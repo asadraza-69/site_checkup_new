@@ -1,0 +1,223 @@
+[
+  {
+    "model": "user_management.globalconfiguration",
+    "pk": 17,
+    "fields": {
+        "name": "crawl_data_expiry_days",
+        "value": "30"
+    }
+},
+{
+    "model": "user_management.globalconfiguration",
+    "pk": 18,
+    "fields": {
+        "name": "title_long",
+        "value": "20"
+    }
+},
+{
+    "model": "user_management.globalconfiguration",
+    "pk": 19,
+    "fields": {
+        "name": "low_content_ratio",
+        "value": "150"
+    }
+},
+{
+    "model": "user_management.globalconfiguration",
+    "pk": 20,
+    "fields": {
+        "name": "titletag_min_length",
+        "value": "35"
+    }
+},
+{
+    "model": "user_management.globalconfiguration",
+    "pk": 21,
+    "fields": {
+        "name": "titletag_max_length",
+        "value": "65"
+    }
+},
+{
+    "model": "user_management.globalconfiguration",
+    "pk": 22,
+    "fields": {
+        "name": "metatag_description_length",
+        "value": "10"
+    }
+},
+{
+    "model": "user_management.globalconfiguration",
+    "pk": 23,
+    "fields": {
+        "name": "low_word_count",
+        "value": "50"
+    }
+},
+{
+    "model": "user_management.globalconfiguration",
+    "pk": 24,
+    "fields": {
+        "name": "thin_content",
+        "value": "150"
+    }
+},
+{
+    "model": "user_management.globalconfiguration",
+    "pk": 25,
+    "fields": {
+        "name": "short_meta_desc",
+        "value": "5"
+    }
+},
+{
+    "model": "user_management.globalconfiguration",
+    "pk": 26,
+    "fields": {
+        "name": "long_meta_desc",
+        "value": "320"
+    }
+},
+{
+    "model": "user_management.globalconfiguration",
+    "pk": 27,
+    "fields": {
+        "name": "recommended_length",
+        "value": "50 - 60"
+    }
+},
+{
+    "model": "user_management.globalconfiguration",
+    "pk": 28,
+    "fields": {
+        "name": "long_h1_tag",
+        "value": "70"
+    }
+},
+{
+    "model": "user_management.globalconfiguration",
+    "pk": 29,
+    "fields": {
+        "name": "short_h1_tag",
+        "value": "20"
+    }
+},
+{
+    "model": "user_management.globalconfiguration",
+    "pk": 30,
+    "fields": {
+        "name": "recommended_words",
+        "value": ">150"
+    }
+},
+{
+    "model": "user_management.globalconfiguration",
+    "pk": 31,
+    "fields": {
+        "name": "recommended_width",
+        "value": "100"
+    }
+},
+{
+    "model": "user_management.globalconfiguration",
+    "pk": 32,
+    "fields": {
+        "name": "recommended_height",
+        "value": "100"
+    }
+},
+{
+    "model": "user_management.globalconfiguration",
+    "pk": 33,
+    "fields": {
+        "name": "optimal_time",
+        "value": "0.80"
+    }
+},
+{
+    "model": "user_management.globalconfiguration",
+    "pk": 34,
+    "fields": {
+        "name": "crawl_pages_limit",
+        "value": "10"
+    }
+},
+{
+    "model": "user_management.globalconfiguration",
+    "pk": 35,
+    "fields": {
+        "name": "keyword_stuffing",
+        "value": "40"
+    }
+},
+{
+    "model": "user_management.globalconfiguration",
+    "pk": 36,
+    "fields": {
+        "name": "twitter_card_description_length",
+        "value": "200"
+    }
+},
+{
+    "model": "user_management.globalconfiguration",
+    "pk": 37,
+    "fields": {
+        "name": "twitter_card_title_length",
+        "value": "70"
+    }
+},
+{
+    "model": "user_management.globalconfiguration",
+    "pk": 38,
+    "fields": {
+        "name": "auto_create_url_projects",
+        "value": "False"
+    }
+}
+,
+{
+    "model": "user_management.globalconfiguration",
+    "pk": 39,
+    "fields": {
+        "name": "Mutliple_payment",
+        "value": "False"
+    }
+}
+,
+{
+    "model": "user_management.globalconfiguration",
+    "pk": 40,
+    "fields": {
+        "name": "google_analytics_pricing",
+        "value": "100"
+    }
+}
+,
+{
+    "model": "user_management.globalconfiguration",
+    "pk": 41,
+    "fields": {
+        "name": "website_attempt_days",
+        "value": "10"
+    }
+}
+,
+{
+    "model": "user_management.globalconfiguration",
+    "pk": 42,
+    "fields": {
+        "name": "website_attempt_count",
+        "value": "3"
+    }
+}
+,
+{
+    "model": "user_management.globalconfiguration",
+    "pk": 43,
+    "fields": {
+        "name": "is_google_analytics_charged",
+        "value": "True"
+    }
+}
+]

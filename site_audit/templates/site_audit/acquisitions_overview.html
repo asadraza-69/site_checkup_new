@@ -1,0 +1,420 @@
+{% extends "base2.html" %}
+{% load static %}
+{% block extrahead %}
+
+<link href="{% static 'site_audit/css/acqu.css' %}" rel="stylesheet">
+<style>
+  #overlay_new {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    display: none;
+  }
+  #add_analytics_button{
+    position: sticky;
+    z-index: 9;
+    top: 50%;
+    width: auto;
+    height: auto;
+    display: none;
+  }
+
+  .cv-spinner_new {
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .cv_add_analytics_button{
+    height: 100%;
+    max-width: 200px;
+margin: auto;
+  }
+  .google_spinner{
+   opacity: 0;
+}
+.background-custom{
+  width: 100%;
+  margin-left: 2%;
+  height: 70vh;
+}
+.background-custom2{
+  margin-left: 33px;
+    margin-top: -40px;
+    margin-bottom: 30px !important;
+}
+  .spinner_new {
+    width: 100px;
+    height: 100px;
+    border: 5px #ddd solid;
+    border-top: 5px #353b41 solid;
+    border-radius: 50%;
+    animation: sp-anime 0.8s infinite linear;
+  }
+
+  @keyframes sp-anime {
+    100% {
+      transform: rotate(360deg);
+    }
+  }
+
+  #topThead th {
+    height: 40px;
+    border: none;
+  }
+
+  .google-visualization-table .gradient {
+    background-image: none !important;
+  }
+
+  .google-visualization-table-tr-head th:nth-child(2),
+  .google-visualization-table-tr-head th:nth-child(3),
+  .google-visualization-table-tr-head th:nth-child(4),
+  .google-visualization-table-tr-head th:nth-child(2),
+  .google-visualization-table-tr-head th:nth-child(8),
+  .google-visualization-table-tr-head th:nth-child(9),
+  .google-visualization-table-tr-head th:nth-child(10) {
+    background-color: #cccccc54;
+  }
+
+  thead#topThead tr:not(:first-child) th {
+    text-align: center;
+  }
+
+  thead#topThead tr:nth-child(3) td {
+    font-size: 25px;
+    border: none;
+    text-align: center;
+
+  }
+
+  thead#topThead tr:first-child th:nth-child(2),
+  thead#topThead tr:first-child th:nth-child(4) {
+    background-color: #cccccc54;
+  }
+
+  thead#topThead tr:nth-child(2) th:nth-child(2),
+  thead#topThead tr:nth-child(2) th:nth-child(3),
+  thead#topThead tr:nth-child(2) th:nth-child(4) {
+    background-color: #cccccc54;
+  }
+
+  thead#topThead tr:nth-child(2) th:nth-child(8),
+  thead#topThead tr:nth-child(2) th:nth-child(9),
+  thead#topThead tr:nth-child(2) th:nth-child(10) {
+    background-color: #cccccc54;
+  }
+
+  thead#topThead tr:nth-child(3) td:nth-child(2),
+  thead#topThead tr:nth-child(3) td:nth-child(3),
+  thead#topThead tr:nth-child(3) td:nth-child(4) {
+    background-color: #cccccc54;
+  }
+
+  thead#topThead tr:nth-child(3) td:nth-child(8),
+  thead#topThead tr:nth-child(3) td:nth-child(9),
+  thead#topThead tr:nth-child(3) td:nth-child(10) {
+    background-color: #cccccc54;
+  }
+
+  thead tr th:not(:first-child) thead tr th:nth-child(3) th:nth-child(2),
+  thead#topThead tr:nth-child(3) th:nth-child(3),
+  thead#topThead tr:nth-child(3) th:nth-child(4) {
+    background-color: #cccccc54;
+  }
+
+  table.google-visualization-table-table tbody tr td {
+    border-left: none;
+    border-right: none;
+    max-width: 95px;
+
+  }
+
+  table.google-visualization-table-table tbody tr {
+    background-color: transparent !important;
+  }
+
+  .google-visualization-table-tr-head {
+    background-color: transparent !important;
+    font-weight: bold;
+    text-align: center;
+    border: none !important;
+  }
+  /* @media only screen and (max-width: 995px) {
+  #add_analytics_button {
+   display: none !important;
+  }
+} */
+  .dropdown_custom {
+    position: relative;
+    /* display: inline-block; */
+    height: 100%;
+    line-height: 41px;
+    align-items: center;
+    justify-content: center;
+    padding: 0px 20px;
+  }
+
+  .dropdown_custom .dropdown-list {
+    padding: 12px;
+    background: #fff;
+    position: absolute;
+    top: 0px;
+    z-index: 999;
+    width: 300px;
+    left: 0px;
+    /* right: 2px; */
+    box-shadow: 0 1px 2px 1px rgb(0 0 0 / 15%);
+    transform-origin: 50% 0;
+    transform: scale(1, 0);
+    transition: transform 0.15s ease-in-out 0.15s;
+    max-height: 66vh;
+    overflow-y: scroll;
+  }
+
+  .dropdown_custom .dropdown-option {
+    display: block;
+    /* padding: 8px 12px; */
+    opacity: 0;
+    transition: opacity 0.15s ease-in-out;
+  }
+
+  .dropdown_custom .dropdown-label {
+    display: block;
+    height: 30px;
+    background: #fff;
+    font-weight: 500;
+    padding: 0px 1px;
+
+    cursor: pointer;
+  }
+
+  .dropdown_custom .dropdown-label:before {
+    content: "▼";
+    float: right;
+  }
+
+  .dropdown_custom.on .dropdown-list {
+    transform: scale(1, 1);
+    transition-delay: 0s;
+  }
+
+  .dropdown_custom.on .dropdown-list .dropdown-option {
+    opacity: 1;
+    transition-delay: 0.2s;
+  }
+
+  .dropdown_custom.on .dropdown-label:before {
+    content: "▲";
+  }
+
+  .dropdown_custom [type=checkbox] {
+    position: relative;
+    top: 2px;
+    margin-right: 4px;
+  }
+
+  .loader-box {
+    position: fixed;
+    width: 100%;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    background-color: rgba(255, 255, 255, 0.7);
+    z-index: 9999;
+  }
+
+  .box span {
+    margin-left: 23px;
+    padding: 7px 0px;
+    /* margin: 15px 10px; */
+    position: absolute;
+    z-index: 999;
+  }
+
+  .donutChart_spinner,
+  .conver_spinner {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0 auto;
+    height: 30vh;
+  }
+
+  .myChart_spinner {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0 auto;
+    height: 30vh;
+  }
+
+  .table_spinner {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0 auto;
+    height: 30vh;
+  }
+  .blur-class{
+  
+     -webkit-filter: blur(2px);
+    -moz-filter: blur(2px);
+    -o-filter: blur(2px);
+    -ms-filter: blur(2px);
+    /* filter: blur(2px); */
+    opacity: 0.3;
+
+  }
+
+</style>
+
+{% endblock %}
+{% block content %}
+
+<div id="overlay_new" style="display: none;">
+  <div class="cv-spinner_new">
+    <span class="spinner_new"></span>
+  </div>
+</div>
+
+<div id="add_analytics_button" style="display: none;">
+  <div class="cv_add_analytics_button">
+    <button class="btn btn-primary gogle-btn conect_g_analytics_neww  " type="button" style="padding: 15px;">
+      <span class="spinner-border spinner-border-sm google_spinner" role="status" aria-hidden="true"></span>
+      <i class="fa fa-cloud-upload" aria-hidden="true"></i> Add  Analytics
+      </button>
+  </div>
+  </div>
+</div>
+<div class="blur-class" id="alternative_img" style="display: none;">
+  <h4 class="title title yellow mb-4  pb-2 custom-head background-custom2 " >Google Analytics
+    Acquisition Overview</h4>
+  <img  src="../../static/site_audit/assets/img/aquisition.png" alt="" class="background-custom">
+</div>
+
+
+<div class="container AudienceOverview margin-left" id="main-tag" style="display: none;">
+  <h4 class="title title yellow mb-4  pb-2 custom-head " >Google Analytics
+    Acquisition Overview</h4>
+<div class="wrapper1 mb-4">
+    <div class="c_dp">
+      <div class="dropdown_custom" data-control="checkbox-dropdown">
+        <label id="continentListlabel" class="dropdown-label">Continent</label>
+        <div class="dropdown-list">
+          <span class="float-end d-block Sessions" title="Sessions"><b>Sessions</b></span>
+          <label class=""><input type="checkbox" name="" id="checkAllContinent"><b> Continent</b></label>
+
+          <input id="continent" type="text" placeholder="Search.." class="form-control form-control-sm" />
+          <div id="continentList"></div>
+        </div>
+      </div>
+    </div>
+    <div class="c_dp">
+      <div class="dropdown_custom" data-control="checkbox-dropdown">
+        <label class="dropdown-label">Region</label>
+        <div class="dropdown-list">
+          <span class="float-end d-block Sessions" title="Sessions"><b>Sessions</b></span>
+          <label><input type="checkbox" name="" id="checkAllRegion"><b>Region</b></label>
+          <input id="region" type="text" placeholder="Search.." class="form-control form-control-sm" />
+          <div id="RegionList">
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="c_dp">
+      <div class="dropdown_custom" data-control="checkbox-dropdown">
+        <label class="dropdown-label">Channel</label>
+        <div class="dropdown-list">
+          <span class="float-end d-block Sessions" title="Sessions"><b>Sessions</b></span>
+
+          <label><input type="checkbox" name="" id="checkAllChannel"><b>Channel</b></label>
+
+          <input id="channel" type="text" placeholder="Search.." class="form-control form-control-sm" />
+          <div id="channelList"></div>
+        </div>
+      </div>
+    </div>
+    <div class="c_dp">
+      <div class="dropdown_custom" data-control="checkbox-dropdown">
+        <label class="dropdown-label">Device</label>
+        <div class="dropdown-list">
+          <span class="float-end d-block Sessions" title="Sessions"><b>Sessions</b></span>
+
+          <label><input type="checkbox" name="" id="checkAllDevice"><b>Device</b></label>
+
+          <input id="device" type="text" placeholder="Search.." class="form-control form-control-sm" />
+          <div id="deviceList"></div>
+        </div>
+      </div>
+    </div>
+    <div class="c_dp">
+      <div class="input-group p-2">
+        <input type="text" readonly id="daterange" name="daterange" value="" class="border-0 date-range-toggle" />
+        <span onclick="myFunction()" class="input-group-text" id="basic-addon1"></span>
+      </div>
+    </div>
+  </div>
+  <div class="col-lg-12">
+    <h3 class="text-gray mb-3 mt-4 pl-2 font-22 fw-400">Acquisition Overview</h3> 
+  </div>
+  <div class="wrapper">
+  </div>
+  <div class="wrapper2">
+    <div class="box">
+      <div id="donutchart" style="width: 100%; height: 100%">
+        <div class="donutChart_spinner">
+          <div class="spinner-border spinner-border-sm" role="status">
+            <span class="visually-hidden">Loading...</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="box">
+     <div class="myChart_spinner">
+          <div class="spinner-border spinner-border-sm" role="status">
+            <span class="visually-hidden">Loading...</span>
+          </div>
+        </div>
+      <canvas id="myChart" class="chartjs-render-monitor" style="width: 100%; height: 100%">
+       
+      </canvas>
+    </div>
+    <div class="box">
+      <div class="conver_spinner">
+          <div class="spinner-border spinner-border-sm" role="status">
+            <span class="visually-hidden">Loading...</span>
+          </div>
+        </div>
+      <canvas id="conver" class="chartjs-render-monitor" style="width: 100%; height: 100%">
+      
+      </canvas>
+    </div>
+  </div>
+  <div id="bottomTable">
+    <div class="wrapper3">
+      <div id="table_div">
+        <div class="table_spinner">
+          <div class="spinner-border" srole="status">
+            <span class="sr-only">Loading...</span>
+          </div>
+        </div>
+      </div>
+      <br>
+      <br>
+    </div>
+  </div>
+</div>
+
+
+{% endblock %}
+{% block extrascript %}
+<script src="{% static 'site_audit/js/acquisitions_overview.js'%}"></script>
+<style>
+  .google-visualization-table-table tr td:nth-child(2) {
+    max-width: 100px !important;
+  }
+</style>
+{% endblock %}

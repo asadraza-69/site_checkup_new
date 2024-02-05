@@ -1,0 +1,1374 @@
+{% extends "base2.html" %}
+{% load static %}
+{% block extrahead %}
+
+<link href="{% static 'site_audit/css/index.css'%}" rel="stylesheet" />
+
+<style>
+   
+    body {
+        background-color: #fff !important;
+    }
+    /* #usersPieChart{
+overflow: hidden;
+position: relative;
+right: 20%;
+    } */
+    
+.fixed-height{
+    height: 352px;
+    overflow-y: hidden;
+}
+    .health-score {
+        display: none;
+    }
+
+    .main-spinner {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+    }
+
+   
+
+    .health_spinner_web {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin: 80px auto;
+    }
+    .health_spinner_webb {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin: 80px auto;
+    }
+
+    .positioned-btn-container {
+        position: relative;
+    }
+
+    .positioned-section {
+        height: 100%;
+    }
+
+    .positioned-btn {
+        display: none;
+        position: absolute;
+        z-index: 999;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+    }
+
+    .health_spinner,
+    .health_mobile_spinner,
+    .health_Desktop_spinner {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin: 80px auto;
+    }
+
+
+    .google_spinner {
+        position: fixed;
+        top: 40%;
+        left: 17%;
+        overflow: hidden;
+        opacity: 0;
+    }
+
+    .google_spinner1 {
+        opacity: 0;
+    }
+
+    .analytics-half-orange {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .pdng{
+        padding:1rem 0px!important;
+    }
+
+    .analytics-half-orange .overlayy_dashboard {
+        position: absolute;
+        top: 70px;
+        bottom: 0;
+        right: 50%;
+        text-align: center;
+    }
+
+    /* .overlayy_dashboard {
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+    } */
+
+    /* .overlayy_dashboard.dbb-cstm {
+        height: 100%;
+        justify-content: center;
+        align-items: center;
+        display: flex;
+        top: 0;
+    } */
+
+    .double_chartss.dbb-cstm {
+        position: relative;
+    }
+
+    .backdrop {
+        display: block;
+        background: #fff;
+        opacity: 0.3;
+    }
+
+    .backdrop.dbb-cstm {
+        background: transparent;
+    }
+
+    .double_chartss div {
+        display: inline-block;
+        align-items: center;
+        justify-content: center;
+    }
+
+    /* .card.grey-box {
+        height: auto !important
+    } */
+
+  
+
+    a.btn.btn-primary.btn-sm.mb-3.gogle-btn {
+        box-shadow: 0 2px 5px 0 rgb(0 0 0 / 20%), 0 2px 10px 0 rgb(0 0 0 / 10%);
+    }
+
+    a.btn.btn-yellow.btn-block.btn-sm.mb-3.gogle-btn {
+        box-shadow: 0 2px 5px 0 rgb(0 0 0 / 20%), 0 2px 10px 0 rgb(0 0 0 / 10%);
+    }
+
+    .p_spinner_cls {
+        display: none;
+    }
+
+
+    /* .p_spinner {
+        margin-right: 20px;
+        margin-left: 20px;
+    } */
+    @media only screen and (max-width:1199px) {
+        #btn-add {
+            width: 50%;
+            margin: auto;
+        }
+    }
+
+    #btn-add {
+        vertical-align: bottom;
+        border: 0;
+        box-shadow: 0 2px 5px 0 rgb(0 0 0 / 20%), 0 2px 10px 0 rgb(0 0 0 / 10%);
+        font-weight: 500;
+        padding: 0.625rem 1.5rem 0.5rem;
+        font-size: .75rem;
+        line-height: 1.5;
+        height: 36px;
+
+    }
+
+    .add_blur {
+
+        -webkit-filter: blur(3px);
+        -moz-filter: blur(3px);
+        -o-filter: blur(3px);
+        -ms-filter: blur(3px);
+        filter: blur(3px);
+        background-color: rgb(158, 151, 151);
+    }
+
+    .analytics-btn {
+        z-index: 999;
+    }
+
+    #btn-add:hover {
+        outline: 0;
+        box-shadow: 0 4px 10px 0 rgb(0 0 0 / 20%), 0 4px 20px 0 rgb(0 0 0 / 10%);
+    }
+
+    #btn-add2:focus {
+        outline: 0;
+        box-shadow: 0 4px 10px 0 rgb(0 0 0 / 20%), 0 4px 20px 0 rgb(0 0 0 / 10%);
+    }
+
+    .iconsize {
+        font-size: 26px;
+    }
+
+    .top_spinner {
+        position: absolute;
+        margin-left: -20px;
+        display: none;
+    }
+
+    .card {
+        margin-bottom:1.5rem;
+    }
+ /* second css */
+     .progress-sec.sts {
+   background-color: #fff;
+
+       box-shadow: 0 7px 14px 0 rgba(65, 69, 88, 0.1), 0 3px 6px 0 rgba(0, 0, 0, 0.07);
+
+    }
+    .btn-outline-danger , .btn-outline-danger:hover {
+        border: 2px solid #eb4335!important;
+        color: #eb4335!important;
+        box-shadow: 0 7px 14px 0 rgb(65 69 88 / 41%), 0 3px 6px 0 rgb(0 0 0 / 7%)!important;
+        background-color: #d5666638!important;
+    }
+    .btn-outline-success, .btn-outline-success:hover{
+           border: 2px solid rgb(0, 172, 69)!important;
+           color: rgb(0, 172, 69) !important;
+           box-shadow: 0 7px 14px 0 rgb(65 69 88 / 41%), 0 3px 6px 0 rgb(0 0 0 / 7%)!important;
+           background-color:   rgb(223, 254, 236) !important
+         }
+    
+.progress {
+    height: 4px;
+    font-size: .75rem;
+    background-color: #fff;
+    border-radius: 0.25rem;
+    box-shadow: 0 7px 14px 0 rgba(65, 69, 88, 0.1), 0 3px 6px 0 rgba(0, 0, 0, 0.07);
+
+}
+
+
+.bord_bottom_good{
+  text-align:center;
+    border-bottom: 4px solid transparent;
+     background-color: #7fc66b;
+    border-image-slice: 1;
+    width:100%;
+}
+.bord_bottom_avg{
+  text-align:center;
+    border-bottom: 4px solid transparent;
+   background-color: #ffc107;
+    border-image-slice: 1;
+    width:100%;
+}
+.bord_bottom_poor{
+  text-align:center;
+    border-bottom: 4px solid transparent;
+   background-color: #eb4335;
+    border-image-slice: 1;
+    width:100%;
+}
+.bord_bottom_analytics{
+  text-align:center;
+    border-bottom: 4px solid transparent;
+   background-color: #707070;
+    border-image-slice: 1;
+    width:100%;
+}
+/* #usersPieChart{
+    min-height: 187.033px;
+    position: absolute;
+    left: -33px;
+    top: 29%;
+} */
+.pieChart{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    margin: 0 auto;
+    width: 100%;
+}
+
+.sts {
+    cursor: default!important
+}
+
+</style>
+
+{% endblock %}
+<!-- <body style="background-color: #666666;"> -->
+{% block content %}
+
+<div class="container">
+    <div class="row pe-0">
+        <div class="col-xl-9">
+           
+            <div class="center-section">
+                <h4 class="title mb-5 fw-400 pb-2">Your Website Performance Score </h4>
+                <div class="row">
+                    <div class="col-xl-3 col-md-6 text-center">
+                        <div class="card progrs-crd p-relative bord_bottom_analytics">
+                            <div class="main-spinner">
+                                <div class="spinner-border text-primary spinner-border-sm  mb-3 mr-1 " role="status">
+                                    <span class="visually-hidden">Loading...</span>
+                                </div>
+                            </div>
+                           
+                            <div class="card-boyd grey-box p-3 pt-3 pb-4 fixed-height " >
+                                      
+                            <div  id="dashboard-chart" style="display: none;">
+                                <div class="d-flex justify-content-end">
+                                    <p id="visitors_text" style="color:#ffa800" class="">
+                                        Visitors
+                                    </p>
+                                </div>
+                                     <p style="font-size: 9px;"><i class="fa fa-circle" style="color:#ffa800"></i> Returning Users <i style="color: #f66d00;" class="fa fa-circle"></i> New Users</p>
+                                <div class="pieChart">
+                                <div id="usersPieChart"></div>
+                                
+                                </div>
+                             
+                               <h4 class="font-16 text-center progrs-txt">Website Visitors</h4>
+                            </div>
+                            
+                            <div id="dashboard-analytics" style="display: none;">
+                             <img src="{% static 'site_audit/assets/img/google_analytics-ar21.png'%}"
+                                    class="img-fluid mb-4 google-anyl" alt="">
+                                <!--                            
+                                <button class="btn btn-primary gogle-btn mb-3" style="width: 144px; font-size: 10px;" >
+                                   
+                                    Connect Google
+                                    Analytics
+                                    </button>
+                                <a href="#" class="btn btn-yellow btn-block btn-sm mb-3">Need Help Doing
+                                    This?</a> -->
+                                   
+                                <a href="#" class="btn btn-primary btn-sm mb-3 gogle-btn  conect_g_analytics_neww" >
+                                    <span class="spinner-border spinner-border-sm top_spinner" role="status"
+                                        aria-hidden="true"></span>Connect Google
+                                    Analytics</a>
+                                <a href="#" class="btn btn-yellow btn-block btn-sm mb-3 gogle-btn">Need Help Doing
+                                    This?</a>
+                                <p class="font-13 google-txt">Every Website Already Has
+                                    Google Analytics </p>
+                            </div>
+                               
+                                <!-- <canvas id="googleanalytics_chart" width:"162" height:"162"></canvas>-->
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-3 col-md-6 col-xs-12">
+                        <div class="card  progrs-crd w_health  bord_bottom_analytics">
+                            <div class="card-body grey-box pt-3 pb-4 fixed-height pdng ">
+                                <div class="d-flex justify-content-end">
+                                    <p id="web_health_text" class="pb-2 px-2">
+                                        Site Health
+                                    </p>
+                                </div>
+                                <div class="health_spinner_web">
+                                    <div class="spinner-border text-primary spinner-border-sm" role="status">
+                                        <span class="visually-hidden">Loading...</span>
+                                    </div>
+                                </div>
+                                <div id="siteHealth_radial" style="min-height: 140px;"></div>
+                                 
+                               
+                                <h4 class="font-14 text-center progrs-txt card-heading-show seo-card-data" style="display: none;">SEO Score </h4>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-3 col-md-6 col-xs-12 d-flex align-align-items-stretch">
+                        <div class="card  progrs-crd w-md-100 m_health   w-100 bord_bottom_analytics">
+                            <div class="card-body grey-box pt-3 pb-4 fixed-height pdng">
+                                <div class="d-flex justify-content-end mobile_text">
+                                    <div id="mobile_icon">
+                                        <i class="lni lni-mobile iconsize" style="color: #80c66c"></i>
+                                    </div>
+                                    <span class="px-2">Mobile</span>
+                                </div>
+                                <div class="health_mobile_spinner">
+                                    <div class="spinner-border text-primary spinner-border-sm" role="status">
+                                        <span class="visually-hidden">Loading...</span>
+                                    </div>
+                                </div>
+                                <div id="mobile_radial" style="min-height: 198.7px;"></div>
+                                <!-- <div class="text-center health-score">
+                                    <div class="mt-4 mb-2 p-relative mobile_chart">
+                                        <div class="box">
+                                            <div class="percent">
+
+                                                <!-- <svg>
+                                                        <circle cx="65" cy="65" r="65"></circle>
+                                                        <circle cx="65" cy="65" r="65"></circle>
+                                                    </svg> --
+                                                <div class="number">
+                                                    <h2 id="mobile_web_result"> <span>%</span></h2>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!-- <div class="mobile_Health_circle"></div>
+                                        <div class="status-btn-main">
+                                            <button class="status-btn  text-white b-none"></button>
+                                        </div> --
+                                    </div>
+                                </div> -->
+                                <h4 class="font-14 text-center progrs-txt card-heading-show web-card-data" style="display: none;">Website
+                                    Performance</h4>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-3 col-md-6 col-xs-12 d-flex align-align-items-stretch">
+                        <div class="card progrs-crd w-md-100 w-100 d_health bord_bottom_analytics ">
+                            <div class="card-body grey-box pt-3 pb-4 fixed-height pdng">
+                                <div class="d-flex justify-content-end desktop-text">
+                                    <div id="desktop_icon">
+                                        <i class="fa fa-desktop fa-2x" style="color: #80c66c "></i>
+                                    </div>
+                                    <span class="px-2">Desktop</span>
+                                </div>
+                                <div class="health_Desktop_spinner">
+                                    <div class="spinner-border text-primary spinner-border-sm" role="status">
+                                        <span class="visually-hidden">Loading...</span>
+                                    </div>
+                                </div>
+                               <div id="desktop_radial" style="min-height: 198.7px;"></div>
+
+                                <!-- <div class="text-center health-score">
+                                    <div class="mt-4 mb-2 p-relative desktop">
+                                        <div class="box">
+                                            <div class="percent">
+                                              
+                                                <div class="number">
+                                                    <h2 id="desktop_web_result"> <span>%</span></h2>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="desktop_Health_circle"></div>
+
+                                        <div class="status-btn-main">
+                                            <div class="status-btn-main">
+                                                <button class="status-btn text-white b-none"></button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div> -->
+                                <h4 class="font-14 text-center progrs-txt card-heading-show web-card-data" style="display: none;">Website
+                                    Performance</h4>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div>
+                        <h4 class="title fw-400 ps-md-0 pb-2 mb-5 mt-4">SEO Checkup Score</h4>
+                    </div>
+                    <div class="col-xl-3">
+
+                        <div class="grey-box  py-2 px-3">
+                     
+                        
+                     <div class="d-flex justify-content-between">
+                       <span></span> <a href="#" class="tooltp mb-3 font-18 " data-bs-placement="right" data-bs-toggle="tooltip"
+                        title=""
+                        data-bs-original-title="More than half of all website traffic comes from mobile phones so it is very important your website loads fast. We review your website's speed daily and will alert you if we find any issues."
+                        aria-label="More than half of all website traffic comes from mobile phones so it is very important your website loads fast. We review your website's speed daily and will alert you if we find any issues."><i
+                            class="far fa-question-circle"></i></a>
+                     </div>
+                            <ul class="ifo-box">
+                                <li class="mb-3">
+                                    <div class="status failed">
+                                        <div class="d-flex justify-content-between">
+                                           <div>
+                                            <span class="st-circle red"><i class="fa-solid fa-circle"></i></span>
+                                            <span class="st-name font-16">Failed</span>
+                                           </div>
+                                           <span class="dash-show" style="display: none; margin-right: 30px;">_</span>
+                                        </div>
+
+                                    </div>
+                                    <div class="error">
+                                        <span class="error-txt font-10">Critical Errors</span>
+                                        <div class="border-cst"></div>
+                                        <div class="spinner-border text-primary spinner-border-sm check_scr_spinner  p_spinner mb-3 mr-1 "
+                                            role="status">
+                                            <span class="visually-hidden">Loading...</span>
+                                        </div>
+                                        <div class="count-main p_spinner_cls">
+                                            <span class="count red font-12 failed_val"></span>
+                                        </div>
+                                    </div>
+                                </li>
+                                <li class="mb-3">
+                                    <div class="status warn">
+                                        <div class="d-flex justify-content-between">
+                                      <div>
+                                        <span class="st-circle yellow"><i class="fa-solid fa-circle"></i></span>
+                                        <span class="st-name font-16">Warnings</span>
+                                      </div>
+                                      <span class="dash-show" style="display: none; margin-right: 20px;">_</span>
+                                        </div>
+                                    </div>
+                                    <div class="error">
+                                        <span class="error-txt font-10">Non-Critical Errors</span>
+                                        <div class="border-cst"></div>
+                                        <div class="spinner-border text-primary spinner-border-sm check_scr_spinner p_spinner  mb-3 mr-1"
+                                            role="status">
+                                            <span class="visually-hidden">Loading...</span>
+                                        </div>
+                                        <div class="count-main p_spinner_cls">
+                                            <span class="count yellow font-12 text-right warning_val"></span>
+                                        </div>
+                                    </div>
+                                </li>
+                                <li class="mb-md-5">
+                                    <div class="status pass">
+                                        <div class="d-flex justify-content-between">
+                                        <div>
+                                            <span class="st-circle green"><i class="fa-solid fa-circle"></i></span>
+                                            <span class="st-name font-16">Passed</span>
+                                          </div>
+                                          <span class="dash-show" style="display: none; margin-right: 20px;">_</span>
+                                     </div>
+                                    </div>
+                                    <div class="error">
+                                        <span class="error-txt font-10">No Action Required</span>
+                                        <div class="border-cst"></div>
+                                        <div class="spinner-border text-primary spinner-border-sm check_scr_spinner p_spinner   mb-3 mr-1"
+                                            role="status">
+                                            <span class="visually-hidden">Loading...</span>
+                                        </div>
+                                        <div class="count-main p_spinner_cls">
+                                            <span class="count green font-12 passed_val"></span>
+                                        </div>
+                                    </div>
+                                </li>
+                            </ul>
+                      
+                           
+                        </div>
+                    </div>
+                    <div class="col-xl-9">
+                        <div class="row mb-4">
+                            <div class="col-xl-4">
+                            
+                                <div id="site_map" class="progress-sec  sts btn-icon-vertical btn-transition btn-block btn btn-outline-danger" style="min-height:52px ;">
+
+                                    <span class="sitemap_colorr text-center">Sitemap <br>
+                                        <div class="spinner-border text-primary spinner-border-sm  p_spinner p-spinner-new mt-1 mr-1"
+                                            role="status">
+                                    <span class="visually-hidden">Loading...</span>
+                                </div>
+                                    <small class="detectedd"></small>
+                                      </span>
+                                    <a href="#" class="text-gray font-18" data-bs-placement="right"
+                                        data-bs-toggle="tooltip" title=""
+                                        data-bs-original-title="More than half of all website traffic comes from mobile phones so it is very important your website loads fast. We review your website's speed daily and will alert you if we find any issues."
+                                        aria-label="More than half of all website traffic comes from mobile phones so it is very important your website loads fast. We review your website's speed daily and will alert you if we find any issues."><i
+                                            class="far fa-question-circle"></i></a>
+                                </div>
+                            </div>
+                            <div class="col-xl-4 gy-xl-0 gy-md-3">
+                                <div id="ssl--cer" style="min-height:52px ;"  class="progress-sec sts btn-icon-vertical btn-transition btn-block btn btn-outline-danger">
+                                    <span class="ssl-certificate">SSL Certificate <br> 
+                                        <div class="spinner-border text-primary spinner-border-sm  p_spinner p-spinner-new mt-1 mr-1"
+                                        role="status">
+                                <span class="visually-hidden">Loading...</span>
+                                </div>
+                                    <small class="ssl_valid"></small>
+                                    </span>
+
+                                    <a href="#" class="text-gray font-18" data-bs-placement="right"
+                                        data-bs-toggle="tooltip" title=""
+                                        data-bs-original-title="More than half of all website traffic comes from mobile phones so it is very important your website loads fast. We review your website's speed daily and will alert you if we find any issues."
+                                        aria-label="More than half of all website traffic comes from mobile phones so it is very important your website loads fast. We review your website's speed daily and will alert you if we find any issues."><i
+                                            class="far fa-question-circle"></i></a>
+                                </div>
+                            </div>
+                            <div class="col-xl-4 gy-xl-0 gy-md-3">
+                                <div  style="min-height:52px ;" class="progress-sec sts btn-icon-vertical btn-transition btn-block btn btn-outline-success">
+                                    <span>Blacklists <br> <small>Clear</small></span>
+                                    <a href="#" class="text-gray font-18" data-bs-placement="right"
+                                        data-bs-toggle="tooltip" title=""
+                                        data-bs-original-title="More than half of all website traffic comes from mobile phones so it is very important your website loads fast. We review your website's speed daily and will alert you if we find any issues."
+                                        aria-label="More than half of all website traffic comes from mobile phones so it is very important your website loads fast. We review your website's speed daily and will alert you if we find any issues."><i
+                                            class="far fa-question-circle"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="progress-bars">
+                            <div class='row'>
+                                <div class='col-xl-4'>
+                                    <div class="health_spinner_web">
+                                        <div class="spinner-border text-primary spinner-border-sm" role="status">
+                                            <span class="visually-hidden">Loading...</span>
+                                        </div>
+                                    </div>
+                                    <div id="siteHealth_radial2" style="min-height: 140px;"></div>
+                                </div>
+                                <div class='col-xl-8'>
+                                    <div class="progressRow mb-3">
+                                        <label for="failed" class="font-12 text-gray">Failed</label>
+                                        <div class="progress red  progress-striped active">
+                                            <div class="progress-bar red progress-bar-success" style="width: 16%;">
+                                                <div class="progress-count red failed_val">
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="progressRow mb-3">
+                                        <label for="failed" class="font-12 text-gray">Warnings</label>
+                                        <div class="progress yellow progress-striped active">
+                                            <div class="progress-bar yellow progress-bar-success" style="width: 55%;">
+                                                <div class="progress-count yellow warning_val">
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="progressRow mb-3">
+                                        <label for="failed" class="font-12 text-gray">Passed</label>
+                                        <div class="progress green progress-striped active">
+                                            <div class="progress-bar green progress-bar-success" style="width: 70%;">
+                                                <div class="progress-count green passed_val">
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                 </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-xl-3 ps-xl-5 ps-md-3 ps-sm-2">
+            <div class="progress-sideBar">
+                <a href="#" data-bs-toggle="modal" data-bs-toggle="modal" data-bs-target="#addToMyWebsite" id="btn-add"
+                    class="btn btn-primary mb-5 d-flex justify-content-center align-items-center gap-2">
+                    <i class="fas fa-plus"></i>
+                    Add to my Websites
+                </a>
+
+                <div class="crawled gray-bg ceawled_section grey-box">
+                    <div class="hdgn-row mb-3 px-3 pt-3">
+                        <h2 class="title pb-2">
+                            Crawled Pages
+                            <div class="page-count" id="page_total" style="display: none;">
+                                <span id="total-crawler-page">0</span>/<span id="total-web-page">0</span>
+                            </div>
+                            <div class="crawl-spinner spinner-border text-primary spinner-border-sm" role="status">
+                                <span class="visually-hidden">Loading...</span>
+                            </div>
+                        </h2>
+
+                    </div>
+                    <div class="battry-prog">
+                        <div class="bat-progrs-bar">
+                            <div class="battery-outer1">
+                                <div class="battery-inner1"></div>
+                                <div class="battery-inner1"></div>
+                                <div class="battery-inner1"></div>
+                                <div class="battery-inner1">
+                                    <div class="text-center">
+                                        <div class="crawl-spinner spinner-border text-primary spinner-border-sm" role="status">
+                                            <span class="visually-hidden">Loading...</span>
+                                        </div>
+                                    </div>
+                                    <span id="percentage_count">-</span>
+                                </div>
+                                <div class="battery-inner1"></div>
+                                <div class="battery-inner1"></div>
+                                <div class="battery-inner1"></div>
+                            </div>
+                        </div>
+                        <div class="bat-prog-status ml-5 ">
+                            <div class="pages-count mb-3">
+                                <img src="{% static 'site_audit/assets/img/spider-web.png'%}" alt="spider-web">
+                                <div class=" crawl-spinner spinner-border text-primary spinner-border-sm" role="status">
+                                    <span class="visually-hidden">Loading...</span>
+                                </div>
+                                 <span class="font-12" id="total-crawler-pages" style="display: none;">0
+                                    Pages</span>
+                            </div>
+                            <ul class="bat-reslt-list">
+                                <li class="font-12"><span class="count red" id="broken">
+                                        <div class="crawl-spinner">
+                                            <div class="spinner-border text-primary spinner-border-sm" role="status">
+                                                <span class="sr-only">Loading...</span>
+                                            </div>
+                                        </div>
+
+                                    </span>
+                                    <span class="txt">Broken</span>
+                                </li>
+                                <li class="font-12"><span class="count yellow" id="redirects">
+                                        <div class="crawl-spinner">
+                                            <div class="spinner-border text-primary spinner-border-sm" role="status">
+                                                <span class="sr-only">Loading...</span>
+                                            </div>
+                                        </div>
+                                    </span> <span class="txt">Redirects</span></li>
+                                <li class="font-12"><span class="count green" id="healthy">
+                                        <div class="crawl-spinner">
+                                            <div class="spinner-border text-primary spinner-border-sm" role="status">
+                                                <span class="sr-only">Loading...</span>
+                                            </div>
+                                        </div>
+                                    </span> <span class="txt">Healthy</span></li>
+                                <li class="font-12"><span class="count black" id="blocked">
+                                        <div class="crawl-spinner">
+                                            <div class="spinner-border text-primary spinner-border-sm" role="status">
+                                                <span class="sr-only">Loading...</span>
+                                            </div>
+                                        </div>
+                                    </span> <span class="txt">Blocked</span></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <p class="crwl-pra font-12 text-gray text-center p-2 m-0">Free Membership Allowed User To Use
+                        Crawler To
+                        <a href="javascript:;" class="text-red">Crawl Up To 20 Pages</a>
+                        Of
+                        Your Website.
+                    </p>
+                 <div id="Free_Pro_Section" style="display: none;">
+                    <div class="upgrade-sec px-3">
+                        <img src="{% static 'site_audit/assets/img/upgrade-plan.png'%}" class="mb-2 mx-auto d-table"
+                            alt="upgrade-pla">
+                        <p class="font-12 text-gray text-center m-0"><a href="javascript:;" class="text-green">Upgrade
+                                To Professional Plan</a> And Unlock The Potential To
+                            Optimize Your Website And Rank On Top Of Search Engine</p>
+                    </div>
+                    <div class="unlock-sec p-3">
+                        <img src="{% static 'site_audit/assets/img/unlock.png'%}" class="mb-2 d-table"
+                            alt="unlock">
+                        <a href="javascript:;" id='unlock-btn' class="unlock-btn ">
+                            <span class="lock">
+                                <img id='success_lock' src="{% static 'site_audit/assets/img/lock.png'%}" alt="lock">
+                            </span>
+                            <span class="lock-txt">Unlock me to Rank High</span>
+                        </a>
+                    </div>
+                 </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="daily-tip jsDailyTipBox mt-4 mb-4 me-xl-5">
+        <div class="tip-img">
+            <img src="{% static 'site_audit/assets/idea.png'%}" alt="idea" />
+        </div>
+        <div class="txt">
+            <h3 class="hdng text-yellow font-15 fw-bold">Your Daily Tip</h3>
+            <p class="pra text-white font-14 pe-md-3 m-0">Boost your website traffic- Search engines like to see
+                content... and more content :) Add to your
+                page a paragraph with the keyword seo optimization tools which is being search 210 times a
+                month! Start acting now and re-adjust your website!</p>
+        </div>
+        <div class="close-btn js-close-tip">
+            <span><i class="fa-solid fa-xmark"></i></span>
+        </div>
+    </div>
+    <div class="positioned-btn-container">
+        <div>
+            <div class="positioned-btn">
+                <button class="btn btn-primary gogle-btn1 conect_g_analytics_neww "  type="button" style="padding: 15px; ">
+                    <span class="spinner-border spinner-border-sm google_spinner1" role="status"
+                        aria-hidden="true"></span>
+                    <i class="fa fa-cloud-upload" aria-hidden="true"></i> Add Analytics
+                </button>
+
+            </div>
+        </div>
+        <div class="row pt-4 pe-xl-5  positioned-section">
+            <div class="col-xl-3 col-md-6">
+                <div class="card  mb-3">
+                    <div class="card-body grey-box">
+
+                        <p class=" text-center">User</p>
+
+
+                        <div class="analytics-half-orange dbb-cstm position-relative analtics-section-spinner "
+                            style=" height: 160px;">
+                            <div>
+                                <div >
+                                    <div class="spinner-border text-primary spinner-border-sm " role="status">
+                                        <span class="visually-hidden">Loading...</span>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+
+                        <div class="analytics-half-orange dbb-cstm position-relative analtics-section-true pt-2"
+                            style="display: none;">
+                            <!-- <div class="backdrop dbb-cstm"> -->
+                            <div class=" dbb-cstm">
+                                <!-- Chart -->
+                                <div class="double_chartss dbb-cstm">
+                                    <div class="overlayy_dashboard dbb-cstm chart_loading0" id="usersCount">
+                                        <div class="spinner-border text-primary spinner-border-sm" role="status">
+                                            <span class="visually-hidden">Loading...</span>
+                                        </div>
+                                    </div>
+                                   <div>
+                                        <canvas id="mychart1"
+                                            style="display: block; box-sizing: border-box; height: 160px; width: 160px;">
+                                        </canvas>
+                                    </div>
+                                    <!-- Chart -->
+                                </div>
+                               
+                            </div>
+                        </div>
+                        <div class="analytics-half-orange dbb-cstm position-relative analtics-section-false"
+                            style="display: none;">
+                            <!-- <div class="backdrop dbb-cstm"> -->
+                            <div class=" dbb-cstm">
+                                <!-- Chart -->
+                                <div class="double_chartss dbb-cstm">
+
+                                    <div class="add_blur">
+                                        <img src="../../static/site_audit/assets/img/bar-red1.png" alt="">
+                                    </div>
+                                    <!-- Chart -->
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-xl-3 col-md-6">
+                <div class="card  mb-3">
+                    <div class="card-body grey-box">
+
+                        <p class=" text-center">New User</p>
+                        <div class="analytics-half-orange dbb-cstm position-relative analtics-section-spinner "
+                            style=" height: 160px;">
+                            <div>
+                                <div >
+                                    <div class="spinner-border text-primary spinner-border-sm " role="status">
+                                        <span class="visually-hidden">Loading...</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="analytics-half-orange dbb-cstm position-relative analtics-section-true pt-2"
+                            style="display: none;">
+                            <div class=" dbb-cstm">
+                                <!-- Chart -->
+                                <div class="double_chartss dbb-cstm">
+                                    <div class="overlayy_dashboard dbb-cstm chart_loading1" id="newUsersCount">
+                                        <div class="spinner-border text-primary spinner-border-sm" role="status">
+                                            <span class="visually-hidden">Loading...</span>
+                                        </div>
+                                    </div>
+                                    <!-- <div class="overlayy_dashboard dbb-cstm">
+                                        <a href="#" class="btn btn-primary"><i class="fa fa-cloud-upload"
+                                                aria-hidden="true"></i> Add
+                                            Analytics</a>
+                                    </div> -->
+                                    <div>
+                                        <canvas id="mychart2"
+                                            style="display: block; box-sizing: border-box; height: 160px; width: 160px;"></canvas>
+                                    </div>
+                                    <!-- Chart -->
+                                </div>
+                            </div>
+                        </div>
+                        <div class="analytics-half-orange dbb-cstm position-relative analtics-section-false"
+                            style="display: none;">
+                            <!-- <div class="backdrop dbb-cstm"> -->
+                            <div class=" dbb-cstm">
+                                <!-- Chart -->
+                                <div class="double_chartss dbb-cstm">
+
+                                    <div class="add_blur">
+                                        <img src="../../static/site_audit/assets/img/bar-yellow1.png" alt="">
+                                    </div>
+                                    <!-- Chart -->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xl-3 col-md-6">
+                <div class="card  mb-3">
+                    <div class="card-body grey-box">
+
+                        <p class=" text-center">Bounce Rate</p>
+                        <div class="analytics-half-orange dbb-cstm position-relative analtics-section-spinner "
+                            style=" height: 160px;">
+                            <div>
+                                <div >
+                                    <div class="spinner-border text-primary spinner-border-sm " role="status">
+                                        <span class="visually-hidden">Loading...</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="analytics-half-orange dbb-cstm position-relative analtics-section-true pt-2"
+                            style="display: none;">
+                            <div class=" dbb-cstm">
+                                <!-- Chart -->
+                                <div class="double_chartss dbb-cstm">
+                                    <div class="overlayy_dashboard dbb-cstm chart_loading2" id="bounceRate">
+                                        <div class="spinner-border text-primary spinner-border-sm" role="status">
+                                            <span class="visually-hidden">Loading...</span>
+                                        </div>
+                                    </div>
+                                    <!-- <div class="overlayy_dashboard dbb-cstm">
+                                        <a href="#" class="btn btn-primary"><i class="fa fa-cloud-upload"
+                                                aria-hidden="true"></i> Add
+                                            Analytics</a>
+                                    </div> -->
+                                    <div>
+                                        <canvas id="mychart3"
+                                            style="display: block; box-sizing: border-box; height: 160px; width: 160px;"></canvas>
+                                    </div>
+                                    <!-- Chart -->
+                                </div>
+                            </div>
+                        </div>
+                        <div class="analytics-half-orange dbb-cstm position-relative analtics-section-false"
+                            style="display: none;">
+                            <!-- <div class="backdrop dbb-cstm"> -->
+                            <div class=" dbb-cstm">
+                                <!-- Chart -->
+                                <div class="double_chartss dbb-cstm">
+
+                                    <div class="add_blur">
+                                        <img src="../../static/site_audit/assets/img/bar-green1.png" alt="">
+                                    </div>
+                                    <!-- Chart -->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xl-3 col-md-6">
+                <div class="card  mb-3">
+                    <div class="card-body grey-box">
+
+                        <p class=" text-center">Sessions</p>
+                        <div class="analytics-half-orange dbb-cstm position-relative analtics-section-spinner "
+                            style=" height: 160px;">
+                            <div>
+                                <div >
+                                    <div class="spinner-border text-primary spinner-border-sm " role="status">
+                                        <span class="visually-hidden">Loading...</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="analytics-half-orange dbb-cstm position-relative analtics-section-true pt-2"
+                            style="display: none;">
+                            <div class=" dbb-cstm">
+                                <!-- Chart -->
+                                <div class="double_chartss dbb-cstm">
+                                    <div class="overlayy_dashboard dbb-cstm chart_loading3" id="sessionCount">
+                                        <div class="spinner-border text-primary spinner-border-sm" role="status">
+                                            <span class="visually-hidden">Loading...</span>
+                                        </div>
+                                    </div>
+                                    <!-- <div class="overlayy_dashboard dbb-cstm">
+                                        <a href="#" class="btn btn-primary"><i class="fa fa-cloud-upload"
+                                                aria-hidden="true"></i> Add
+                                            Analytics</a>
+                                    </div> -->
+                                    <div>
+                                        <canvas id="mychart4"
+                                            style="display: block; box-sizing: border-box; height: 160px; width: 160px;"></canvas>
+                                    </div>
+                                    <!-- Chart -->
+                                </div>
+                            </div>
+                        </div>
+                        <div class="analytics-half-orange dbb-cstm position-relative analtics-section-false"
+                            style="display: none;">
+                            <!-- <div class="backdrop dbb-cstm"> -->
+                            <div class=" dbb-cstm">
+                                <!-- Chart -->
+                                <div class="double_chartss dbb-cstm">
+
+                                    <div class="add_blur">
+                                        <img src="../../static/site_audit/assets/img/bar-blue1.png" alt="">
+                                    </div>
+                                    <!-- Chart -->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xl-3 col-md-6">
+                <div class="card  mb-3">
+                    <div class="card-body grey-box">
+
+                        <p class=" text-center">Pageviews</p>
+                        <div class="analytics-half-orange dbb-cstm position-relative analtics-section-spinner "
+                            style=" height: 160px;">
+                            <div>
+                                <div >
+                                    <div class="spinner-border text-primary spinner-border-sm " role="status">
+                                        <span class="visually-hidden">Loading...</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="analytics-half-orange dbb-cstm position-relative analtics-section-true pt-2"
+                            style="display: none;">
+                            <div class=" dbb-cstm">
+                                <!-- Chart -->
+                                <div class="double_chartss dbb-cstm">
+                                    <div class="overlayy_dashboard dbb-cstm chart_loading4" id="pageViews">
+                                        <div class="spinner-border text-primary spinner-border-sm" role="status">
+                                            <span class="visually-hidden">Loading...</span>
+                                        </div>
+                                    </div>
+                                    <!-- <div class="overlayy_dashboard dbb-cstm">
+                                        <a href="#" class="btn btn-primary"><i class="fa fa-cloud-upload"
+                                                aria-hidden="true"></i> Add
+                                            Analytics</a>
+                                    </div> -->
+                                    <div>
+                                        <canvas id="mychart5"
+                                            style="display: block; box-sizing: border-box; height: 160px; width: 160px;"></canvas>
+                                    </div>
+                                    <!-- Chart -->
+                                </div>
+                            </div>
+                        </div>
+                        <div class="analytics-half-orange dbb-cstm position-relative analtics-section-false"
+                            style="display: none;">
+                            <!-- <div class="backdrop dbb-cstm"> -->
+                            <div class=" dbb-cstm">
+                                <!-- Chart -->
+                                <div class="double_chartss dbb-cstm">
+
+                                    <div class="add_blur">
+                                        <img src="../../static/site_audit/assets/img/bar-red2.png" alt="">
+                                    </div>
+                                    <!-- Chart -->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xl-3 col-md-6">
+                <div class="card  mb-3">
+                    <div class="card-body grey-box">
+
+                        <p class=" text-center">Pages / Session</p>
+                        <div class="analytics-half-orange dbb-cstm position-relative analtics-section-spinner "
+                            style=" height: 160px;">
+                            <div>
+                                <div >
+                                    <div class="spinner-border text-primary spinner-border-sm " role="status">
+                                        <span class="visually-hidden">Loading...</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="analytics-half-orange dbb-cstm position-relative analtics-section-true pt-2"
+                            style="display: none;">
+                            <div class=" dbb-cstm">
+                                <!-- Chart -->
+                                <div class="double_chartss dbb-cstm">
+                                    <div class="overlayy_dashboard dbb-cstm chart_loading5" id="pagePerSession">
+                                        <div class="spinner-border text-primary spinner-border-sm" role="status">
+                                            <span class="visually-hidden">Loading...</span>
+                                        </div>
+                                    </div>
+                                    <!-- <div class="overlayy_dashboard dbb-cstm">
+                                        <a href="#" class="btn btn-primary"><i class="fa fa-cloud-upload"
+                                                aria-hidden="true"></i> Add
+                                            Analytics</a>
+                                    </div> -->
+                                    <div>
+                                        <canvas id="mychart6" width="110" height="110"
+                                            style="display: block; box-sizing: border-box; height: 160px; width: 160px;"></canvas>
+                                    </div>
+                                    <!-- Chart -->
+                                </div>
+                            </div>
+                        </div>
+                        <div class="analytics-half-orange dbb-cstm position-relative analtics-section-false"
+                            style="display: none;">
+                            <!-- <div class="backdrop dbb-cstm"> -->
+                            <div class=" dbb-cstm">
+                                <!-- Chart -->
+                                <div class="double_chartss dbb-cstm">
+
+                                    <div class="add_blur">
+                                        <img src="../../static/site_audit/assets/img/bar-yellow2.png" alt="">
+                                    </div>
+                                    <!-- Chart -->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xl-3 col-md-6">
+                <div class="card  mb-3">
+                    <div class="card-body grey-box">
+
+                        <p class=" text-center">Avg. Session Duration</p>
+                        <div class="analytics-half-orange dbb-cstm position-relative analtics-section-spinner "
+                            style=" height: 160px;">
+                            <div>
+                                <div >
+                                    <div class="spinner-border text-primary spinner-border-sm " role="status">
+                                        <span class="visually-hidden">Loading...</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="analytics-half-orange dbb-cstm position-relative analtics-section-true pt-2"
+                            style="display: none;">
+                            <div class=" dbb-cstm">
+                                <!-- Chart -->
+                                <div class="double_chartss dbb-cstm">
+                                    <!-- <div class="overlayy_dashboard dbb-cstm">
+                                        <a href="#" class="btn btn-primary"><i class="fa fa-cloud-upload"
+                                                aria-hidden="true"></i> Add
+                                            Analytics</a>
+                                    </div> -->
+                                    <div class="overlayy_dashboard dbb-cstm chart_loading6" id="sessonDuration">
+                                        <div class="spinner-border text-primary spinner-border-sm" role="status">
+                                            <span class="visually-hidden">Loading...</span>
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <canvas id="mychart7"
+                                            style="display: block; box-sizing: border-box; height: 160px; width: 160px;"></canvas>
+                                    </div>
+                                    <!-- Chart -->
+                                </div>
+                            </div>
+                        </div>
+                        <div class="analytics-half-orange dbb-cstm position-relative analtics-section-false"
+                            style="display: none;">
+                            <!-- <div class="backdrop dbb-cstm"> -->
+                            <div class=" dbb-cstm">
+                                <!-- Chart -->
+                                <div class="double_chartss dbb-cstm">
+                                    <!-- <div class="overlayy_dashboard dbb-cstm analytics-btn" >
+                                        <a  class="btn btn-primary"><i class="fa fa-cloud-upload"
+                                                aria-hidden="true"></i> Add
+                                            Analytics</a>
+                                    </div> -->
+                                    <div class="add_blur">
+                                        <img src="../../static/site_audit/assets/img/bar-green2.png" alt="">
+                                    </div>
+                                    <!-- Chart -->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xl-3 col-md-6">
+                <div class="card  mb-3">
+                    <div class="card-body grey-box">
+
+                        <p class=" text-center">No. Of Sessions / User</p>
+                        <div class="analytics-half-orange dbb-cstm position-relative analtics-section-spinner "
+                            style=" height: 160px;">
+                            <div>
+                                <div >
+                                    <div class="spinner-border text-primary spinner-border-sm " role="status">
+                                        <span class="visually-hidden">Loading...</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="analytics-half-orange dbb-cstm position-relative analtics-section-true pt-2"
+                            style="display: none;">
+                            <div class=" dbb-cstm">
+                                <!-- Chart -->
+                                <div class="double_chartss dbb-cstm">
+                                    <div class="overlayy_dashboard dbb-cstm chart_loading7" id="usersSessions">
+                                        <div class="spinner-border text-primary spinner-border-sm" role="status">
+                                            <span class="visually-hidden">Loading...</span>
+                                        </div>
+                                    </div>
+                                    <!-- <div class="overlayy_dashboard dbb-cstm">
+                                        <a href="#" class="btn btn-primary"><i class="fa fa-cloud-upload"
+                                                aria-hidden="true"></i> Add
+                                            Analytics</a>
+                                    </div> -->
+
+                                    <div>
+                                        <canvas id="mychart8" width="110" height="110"
+                                            style="display: block; box-sizing: border-box; height: 160px; width: 160px;"></canvas>
+                                    </div>
+                                    <!-- Chart -->
+                                </div>
+                            </div>
+                        </div>
+                        <div class="analytics-half-orange dbb-cstm position-relative analtics-section-false"
+                            style="display: none;">
+                            <!-- <div class="backdrop dbb-cstm"> -->
+                            <div class=" dbb-cstm">
+                                <!-- Chart -->
+                                <div class="double_chartss dbb-cstm">
+                                    <!-- <div class="overlayy_dashboard dbb-cstm analytics-btn" >
+                                        <a  class="btn btn-primary"><i class="fa fa-cloud-upload"
+                                                aria-hidden="true"></i> Add
+                                            Analytics</a>
+                                    </div> -->
+                                    <div class="add_blur">
+                                        <img src="../../static/site_audit/assets/img/bar-blue2.png" alt="">
+                                    </div>
+                                    <!-- Chart -->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- add website modal -->
+{% comment %} 
+<div class="modal fade websiteListt" id="rem_attr_modal" tabindex="{-1}" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-xl">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" />
+        </div>
+            <div class="modal-body">
+                <h2>Drag your links you want to crawl</h2>
+               <div class="d-flex gap-4">
+                <div class="list-group " id="list-group-one">
+                </div>
+                <i class="fa fa-exchange-alt" style="margin-top: 150px;"></i>
+                <div class="list-group " id="list-group-two">
+                 
+                </div>
+               </div>
+               <div class="float-end">
+               <button class="btn btn-primary mt-2" id="submit_links">Submit</button>
+               </div>
+            </div>
+        </div>
+    </div>
+  </div> {% endcomment %}
+
+   <!-- Sortable.js library -->
+   <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/Sortable/1.13.0/Sortable.min.js"></script>
+  <script>
+window.onload = function() {
+      new Sortable(document.getElementById('list-group-one'), {
+  group: 'shared',// set both lists to same group
+  animation: 150
+});
+
+new Sortable(document.getElementById('list-group-two'), {
+  group: 'shared',// set both lists to same group
+  animation: 150
+});
+    }
+</script> -->
+
+{% endblock %} {% block extrascript %}
+
+<script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-circle-progress/1.2.2/circle-progress.min.js"></script>
+<script src="https://cdn.anychart.com/releases/v8/js/anychart-base.min.js"></script>
+<script src="https://cdn.anychart.com/releases/v8/js/anychart-ui.min.js"></script>
+<script src="https://cdn.anychart.com/releases/v8/js/anychart-exports.min.js"></script>
+<script src="https://cdn.anychart.com/releases/v8/js/anychart-tag-cloud.min.js"></script>
+<link href="https://cdn.anychart.com/releases/v8/css/anychart-ui.min.css" type="text/css" rel="stylesheet">
+<script src="{% static 'site_audit/js/site_audit_dashboard.js' %}"></script>
+
+<!-- projectlist js -->
+{% if request.user.is_authenticated %}
+
+{% endif %}
+
+<style>
+    .progress-bar-success {
+        min-width: 5.4% !important;
+    }
+</style>
+<script>
+
+    // add analytics btn
+    // $('.gogle-btn1').on('click', function () {
+
+    //     $('.google_spinner1').css('opacity', '1');
+    //     var project_id = $('.url').attr('data-id')
+    //     const perm_url = window.location.origin + '/site_audit/get_auth_url/?project_id=' + project_id;
+    //     $.ajax({
+    //         method: 'GET',
+    //         url: perm_url,
+    //         success: function (response) {
+    //             if (response.status) {
+    //                 $('.google_spinner1').css('opacity', '0');
+    //                 let auth_url = response.auth_url;
+    //                 window.location.href = auth_url
+    //             }
+    //         }
+    //     })
+    // })
+</script>
+<script>
+    
+    jQuery(".js-close-tip").on("click", function () {
+        jQuery(this).parent().fadeOut("slow");
+    });
+    //Charts
+
+    var x1Values = [
+        "New Users",
+        " Bounce Rate",
+
+    ];
+    var y1Values = [30, 25];
+    var barColors = [
+        "#eb4335",
+        "#ffc107",
+    ];
+
+    new Chart("googleanalytics_chart", {
+        //   startAngle: -400.55,
+        type: "doughnut",
+        borderWidth: 20,
+        data: {
+            labels: x1Values,
+            datasets: [
+                {
+                    backgroundColor: barColors,
+                    data: y1Values,
+                },
+            ],
+        },
+
+        options: {
+            legend: {
+                display: false,
+            },
+            responsive: true,
+            aspectRatio: 1,
+            maintainAspectRatio: false,
+            rotation: 40,
+        },
+    });
+
+</script>
+
+{% endblock %}

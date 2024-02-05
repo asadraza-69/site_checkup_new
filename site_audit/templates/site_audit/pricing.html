@@ -1,0 +1,407 @@
+{% extends "base2.html" %}
+{% load static %}
+{% block extrahead %}
+<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"/>
+<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick-theme.css"/>
+<style>
+      section.content {
+    background-color: #fff;
+}
+
+.loaderrr {
+    min-height: 100px;
+    width:100%;
+    display:flex;
+    justify-content:center;
+}
+.slick-slide {
+    margin: 10px;
+}
+
+@media (max-width: 1300px) {
+        
+    main {
+      padding-left: 18%;
+    }
+}
+
+@media (max-width: 1199px) {
+    main {
+      padding-left: 20%;
+    }
+}    
+
+</style>
+
+{% endblock %}
+{% block content %}
+
+
+    <section>
+        <div class="light-background pt-70 pb-70">
+            <div class="container">
+                <div class="row">
+                    <div class="col-12 col-sm-12 col-md-6 col-lg-4 col-xl-4 col-xxl-4 mb-3 mb-lg-0">
+                        <div class="d-flex align-items-center gap-3">
+                            <img src="/static/site_audit/assets/robot-icon.png" alt="WebsiteRankingExpert" width="32" height="36" />
+                            <p class="f-15 f-400 f-black-light mb-0">We use your real data to find you real opportunities.</p>
+                        </div>
+                    </div>
+                    <div class="col-12 col-sm-12 col-md-6 col-lg-4 col-xl-4 col-xxl-4 mb-3 mb-lg-0">
+                        <div class="d-flex align-items-center gap-3">
+                            <img src="/static/site_audit/assets/suitcase-icon.png" alt="WebsiteRankingExpert" width="32" height="36" />
+                            <p class="f-15 f-400 f-black-light mb-0">Save time and money. We make growing online easy and simple.</p>
+                        </div>
+                    </div>
+                    <div class="col-12 col-sm-12 col-md-6 col-lg-4 col-xl-4 col-xxl-4 mb-3 mb-lg-0">
+                        <div class="d-flex align-items-center gap-3">
+                            <img src="/static/site_audit/assets/sun-icon.png" alt="WebsiteRankingExpert" width="32" height="36" />
+                            <p class="f-15 f-400 f-black-light mb-0">Over 250k businesses trust the Answer Engine to help them monitor and grow their websites!</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section>
+        <div>
+            <div class="container w-lg-100">
+                <div class="row pt-4 pb-4">
+                    <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 col-xxl-12">
+                        <h2 class="f-32 f-600 f-height-1-1 f-black text-center mb-0">Plans</h2>
+                    </div>
+                </div>
+                <div class="row d-flex">
+                    <!-- <div class="col-12 col-sm-12 col-md-6 col-lg-5 col-xl-5 col-xxl-5 d-flex align-self-stretch mb-5 mb-lg-0">
+                        <div class="left-side-pricing">
+                            <div>
+                                <h2 class="f-24 f-600 f-height-1-1 f-white mb-3">Get unlimited access to WebsiteRankingExpert's award winning growth tools.</h2>
+                                <p class="f-14 f-400 f-white mb-4"><i>Really enjoying SEO and other forms of website optimisation for my KoffeeKlatch contract site. I never thought I'd every say those words. I enjoy the regular email updates on my numbers and the tasks to improve them. Love getting numbers that are relevant and that I can understand AND do something about.</i></p>
+                                <div class="d-flex align-items-center justify-content-start gap-3">
+                                    <div>
+                                        <img src="/static/site_audit/assets/avatar-3.png" alt="WebsiteRankingExpert" width="52" height="52" class="rounded-circle" />
+                                    </div>
+                                    <div>
+                                        <h6 class="f-18 f-500 f-white mb-0">Annabel Kaye</h6>
+                                        <p class="f-14 f-400 f-white mb-0">Verified Google 5-Star Review</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="mt-3">
+                                <h2 class="f-24 f-600 f-height-1-1 f-white mb-2">Growth Plan</h2>
+                                <p class="f-14 f-400 f-white mb-0">WebsiteRankingExpert combines your real-time data with a thorough study of your website, competitors', and industry standards to suggest how to expand online more quickly. The Answer Engine is on 24 hours a day, 7 days a week, to develop bespoke growth goals and notifications to assist you in optimizing your: SEO, Social, Mobile, Visitor experience, and more.</p>
+                            </div>
+                            <div class="mt-3">
+                                <h2 class="f-24 f-600 f-height-1-1 f-white mb-2">Website Monitoring</h2>
+                                <p class="f-14 f-400 f-white mb-0">We promise you a good night's sleep! We automate Website Monitoring so that you are notified if we detect any problems. All Pro accounts include up to 30 websites for speed/security monitoring, email deliverability (ensure that your emails aren't sent to spam), rankings changes, and competitor activity.</p>
+                            </div>
+                            <div class="mt-3">
+                                <h2 class="f-24 f-600 f-height-1-1 f-white mb-2">RankGuard®</h2>
+                                <p class="f-14 f-400 f-white mb-0">With this free report, you'll be able to find out whether your website is currently ranking high for certain terms on Google! To beat the competition, follow these simple procedures to enhance your Google rankings. You'll also see how ranking higher for that term benefits you!</p>
+                            </div>
+                            <div class="mt-3">
+                                <h2 class="f-24 f-600 f-height-1-1 f-white mb-2">Keyword Explorer</h2>
+                                <p class="f-14 f-400 f-white mb-0">Add new pages and content to your website with WebsiteRankingExpert's Keyword Explorer, outranking your rivals! Getting more visitors to your website is as simple as adding high-quality articles and blogs. With WebsiteRankingExpert's powerful keyword explorer, you can look up thousands of new keyword ideas to write about.</p>
+                            </div>
+                            <div class="mt-3">
+                                <h2 class="f-24 f-600 f-height-1-1 f-white mb-2">Backlink Analysis</h2>
+                                <p class="f-14 f-400 f-white mb-0">We look for both quality backlinks that will assist you to rank higher and spammy ones that must be disavowed in Google. You may view and monitor the sources that link to you and your competitors' backlinks. We'll continue to watch your website, and if we find any spammy links from bad actors that might harm your rankings. </p>
+                            </div>
+                            <div class="mt-3">
+                                <h2 class="f-24 f-600 f-height-1-1 f-white mb-2">Competitor Analysis</h2>
+                                <p class="f-14 f-400 f-white mb-0">WebsiteRankingExpert makes it simple to stay on top of your competition! You may add up to six rivals, and we'll keep you informed on how much traffic they're receiving as well as how they're doing with their SEO (keywords, backlinks, etc.).</p>
+                            </div>
+                            <div class="mt-3">
+                                <h2 class="f-24 f-600 f-height-1-1 f-white mb-2">Monthly/Weekly Snapshot</h2>
+                                <p class="f-14 f-400 f-white mb-0">Are you feeling overwhelmed? Your new Weekly Snapshot offers you a quick look at how your company is performing online: traffic and ranking changes, social performance, as well as local map (if applicable) data, new growth possibilities, security, speed, and SEO overview.</p>
+                            </div>
+                            <div class="mt-3">
+                                <h2 class="f-24 f-600 f-height-1-1 f-white mb-2">Daily Health Score</h2>
+                                <p class="f-14 f-400 f-white mb-0">The easiest way to discover whether your website is safe is by checking your Daily Health Score. We use 12 indicators to calculate a single score that looks at the overall performance of your website. We also consider how you compare to similar sites!</p>
+                            </div>
+                            <div class="mt-3">
+                                <h2 class="f-24 f-600 f-height-1-1 f-white mb-2">Websites</h2>
+                                <p class="f-14 f-400 f-white mb-0">If you run many websites for your company or agency, WebsiteRankingExpert has you covered! Each account allows you to add up to 30 WebsiteRankingExperts. You can also see how they're all progressing across several metrics simultaneously in an overview.</p>
+                            </div>
+                            <div class="mt-3">
+                                <h2 class="f-24 f-600 f-height-1-1 f-white mb-2">Support</h2>
+                                <p class="f-14 f-400 f-white mb-0">Just reach out if you need assistance selecting keywords. Are you stumped as to why your website is slow or how a competitor has appeared above you when your site isn't? There's no problem. Inquire of your friendly WebsiteRankingExpert Growth Adviser for some assistance (included in all PRO packages).</p>
+                            </div>
+                            <div class="mt-3">
+                                <h2 class="f-24 f-600 f-height-1-1 f-white mb-2">Social Media</h2>
+                                <p class="f-14 f-400 f-white mb-0">Understanding social media is critical for expanding internet presence in today's world. WebsiteRankingExpert is here to make it easier for you. We link to your social media data and provide insights based on actual evidence.</p>
+                            </div>
+                            <div class="mt-3">
+                                <h2 class="f-24 f-600 f-height-1-1 f-white mb-2">Growth Experts</h2>
+                                <p class="f-14 f-400 f-white mb-0">All of WebsiteRankingExpert's Growth Experts have been certified and are highly efficient. Our Growth Experts always provide you with the advice and assistance you need, whether you want a second opinion, help to research new keywords or a better strategy to outrank your competition. Finally, we have the best plans for you. We provide free access (in fact, it is included, and there are no hidden or extra costs ever)!</p>
+                            </div>
+                        </div>
+                    </div> -->
+                   
+
+                    <div class="loaderrr">
+                        <div class="tb_loader text-center">
+                            <div class="spinner-border" role="status">
+                                <span class="visually-hidden">Loading...</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="d-flex d-none  row" id="planss">
+                    </div>
+                </div>
+            </div>
+            </div>
+        </div>
+    </section>
+
+
+{% endblock %}
+{% block extrascript %}
+
+<script>
+
+$(document).ready(function() {
+    $('.websiteListt').modal('hide')
+    $('.websiteListt').remove()
+    //$('.websiteListt').addClass('d-none')
+   // $('.websiteListt').removeClass('show')
+})
+
+     $('#detect').prop('disabled', true)
+      $('#DetectUrl').addClass("mb-2")
+
+      //enter correct URL input validation
+       $('#websiteValidation').on('change input type', function () {
+        website_url = $(this).val();
+        $("#responseText").html("")
+        var pattern = /(((http|ftp|https):\/{2})+(([0-9a-z_-]+\.)+(aero|asia|biz|cat|com|coop|edu|gov|info|int|jobs|mil|mobi|museum|name|net|org|pro|tel|travel|ac|ad|ae|af|ag|ai|al|am|an|ao|aq|ar|as|at|au|aw|ax|az|ba|bb|bd|be|bf|bg|bh|bi|bj|bm|bn|bo|br|bs|bt|bv|bw|by|bz|ca|cc|cd|cf|cg|ch|ci|ck|cl|cm|cn|co|cr|cu|cv|cx|cy|cz|cz|de|dj|dk|dm|do|dz|ec|ee|eg|er|es|et|eu|fi|fj|fk|fm|fo|fr|ga|gb|gd|ge|gf|gg|gh|gi|gl|gm|gn|gp|gq|gr|gs|gt|gu|gw|gy|hk|hm|hn|hr|ht|hu|id|ie|il|im|in|io|iq|ir|is|it|je|jm|jo|jp|ke|kg|kh|ki|km|kn|kp|kr|kw|ky|kz|la|lb|lc|li|lk|lr|ls|lt|lu|lv|ly|ma|mc|md|me|mg|mh|mk|ml|mn|mn|mo|mp|mr|ms|mt|mu|mv|mw|mx|my|mz|na|nc|ne|nf|ng|ni|nl|no|np|nr|nu|nz|nom|pa|pe|pf|pg|ph|pk|pl|pm|pn|pr|ps|pt|pw|py|qa|re|ra|rs|ru|rw|sa|sb|sc|sd|se|sg|sh|si|sj|sj|sk|sl|sm|sn|so|sr|st|su|sv|sy|sz|tc|td|tf|tg|th|tj|tk|tl|tm|tn|to|tp|tr|tt|tv|tw|tz|ua|ug|uk|us|uy|uz|va|vc|ve|vg|vi|vn|vu|wf|ws|ye|yt|yu|za|zm|zw|arpa|solutions)(:[0-9]+)?((\/([~0-9a-zA-Z\#\+\%@\.\/_-]+))?(\?[0-9a-zA-Z\+\%@\/&\[\];=_-]+)?)?))\b/
+        if (pattern.test(website_url)) {
+          $('#detect').prop('disabled', false);
+        } else {
+          $('#detect').prop('disabled', true)
+          $("#responseText").html('Please enter correct url i.e https://example.com').addClass('text-danger')
+        }
+      });
+
+      $(document).ready(function(){
+        //GET plans API
+       
+
+        $.ajax({
+            method: 'GET',
+            url: '/subscription/get_plans/',
+            success: function (res) {
+             
+                if(res.status){
+                //looping DATA to append plans card
+                  $.each(res.data, function(idx, item){
+                    // if(idx == 2){
+                    //     return false
+                    // }
+                    $(document).on('keyup input change',`.websiteValidation${idx}`, function () {
+        var website_url = $(this).val();
+        $(`#responseTextt${idx}`).html("")
+        var pattern = /(((http|ftp|https):\/{2})+(([0-9a-z_-]+\.)+(aero|asia|biz|cat|com|coop|edu|gov|info|int|jobs|mil|mobi|museum|name|net|org|pro|tel|travel|ac|ad|ae|af|ag|ai|al|am|an|ao|aq|ar|as|at|au|aw|ax|az|ba|bb|bd|be|bf|bg|bh|bi|bj|bm|bn|bo|br|bs|bt|bv|bw|by|bz|ca|cc|cd|cf|cg|ch|ci|ck|cl|cm|cn|co|cr|cu|cv|cx|cy|cz|cz|de|dj|dk|dm|do|dz|ec|ee|eg|er|es|et|eu|fi|fj|fk|fm|fo|fr|ga|gb|gd|ge|gf|gg|gh|gi|gl|gm|gn|gp|gq|gr|gs|gt|gu|gw|gy|hk|hm|hn|hr|ht|hu|id|ie|il|im|in|io|iq|ir|is|it|je|jm|jo|jp|ke|kg|kh|ki|km|kn|kp|kr|kw|ky|kz|la|lb|lc|li|lk|lr|ls|lt|lu|lv|ly|ma|mc|md|me|mg|mh|mk|ml|mn|mn|mo|mp|mr|ms|mt|mu|mv|mw|mx|my|mz|na|nc|ne|nf|ng|ni|nl|no|np|nr|nu|nz|nom|pa|pe|pf|pg|ph|pk|pl|pm|pn|pr|ps|pt|pw|py|qa|re|ra|rs|ru|rw|sa|sb|sc|sd|se|sg|sh|si|sj|sj|sk|sl|sm|sn|so|sr|st|su|sv|sy|sz|tc|td|tf|tg|th|tj|tk|tl|tm|tn|to|tp|tr|tt|tv|tw|tz|ua|ug|uk|us|uy|uz|va|vc|ve|vg|vi|vn|vu|wf|ws|ye|yt|yu|za|zm|zw|arpa|solutions)(:[0-9]+)?((\/([~0-9a-zA-Z\#\+\%@\.\/_-]+))?(\?[0-9a-zA-Z\+\%@\/&\[\];=_-]+)?)?))\b/
+        if (pattern.test(website_url)) {
+          $('.detect_exis_url').prop('disabled', false);
+        } else if($(`.websiteValidation${idx}`).val() == ""){
+        $(`#responseTextt${idx}`).html("")
+      }else {
+          $('.detect_exis_url').prop('disabled', true);
+          $(`#responseTextt${idx}`).html('Please enter correct url i.e https://example.com').addClass("text-danger")
+        }
+      });
+      
+            //appending plan card information
+                    $("#planss").append(`
+                    <div class="slick-slide" >
+                    <div class="plans-wrapper purple">
+                        <div class="head">
+                            <h3 class="f-28 f-600 f-height-1-1 f-black text-center mb-1">${item.name}</h3>
+                            <p class="f-14 f-400 f-black-light text-center mb-1">Unlimited access to WebsiteRankingExpert's award winning growth tools</p>
+                            <p class="f-600 f-purple text-center mb-1" id="price" style="font-size:24px">$ ${item.price} / ${item.days_per_interval ==30 ? "Month" : "Year"}</p>
+                            <p class="f-14 f-500 f-black text-center mb-4">Renews at just <span class="f-purple">$29.99</span> month</p>
+                        </div>
+                        <form>
+                            <div class="row">
+                                <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 col-xxl-12">
+                                    <input type="text" placeholder="Enter Your Website" class="websiteValidation websiteValidation${idx}" id="websiteValidation2"  required />
+                                    <span id="responseTextt${idx}" class="mt-5"></span>
+                                </div>
+                                <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 col-xxl-12">
+                                    <button type="submit" disabled class="detect_exis_url" plan_id="${item.id}"> Proceed</button>
+                                </div>
+                            </div>
+                        </form>
+                        <div class="items-wrapper">
+                            <div class="item item-1">
+                                <div class="d-flex justify-content-between mb-2">
+                                    <h6 class="f-18 f-500 f-black mb-0">Growth Plan</h6>
+                                    <h6 class="f-16 f-600 f-purple mb-0">Full</h6>
+                                </div>
+                                <p class="f-14 f-400 f-black-light mb-0">You'll get access to our most effective daily alerts and objectives.</p>
+                            </div>
+                            <div class="item item-2">
+                                <h6 class="f-18 f-500 f-black mb-2">Robust Website Monitoring</h6>
+                                <p class="f-14 f-400 f-black-light mb-0">10x the scans and more frequent monitoring of additional issues like email deliverability and competitor changes</p>
+                            </div>
+                            <div class="item item-3">
+                                <div class="d-flex justify-content-between mb-2">
+                                    <h6 class="f-18 f-500 f-black mb-0">RankGuard®</h6>
+                                    <h6 class="f-16 f-600 f-purple mb-0">1 scan/week</h6>
+                                </div>
+                                <p class="f-14 f-400 f-black-light mb-0">We'll check your current keyword rankings on Google every week. If you already deserve to rank higher for a term, we'll let you know. We'll also provide easy solutions for getting there.</p>
+                            </div>
+                            <div class="item item-4">
+                                <div class="d-flex justify-content-between mb-2">
+                                    <h6 class="f-18 f-500 f-black mb-0">Keyword Explorer</h6>
+                                    <h6 class="f-16 f-600 f-purple mb-0">Full</h6>
+                                </div>
+                                <p class="f-14 f-400 f-black-light mb-0">Full access to all our keyword attributes.</p>
+                            </div>
+                            <div class="item item-5">
+                                <div class="d-flex justify-content-between mb-2">
+                                    <h6 class="f-18 f-500 f-black mb-0">Backlink Analysis</h6>
+                                    <h6 class="f-16 f-600 f-purple mb-0">Full</h6>
+                                </div>
+                                <p class="f-14 f-400 f-black-light mb-0">Comprehensive access to all our backlinking software.</p>
+                            </div>
+                            <div class="item item-6">
+                                <h6 class="f-18 f-500 f-black mb-2">Competitor Analysis</h6>
+                                <p class="f-14 f-400 f-black-light mb-0">Add up to 6 competitors and track their rankings and traffic. We'll even tell you when they make a change to a page that improves their rankings, so you can see their strategy.</p>
+                            </div>
+                            <div class="item item-7">
+                                <h6 class="f-18 f-500 f-black mb-2">Weekly Snapshot</h6>
+                                <p class="f-14 f-400 f-black-light mb-0">More data, more often. Get a brief weekly report on your and your competitors' ranks, traffic, and other metrics.</p>
+                            </div>
+                            <div class="item item-8">
+                                <h6 class="f-18 f-500 f-black mb-2">Daily Health Score</h6>
+                                <p class="f-14 f-400 f-black-light mb-0">WebsiteRankingExpert's proprietary Health Score algorithm compares your daily performance to our predictions.</p>
+                            </div>
+                            <div class="item item-9">
+                                <div class="d-flex justify-content-between mb-2">
+                                    <h6 class="f-18 f-500 f-black mb-0">Websites</h6>
+                                    <h6 class="f-16 f-600 f-purple mb-0">Add Up to 30</h6>
+                                </div>
+                                <p class="f-14 f-400 f-black-light mb-0">Find out how your websites are doing on one screen, and get monitoring and data insights for your entire portfolio from one dashboard.</p>
+                            </div>
+                            <div class="item item-10">
+                                <h6 class="f-18 f-500 f-black mb-2">Email, Phone, and Chat Support</h6>
+                                <p class="f-14 f-400 f-black-light mb-0">Our highest level of devoted support. Pro associates can also organize a one-on-one Zoom discussion with a Growth Expert to review their site, SEO, and/or anything else.</p>
+                            </div>
+                            <div class="item item-11">
+                                <h6 class="f-18 f-500 f-black mb-2">Social Media</h6>
+                                <p class="f-14 f-400 f-black-light mb-0">We observe your actual performance and offer you a custom roadmap to develop this very meaningful channel.</p>
+                            </div>
+                            <div class="item item-12">
+                                <h6 class="f-18 f-500 f-black mb-2">Growth Expert Assistance</h6>
+                                <p class="f-14 f-400 f-black-light mb-0">Our professional human Growth Experts are available to assist with SEO, performance, and online strategy queries.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>`)
+                   
+                  })
+                   
+         
+                  
+                  setTimeout(() => {
+                    $(".loaderrr").hide();
+                $("#planss").removeClass("d-none")
+            
+                $("#planss").slick({
+    dots: true,
+    infinite: false,
+    speed: 300,
+    slidesToShow: 3,
+    slidesToScroll: 3,
+    autoplay: false,
+    autoplaySpeed: 2000,
+    arrows: true,
+    prevArrow: '<i id="prev-arrow" class="fas fa-angle-left" style="font-size: 40px; position: relative; top: 211px; left: 3px; cursor: pointer; z-index: 10;"></i>',
+    nextArrow: '<i id="next-arrow" class="fas fa-angle-right" style="font-size: 40px; position: absolute; left: calc(100% - 5vw); top: 211px; cursor: pointer; z-index: 11;"></i>',
+    responsive: [
+        {
+            breakpoint: 1124,
+            settings: {
+                slidesToShow: 2,
+                slidesToScroll: 2
+            }
+        },
+        {
+            breakpoint: 800,
+            settings: {
+                slidesToShow: 1,
+                slidesToScroll: 1
+            }
+        }
+    ]
+});
+
+   }, 500);
+                }
+                
+            }
+        })
+    })
+
+
+
+    //   $('#websiteValidation2').on('change input type', function () {
+    //     website_url = $(this).val();
+    //     $("#responseText").html("")
+    //     var pattern = /(((http|ftp|https):\/{2})+(([0-9a-z_-]+\.)+(aero|asia|biz|cat|com|coop|edu|gov|info|int|jobs|mil|mobi|museum|name|net|org|pro|tel|travel|ac|ad|ae|af|ag|ai|al|am|an|ao|aq|ar|as|at|au|aw|ax|az|ba|bb|bd|be|bf|bg|bh|bi|bj|bm|bn|bo|br|bs|bt|bv|bw|by|bz|ca|cc|cd|cf|cg|ch|ci|ck|cl|cm|cn|co|cr|cu|cv|cx|cy|cz|cz|de|dj|dk|dm|do|dz|ec|ee|eg|er|es|et|eu|fi|fj|fk|fm|fo|fr|ga|gb|gd|ge|gf|gg|gh|gi|gl|gm|gn|gp|gq|gr|gs|gt|gu|gw|gy|hk|hm|hn|hr|ht|hu|id|ie|il|im|in|io|iq|ir|is|it|je|jm|jo|jp|ke|kg|kh|ki|km|kn|kp|kr|kw|ky|kz|la|lb|lc|li|lk|lr|ls|lt|lu|lv|ly|ma|mc|md|me|mg|mh|mk|ml|mn|mn|mo|mp|mr|ms|mt|mu|mv|mw|mx|my|mz|na|nc|ne|nf|ng|ni|nl|no|np|nr|nu|nz|nom|pa|pe|pf|pg|ph|pk|pl|pm|pn|pr|ps|pt|pw|py|qa|re|ra|rs|ru|rw|sa|sb|sc|sd|se|sg|sh|si|sj|sj|sk|sl|sm|sn|so|sr|st|su|sv|sy|sz|tc|td|tf|tg|th|tj|tk|tl|tm|tn|to|tp|tr|tt|tv|tw|tz|ua|ug|uk|us|uy|uz|va|vc|ve|vg|vi|vn|vu|wf|ws|ye|yt|yu|za|zm|zw|arpa|solutions)(:[0-9]+)?((\/([~0-9a-zA-Z\#\+\%@\.\/_-]+))?(\?[0-9a-zA-Z\+\%@\/&\[\];=_-]+)?)?))\b/
+    //     if (pattern.test(website_url)) {
+    //       $('#detect').prop('disabled', false);
+    //     } else {
+    //       $('#detect').prop('disabled', true)
+    //       $("#responseText").html('Please enter correct url i.e https://example.com').addClass('text-danger')
+    //     }
+    //   });
+</script>
+
+<script>
+    //redirect to plan_subscription with specific path
+      $(document).on("click", ".detect_exis_url",function(e){
+        e.preventDefault()
+       var plan_id=  $(this).attr("plan_id")
+        if ( plan_id ) {
+            var val= $(this).parent().parent().find("input.websiteValidation").val()
+            window.location.href = `/site_audit/plan_subscription/?website_url=${val}&plan_id=${plan_id}`
+        }
+        // else if ( plan_id == 2 ) {
+        //     var val= $(this).parent().parent().find("input.websiteValidation").val()
+        //     window.location.href = `/site_audit/plan_subscription/?website_url=${val}&plan_id=${plan_id}`
+        // }
+
+        // else if (plan_id == 3 ) {
+        //     var val= $(this).parent().parent().find("input.websiteValidation").val()
+        //     window.location.href = `/site_audit/plan_subscription/?website_url=${val}&plan_id=${plan_id}`
+        // }
+       
+        
+    //    var data = {
+    //     website_url: inputId,
+    //     plan_id: btnAttr
+    //    }
+
+    //   console.log(data,"data")
+
+    //    $.ajax({
+    //     method: 'POST',
+    //     url: '/subscription/add_website_to_plan/',
+    //     data:data,
+        
+    //     success: function (res) {
+    //         console.log(res)
+    //         window.location.href = '/site_audit/plan_subscription/'
+    //     }
+    // })
+   
+    })
+
+   
+</script>
+<script type="text/javascript" src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
+{% endblock %}

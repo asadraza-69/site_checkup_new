@@ -1,0 +1,551 @@
+{% extends "base2.html" %}
+{% load static %}
+{% block extrahead %}
+
+
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css"
+  integrity="sha256-kLaT2GOSpHechhsozzB+flnD+zUyjE2LlfWPgU04xyI=" crossorigin="" />
+
+<!-- Make sure you put this AFTER Leaflet's CSS -->
+<!-- Make sure you put this AFTER Leaflet's CSS -->
+<script src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js"
+  integrity="sha256-WBkoXOwTeyKclOHuWtc+i2uENFpDZ9YPdf5Hf+D7ewM=" crossorigin=""></script>
+<link href="https://unpkg.com/leaflet-geosearch@latest/assets/css/leaflet.css" rel="stylesheet" />
+<script src="https://unpkg.com/leaflet-geosearch@latest/dist/bundle.min.js"></script>
+
+<style>
+  #map {
+    height: 380px;
+    margin-bottom: 8px;
+
+  }
+
+  .gap-3{
+    gap: 2rem!important;
+  }
+
+  .main-container {
+    box-shadow:0 7px 14px 0 rgb(65 69 88 / 41%), 0 3px 6px 0 rgb(0 0 0 / 7%)!important;
+    max-width: 1058px;
+    background-color: #f3f5f7;
+    padding: 10px;
+  }
+
+  /* Absolute Center Spinner */
+  .loading {
+    position: fixed;
+    z-index: 99999;
+    height: 2em;
+    width: 2em;
+    overflow: show;
+    margin: auto;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+  }
+
+  /* Transparent Overlay */
+  .loading:before {
+    content: "";
+    display: block;
+    position: fixed;
+    top: 0;
+    left: 14.5%;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(rgba(20, 20, 20, 0.8), rgba(0, 0, 0, 0.8));
+
+    background: -webkit-radial-gradient(rgba(20, 20, 20, 0.8),
+        rgba(0, 0, 0, 0.8));
+  }
+
+  /* :not(:required) hides these rules from IE9 and below */
+  .loading:not(:required) {
+    /* hide "loading..." text */
+    font: 0/0 a;
+    color: transparent;
+    text-shadow: none;
+    background-color: transparent;
+    border: 0;
+  }
+
+
+  .loading:not(:required):after {
+    content: "";
+    display: block;
+    font-size: 10px;
+    width: 1em;
+    height: 1em;
+    margin-top: -0.5em;
+    -webkit-animation: spinner 150ms infinite linear;
+    -moz-animation: spinner 150ms infinite linear;
+    -ms-animation: spinner 150ms infinite linear;
+    -o-animation: spinner 150ms infinite linear;
+    animation: spinner 150ms infinite linear;
+    border-radius: 0.5em;
+    -webkit-box-shadow: rgba(255, 255, 255, 0.75) 1.5em 0 0 0,
+      rgba(255, 255, 255, 0.75) 1.1em 1.1em 0 0,
+      rgba(255, 255, 255, 0.75) 0 1.5em 0 0,
+      rgba(255, 255, 255, 0.75) -1.1em 1.1em 0 0,
+      rgba(255, 255, 255, 0.75) -1.5em 0 0 0,
+      rgba(255, 255, 255, 0.75) -1.1em -1.1em 0 0,
+      rgba(255, 255, 255, 0.75) 0 -1.5em 0 0,
+      rgba(255, 255, 255, 0.75) 1.1em -1.1em 0 0;
+    box-shadow: rgba(255, 255, 255, 0.75) 1.5em 0 0 0,
+      rgba(255, 255, 255, 0.75) 1.1em 1.1em 0 0,
+      rgba(255, 255, 255, 0.75) 0 1.5em 0 0,
+      rgba(255, 255, 255, 0.75) -1.1em 1.1em 0 0,
+      rgba(255, 255, 255, 0.75) -1.5em 0 0 0,
+      rgba(255, 255, 255, 0.75) -1.1em -1.1em 0 0,
+      rgba(255, 255, 255, 0.75) 0 -1.5em 0 0,
+      rgba(255, 255, 255, 0.75) 1.1em -1.1em 0 0;
+  }
+
+  /* Animation */
+
+  @-webkit-keyframes spinner {
+    0% {
+      -webkit-transform: rotate(0deg);
+      -moz-transform: rotate(0deg);
+      -ms-transform: rotate(0deg);
+      -o-transform: rotate(0deg);
+      transform: rotate(0deg);
+    }
+
+    100% {
+      -webkit-transform: rotate(360deg);
+      -moz-transform: rotate(360deg);
+      -ms-transform: rotate(360deg);
+      -o-transform: rotate(360deg);
+      transform: rotate(360deg);
+    }
+  }
+
+  @-moz-keyframes spinner {
+    0% {
+      -webkit-transform: rotate(0deg);
+      -moz-transform: rotate(0deg);
+      -ms-transform: rotate(0deg);
+      -o-transform: rotate(0deg);
+      transform: rotate(0deg);
+    }
+
+    100% {
+      -webkit-transform: rotate(360deg);
+      -moz-transform: rotate(360deg);
+      -ms-transform: rotate(360deg);
+      -o-transform: rotate(360deg);
+      transform: rotate(360deg);
+    }
+  }
+
+  @-o-keyframes spinner {
+    0% {
+      -webkit-transform: rotate(0deg);
+      -moz-transform: rotate(0deg);
+      -ms-transform: rotate(0deg);
+      -o-transform: rotate(0deg);
+      transform: rotate(0deg);
+    }
+
+    100% {
+      -webkit-transform: rotate(360deg);
+      -moz-transform: rotate(360deg);
+      -ms-transform: rotate(360deg);
+      -o-transform: rotate(360deg);
+      transform: rotate(360deg);
+    }
+  }
+
+  @keyframes spinner {
+    0% {
+      -webkit-transform: rotate(0deg);
+      -moz-transform: rotate(0deg);
+      -ms-transform: rotate(0deg);
+      -o-transform: rotate(0deg);
+      transform: rotate(0deg);
+    }
+
+    100% {
+      -webkit-transform: rotate(360deg);
+      -moz-transform: rotate(360deg);
+      -ms-transform: rotate(360deg);
+      -o-transform: rotate(360deg);
+      transform: rotate(360deg);
+    }
+  }
+
+  .loading {
+    display: none;
+  }
+
+  /* label {
+  display: inline-block;
+  width: 113px;
+  text-align: right;
+} */
+  /* .location_form{
+ background-color: lightgrey;
+ padding: 5%;
+ height: 100%;
+ margin-top: 2px;
+} */
+  input {
+    background-color: #d8ecf8;
+  }
+
+  #xhtmlcode {
+    /* margin-left: 116px; */
+    width: 90%;
+    background-color: #c0e1f3;
+
+  }
+
+  .inputs-one {
+    width: 100px;
+    background-color: #d8ecf8;
+    cursor: default;
+    border: none;
+  }
+
+  .inputs {
+    width: 220px;
+    background-color: #d8ecf8;
+    border: none;
+    height: 27px;
+    cursor: default;
+  }
+
+
+  .inputs-code {
+    width: 40px;
+    background-color: #d8ecf8;
+    border: none;
+    cursor: default;
+  }
+
+  .labels {
+    color: #000;
+    text-align: center;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 1.2rem;
+    font-weight: 500;
+  }
+
+  .hinweis {
+    font-size: 10pt;
+    color: blue;
+    width: 700px;
+    height: 18px;
+    margin: 8px 0px;
+    font-weight: 500;
+  }
+  .labels-left{
+    width: 80px;
+    text-align: left;
+  }
+  .labels-right{
+    width: 142px;
+    text-align: left;
+  }
+
+  @media (max-width: 1199px){
+    main {
+    padding-left: 19%;
+}
+  }
+
+  @media (max-width: 768px){
+    .footer {
+       bottom:-44px!important;
+    }
+      }
+
+  @media (max-width: 991px){
+main {
+    padding-left: 0;
+    margin-top: 125px;
+}
+  }
+
+  @media (max-width:480px){
+    .map-container {
+      display: inline-block!important;
+    }
+  }
+
+  
+</style>
+{% endblock %}
+{% block content %}
+<div class="container">
+  <!-- Crawler Heading Section  -->
+  <div class="row">
+    <div class="col-xl-9">
+      <h2 class="title red fw-400 mb-md-3 pb-2">GEO Location</h2>
+    </div>
+  </div>
+</div>
+<div class="container">
+  <div class="row mt-2">
+    <div class="col-md-12">
+      <div class="map-container d-flex justify-content-center">
+        <div class="main-container">
+          <div class="loading"></div>
+          <div id="map"></div>
+          <div class="location_form">
+
+            <div class="d-flex gap-3">
+              <div class="">
+                <label for="" class="labels labels-left">Latitude: </label>
+                <input type="text" readonly class="mb-3 inputs-one" value="0" id="lat">
+              </div>
+              <div class="">
+                <label for="" class="labels">Longitude: </label>
+                <input type="text" readonly id="lon" value="0" class="mb-3 inputs-one">
+              </div>
+            </div>
+            {% comment %} <div id="hland" class="hinweis">Select a country or enter a country-code by hand:</div> {% endcomment %}
+            <!--  -->
+            <div class="d-flex gap-3">
+              <div class="">
+                <label for="" class="labels labels-left">Country:</label>
+                <!-- <input type="text" id="country" class="mb-2"> -->
+                <input type="text" id="country" name="country" class="mb-3 inputs" readonly/>
+              </div>
+              <div class="">
+                <label for="" class="labels labels-right">Country Code:</label>
+                <input type="text" readonly id="country_code" class="mb-3 inputs-code">
+              </div>
+            </div>
+            {% comment %} <div id="hland" class="hinweis">Select a region, enter a regional-code by hand or leave it blank:</div> {% endcomment %}
+            <!--  -->
+            <div class="d-flex gap-3">
+              <div class="">
+                <label for="" class="labels labels-left">Region:</label>
+                <!-- <input type="text" id="region" class="mb-2"> -->
+                <input type="text" id="region" name="region" class="mb-3 inputs" readonly />
+              </div>
+              <div class="">
+                <label for="" class="labels labels-right">Regional Code:</label>
+                <input type="text" readonly id="regional_code" class="mb-3 inputs-code">
+              </div>
+            </div>
+            {% comment %} <div id="hland" class="hinweis">Enter the name of the city:</div> {% endcomment %}
+            <!--  -->
+            <div class="d-flex gap-3">
+            <div class="">
+            <label for="" class="labels labels-left">City:</label>
+            <!-- <input type="text" id="region" class="mb-2"> -->
+            <input type="text" readonly  id="city" name="city" class="mb-3 inputs" >
+            </div>
+            </div>
+            <!--  -->
+            <div class="row">
+              <div class="col-md-12">
+                <textarea readonly="readonly" rows="6" cols="105" id="xhtmlcode"></textarea>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}
+{% block extrascript %}
+<script>
+ var theMarker;
+  var map = L.map('map').setView([51.505, -0.09], 13);
+  L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    Zoom: 2,
+    attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+  }).addTo(map);
+  const search = new GeoSearch.GeoSearchControl({
+    provider: new GeoSearch.OpenStreetMapProvider(),
+    style: 'bar',
+      showMarker: true, // optional: true|false  - default true
+    showPopup: false, // optional: true|false  - default false
+    marker: {
+      // optional: L.Marker    - default L.Icon.Default
+      icon: new L.Icon.Default(),
+      draggable: false,
+    },
+  });
+  
+  map.addControl(search);
+  // search function to get values
+ 
+  function searchEventHandler(result) {
+   
+
+    var lat = result.marker._latlng.wrap().lat;
+    var lon =result.marker._latlng.wrap().lng;
+    //  searchMarker = L.marker(result.marker._latlng).addTo(map);
+    $('.loading').show();
+     $('#country').val('')
+    $('#region').val('')
+    $('#lat').val('');
+    $('#lon').val('');
+    $('#city').val('')
+    $('#country_code').val('')
+    $('#country').val('');
+    $('#xhtmlcode').val('');
+    if(theMarker){
+     map.removeControl(theMarker)
+
+    }
+    // map.zoomIn();
+    $.ajax({
+      method: 'GET',
+      url: `https://nominatim.openstreetmap.org/reverse?lat=${lat}&lon=${lon}&format=json`,
+      success: function (response) {
+      
+        if (!response.error) {
+          var city = response.address.city;
+          $('#city').val(city)
+          $('#city').attr('title', city);
+          var lan = Number(response.lat).toFixed(5);
+          $('#lat').val(`${lan}`);
+          var lon = Number(response.lon).toFixed(5);
+          $('#lon').val(`${lon}`);
+          var country = response.address.country;
+        //  $('#country').append($('<option>', {
+         //   value: country,
+        //    text: country
+        //  }));
+          $('#country').val(country);
+          var region = response.address.state;
+          const keysToSearch = ['ISO3166-2-lvl4', 'ISO3166-2-lvl5', 'ISO3166-2-lvl6', 'ISO3166-2-lvl8'];
+          var regional_code
+          for (let i = 0; i < keysToSearch.length; i++) {
+            const key = keysToSearch[i];
+            if (response.address.hasOwnProperty(key)) {
+              regional_code = response.address[key]
+              // console.log(response.address[key]);
+              break;
+            }
+          }
+          var reginal = regional_code?.split('-');
+          var reg_0 = reginal && reginal[0];
+          var reg_1 = reginal && reginal[1]
+          $('#country_code').val(`${reg_0}`)
+         // $('#region').append($('<option>', {
+          //  value: region,
+          //  text: region
+         // }));
+          $('#region').val(region);
+         $('#regional_code').val(`${reg_1}`);
+          var metaTags = '';
+          if (regional_code) {
+            metaTags += `<meta name="geo.region" content=" ${regional_code} "  />\n`;
+          }
+          if (response.address.city) {
+            metaTags += `<meta name="geo.placename" content="${response.address.city}" />\n`;
+          }
+          if (lan && lon) {
+            metaTags += `<meta name="geo.position" content=" ${parseFloat(lan).toFixed(6)} ; ${parseFloat(lon).toFixed(6)} "  />\n`;
+            metaTags += `<meta name="ICBM" content=" ${parseFloat(lan).toFixed(6)} ; ${parseFloat(lon).toFixed(6)} "  />\n`;
+          }
+          $('#xhtmlcode').val(metaTags);
+          $('.loading').hide()
+          $('.loading').hide()
+        } else {
+          $('.loading').hide()
+          ShowNoty(response.error, 'error')
+        }
+      }
+    })
+  }
+  map.on('geosearch/showlocation', searchEventHandler);
+
+  function onMapClick(e) {
+    console.log(e,'e')
+    $('.reset').trigger('click')
+    $('.loading').show();
+    $('#country').empty()
+    $('#region').empty()
+    $('#lat').val('');
+    $('#lon').val('');
+    $('#city').val('')
+    $('#country_code').val('')
+    $('#country').val('');
+    $('#xhtmlcode').val('');
+    var lat = e.latlng.wrap().lat;
+    var lon = e.latlng.wrap().lng;
+    console.log(lat,'lat',lon)
+  //  lat = lat.toFixed(2);
+  //  lon = lon.toFixed(2)
+    if(theMarker){
+      map.removeControl(theMarker)
+    }
+   
+    theMarker = new L.Marker(e.latlng, {draggable:true});
+        map.addLayer(theMarker);
+    // Zoom to clicked location
+// map.setView(e.latlng, 15);
+    map.zoomIn();
+    $.ajax({
+      method: 'GET',
+      url: `https://nominatim.openstreetmap.org/reverse?lat=${lat}&lon=${lon}&format=json`,
+      success: function (response) {
+     
+        if (!response.error) {
+         
+          var city = response.address.city;
+          $('#city').val(city)
+          var lan = Number(response.lat).toFixed(4);
+          $('#lat').val(`${lan}`);
+          var lon = Number(response.lon).toFixed(4);
+          $('#lon').val(`${lon}`);
+          var country = response.address.country;
+          $('#country').append($('<option>', {
+            value: country,
+            text: country
+          }));
+          $('#country').val(country);
+          var region = response.address.state;
+          const keysToSearch = ['ISO3166-2-lvl4', 'ISO3166-2-lvl5', 'ISO3166-2-lvl6', 'ISO3166-2-lvl8'];
+          var regional_code
+          for (let i = 0; i < keysToSearch.length; i++) {
+            const key = keysToSearch[i];
+            if (response.address.hasOwnProperty(key)) {
+              regional_code = response.address[key]
+              // console.log(response.address[key]);
+              break;
+            }
+          }
+          var reginal = regional_code?.split('-');
+          var reg_0 = reginal && reginal[0];
+          var reg_1 = reginal && reginal[1]
+          $('#country_code').val(`${reg_0}`)
+          $('#region').append($('<option>', {
+            value: region,
+            text: region
+          }));
+          $('#region').val(region);
+          $('#regional_code').val(`${reg_1}`);
+          var metaTags = '';
+          if (regional_code) {
+            metaTags += `<meta name="geo.region" content=" ${regional_code} "  />\n`;
+          }
+          if (response.address.city) {
+            metaTags += `<meta name="geo.placename" content="${response.address.city}" />\n`;
+          }
+          if (lan && lon) {
+            metaTags += `<meta name="geo.position" content=" ${parseFloat(lan).toFixed(6)} ; ${parseFloat(lon).toFixed(6)} "  />\n`;
+            metaTags += `<meta name="ICBM" content=" ${parseFloat(lan).toFixed(6)} ; ${parseFloat(lon).toFixed(6)} "  />\n`;
+          }
+          $('#xhtmlcode').val(metaTags);
+          $('.loading').hide()
+        } else {
+          $('.loading').hide()
+          ShowNoty(response.error, 'error')
+        }
+      }
+    })
+  }
+  map.on('click', onMapClick);
+</script>
+{% endblock %}

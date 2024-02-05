@@ -1,0 +1,470 @@
+
+[
+{       
+    "model": "auth.user",
+    "pk": 1,
+    "fields": {
+        "password": "pbkdf2_sha256$260000$W3Okeqd8pfRaa02HYDk5fe$pUctXvIbnkHIz6kBbZqSL0Gyx3pFprnYzmeVcZNQkNg=",
+        "last_login": "2023-01-03T10:42:43.445Z",
+        "is_superuser": true,
+        "username": "admin",
+        "first_name": "Asad",
+        "last_name": "Raza",
+        "email": "admin@gmail.com",
+        "is_staff": true,
+        "is_active": true,
+        "date_joined": "2022-12-22T12:26:21Z",
+        "groups": [],
+        "user_permissions": []
+    }
+},
+{
+    "model": "auth.user",
+    "pk": 2,
+    "fields": {
+        "password": "pbkdf2_sha256$260000$3kxRJIX3vKp8md65wgb18Y$kYtVEBUC9JZZtfLNrslp12EDoIVbfxXqgkrY+86qJzM=",
+        "last_login": "2023-01-03T10:42:21.388Z",
+        "is_superuser": true,
+        "username": "dev_free",
+        "first_name": "dev",
+        "last_name": "free",
+        "email": "dev_free@gmail.com",
+        "is_staff": true,
+        "is_active": true,
+        "date_joined": "2023-01-03T10:40:12Z",
+        "groups": [],
+        "user_permissions": []
+    }
+},
+{
+    "model": "auth.user",
+    "pk": 3,
+    "fields": {
+        "password": "pbkdf2_sha256$260000$cuRVj4MKjTiVMJKbX1ZQZ9$zy5bjGNinkONWpGBtMLnWcse1FWZBMRpMZEDlkrl0ok=",
+        "last_login": null,
+        "is_superuser": false,
+        "username": "dev_premium",
+        "first_name": "dev",
+        "last_name": "premium",
+        "email": "dev_premium@gmail.com",
+        "is_staff": false,
+        "is_active": true,
+        "date_joined": "2023-01-03T10:47:38Z",
+        "groups": [],
+        "user_permissions": []
+    }
+},
+{
+    "model": "user_management.profile",
+    "pk": 1,
+    "fields": {
+        "role": null,
+        "phone_number": null,
+        "is_verified": false,
+        "permission_tags": [],
+        "permission_groups": []
+    }
+},
+{
+    "model": "user_management.profile",
+    "pk": 2,
+    "fields": {
+        "role": "user",
+        "phone_number": "+12025550196",
+        "is_verified": true,
+        "permission_tags": [],
+        "permission_groups": []
+    }
+},
+{
+    "model": "user_management.profile",
+    "pk": 3,
+    "fields": {
+        "role": "user",
+        "phone_number": "+12025550196",
+        "is_verified": true,
+        "permission_tags": [],
+        "permission_groups": []
+    }
+},
+{
+    "model": "stripe_payment_module.customer",
+    "pk": 1,
+    "fields": {
+        "email": "admin@gmail.com",
+        "ref_id": "cus_N46oz21TC3RhAz",
+        "card_token": "tok_1MJybJLN0C8PbbSaPfcm7Qxr",
+        "is_paid": true,
+        "i_profile": 1
+    }
+},
+{
+    "model": "stripe_payment_module.customer",
+    "pk": 2,
+    "fields": {
+        "email": "dev_free@gmail.com",
+        "ref_id": "cus_N46oz21TC3RhAz",
+        "card_token": null,
+        "is_paid": false,
+        "i_profile": 2
+    }
+},
+{
+    "model": "stripe_payment_module.customer",
+    "pk": 3,
+    "fields": {
+        "email": "dev_premium@gmail.com",
+        "ref_id": "cus_N3eyXBdsrHg2cP",
+        "card_token": "tok_1MJXJ7LN0C8PbbSaTqbGxnHf",
+        "is_paid": false,
+        "i_profile": 3
+    }
+},
+{
+    "model": "stripe_payment_module.invoice",
+    "pk": 1,
+    "fields": {
+        "i_customer": 1,
+        "invoice_number": "WRE-0001-0001",
+        "i_plan": 2,
+        "amount": "11.00",
+        "email": "admin@gmail.com",
+        "is_paid": true,
+        "from_date": "2022-12-28",
+        "paid_date": "2022-12-28",
+        "to_date": "2023-01-02",
+        "multiple_payment": false,
+        "retry_count": 0,
+        "is_recurring": false,
+        "remarks": "",
+        "created_on": "2023-01-02T11:54:24.273Z"
+    }
+},
+{
+    "model": "stripe_payment_module.invoice",
+    "pk": 2,
+    "fields": {
+        "i_customer": 1,
+        "invoice_number": "WRE-0001-0002",
+        "i_plan": 2,
+        "amount": "11.00",
+        "email": "admin@gmail.com",
+        "is_paid": true,
+        "from_date": "2023-01-02",
+        "paid_date": "2023-01-03",
+        "to_date": "2023-02-03",
+        "multiple_payment": false,
+        "retry_count": 0,
+        "is_recurring": false,
+        "remarks": "ErrorLog:",
+        "created_on": "2023-01-03T06:08:34.937Z"
+    }
+},
+{
+    "model": "stripe_payment_module.invoice",
+    "pk": 3,
+    "fields": {
+        "i_customer": 2,
+        "invoice_number": "WRE-0002-0001",
+        "i_plan": 1,
+        "amount": "0.00",
+        "email": "dev_free@gmail.com",
+        "is_paid": true,
+        "from_date": "2023-01-03",
+        "paid_date": null,
+        "to_date": "2023-01-03",
+        "multiple_payment": false,
+        "retry_count": 0,
+        "is_recurring": false,
+        "remarks": "ErrorLog:",
+        "created_on": "2023-01-03T10:43:32.409Z"
+    }
+},
+{
+    "model": "stripe_payment_module.invoice",
+    "pk": 4,
+    "fields": {
+        "i_customer": 3,
+        "invoice_number": "WRE-0003-0001",
+        "i_plan": 2,
+        "amount": "11.00",
+        "email": "dev_premium@gmail.com",
+        "is_paid": true,
+        "from_date": "2022-12-03",
+        "paid_date": null,
+        "to_date": "2023-01-03",
+        "multiple_payment": false,
+        "retry_count": 0,
+        "is_recurring": false,
+        "remarks": "ErrorLog:",
+        "created_on": "2023-01-03T10:50:33.678Z"
+    }
+},
+{
+    "model": "stripe_payment_module.invoice",
+    "pk": 5,
+    "fields": {
+        "i_customer": 3,
+        "invoice_number": "WRE-0003-0002",
+        "i_plan": 2,
+        "amount": "11.00",
+        "email": "dev_premium@gmail.com",
+        "is_paid": false,
+        "from_date": "2023-01-03",
+        "paid_date": null,
+        "to_date": "2023-02-03",
+        "multiple_payment": false,
+        "retry_count": 0,
+        "is_recurring": false,
+        "remarks": "ErrorLog:",
+        "created_on": "2023-01-03T10:50:33.678Z"
+    }
+},
+{
+    "model": "stripe_payment_module.payment",
+    "pk": 1,
+    "fields": {
+        "i_customer": 1,
+        "i_plan": 2,
+        "i_invoice": 1,
+        "amount": "11.00",
+        "pay_token": "pi_3MJxdOLN0C8PbbSa1fVp0n5i"
+    }
+},
+{
+    "model": "stripe_payment_module.payment",
+    "pk": 2,
+    "fields": {
+        "i_customer": 1,
+        "i_plan": 2,
+        "i_invoice": 3,
+        "amount": "11.00",
+        "pay_token": "pi_3MM3iGLN0C8PbbSa0c753bqZ"
+    }
+},
+{
+    "model": "stripe_payment_module.payment",
+    "pk": 3,
+    "fields": {
+        "i_customer": 3,
+        "i_plan": 2,
+        "i_invoice": 4,
+        "amount": "11.00",
+        "pay_token": "pi_3MM3iGLN0C8PbbSa0c753bqZ"
+    }
+},
+{
+    "model": "subscription_module.subscriptions",
+    "pk": 1,
+    "fields": {
+        "plan_id": 1,
+        "profile_id": 1,
+        "billing_cycle": "monthly",
+        "starts_at": "2022-12-23T11:03:48Z",
+        "ends_at": "2022-12-23T11:03:48Z",
+        "renewed_at": "2022-12-23T11:03:48Z",
+        "cancelled_at": "2022-12-23T11:03:48Z",
+        "created_at": "2022-12-23T11:03:48Z",
+        "expired_at": "2022-12-23T11:03:48Z",
+        "is_active": false
+    }
+},
+{
+    "model": "subscription_module.subscriptions",
+    "pk": 2,
+    "fields": {
+        "plan_id": 2,
+        "profile_id": 1,
+        "billing_cycle": "monthly",
+        "starts_at": "2022-12-28T11:17:22.210Z",
+        "ends_at": "2023-02-03T00:00:00Z",
+        "renewed_at": null,
+        "cancelled_at": null,
+        "created_at": null,
+        "expired_at": null,
+        "is_active": true
+    }
+},
+{
+    "model": "subscription_module.subscriptions",
+    "pk": 3,
+    "fields": {
+        "plan_id": 1,
+        "profile_id": 2,
+        "billing_cycle": "monthly",
+        "starts_at": "2023-01-03T10:42:21Z",
+        "ends_at": "2023-01-03T10:42:21Z",
+        "renewed_at": "2023-01-03T10:42:21Z",
+        "cancelled_at": "2023-01-03T10:42:21Z",
+        "created_at": "2023-01-03T10:42:21Z",
+        "expired_at": "2023-01-03T10:42:21Z",
+        "is_active": true
+    }
+},
+{
+    "model": "subscription_module.subscriptions",
+    "pk": 4,
+    "fields": {
+        "plan_id": 2,
+        "profile_id": 3,
+        "billing_cycle": "monthly",
+        "starts_at": "2023-01-03T10:51:11Z",
+        "ends_at": "2023-02-03T10:51:12Z",
+        "renewed_at": null,
+        "cancelled_at": null,
+        "created_at": null,
+        "expired_at": null,
+        "is_active": true
+    }
+},
+{
+    "model": "subscription_module.usermoduleunits",
+    "pk": 1,
+    "fields": {
+        "profile_id": 1,
+        "subscription_id": 2,
+        "module_id": 1,
+        "consumed_units": 0
+    }
+},
+{
+    "model": "subscription_module.usermoduleunits",
+    "pk": 2,
+    "fields": {
+        "profile_id": 1,
+        "subscription_id": 2,
+        "module_id": 2,
+        "consumed_units": 0
+    }
+},
+{
+    "model": "subscription_module.usermoduleunits",
+    "pk": 3,
+    "fields": {
+        "profile_id": 1,
+        "subscription_id": 2,
+        "module_id": 3,
+        "consumed_units": 0
+    }
+},
+{
+    "model": "subscription_module.usermoduleunits",
+    "pk": 4,
+    "fields": {
+        "profile_id": 1,
+        "subscription_id": 2,
+        "module_id": 4,
+        "consumed_units": 0
+    }
+},
+{
+    "model": "subscription_module.usermoduleunits",
+    "pk": 5,
+    "fields": {
+        "profile_id": 1,
+        "subscription_id": 2,
+        "module_id": 5,
+        "consumed_units": 0
+    }
+},
+{
+    "model": "subscription_module.usermoduleunits",
+    "pk": 6,
+    "fields": {
+        "profile_id": 2,
+        "subscription_id": 1,
+        "module_id": 1,
+        "consumed_units": 0
+    }
+},
+{
+    "model": "subscription_module.usermoduleunits",
+    "pk": 7,
+    "fields": {
+        "profile_id": 2,
+        "subscription_id": 1,
+        "module_id": 2,
+        "consumed_units": 0
+    }
+},
+{
+    "model": "subscription_module.usermoduleunits",
+    "pk": 8,
+    "fields": {
+        "profile_id": 2,
+        "subscription_id": 1,
+        "module_id": 3,
+        "consumed_units": 0
+    }
+},
+{
+    "model": "subscription_module.usermoduleunits",
+    "pk": 9,
+    "fields": {
+        "profile_id": 2,
+        "subscription_id": 1,
+        "module_id": 4,
+        "consumed_units": 0
+    }
+},
+{
+    "model": "subscription_module.usermoduleunits",
+    "pk": 10,
+    "fields": {
+        "profile_id": 2,
+        "subscription_id": 1,
+        "module_id": 5,
+        "consumed_units": 0
+    }
+},
+{
+    "model": "subscription_module.usermoduleunits",
+    "pk": 11,
+    "fields": {
+        "profile_id": 3,
+        "subscription_id": 2,
+        "module_id": 1,
+        "consumed_units": 0
+    }
+},
+{
+    "model": "subscription_module.usermoduleunits",
+    "pk": 12,
+    "fields": {
+        "profile_id": 3,
+        "subscription_id": 2,
+        "module_id": 2,
+        "consumed_units": 0
+    }
+},
+{
+    "model": "subscription_module.usermoduleunits",
+    "pk": 13,
+    "fields": {
+        "profile_id": 3,
+        "subscription_id": 2,
+        "module_id": 3,
+        "consumed_units": 0
+    }
+},
+{
+    "model": "subscription_module.usermoduleunits",
+    "pk": 14,
+    "fields": {
+        "profile_id": 3,
+        "subscription_id": 2,
+        "module_id": 4,
+        "consumed_units": 0
+    }
+},
+{
+    "model": "subscription_module.usermoduleunits",
+    "pk": 15,
+    "fields": {
+        "profile_id": 3,
+        "subscription_id": 2,
+        "module_id": 5,
+        "consumed_units": 0
+    }
+}
+]

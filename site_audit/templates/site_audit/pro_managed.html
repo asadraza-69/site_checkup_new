@@ -1,0 +1,201 @@
+{% extends "base2.html" %}
+{% load static %}
+{% block extrahead %}
+
+<style>
+    @media (min-width: 1150px) {
+        .c348 {
+            background: rgba(250, 250, 250, .9);
+            border: 1px solid #ffffff;
+            border-radius: 5px;
+            margin: 16px 0 16px 16px;
+            grid-gap: 48px;
+            padding: 28px 44px;
+        }
+    }
+
+    .c348 {
+        grid-template-columns: repeat(2, 1fr);
+        grid-gap: 32px;
+
+    }
+
+    .c348 {
+
+        padding: 24px 20px;
+        font-family: Poppins, sans-serif;
+    }
+
+
+
+    .c348 .label {
+        grid-gap: 20px;
+    }
+
+    .c348 .label {
+        font-family: Poppins, sans-serif;
+        font-style: normal;
+        font-weight: 600;
+        font-size: 16px;
+        line-height: 20px;
+        color: #000;
+        display: grid;
+        grid-gap: 12px;
+        grid-template-columns: auto 1fr;
+        align-items: center;
+        margin-bottom: 8px;
+        position: relative;
+    }
+
+    .mat-icon {
+        -webkit-user-select: none;
+        user-select: none;
+        background-repeat: no-repeat;
+        display: inline-block;
+        fill: currentColor;
+        height: 24px;
+        width: 24px;
+    }
+
+    .c202.description {
+        margin-left: 40px;
+    }
+
+
+    .c202.description {
+        font-family: Poppins, sans-serif;
+        font-style: normal;
+        font-weight: 400;
+        font-size: 13px;
+        line-height: 20px;
+        color: #262626;
+    }
+
+    .c203.label {
+        font-family: Poppins, sans-serif;
+        font-style: normal;
+        font-weight: 600;
+        font-size: 13px;
+        line-height: 18px;
+        display: flex;
+        align-items: center;
+        margin-top: 16px;
+        color: #000;
+    }
+
+    .c203.label mat-icon {
+        width: 42px;
+        height: 35px;
+        margin-right: 10px;
+    }
+
+    .c203.label p {
+        margin: 0;
+        line-height: 22px;
+    }
+
+    .c203.label p a {
+        white-space: nowrap;
+        color: #2f54eb;
+    }
+
+    .c203.label p {
+        margin: 0;
+        line-height: 22px;
+    }
+
+    .c203.label p a {
+        white-space: nowrap;
+        color: #2f54eb;
+    }
+</style>
+{% endblock %}
+{% block content %}
+<div class="container">
+
+    <div class="pt-4 pb-2">
+
+        <app-breadcrumbs class="c197 ng-star-inserted"><a 
+          class="home ng-star-inserted"><img  src="../../static/site_audit/assets/home.svg" alt="">
+          <app-url-shortener class="c197">
+           <div  class="segment ng-star-inserted">www.</div>
+           <div class="selectedWebsite segment longest ng-star-inserted" ></div>
+       
+          </app-url-shortener>
+         </a>
+         <div  class="delimiter ng-star-inserted">/</div><a 
+          class="item ng-star-inserted">Services</a>
+         <!---->
+         <!---->
+        </app-breadcrumbs>
+       </div>
+       
+
+
+    <!-- ============= -->
+    <div class="card">
+
+        <div class="row justify-content-center d-flex">
+            <div class="col-md-4">
+                <div class="illustration_services w-100">
+                    <img src="../../static/site_audit/assets/pro-managed.svg" alt="" style="clip-path: none;height:auto;">
+
+                </div>
+
+            </div>
+            <div class="col-md-8">
+
+
+                <div class="content1 p-5">
+                    <h2> Let us automatically grow <span class="selectedWebsite text-primary"></span> every month. </h2>
+               
+                   <p>Congrats! We’ve finished analyzing your website.</p>
+                   
+                <ul style="list-style-type:none; padding: 0;">
+                    <li class="mb-2"><img src="../../static/site_audit/assets/check-circle.svg" alt="" style="clip-path: none;height: 24px;margin-right: 10px;">We found: 
+                        <span class="count alerts-count" id="alertCount">7</span>
+                         &nbsp;Alerts
+                        
+                        <span class="count objectives-count" id="objectivesCount"></span>
+                        &nbsp;Objectives
+                    </li>
+                    <li class="mb-2"><img src="../../static/site_audit/assets/check-circle.svg" alt="" style="clip-path: none;height:24px;margin-right: 10px;">We analyzed your competitors and specific keyword rankings</li>
+                    <li class="mb-2"><img src="../../static/site_audit/assets/check-circle.svg" alt="" style="clip-path: none;height:24px;margin-right: 10px;">We scanned your website</li>
+                    <li class="mb-2"><img src="../../static/site_audit/assets/check-circle.svg" alt="" style="clip-path: none;height:24px;margin-right: 10px;">We looked at multiple factors such as speed and Domain Authority</li>
+                </ul>
+                   
+
+
+                <!-- <a href="#" class="link text-success fw-bolder">See our analysis <i class="fa fa-chevron-right" aria-hidden="true"></i></a> -->
+                </div>
+
+            </div>
+
+          
+
+        </div>
+    </div>
+
+
+</div>
+{% endblock %}
+{% block extrascript %}
+<!-- <script src="https://unpkg.com/masonry-layout@4/dist/masonry.pkgd.min.js"></script> -->
+<script>
+setTimeout(()=>{
+var  selectedWebsiteId = $(".url").first().attr("data-id");
+
+ $.ajax({
+  method:'GET',
+  url:'/site_audit/get_objectives/?project_id='+selectedWebsiteId,
+  success:function(response){
+  $('#objectivesCount').html(response.objectives.length)
+  }
+  
+  })
+},1000)
+
+  
+  </script>
+
+{% endblock %}

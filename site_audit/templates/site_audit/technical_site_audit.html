@@ -1,0 +1,1523 @@
+{% extends "base2.html" %} {% load static %} {% block extrahead %}
+
+<link type="text/css" rel="stylesheet" href="{% static 'site_audit/css/technical_site_audit.css' %}" />
+<style>
+  .tb_loader {
+    position: absolute;
+    z-index: 999;
+    margin: 3% 40%;
+  }
+  .modal_links {
+  font-family: arial, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+  display: none;
+}
+.modal_links thead {
+  background-color: #5c5c5c;
+    color: #fff;
+    font-size: 12px;
+    border: 0;
+    vertical-align: middle !important;
+    position: relative;
+}
+.modal_links_td, .modal_links_td a {
+  max-width: 220px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+ 
+.modal_links td, th {
+  border: 1px solid #dddddd;
+  text-align: left;
+  padding: 8px;
+}
+
+  /* .table-head.errorTypes {
+    position: sticky;
+    top: 0;
+  } */
+
+  /* .sort-table-scroll {
+    max-height: 200px;
+    overflow-y: scroll;
+  } */
+
+  #modal-body-links {
+    max-height: 70vh;
+    overflow-y: scroll;
+  }
+
+  .text-elpsis-class {
+    max-width: 370px !important;
+    display: block !important;
+  }
+
+  #displayTable td {
+    color: gray;
+  }
+
+  #displayTable th {
+    font-weight: 500 !important;
+  }
+
+  .bottom_table {
+    display: none;
+  }
+
+  .tabs-table th {
+    font-weight: 500 !important;
+  }
+
+  #tech-addBtn {
+    vertical-align: bottom;
+    border: 0;
+    box-shadow: 0 2px 5px 0 rgb(0 0 0 / 20%), 0 2px 10px 0 rgb(0 0 0 / 10%);
+    font-weight: 500;
+    padding: 0.625rem 1.5rem 0.5rem;
+    font-size: .75rem;
+    line-height: 1.5;
+    height: 39px;
+  }
+
+  .statusCode {
+    width: 115px !important;
+  }
+
+  .contentType {
+    width: 128px !important;
+  }
+
+  #tech-addBtn:hover {
+    outline: 0;
+    box-shadow: 0 4px 10px 0 rgb(0 0 0 / 20%), 0 4px 20px 0 rgb(0 0 0 / 10%);
+  }
+
+  span#internal_page_total {
+    padding-left: 2px;
+  }
+
+  .help-icon {
+    cursor: pointer;
+  }
+
+  .bg-light-blue3 {
+    background-color: #cee7fe;
+  }
+</style>
+{% endblock %} {% block content %}
+<div class="container pt-4">
+  <div class="d-flex justify-content-between">
+    <div class="backlins-hdng blue mb-4">
+      <h2 class="title">Technical Site Audit:<a href="" id="finalUrl"></a></h2>
+      <a href="#" data-bs-toggle="modal" data-bs-target="#addToMyWebsite"
+        class="btn btn-primary d-flex justify-content-center align-items-center gap-2 add_web" id="tech-addBtn"><i
+          class="fas fa-plus"></i> Add to my Websites</a>
+    </div>
+  </div>
+  <div class="souce-page-tabs mt-2">
+    <div class="backl-tabs audit-tabs-main">
+      <ul class="tabs audit mb-4">
+        <li class="active tabs-li" data-targetit="tabs-1">
+          <span data-target="internal_pages">Internal Pages</span><span class="text-gray empty_counts pagevalue8"
+            id="internal_page_total">
+            <div class="count_loader">
+              <div class="spinner-border spinner-border-sm" role="status">
+                <span class="visually-hidden">Loading...</span>
+              </div>
+            </div>
+          </span>
+        </li>
+        <li class="tabs-li" data-targetit="tabs-2">
+          <span data-target="Links">Links</span> <span class="text-gray empty_counts pagevalue0" id="links_total">
+            <div class="count_loader">
+              <div class="spinner-border spinner-border-sm" role="status">
+                <span class="visually-hidden">Loading...</span>
+              </div>
+            </div>
+          </span>
+        </li>
+        <li class="tabs-li" data-targetit="tabs-3">
+          <span data-target="Indexability">Indexability</span> <span class="text-gray empty_counts pagevalue7"
+            id="indexability_total">
+            <div class="count_loader">
+              <div class="spinner-border spinner-border-sm" role="status">
+                <span class="visually-hidden">Loading...</span>
+              </div>
+            </div>
+          </span>
+        </li>
+        <li class="tabs-li" data-targetit="tabs-4">
+          <span data-target="Redirects">Redirects</span> <span class="text-gray empty_counts pagevalue5"
+            id="redirects_found">
+            <div class="count_loader">
+              <div class="spinner-border spinner-border-sm" role="status">
+                <span class="visually-hidden">Loading...</span>
+              </div>
+            </div>
+          </span>
+        </li>
+        <li class="tabs-li" data-targetit="tabs-5">
+          <span data-target="Content">Content</span> <span class="text-gray empty_counts pagevalue4" id="content_total">
+            <div class="count_loader">
+              <div class="spinner-border spinner-border-sm" role="status">
+                <span class="visually-hidden">Loading...</span>
+              </div>
+            </div>
+          </span>
+        </li>
+        <li class="tabs-li" data-targetit="tabs-6">
+          <span data-target="Images">Images</span> <span class="text-gray empty_counts pagevalue2" id="images_total">
+            <div class="count_loader">
+              <div class="spinner-border spinner-border-sm" role="status">
+                <span class="visually-hidden">Loading...</span>
+              </div>
+            </div>
+          </span>
+        </li>
+        <li class="tabs-li" data-targetit="tabs-7">
+          <span data-target="Social">Social</span> <span class="text-gray empty_counts pagevalue3" id="social_total">
+            <div class="count_loader">
+              <div class="spinner-border spinner-border-sm" role="status">
+                <span class="visually-hidden">Loading...</span>
+              </div>
+            </div>
+          </span>
+        </li>
+        <li class="tabs-li" data-targetit="tabs-8">
+          <span data-target="Other">Other</span> <span class="text-gray empty_counts pagevalue1" id="other_total">
+            <div class="count_loader">
+              <div class="spinner-border spinner-border-sm" role="status">
+                <span class="visually-hidden">Loading...</span>
+              </div>
+            </div>
+          </span>
+        </li>
+        <li class="tabs-li" data-targetit="tabs-9" id="tabs-9">
+          <span data-target="Performance">Performance</span> <span class="text-gray " id="performance_total"> 4</span>
+        </li>
+      </ul>
+    </div>
+    <div class="backl-tab-content">
+      <div class="tab-content">
+        <div class="tabs-1 showfirst">
+          <div class="error-types-table sort-table ">
+            <table class="table table-striped table-bordered table-sm tabs-table" cellspacing="0" width="100%">
+              <thead class="table-head errorTypes">
+                <tr>
+                  <th class="th-sm w-70 font-14 br-0">Error Type</th>
+                  <th class="th-sm text-center w-10 font-14"></th>
+                  <th class="th-sm text-center w-10 font-14">Found</th>
+                  <th class="th-sm text-center w-10 font-14">History</th>
+                </tr>
+              </thead>
+              <tbody id="external_pages">
+                <div class="tb_loader">
+                  <div class="spinner-border" role="status">
+                    <span class="visually-hidden">Loading...</span>
+                  </div>
+                </div>
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <div class="tabs-2">
+          <div class="error-types-table sort-table ">
+            <table class="table table-striped table-bordered table-sm tabs-table" cellspacing="0" width="100%">
+              <thead class="table-head errorTypes">
+                <tr>
+                  <th class="th-sm w-70 font-14 br-0">Links</th>
+                  <th class="th-sm text-center w-10 font-14"></th>
+                  <th class="th-sm text-center w-10 font-14">Found</th>
+                  <th class="th-sm text-center w-10 font-14">History</th>
+                </tr>
+              </thead>
+              <tbody id="links">
+                <div class="tb_loader">
+                  <div class="spinner-border" role="status">
+                    <span class="visually-hidden">Loading...</span>
+                  </div>
+                </div>
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <div class="tabs-3">
+          <div class="error-types-table sort-table ">
+            <table class="table table-striped table-bordered table-sm tabs-table" cellspacing="0" width="100%">
+              <thead class="table-head errorTypes">
+                <tr>
+                  <th class="th-sm w-70 font-14 br-0">Indexability</th>
+                  <th class="th-sm text-center w-10 font-14"></th>
+                  <th class="th-sm text-center w-10 font-14">Found</th>
+                  <th class="th-sm text-center w-10 font-14">History</th>
+                </tr>
+              </thead>
+              <tbody id="Indexability">
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <div class="tabs-4">
+          <div class="error-types-table sort-table ">
+            <table class="table table-striped table-bordered table-sm tabs-table" cellspacing="0" width="100%">
+              <thead class="table-head errorTypes">
+                <tr>
+                  <th class="th-sm w-70 font-14 br-0">Redirects</th>
+                  <th class="th-sm text-center w-10 font-14"></th>
+                  <th class="th-sm text-center w-10 font-14">Found</th>
+                  <th class="th-sm text-center w-10 font-14">History</th>
+                </tr>
+              </thead>
+              <tbody id="Redirects">
+                <div class="tb_loader">
+                  <div class="spinner-border" role="status">
+                    <span class="visually-hidden">Loading...</span>
+                  </div>
+                </div>
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <div class="tabs-5">
+          <div class="error-types-table sort-table ">
+            <table class="table table-striped table-bordered table-sm tabs-table" cellspacing="0" width="100%">
+              <thead class="table-head errorTypes">
+                <tr>
+                  <th class="th-sm w-70 font-14 br-0">Content</th>
+                  <th class="th-sm text-center w-10 font-14"></th>
+                  <th class="th-sm text-center w-10 font-14">Found</th>
+                  <th class="th-sm text-center w-10 font-14">History</th>
+                </tr>
+              </thead>
+              <tbody id="Content">
+                <div class="tb_loader">
+                  <div class="spinner-border" role="status">
+                    <span class="visually-hidden">Loading...</span>
+                  </div>
+                </div>
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <div class="tabs-6">
+          <div class="error-types-table sort-table ">
+            <table class="table table-striped table-bordered table-sm tabs-table" cellspacing="0" width="100%">
+              <thead class="table-head errorTypes">
+                <tr>
+                  <th class="th-sm w-70 font-14 br-0">Images</th>
+                  <th class="th-sm text-center w-10 font-14"></th>
+                  <th class="th-sm text-center w-10 font-14">Found</th>
+                  <th class="th-sm text-center w-10 font-14">History</th>
+                </tr>
+              </thead>
+              <tbody id="Images">
+                <div class="tb_loader">
+                  <div class="spinner-border" role="status">
+                    <span class="visually-hidden">Loading...</span>
+                  </div>
+                </div>
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <div class="tabs-7">
+          <div class="error-types-table sort-table ">
+            <table class="table table-striped table-bordered table-sm tabs-table" cellspacing="0" width="100%">
+              <thead class="table-head errorTypes">
+                <tr>
+                  <th class="th-sm w-70 font-14 br-0">Social</th>
+                  <th class="th-sm text-center w-10 font-14"></th>
+                  <th class="th-sm text-center w-10 font-14">Found</th>
+                  <th class="th-sm text-center w-10 font-14">History</th>
+                </tr>
+              </thead>
+              <tbody id="Social">
+                <div class="tb_loader">
+                  <div class="spinner-border" role="status">
+                    <span class="visually-hidden">Loading...</span>
+                  </div>
+                </div>
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <div class="tabs-8">
+          <div class="error-types-table sort-table ">
+            <table class="table table-striped table-bordered table-sm tabs-table" cellspacing="0" width="100%">
+              <thead class="table-head errorTypes">
+                <tr>
+                  <th class="th-sm w-70 font-14 br-0">Other</th>
+                  <th class="th-sm text-center w-10 font-14"></th>
+                  <th class="th-sm text-center w-10 font-14">Found</th>
+                  <th class="th-sm text-center w-10 font-14">History</th>
+                </tr>
+              </thead>
+              <tbody id="Other">
+                <div class="tb_loader">
+                  <div class="spinner-border" role="status">
+                    <span class="visually-hidden">Loading...</span>
+                  </div>
+                </div>
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <div class="tabs-9">
+          <div class="error-types-table sort-table ">
+            <table class="table table-striped table-bordered table-sm tabs-table" cellspacing="0" width="100%">
+              <thead class="table-head errorTypes">
+                <tr>
+                  <th class="th-sm w-70 font-14 br-0">Performance</th>
+                  <th class="th-sm text-center w-10 font-14"></th>
+                  <th class="th-sm text-center w-10 font-14">Found</th>
+                  <th class="th-sm text-center w-10 font-14">History</th>
+                </tr>
+              </thead>
+              <tbody id="">
+                <tr class="text-center">
+                  <td class="text-left " data-text="Core web vitals issues (CLS)"><a href=" javascript:void()"
+                      class="text-gray"></a>Core web vitals issues
+                    (CLS)</td>
+                  <td class="performance_cls"><i class="fa-solid fa-circle-exclamation font-14"></i></td>
+                  <td>
+                    <span class="performance_found0"></span>
+                    <div class="performance_loader">
+                      <div class="spinner-border spinner-border-sm" role="status">
+                        <span class="visually-hidden">Loading...</span>
+                      </div>
+                    </div>
+                  </td>
+                  <td></td>
+                </tr>
+                <tr class="text-center">
+                  <td class="text-left " data-text="Core web vitals issues (FID)"><a href=" javascript:void()"
+                      class="text-gray"></a>Core web vitals issues
+                    (FID)</td>
+                  <td class="performance_fid"><i class="fa-solid fa-circle-exclamation font-14"></i></td>
+                  <td>
+                    <span class="performance_found1"></span>
+                    <div class="performance_loader">
+                      <div class="spinner-border spinner-border-sm" role="status">
+                        <span class="visually-hidden">Loading...</span>
+                      </div>
+                    </div>
+                  </td>
+                  <td></td>
+                </tr>
+                <tr class="text-center">
+                  <td class="text-left " data-text="Core web vitals issues(LCP)"><a href=" javascript:void()"
+                      class="text-gray"></a>Core web vitals issues
+                    (LCP)</td>
+                  <td class="performance_lcp"><i class="fa-solid fa-circle-exclamation font-14"></i></td>
+                  <td>
+                    <span class="performance_found2"></span>
+                    <div class="performance_loader">
+                      <div class="spinner-border spinner-border-sm" role="status">
+                        <span class="visually-hidden">Loading...</span>
+                      </div>
+                    </div>
+                  </td>
+                  <td></td>
+                </tr>
+                <tr class="text-center">
+                  <td class="text-left " data-text="Desktop pagespeed score"><a href=" javascript:void()"
+                      class="text-gray"></a>Desktop pagespeed
+                    score <span id="performance_r"> is not found</span> </td>
+                  <td class="performance_icon"><i class="fa-solid fa-circle-exclamation font-14"></i></td>
+                  <td>
+                    <span id="performance"></span>
+                    <div class="performance_loader">
+                      <div class="spinner-border spinner-border-sm" role="status">
+                        <span class="visually-hidden">Loading...</span>
+                      </div>
+                    </div>
+                  </td>
+                  <td></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="sort-table audit mt-4 bottom_table" id="table-heading">
+      <div class="errorTypesLabel bg-light-blue2 font-16 text-gray px-3 pt-3 pb-4">Page has links
+        to broken page</div>
+      <table id="displayTable" class="table audit table-striped table-bordered table-sm" cellspacing="0" width="100%">
+        <thead class="table-head audit">
+          <tr>
+            <th class="sorting-icon th-sm p-relative w-37">Source Page Title <small class="tbl-sml-txt">Website
+                URL</small> <small class=" tbl-sml-txt chevron d-flex justify-content-end"
+                style="padding-bottom: 20px;">
+                <i class="fa-solid fa-chevron-up ml-1 me-1"></i>
+              </small>
+            </th>
+            <th class="sorting-icon th-sm p-relative w-18  " id="statusCode">Status Code <small
+                class=" tbl-sml-txt chevron d-flex justify-content-end" style="padding-bottom: 20px;">
+                <i class="fa-solid fa-chevron-up me-1"></i>
+              </small></th>
+            <th class="sorting-icon th-sm p-relative w-18" id="contentType">
+              Content Type
+              <small class="tbl-sml-txt chevron d-flex justify-content-end" style="padding-bottom: 20px;">
+                <i class="fa-solid fa-chevron-up me-1"></i>
+              </small>
+            </th>
+            <th class="sorting-icon th-sm w-10">Date <small class="tbl-sml-txt chevron d-flex justify-content-end"
+                style="padding-bottom: 20px;">
+                <i class="fa-solid fa-chevron-up me-1"></i>
+              </small></th>
+            <th class="sorting-icon th-sm w-12">Length <small class="tbl-sml-txt chevron d-flex justify-content-end"
+                style="padding-bottom: 20px;">
+                <i class="fa-solid fa-chevron-up me-1"></i>
+              </small></th>
+            <th class="sorting-icon th-sm w-15">Recommended Length<small
+                class="tbl-sml-txt chevron d-flex justify-content-end" style="padding-bottom: 20px;">
+                <i class="fa-solid fa-chevron-up me-1"></i>
+              </small></th>
+          </tr>
+        </thead>
+        <tbody class="audit-scroll-bar " id="links_detail">
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <div class="limit-alert-bar mt-5 mb-4  freeProSection" style="display: none;" >
+    <div class="limit-alert">
+      <img src="../../static/site_audit/assets/limit-alert.png" alt="limit-alert">
+    </div>
+    <p class="font-14 text-black m-0">You've reached your limits for the free plan. You can see more by
+      upgrading to the higher plan.</p>
+    <a  href="/subscription/upgrade_subscription/" class="upgrade-btn">
+      <img src="../../static/site_audit/assets/king.png" alt="king" />
+      Upgrade plan
+    </a>
+  </div>
+</div>
+</div>
+<!-- add website modal -->
+<div class="modal fade" id="addToMyWebsite" tabindex="{-1}" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" />
+      </div>
+      <div class="modal-body">
+        <div class="d-flex justify-content-center">
+          <h4 class="font-22 mb-3">Import Website</h4>
+        </div>
+        <div class="addMyWeb-body">
+          <h4 class="font-16 fw-600 text-gray">Active websites</h4>
+          <h5 class="text-gray font-14 fw-400 mb-3">
+            Enter URL / domain name
+          </h5>
+          <form action="" class="form">
+            <!-- Search input -->
+            <div class="form-outline mb-3">
+              <input type="text" class="form-control" placeholder="Yourwebsite.com" id="DetectUrl" />
+              <span id="responseText" class="mt-5"></span>
+            </div>
+            <button type="submit" id="detect" class="btn btn-prim mb-3">
+              DETECT
+            </button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Add to My Website Popup End  -->
+<!-- ConTent Ratio (?) Popup Start  -->
+<div class="modal fade" id="tableContentPopup" tabindex="-1" aria-labelledby="exampleModalLabel"
+  data-gtm-vis-first-on-screen-2340190_1302="26215" data-gtm-vis-total-visible-time-2340190_1302="100"
+  data-gtm-vis-has-fired-2340190_1302="1" aria-modal="true" role="dialog">
+  <div class="modal-dialog modal-xl">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div class="sort-table audit mt-4">
+          <div class="errorTypesLabel bg-light-blue2 font-16 text-gray px-3 pt-3 pb-4">
+            Website URL
+            <a href="https://www.jumpto1.com/seo-services"
+              class="d-block font-10 fw-500">https://www.jumpto1.com/seo-services</a>
+          </div>
+          <table class="table audit table-striped table-bordered table-sm" cellspacing="0" width="100%">
+            <thead class="table-head audit">
+            </thead>
+            <tbody class="audit-scroll-bar">
+              <tr>
+                <td>
+                  <p class="text-gray font-12 text-left mb-1 text-elipses w-254">
+                    Best SEO Services Provider Company to Help You Success
+                  </p>
+                </td>
+                <td>
+                  <button class="b-gray text-gray font-10">
+                    Text/Html; Charset=UTF-8
+                  </button>
+                </td>
+                <td>20-8-2021</td>
+                <td>06-9-2022</td>
+                <td>imunify360-webshield/1.18</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="modal fade" id="brokenLinksPopUp" tabindex="-1" aria-labelledby="exampleModalLabel"
+  data-gtm-vis-first-on-screen-2340190_1302="26215" data-gtm-vis-total-visible-time-2340190_1302="100"
+  data-gtm-vis-has-fired-2340190_1302="1" aria-modal="true" role="dialog">
+  <div class="modal-dialog modal-lg modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title m-0" id="modalBroken-heading"></h5>
+        <button type="button" class="btn-close px-0 m-0" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body " id="modal-body-links">
+        <div id="ModalData">
+          <ul class="list-group list-group-flush p-3" id="ul-modal">
+          </ul>
+          <table class=" modal_links table audit table-striped table-bordered table-sm" cellspacing="0" width="100%">
+            <thead class=" audit ">
+              <tr>
+                <th>Links</th>
+                <th class="text-center">Status Code</th>
+              </tr>
+            </thead>
+            <tbody class="audit-scroll-bar">
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- ConTent Ratio (?) Popup Start  -->
+{% endblock %} {% block extrascript %}
+<script type="text/javascript" src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
+<script type="text/javascript" src="https://cdn.datatables.net/buttons/2.2.3/js/dataTables.buttons.min.js"></script>
+<script type="text/javascript" src="https://cdn.datatables.net/buttons/2.2.3/js/buttons.html5.min.js"></script>
+<script>
+  $(document).on("click", ".sorting-icon", function () {
+    $(this).find('small').find('i').toggleClass('fa-chevron-down fa-chevron-up');
+  })
+  $(document).on('click', '.clickable', function () {
+    if (!$.fn.DataTable.isDataTable()) {
+      $('#displayTable').DataTable().destroy();
+    }
+    setTimeout(() => {
+      $('#displayTable').DataTable({
+        dom: 'frtipB',
+        pageLength: 3,
+        "aaSorting": [],
+        "bDestroy": true
+      });
+      $("#statusCode").addClass("statusCode")
+      $("#contentType").addClass("contentType")
+    },);
+  });
+  function techFunc2(url) {
+    var count_length
+    var count_length_two
+    $.ajax({
+      type: "GET",
+      url: "/crawler/crawl/?website_url=" + url,
+      success: function (response) {
+        if (response.status === true ) {
+          var myObject = response.data;
+          var check = $('.tabs li.active').find('span').attr("data-target")
+          var links_code
+          var newObject = Object.fromEntries(Object.entries(myObject).filter(([key]) => key.includes("Links")));
+            Object.entries(newObject).map(function ([key, value]) {
+              $.each(value, function (i, value) {
+                if ( key === "Links" && value.name ==="Page has links to broken page") {
+                  links_code=value.link_code
+                }
+              })
+
+            })
+
+
+
+          const error_count = Object.values(Object.values(myObject)).map(val => Object.values(val).filter((val) => val.Founded > 0)).map(val => val.map(val => val.Founded).reduce((a, b) => a + b, 0))
+          $.each(error_count, function (i, val) {
+            $('.pagevalue' + i).html('')
+            $('.pagevalue' + i).append(`${val}`)
+          })
+          function getValue() {
+            var newObject = Object.fromEntries(Object.entries(myObject).filter(([key]) => key.includes(check)));
+            Object.entries(newObject).map(function ([key, value]) {
+              $('.count_loader').hide();
+              $("#external_pages").html("")
+              $("#links").html("")
+              $("#Indexability").html("")
+              $("#Redirects").html("")
+              $("#Content").html("")
+              $("#Images").html("")
+              $("#Social").html("")
+              $("#Other").html("")
+              $("#Performance").html("");
+              $.each(value, function (i, val) {
+                var index = i.replace(/\s/g, '')
+                if (key == "internal_pages") {
+                  if (val.Founded == 0) {
+                    $("#external_pages").append(`
+                 <tr class="text-center">
+                                        <td class="text-left clickable" data-text="${val.name}">
+                                            <a href="javascript:void()" class="text-gray">
+                                               ${val.name}
+                                            </a>
+                                            <span class='help-icon${index}'> <i class="far fa-question-circle text-d-blue p-2  font-14 help-icon"></i> <small class="tbl_popup" title="${val.name}"> </small> </span>
+                                        </td>
+                                        <td class="text-green"><i class="fa-solid fa-circle-exclamation font-14"></i></td>
+                                        <td class="internal_pages_found">${val.Founded}</td>
+                                        <td></td>
+                                    </tr>
+                `);
+                  } else if (val.Founded > 0) {
+                    $("#external_pages").append(`
+                 <tr class="text-center">
+                                        <td class="text-left clickable" data-text="${val.name}">
+                                            <a href="javascript:void()" class="text-gray">
+                                               ${val.name}
+                                            </a>
+                                            <span class='help-icon${index}'> <i class="far fa-question-circle text-d-blue p-2  font-14 help-icon"></i> <small class="tbl_popup" title="${val.name}"> </small> </span>
+                                        </td>
+                                        <td class="text-red"><i class="fa-solid fa-circle-exclamation font-14"></i></td>
+                                        <td class="internal_pages_found">${val.Founded}</td>
+                                        <td></td>
+                                    </tr>
+                `);
+                  }
+
+                } else if (key == "Links") {
+                  if (val.Founded == 0) {
+                    $("#links").append(`
+                  <tr class="text-center">
+                                        <td class="text-left clickable" data-text="${val.name}"><a href="javascript:void()" class="text-gray">${val.name}</a> <span class='help-icon${index}'> <i class="far fa-question-circle text-d-blue p-2  font-14 help-icon"></i> <small class="tbl_popup" title="${val.name}"> </small> </span></td>
+                                        <td class="text-green"><i class="fa-solid fa-circle-exclamation font-14"></i></td>
+                                        <td class="links_found">${val.Founded}</td>
+                                        <td></td>
+                                    </tr>
+                 `);
+
+                  } else if (val.Founded > 0) {
+                    $("#links").append(`
+                  <tr class="text-center">
+                                        <td class="text-left clickable" data-text="${val.name}"><a href="javascript:void()" class="text-gray">${val.name}</a>  <span class='help-icon${index}'> <i class="far fa-question-circle text-d-blue p-2  font-14 help-icon"></i> <small class="tbl_popup" title="${val.name}"> </small> </span></td>
+                                        <td class="text-red"><i class="fa-solid fa-circle-exclamation font-14"></i></td>
+                                        <td class="links_found">${val.Founded}</td>
+                                        <td></td>
+                                    </tr>
+                 `);
+                  }
+                } else if (key == "Indexability") {
+                  if (val.Founded == 0) {
+                    $("#Indexability").append(`
+                    <tr class="text-center">
+                                        <td class="text-left clickable" data-text="${val.name}"><a href="javascript:void()" class="text-gray">${val.name}</a>  <span class='help-icon${index}'> <i class="far fa-question-circle text-d-blue p-2  font-14 help-icon"></i> <small class="tbl_popup" title="${val.name}"> </small> </span></td>
+                                        <td class="text-green"><i class="fa-solid fa-circle-exclamation font-14"></i></td>
+                                        <td class="indexability_found">${val.Founded}</td>
+                                        <td></td>
+                                    </tr>
+                   `);
+                  } else if (val.Founded > 0) {
+                    $("#Indexability").append(`
+                    <tr class="text-center">
+                                        <td class="text-left clickable" data-text="${val.name}"><a href="javascript:void()" class="text-gray">${val.name}</a>  <span class='help-icon${index}'> <i class="far fa-question-circle text-d-blue p-2  font-14 help-icon"></i> <small class="tbl_popup" title="${val.name}"> </small> </span></td>
+                                        <td class="text-red"><i class="fa-solid fa-circle-exclamation font-14"></i></td>
+                                        <td class="indexability_found">${val.Founded}</td>
+                                        <td></td>
+                                    </tr>
+                   `)
+                  }
+
+                } else if (key == "Redirects") {
+                  if (val.Founded == 0) {
+                    $("#Redirects").append(`
+                    <tr class="text-center">
+                                        <td class="text-left clickable" data-text="${val.name}"><a href="javascript:void()" class="text-gray">${val.name}</a>  <span class='help-icon${index}'> <i class="far fa-question-circle text-d-blue p-2  font-14 help-icon"></i> <small class="tbl_popup" title="${val.name}"> </small> </span></td>
+                                        <td class="text-green"><i class="fa-solid fa-circle-exclamation font-14"></i></td>
+                                        <td class="redirects_found">${val.Founded}</td>
+                                        <td></td>
+                                    </tr>
+                   `);
+                  } else if (val.Founded > 0) {
+                    $("#Redirects").append(`
+                    <tr class="text-center">
+                                        <td class="text-left clickable" data-text="${val.name}"><a href="javascript:void()" class="text-gray">${val.name}</a>  <span class='help-icon${index}'> <i class="far fa-question-circle text-d-blue p-2  font-14 help-icon"></i> <small class="tbl_popup" title="${val.name}"> </small> </span></td>
+                                        <td class="text-red"><i class="fa-solid fa-circle-exclamation font-14"></i></td>
+                                        <td class="redirects_found">${val.Founded}</td>
+                                        <td></td>
+                                    </tr>
+                   `);
+                  }
+
+                } else if (key == "Content") {
+
+                  if (val.Founded == 0) {
+
+                    $("#Content").append(`
+                    <tr class="text-center">
+                                        <td class="text-left clickable" data-text="${val.name}"><a href="javascript:void()" class="text-gray">${val.name}</a>  <span class='help-icon${index}'> <i class="far fa-question-circle text-d-blue p-2  font-14 help-icon"></i> <small class="tbl_popup" title="${val.name}"> </small> </span></td>
+                                        <td class="text-green"><i class="fa-solid fa-circle-exclamation font-14"></i></td>
+                                        <td class="found_content">${val.Founded}</td>
+                                        <td></td>
+                                    </tr>
+                   `);
+                  } else if (val.Founded > 0) {
+                    $("#Content").append(`
+                    <tr class="text-center">
+                                        <td class="text-left clickable" data-text="${val.name}"><a href="javascript:void()" class="text-gray">${val.name}</a>  <span class='help-icon${index}'> <i class="far fa-question-circle text-d-blue p-2  font-14 help-icon"></i> <small class="tbl_popup" title="${val.name}"> </small> </span></td>
+                                        <td class="text-red"><i class="fa-solid fa-circle-exclamation font-14"></i></td>
+                                        <td class="found_content">${val.Founded}</td>
+                                        <td></td>
+                                    </tr>
+                   `);
+                  }
+                } else if (key == "Images") {
+                  if (val.Founded == 0) {
+                    $("#Images").append(`
+                    <tr class="text-center">
+                                        <td class="text-left clickable" data-text="${val.name}"><a href="javascript:void()" class="text-gray">${val.name}</a>  <span class='help-icon${index}'> <i class="far fa-question-circle text-d-blue p-2  font-14 help-icon"></i> <small class="tbl_popup" title="${val.name}"> </small> </span></td>
+                                        <td class="text-green"><i class="fa-solid fa-circle-exclamation font-14"></i></td>
+                                        <td class="images_found">${val.Founded}</td>
+                                        <td></td>
+                                    </tr>
+                   `);
+                  } else if (val.Founded > 0) {
+                    $("#Images").append(`
+                    <tr class="text-center">
+                                        <td class="text-left clickable" data-text="${val.name}"><a href="javascript:void()" class="text-gray">${val.name}</a>  <span class='help-icon${index}'> <i class="far fa-question-circle text-d-blue p-2  font-14 help-icon"></i> <small class="tbl_popup" title="${val.name}"> </small> </span></td>
+                                        <td class="text-red"><i class="fa-solid fa-circle-exclamation font-14"></i></td>
+                                        <td class="images_found">${val.Founded}</td>
+                                        <td></td>
+                                    </tr>
+                   `);
+                  }
+
+                } else if (key == "Social") {
+                  if (val.Founded == 0) {
+                    $("#Social").append(`
+                    <tr class="text-center">
+                                        <td class="text-left clickable" data-text="${val.name}"><a href="javascript:void()" class="text-gray">${val.name}</a>  <span class='help-icon${index}'> <i class="far fa-question-circle text-d-blue p-2  font-14 help-icon"></i> <small class="tbl_popup" title="${val.name}"> </small> </span></td>
+                                        <td class="text-green"><i class="fa-solid fa-circle-exclamation font-14"></i></td>
+                                        <td class="social_found">${val.Founded}</td>
+                                        <td></td>
+                                    </tr>
+                   `);
+                  } else if (val.Founded > 0) {
+                    $("#Social").append(`
+                    <tr class="text-center">
+                                        <td class="text-left clickable" data-text="${val.name}"><a href="javascript:void()" class="text-gray">${val.name}</a>  <span class='help-icon${index}'> <i class="far fa-question-circle text-d-blue p-2  font-14 help-icon"></i> <small class="tbl_popup" title="${val.name}"> </small> </span></td>
+                                        <td class="text-red"><i class="fa-solid fa-circle-exclamation font-14"></i></td>
+                                        <td class="social_found">${val.Founded}</td>
+                                        <td></td>
+                                    </tr>
+                   `);
+                  }
+                } else if (key == "Other") {
+                  if (val.Founded == 0) {
+                    $("#Other").append(`
+                    <tr class="text-center">
+                                        <td class="text-left clickable" data-text="${val.name}"><a href="javascript:void()" class="text-gray">${val.name}</a>  <span class='help-icon${index}'> <i class="far fa-question-circle text-d-blue p-2  font-14 help-icon"></i> <small class="tbl_popup" title="${val.name}"> </small> </span></td>
+                                        <td class="text-green"><i class="fa-solid fa-circle-exclamation font-14"></i></td>
+                                        <td class="other_found">${val.Founded}</td>
+                                        <td></td>
+                                    </tr>
+                   `);
+                  } else if (val.Founded > 0) {
+                    $("#Other").append(`
+                    <tr class="text-center">
+                                        <td class="text-left clickable" data-text="${val.name}"><a href="javascript:void()" class="text-gray">${val.name}</a>  <span class='help-icon${index}'> <i class="far fa-question-circle text-d-blue p-2  font-14 help-icon"></i> <small class="tbl_popup" title="${val.name}"> </small> </span></td>
+                                        <td class="text-red"><i class="fa-solid fa-circle-exclamation font-14"></i></td>
+                                        <td class="other_found">${val.Founded}</td>
+                                        <td></td>
+                                    </tr>
+                   `);
+                  }
+                }
+              });
+              $('.tb_loader').hide();
+              $("li").on("click", function () {
+                $(".bottom_table").css("display", "none");
+                $('#displayTable .table-head tr th:nth-child(2)').text('Status Code');
+              });
+              $(document).on('click', '.clickable .help-icon', function (e) {
+
+                e.stopPropagation();
+              });
+              $(document).on("click", ".clickable", function (event) {
+
+                // document.querySelector('#displayTable').scrollIntoView({
+                //   behavior: 'smooth'
+                // });
+                event.preventDefault(); // prevent default action of the link
+              $('html, body').animate({
+                scrollTop: $("#displayTable").offset().top
+              }, 0);
+                $(".bottom_table").css("display", "block");
+                var match_word = $(this).attr("data-text");
+                $(".errorTypesLabel").html("");
+                $(".errorTypesLabel").append(match_word);
+                $("#links_detail").html("")
+                $.each(value, function (i, value) {
+
+                  if (value.name === match_word) {
+                    if (key === 'Content' && value.name === "Low content ratio" || value.name === "Low Word Count") {
+                      var table = value.table;
+                      if (table.length > 0) {
+                     
+                        $.each(table, function (i, j) {
+
+                          $("#links_detail").append(`
+                                 <tr>
+                                      <td>
+                                          <div class="d-flex justify-content-between">
+                                             <p class="text-gray font-14 text-left mb-1 text-elipses text-elpsis-class d-block" title="${j.source_page_title}">
+                                               ${j.source_page_title}
+                                             </p>
+                                             </div>
+                                             <div class="text-left font-12">
+                                                 <a class="text-elipses text-elpsis-class d-block"
+                                               title="${j.website_url}"
+                                                     href="${j.website_url}" target="blank">${j.website_url}</a>
+                                             </div>
+                                         </td>
+                                         <td class="text-red"> ${value.name.includes("Title") || value.name.includes("title") ? j.source_page_title : value.name.includes("Description") || value.name.includes("description") ? j.description : j.status_code}</td>
+                                         
+                                         <td><button class="b-gray text-gray font-10">${j.content_type}</button></td>
+                                         <td>${j.date}</td>
+                                         <td>${j.last_modified}</td>
+                                         <td>${j.server}</td>
+                                     </tr>
+                                `);
+
+                          if (value.name.includes("Title") || value.name.includes("title")) {
+                            $('#displayTable .table-head tr th:nth-child(2)').text('Title');
+                          } else if (value.name.includes("description") || value.name.includes("Description")) {
+                            $('#displayTable .table-head tr th:nth-child(2)').text('Description ');
+                          }
+                          if (key === 'Content') {
+                            $('#displayTable .table-head tr th:nth-child(5)').text('Length');
+                            $(' #displayTable .table-head tr th:nth-child(6)').text('Recommended Length');
+                          } else {
+                            $('#displayTable .table-head tr th:nth-child(2)').text('Status Code');
+
+                            $(' #displayTable .table-head tr th:nth-child(5)').text('Last Modified');
+                            $(' #displayTable .table-head tr th:nth-child(6)').text('Server')
+                          }
+                        })
+                                $('#displayTable .table-head tr th:nth-child(3)').html(`<div><span> Content Type</span> <small class="tbl-sml-txt chevron d-flex justify-content-end" style="padding-bottom: 20px;">
+                        <i class="fa-solid fa-chevron-up me-1"></i>
+                      </small></div>`);
+                              } else {
+                                $("#links_detail").append(
+                                  `<td colspan='6' class="bg-light-blue2 text-center fw-bold fs-3 "> No Data Found </td> `
+                                );
+                                $('#displayTable .table-head tr th:nth-child(3)').html(`<div><span> Content Type</span> <small class="tbl-sml-txt chevron d-flex justify-content-end" style="padding-bottom: 20px;">
+                        <i class="fa-solid fa-chevron-up me-1"></i>
+                      </small></div>`);
+                              }
+                    }
+                     else if (key ==='internal_pages')
+                     {    
+                      var total_links
+          var match_wordd = $('#table-heading .errorTypesLabel').text()
+          var newObjectt = Object.fromEntries(Object.entries(myObject).filter(([key]) => key.includes(check)));
+          Object.entries(newObjectt).map(function ([key, value]) {
+             $.each(value, function (i, vall) {
+               if (vall.name === match_wordd && key === "internal_pages" ) { 
+                count_length = vall.detail.map((value) => value.length)     
+               }
+              })
+            })
+                      var table = value.table;
+                      if (table.length > 0) {
+                        $.each(table, function (i, j) {
+                          $("#links_detail").append(`
+                                 <tr>
+                                      <td>
+                                          <div class="d-flex justify-content-between">
+                                             <p class="text-gray font-14 text-left mb-1 text-elipses text-elpsis-class d-block" title="${j.source_page_title}">
+                                               ${j.source_page_title}
+                                             </p>
+                                             <span class='help-class-icon' id="${i}" > <i class="far fa-question-circle text-d-blue p-2  font-14 help-icon" ></i> </span> 
+                                             </div>
+                                             <div class="text-left font-12">
+                                                 <a class="text-elipses text-elpsis-class d-block"
+                                               title="${j.website_url}"
+                                                     href="${j.website_url}" target="blank">${j.website_url}</a>
+                                             </div>
+                                         </td>
+                                         <td class="text-red" style="display: none;">-</td>
+                                         <td ><span class="badge badge-light">${count_length[i]}</span></td>
+                                         <td>${j.date}</td>
+                                         <td>${j.last_modified}</td>
+                                         <td>${j.server}</td>
+                                     </tr>
+                                `);
+                             
+                        })
+                        $('#displayTable .table-head tr th:nth-child(2)').hide()
+                            $('#displayTable .table-head tr th:nth-child(3)').html (`<div><span> Broken Links Count</span> <small class="tbl-sml-txt chevron d-flex justify-content-end" style="padding-bottom: 20px;">
+                <i class="fa-solid fa-chevron-up me-1"></i>
+              </small></div>`);
+                      } else {
+                        $("#links_detail").append(
+                          `<td colspan='6' class="bg-light-blue2 text-center fw-bold fs-3 "> No Data Found </td> `
+                        );
+                        $('#displayTable .table-head tr th:nth-child(2)').hide()
+                        $('#displayTable .table-head tr th:nth-child(3)').html (`<div><span> Broken Links Count</span> <small class="tbl-sml-txt chevron d-flex justify-content-end" style="padding-bottom: 20px;">
+                <i class="fa-solid fa-chevron-up me-1"></i>
+              </small></div>`);
+                      }
+                    }
+                    else if (key === 'Links' && value.name === "Page has links to broken page" )
+                     {
+                      
+                      var total_links
+          var match_wordd = $('#table-heading .errorTypesLabel').text()
+          var newObjectt = Object.fromEntries(Object.entries(myObject).filter(([key]) => key.includes(check)));
+          Object.entries(newObjectt).map(function ([key, value]) {
+             $.each(value, function (i, vall) {
+               if (vall.name === match_wordd && key === "Links") { 
+                count_length = vall.detail.map((value) => value.length)     
+               }
+              })
+            })
+                      var table = value.table;
+                      if (table.length > 0) {
+                        $.each(table, function (i, j) {
+                          $("#links_detail").append(`
+                                 <tr>
+                                      <td>
+                                          <div class="d-flex justify-content-between">
+                                             <p class="text-gray font-14 text-left mb-1 text-elipses text-elpsis-class d-block" title="${j.source_page_title}">
+                                               ${j.source_page_title}
+                                             </p>
+                                             <span class='help-class-icon' id="${i}" > <i class="far fa-question-circle text-d-blue p-2  font-14 help-icon" ></i> </span> 
+                                             </div>
+                                             <div class="text-left font-12">
+                                                 <a class="text-elipses text-elpsis-class d-block"
+                                               title="${j.website_url}"
+                                                     href="${j.website_url}" target="blank">${j.website_url}</a>
+                                             </div>
+                                         </td>
+                                         <td class="text-red"> ${value.name.includes("Title") || value.name.includes("title") ? j.source_page_title : value.name.includes("Description") || value.name.includes("description") ? j.description : j.status_code}</td>
+                                         <td ><span class="badge badge-light">${count_length[i]}</span></td>
+                                         <td>${j.date}</td>
+                                         <td>${j.last_modified}</td>
+                                         <td>${j.server}</td>
+                                     </tr>
+                                `);
+                             
+                        })
+                        $('#displayTable .table-head tr th:nth-child(2)').show()
+                            $('#displayTable .table-head tr th:nth-child(3)').html (`<div><span> Broken Links Count</span> <small class="tbl-sml-txt chevron d-flex justify-content-end" style="padding-bottom: 20px;">
+                <i class="fa-solid fa-chevron-up me-1"></i>
+              </small></div>`);
+                      } else {
+                        $("#links_detail").append(
+                          `<td colspan='6' class="bg-light-blue2 text-center fw-bold fs-3 "> No Data Found </td> `
+                        );
+                        $('#displayTable .table-head tr th:nth-child(2)').show()
+                        $('#displayTable .table-head tr th:nth-child(3)').html (`<div><span> Broken Links Count</span> <small class="tbl-sml-txt chevron d-flex justify-content-end" style="padding-bottom: 20px;">
+                <i class="fa-solid fa-chevron-up me-1"></i>
+              </small></div>`);
+                      }
+                    }
+                    else if (key === 'Other' && value.name === "www" || value.name === "non-www") {
+                      var table = value.table;
+                      if (table.length > 0) {
+                        $.each(table, function (i, j) {
+                          $("#links_detail").append(`
+                                 <tr>
+                                      <td>
+                                          <div class="d-flex justify-content-between">
+                                             <p class="text-gray font-14 text-left mb-1 text-elipses text-elpsis-class d-block" title="${j.source_page_title}">
+                                               ${j.source_page_title}
+                                             </p>
+                                             </div>
+                                             <div class="text-left font-12">
+                                                 <a class="text-elipses text-elpsis-class d-block"
+                                               title="${j.website_url}"
+                                                     href="${j.website_url}" target="blank">${j.website_url}</a>
+                                             </div>
+                                         </td>
+                                         <td class="text-red"> ${value.name.includes("Title") || value.name.includes("title") ? j.source_page_title : value.name.includes("Description") || value.name.includes("description") ? j.description : j.status_code}</td>
+                                         <td><button class="b-gray text-gray font-10">${j.content_type}</button></td>
+                                         <td>${j.date}</td>
+                                         <td>${j.last_modified}</td>
+                                         <td>${j.server}</td>
+                                     </tr>
+                                `);
+                          if (value.name.includes("Title") || value.name.includes("title")) {
+                            $('#displayTable .table-head tr th:nth-child(2)').text('Title');
+                          } else if (value.name.includes("description") || value.name.includes("Description")) {
+                            $('#displayTable .table-head tr th:nth-child(2)').text('Description ');
+                          }
+                          if (key === 'Content') {
+                            $('#displayTable .table-head tr th:nth-child(5)').text('Length');
+                            $(' #displayTable .table-head tr th:nth-child(6)').text('Recommended Length');
+                          } else {
+                            $('#displayTable .table-head tr th:nth-child(2)').text('Status Code');
+                            $(' #displayTable .table-head tr th:nth-child(5)').text('Last Modified');
+                            $(' #displayTable .table-head tr th:nth-child(6)').text('Server')
+                          }
+                        })
+                        $('#displayTable .table-head tr th:nth-child(2)').show()
+                        $('#displayTable .table-head tr th:nth-child(3)').html(`<div><span> Content Type</span> <small class="tbl-sml-txt chevron d-flex justify-content-end" style="padding-bottom: 20px;">
+                <i class="fa-solid fa-chevron-up me-1"></i>
+              </small></div>`);
+                      } else {
+                        $("#links_detail").append(
+                          `<td colspan='6' class="bg-light-blue2 text-center fw-bold fs-3 "> No Data Found </td> `
+                        );
+                        $('#displayTable .table-head tr th:nth-child(2)').show()
+                        $('#displayTable .table-head tr th:nth-child(3)').html(`<div><span> Content Type</span> <small class="tbl-sml-txt chevron d-flex justify-content-end" style="padding-bottom: 20px;">
+                <i class="fa-solid fa-chevron-up me-1"></i>
+              </small></div>`);
+                      }
+                    } else {
+                      var table = value.table;
+                      if (table.length > 0) {
+                        $.each(table, function (i, j) {
+                          $("#links_detail").append(`
+                                 <tr>
+                                      <td>
+                                          <div class="d-flex justify-content-between">
+                                             <p class="text-gray font-14 text-left mb-1 text-elipses text-elpsis-class d-block" title="${j.source_page_title}">
+                                               ${j.source_page_title}
+                                             </p>
+                                             <span class='help-class-icon' id="${i}" > <i class="far fa-question-circle text-d-blue p-2  font-14 help-icon" ></i> </span> 
+                                             </div>
+                                             <div class="text-left font-12">
+                                                 <a class="text-elipses text-elpsis-class d-block"
+                                               title="${j.website_url}"
+                                                     href="${j.website_url}" target="blank">${j.website_url}</a>
+                                             </div>
+                                         </td>
+                                         <td class="text-red"> ${value.name.includes("Title") || value.name.includes("title") ? j.source_page_title : value.name.includes("Description") || value.name.includes("description") ? j.description : j.status_code}</td>
+                                         
+                                         <td><button class="b-gray text-gray font-10">${j.content_type}</button></td>
+                                         <td>${j.date}</td>
+                                         <td>${j.last_modified}</td>
+                                         <td>${j.server}</td>
+                                     </tr>
+                                `);
+
+                          if (value.name.includes("Title") || value.name.includes("title")) {
+                            $('#displayTable .table-head tr th:nth-child(2)').text('Title');
+                          } else if (value.name.includes("description") || value.name.includes("Description")) {
+                            $('#displayTable .table-head tr th:nth-child(2)').text('Description ');
+                          }
+                          if (key === 'Content') {
+                            $('#displayTable .table-head tr th:nth-child(5)').text('Length');
+                            $(' #displayTable .table-head tr th:nth-child(6)').text('Recommended Length');
+                          } else {
+                            $('#displayTable .table-head tr th:nth-child(2)').text('Status Code');
+
+                            $(' #displayTable .table-head tr th:nth-child(5)').text('Last Modified');
+                            $(' #displayTable .table-head tr th:nth-child(6)').text('Server')
+                          }
+                        })
+                        $('#displayTable .table-head tr th:nth-child(2)').show()
+                        $('#displayTable .table-head tr th:nth-child(3)').html(`<div><span> Content Type</span> <small class="tbl-sml-txt chevron d-flex justify-content-end" style="padding-bottom: 20px;">
+                <i class="fa-solid fa-chevron-up me-1"></i>
+              </small></div>`);
+                      } else {
+                        $("#links_detail").append(
+                          `<td colspan='6' class="bg-light-blue2 text-center fw-bold fs-3 "> No Data Found </td> `
+                        );
+                        $('#displayTable .table-head tr th:nth-child(2)').show()
+                        $('#displayTable .table-head tr th:nth-child(3)').html(`<div><span> Content Type</span> <small class="tbl-sml-txt chevron d-flex justify-content-end" style="padding-bottom: 20px;">
+                <i class="fa-solid fa-chevron-up me-1"></i>
+              </small></div>`);
+                      }
+                    }
+                  }
+                });
+              });
+            });
+          }
+          getValue()
+        
+          $("li").on("click", function () {
+            $(".bottom_table").css("display", "none");
+            check = $('.tabs li.active').find('span').attr("data-target")
+            getValue()
+          });
+          // end 
+     
+          $(document).on('click', '.help-class-icon', function () {
+            $(".modal_links tbody").empty()
+            $('.modal_links').DataTable().destroy();
+            var id = ""
+            id = $(this).attr("id")
+            $("#ul-modal").html('')
+            var match_wordd = $('#table-heading .errorTypesLabel').text()
+            var newObject = Object.fromEntries(Object.entries(myObject).filter(([key]) => key.includes(check)));
+            Object.entries(newObject).map(function ([key, value]) {
+              $.each(value, function (i, value) {
+                 if (value.name === match_wordd && key === "Links" &&  value.name == "Page has links to broken page") {
+                  // console.log("log2")
+                  $(".modal_links").show()
+                  $("#ul-modal").hide()
+                  $("#brokenLinksPopUp").modal("show")
+                  var detail = value.detail[id];
+                  links_code=value.link_code
+                  $("#modalBroken-heading").text(match_wordd)
+                  $(".modal_links tbody").html(` ${detail && detail.length > 0 ? (detail.map((val, i) => `
+                      <tr>
+                        <td class="modal_links_td"> <a   title="${val}" href="${val}" target="_blank"  >${val}</a></td>
+                        <td class="text-red text-center" >${value.link_code[val]}</td>
+                      </tr>      `).join(' ')) : "---"} ` 
+                      )
+                      if (!$.fn.DataTable.isDataTable()) {
+                          $('.modal_links').DataTable().destroy();
+                        }
+                        setTimeout(() => {
+                          $('.modal_links').DataTable({
+                            dom: 'frtipB',
+                            pageLength: 4,
+                            "aaSorting": [],
+                            "bDestroy": true
+                          });
+                          $("#statusCode").addClass("statusCode")
+                          $("#contentType").addClass("contentType")
+                        },);
+                } else  if (value.name === match_wordd && key === "internal_pages" ) {
+                  // console.log("log2")
+                  $(".modal_links").show()
+                  $("#ul-modal").hide()
+                  $("#brokenLinksPopUp").modal("show")
+                  var detail = value.detail[id];
+                  $("#modalBroken-heading").text(match_wordd)
+                  $(".modal_links tbody").html(` ${detail && detail.length > 0 ? (detail.map((val, i) => `
+                      <tr>
+                        <td class="modal_links_td"> <a   title="${val}" href="${val}" target="_blank"  >${val}</a></td>
+                        <td class="text-red text-center" >${links_code[val]}</td>
+                      </tr>      `).join(' ')) : "---"} ` 
+                      )
+                      if (!$.fn.DataTable.isDataTable()) {
+                          $('.modal_links').DataTable().destroy();
+                        }
+                        setTimeout(() => {
+                          $('.modal_links').DataTable({
+                            dom: 'frtipB',
+                            pageLength: 4,
+                            "aaSorting": [],
+                            "bDestroy": true
+                          });
+                          $("#statusCode").addClass("statusCode")
+                          $("#contentType").addClass("contentType")
+                        },);
+                } 
+                  else if (value.name === match_wordd && key === "Links") {
+              
+              
+                  $(".modal_links").hide()
+                  $("#ul-modal").show()
+                  $('.modal_links').DataTable().destroy();
+                  $("#brokenLinksPopUp").modal("show")
+                  var detail = value.detail[id];
+                  $("#modalBroken-heading").text(match_wordd)
+                  $("#ul-modal").html(` ${detail && detail.length > 0 ? (detail.map((val, i) => `<li class="list-group-item list-group-item-action text-left text-info cursor-pointer"><a class="text-elipses" style="display: inherit;" title="${val}" href="${val}" target="_blank">${val}</a></li>`).join(' ')) : "---"}  `)
+                }
+                else if (value.name === match_wordd && value.name == "Meta description too short") {
+                  // console.log("log2")
+                  $(".modal_links").hide()
+                  $("#ul-modal").show()
+                  $('.modal_links').DataTable().destroy();
+                  $("#brokenLinksPopUp").modal("show")
+                  $("#modalBroken-heading").text(match_wordd)
+                  $("#ul-modal").html(` ${value.table && value.table[id].description ? `<li class="list-group-item list-group-item-action text-left text-info cursor-pointer"><a class="text-elipses" style="display: inherit;">${value.table[id].description}</a></li>` : "---"}  `)
+                }
+                else if (value.name === match_wordd && value.name == "Low content ratio") {
+                  // console.log("log3")
+                  $(".modal_links").hide()
+                  $("#ul-modal").show()
+                  $('.modal_links').DataTable().destroy();
+                  $("#brokenLinksPopUp").modal("show")
+                  $("#modalBroken-heading").text(match_wordd)
+                  $("#ul-modal").html(` ${value.table && value.table[id].source_page_title ? `<li class="list-group-item list-group-item-action text-left text-info cursor-pointer"><a class="text-elipses" style="display: inherit;">${value.table[id].source_page_title}</a></li>` : "---"}  `)
+                }
+                else if (value.name === match_wordd && value.name == "Low Word Count") {
+                  $(".modal_links").hide()
+                  $('.modal_links').DataTable().destroy();
+                  // console.log("log4")
+                  $("#brokenLinksPopUp").modal("show")
+                  $("#ul-modal").show()
+                  $("#modalBroken-heading").text(match_wordd)
+                  $("#ul-modal").html(` ${value.table && value.table[id].source_page_title ? `<li class="list-group-item list-group-item-action text-left text-info cursor-pointer"><a class="text-elipses" style="display: inherit;">${value.table[id].source_page_title}</a></li>` : "---"}  `)
+                }
+                else if (value.name === match_wordd && value.name == "Multiple title tags") {
+                  $(".modal_links").hide()
+                  $('.modal_links').DataTable().destroy();
+                  // console.log("log5")
+                  $("#brokenLinksPopUp").modal("show")
+                  $("#modalBroken-heading").text(match_wordd)
+                  // $("#ul-modal").html(` ${value.table && value.table[id].description ? value.table[id].description : "---"}  `)
+                  $("#ul-modal").html(` ${value.table && value.table[id].source_page_title ? `<li class="list-group-item list-group-item-action text-left text-primary cursor-pointer"><p class="text-primary"> ${value.table[id].source_page_title}</p></li>` : "---"}  `)
+                }
+                else if (value.name === match_wordd && key === "Other") {
+                  $(".modal_links").hide()
+                  $('.modal_links').DataTable().destroy();
+                  $("#ul-modal").show()
+                  $("#brokenLinksPopUp").modal("show")
+                  var detail = value.detail[id];
+                  if (Array.isArray(detail) === false) {
+                    detail = Array(detail)
+                  }
+                  $("#modalBroken-heading").text(match_wordd)
+                  if (match_wordd === "Pages with Console errors" || match_wordd === "Pages with Syntax issues") {
+                    // console.log("log7")
+                    $("#ul-modal").html(` ${detail ? detail.length > 0 ? (detail.map((val) => `<li class="list-group-item list-group-item-action text-left text-danger cursor-pointer"><p class="text-danger" style="word-break:break-all" > ${val}</p></li>`).join(' ')) : "---" : "---"} `)
+                  } else {
+                    $("#ul-modal").html(` ${detail ? detail.length > 0 ? (detail.map((val) => `<li class="list-group-item list-group-item-action text-left cursor-pointer"><a href="${val}" class="text-primary" style="" class="" style="word-break:break-all" > ${val}</a></li>`).join(' ')) : "---" : "---"} `)
+                  }
+                }
+                else if (value.name === match_wordd && match_wordd !== "Meta description tag missing or empty") {
+                  $(".modal_links").hide()
+                  $('.modal_links').DataTable().destroy();
+                  $("#ul-modal").show()
+                  // console.log("log9", match_wordd)
+                  $("#brokenLinksPopUp").modal("show")
+                  var detail = value.detail[id];
+                  $("#modalBroken-heading").text(match_wordd)
+                  $("#ul-modal").html(` ${detail && detail.length > 0 ? (detail.map((val) => `<li class="list-group-item list-group-item-action text-primary text-left cursor-pointer"><p ><xmp> ${val}</xmp></p></li>`).join(' ')) : "No data found"}  `)
+                  //$("#ul-modal").html(` ${detail}`)
+                }
+                else if (value.name === match_wordd && match_wordd == "Meta description tag missing or empty") {
+                  $(".modal_links").hide()
+                  $('.modal_links').DataTable().destroy();
+                  $("#ul-modal").show()
+                  // console.log("log8", match_wordd)
+                  $("#brokenLinksPopUp").modal("show")
+                  var detail = value.detail[id];
+                  $("#modalBroken-heading").text(match_wordd)
+                  $("#ul-modal").html(`<li class="list-group-item list-group-item-action text-left text-primary cursor-pointer"><p class="text-primary" style="word-break: break-all" > ${detail ? detail : "---"}</p></li>`)
+                  //$("#ul-modal").html(` ${detail}`)
+                }
+              })
+            })
+          })
+
+        }
+         else if(response.status === false && response.crawl_request_inprocess === true){
+  ShowNoty("Crawled data in process,you may go to Project List for further details", "warning");
+}
+        
+        else {
+          $('.count_loader,.tb_loader').hide();
+          $('.empty_counts').text("-")
+          $('.count_loader').hide();
+          $("#external_pages").empty()
+          $("#external_pages").append(`<tr><td colspan="4">No Data found</td></tr>`);
+          $("#links").empty()
+          $("#links").append(`<tr><td colspan="4">No Data found</td></tr>`);
+          $("#Indexability").empty()
+          $("#Indexability").append(`<tr><td colspan="4">No Data found</td></tr>`);
+          $("#Redirects").empty()
+          $("#Redirects").append(`<tr><td colspan="4">No Data found</td></tr>`);
+          $("#Content").empty()
+          $("#Content").append(`<tr><td colspan="4">No Data found</td></tr>`);
+          $("#Images").empty()
+          $("#Images").append(`<tr><td colspan="4">No Data found</td></tr>`);
+          $("#Social").empty()
+          $("#Social").append(`<tr><td colspan="4">No Data found</td></tr>`);
+          $("#Other").empty()
+          $("#Other").append(`<tr><td colspan="4">No Data found</td></tr>`);
+          ShowNoty(response.error, "error");
+          $("#noty_layout__topRight").find("span:nth-child(2)").attr('title', `${response.error}`);
+          $("#noty_layout__topRight").find("span:nth-child(2)").addClass("text-elipses")
+        }
+      }
+    });
+  }
+  var setInt = setInterval(techFunc, 1000)
+  function techFunc() {
+    var id = $('.radio :selected').first().attr('data-id')
+    // console.log("kkkk", id)
+    var url = $('.radio :selected').first().val();
+    $("#modalBroken-heading").text("")
+    if (url !== undefined && url !== '') {
+      clearInterval(setInt)
+      //  crawler page start
+      $.ajax({
+        method: 'GET',
+        // url: '/site_audit/crawler_data/?url=' + url,
+        url: '/site_audit/crawler_data/?project_id=' + id ,
+        success: function (response) {
+          if (!response.crawl_request_inprocess) {
+            techFunc2(url);
+          } 
+          else if (response.crawl_request_inprocess) {
+            techFunc2(url);
+            // ShowNoty('Crawled data in process', 'warning')
+            $('.empty_counts').html('-')
+            $('.count_loader,.tb_loader').hide();
+            $('.count_loader').hide();
+            $("#external_pages").empty()
+            $("#external_pages").append(`<tr><td colspan="4">Crawl data in process</td></tr>`);
+            $("#links").empty()
+            $("#links").append(`<tr><td colspan="4">Crawl data in process</td></tr>`);
+            $("#Indexability").empty()
+            $("#Indexability").append(`<tr><td colspan="4">Crawl data in process</td></tr>`);
+            $("#Redirects").empty()
+            $("#Redirects").append(`<tr><td colspan="4">Crawl data in process</td></tr>`);
+            $("#Content").empty()
+            $("#Content").append(`<tr><td colspan="4">Crawl data in process</td></tr>`);
+            $("#Images").empty()
+            $("#Images").append(`<tr><td colspan="4">Crawl data in process</td></tr>`);
+            $("#Social").empty()
+            $("#Social").append(`<tr><td colspan="4">Crawl data in process</td></tr>`);
+            $("#Other").empty()
+            $("#Other").append(`<tr><td colspan="4">Crawl data in process</td></tr>`);
+          }
+        }
+      })
+      //  crawler page end
+      $("#finalUrl").html("");
+      $("#finalUrl").html(`${url}`);
+      $("#finalUrl").attr("href", url);
+      $.ajax({
+        type: "GET",
+        url: "/site_audit/get_site_live_data/?url=" + url,
+        dataType: "json", // expect html to be returned
+        success: function (response) {
+          if (response.status) {
+            $(".performance_found0").empty()
+            $(".performance_found1").empty()
+            $(".performance_found2").empty()
+            $(".performance_loader").hide()
+            if (response.response_desktop.all_data.originLoadingExperience !== undefined) {
+              var CLS = response.response_desktop.all_data.originLoadingExperience.metrics.CUMULATIVE_LAYOUT_SHIFT_SCORE ? response.response_desktop.all_data.originLoadingExperience.metrics.CUMULATIVE_LAYOUT_SHIFT_SCORE.category : "-"
+              var FID = response.response_desktop.all_data.originLoadingExperience.metrics.FIRST_CONTENTFUL_PAINT_MS ? response.response_desktop.all_data.originLoadingExperience.metrics.FIRST_CONTENTFUL_PAINT_MS.category : "-"
+              var LCP = response.response_desktop.all_data.originLoadingExperience.metrics.LARGEST_CONTENTFUL_PAINT_MS ? response.response_desktop.all_data.originLoadingExperience.metrics.LARGEST_CONTENTFUL_PAINT_MS.category : "-"
+              var pagespeed = response.response_desktop.all_data.lighthouseResult.categories.performance.score * 100
+              $(".performance_found0").text(CLS)
+              $(".performance_found1").text(FID)
+              $(".performance_found2").text(LCP)
+              if (CLS === "SLOW") {
+                $(".performance_cls").addClass("text-red")
+              } else if (CLS === "AVERAGE") {
+                $(".performance_cls").addClass("text-yellow")
+              } else if (CLS === "FAST") {
+                $(".performance_cls").addClass("text-green")
+              }
+              if (FID === "SLOW") {
+                $(".performance_fid").addClass("text-red")
+              } else if (FID === "AVERAGE") {
+                $(".performance_fid").addClass("text-yellow")
+              } else if (FID === "FAST") {
+                $(".performance_fid").addClass("text-green")
+              }
+              if (LCP === "SLOW") {
+                $(".performance_lcp").addClass("text-red")
+              } else if (LCP === "AVERAGE") {
+                $(".performance_lcp").addClass("text-yellow")
+              } else if (LCP === "FAST") {
+                $(".performance_lcp").addClass("text-green")
+              }
+              if (pagespeed >= 0 && pagespeed <= 49) {
+                $(".performance_icon").addClass("text-red")
+                $("#performance").text("SLOW")
+                $("#performance_r").text("is slow")
+              } else if (pagespeed >= 50 && pagespeed <= 89) {
+                $(".performance_icon").addClass("text-yellow")
+                $("#performance").text("AVERAGE")
+                $("#performance_r").text("is average")
+              } else {
+                $(".performance_icon").addClass("text-green")
+                $("#performance").text("FAST")
+                $("#performance_r").text("is fast")
+              }
+            } else {
+              $(".performance_found0").text("-")
+              $(".performance_found1").text("-")
+              $(".performance_found2").text("-")
+              $("#performance_r").text("is not found")
+              $("#performance").text("-")
+            }
+          } else {
+            $(".performance_loader").hide()
+            $(".performance_found0").text("-")
+            $(".performance_found1").text("-")
+            $(".performance_found2").text("-")
+            $("#performance_r").text("is not found")
+            $("#performance").text("-")
+          }
+        }
+      }
+      )
+    }
+  }
+
+  /* Tab Function */
+  $(document).on('click', '.clickable', function () {
+    $("#links_detail").html('')
+    $(this).parent().addClass("bg-light-blue3");
+    $(this).parent().siblings().removeClass("bg-light-blue3");
+    if (this.innerText) {
+      jQuery(".sort-table.audit").fadeIn("slow");
+    }
+    else {
+      jQuery(".sort-table.audit").fadeOut("slow");
+    }
+  })
+
+  jQuery("[data-targetit]").on("click", function (e) {
+    jQuery(this).addClass("active");
+    jQuery(this).siblings().removeClass("active");
+    var target = jQuery(this).data("targetit");
+    jQuery("." + target)
+      .siblings('[class^="tabs-"]')
+      .hide();
+    jQuery("." + target).fadeIn();
+  });
+
+  $(document).on('change', '.radio', function (e) {
+    $("#ul-modal").html("");
+    $('.count_loader').show();
+    $("#external_pages").html("");
+    $("#links").html("");
+    $("#Indexability").html("");
+    $("#Redirects").html("");
+    $("#Content").html("");
+    $("#Images").html("");
+    $("#Social").html("");
+    $("#Other").html("");
+    $("#Performance").html("");
+    $('.tb_loader').show();
+    $(".performance_loader").show()
+    $('.performance_found0').empty()
+    $(".performance_icon").removeClass("text-red text-yellow text-green")
+    $(".performance_lcp").removeClass("text-red text-yellow text-green")
+    $(".performance_cls").removeClass("text-red text-yellow text-green")
+    $(".performance_fid").removeClass("text-red text-yellow text-green")
+    $('.performance_found1').empty()
+    $('.performance_found2').empty()
+    $("#performance_r").empty()
+    $("#performance").empty()
+    $("#displayTable_wrapper").hide()
+    $("#table-heading").hide()
+    e.preventDefault();
+    var url = $(this).val();
+    $("#finalUrl").html("");
+    $("#finalUrl").html(`${url}`);
+    $("#finalUrl").attr("href", url);
+    techFunc(url)
+  })
+</script>
+
+{% endblock %}
+</div>
+</div>

@@ -1,0 +1,533 @@
+{% extends "base2.html" %}
+{% load static %}
+{% block extrahead %}
+<style>
+	/* Card General Styles */
+	.card-custom {
+		width: 100%;
+		margin: auto;
+		max-width: 430px;
+		position: relative;
+		color: #fff;
+		transition: .3s ease all;
+		transform: rotateY(0deg);
+		transform-style: preserve-3d;
+		cursor: pointer;
+		z-index: 2;
+		border-radius: 1.5rem;
+	}
+
+	.custom-card {
+		max-height: 620px;
+	}
+
+	.card-not-found {
+		color: black;
+	}
+
+	.card-width {
+		width: 60%;
+		margin: auto;
+	}
+
+	.custom-Form {
+		display: flex;
+		justify-content: center;
+	}
+
+	/* .card-custom.active {
+		transform: rotateY(180deg);
+	} */
+
+	.card-custom>div {
+
+		/* max-width: 470px; */
+		position: relative;
+		padding: 30px;
+		border-radius: 15px;
+		/* min-height: 315px; */
+		display: flex;
+		flex-direction: column;
+		justify-content: space-between;
+		box-shadow: 0 10px 10px 10px rgba(0, 60, 134, 0.3);
+	}
+
+	/* Front Card */
+	.card-custom .front {
+		width: 100%;
+		background: linear-gradient(to bottom right,
+				rgba(255, 255, 255, 0.2),
+				rgb(87, 79, 90));
+		box-shadow: 0 1rem 2rem rgba(0, 0, 0, 0.5),
+			-1 -1 2px rgb(27, 26, 26),
+			1 1 2px rgb(23, 21, 21);
+		backdrop-filter: blur(0.65rem);
+		-webkit-backdrop-filter: blur(0.65rem);
+	}
+
+	.card-custom .card-not-found {
+		width: 100%;
+		background: linear-gradient(to bottom right,
+				rgba(255, 255, 255, 0.2),
+				rgb(87, 79, 90));
+		box-shadow: 0 1rem 2rem rgba(0, 0, 0, 0.5),
+			-1 -1 2px rgb(27, 26, 26),
+			1 1 2px rgb(23, 21, 21);
+		backdrop-filter: blur(0.65rem);
+		-webkit-backdrop-filter: blur(0.65rem);
+	}
+
+	.front .brand-logo {
+		text-align: right;
+		min-height: 50px;
+	}
+
+	.front .brand-logo img {
+		width: 100%;
+		height: 100%;
+		object-fit: cover;
+		max-width: 80px;
+	}
+
+	.front .chip {
+		width: 100%;
+		max-width: 50px;
+		margin-bottom: 20px;
+	}
+
+	@media (max-width: 1170px) {
+		.card-width {
+			width: 80%;
+			margin: auto;
+		}
+	}
+
+	@media (max-width: 776px) {
+		.card-width {
+			width: 100%;
+			margin: auto;
+		}
+	}
+
+	@media (max-width: 1300px) {
+		main {
+			padding-left: 16%;
+		}
+	}
+
+	@media (max-width: 1199px) {
+		main {
+			padding-left: 19%;
+		}
+	}
+
+	@media (max-width: 991px) {
+		main {
+			padding-left: 0;
+			margin-top: 125px;
+		}
+	}
+
+	.front .group .label {
+		font-size: 16px;
+		color: #5d6872;
+		-webkit-text-stroke: 0.15px #000;
+		margin-bottom: 5px;
+	}
+
+	.front .group .number,
+	.front .group .name,
+	.front .group .expiration {
+		color: #000;
+		font-size: 22px;
+		text-transform: uppercase;
+	}
+
+	.front .flexbox {
+		display: flex;
+		justify-content: space-between;
+		margin-top: 20px;
+	}
+
+	/* ---------- Back Card ----------*/
+	/* .back {
+		background: linear-gradient(to bottom right,
+				rgba(255, 255, 255, 0.2),
+				rgba(255, 255, 255, 0.05));
+		box-shadow: 0 1rem 2rem rgba(0, 0, 0, 0.5),
+			-1 -1 2px #aaa,
+			1 1 2px #555;
+		backdrop-filter: blur(0.8rem);
+		-webkit-backdrop-filter: blur(0.8rem);
+
+		position: absolute;
+		top: 0;
+		transform: rotateY(180deg);
+		backface-visibility: hidden;
+	}
+
+	.back .magnetic-bar {
+		height: 40px;
+		background: #000;
+		width: 100%;
+		position: absolute;
+		top: 30px;
+		left: 0;
+	}
+
+	.back .details {
+		margin-top: 60px;
+		display: flex;
+		justify-content: space-between;
+	}
+
+	.back .details p {
+		margin-bottom: 5px;
+	}
+
+	.back .details #signature {
+		width: 70%;
+		color: #000;
+	}
+
+	.back .details #signature .signature {
+		height: 40px;
+		background: repeating-linear-gradient(skyblue 0, skyblue 5px, orange 5px, orange 10px);
+	}
+
+	.back .details #signature .signature p {
+		line-height: 40px;
+		font-family: 'Liu Jian Mao Cao', cursive;
+		color: #000;
+		font-size: 30px;
+		padding: 0 10px;
+		text-transform: capitalize;
+	}
+
+	.back .details #ccv {
+		width: 20%;
+		color: #000;
+	}
+
+	.back .details #ccv .ccv {
+		background: #fff;
+		height: 40px;
+		color: #000;
+		padding: 10px;
+		text-align: center;
+	}
+
+	.back .legend {
+		font-size: 14px;
+		line-height: 24px;
+		color: black;
+	}
+
+	.back .bank-link {
+		font-size: 14px;
+		color: #000;
+	} */
+
+	/* ---------- Contenedor Boton ----------*/
+	.container-btn .btn-open-form {
+		width: 50px;
+		height: 50px;
+		font-size: 20px;
+		line-height: 20px;
+		background: #707070;
+		color: #fff;
+		position: relative;
+		top: -25px;
+		left: 48%;
+		z-index: 3;
+		border-radius: 100%;
+		box-shadow: -5px 4px 8px rgba(24, 56, 182, 0.4);
+		padding: 5px;
+		transition: all .2s ease;
+		border: none;
+		cursor: pointer;
+	}
+
+	.container-btn .btn-open-form:hover {
+		outline: 0;
+		box-shadow: 0 4px 10px 0 rgb(0 0 0 / 20%), 0 4px 20px 0 rgb(0 0 0 / 10%);
+	}
+
+	.container-btn .btn-open-form.active {
+		transform: rotate(45deg);
+	}
+
+
+	/* ---------- Card Form ----------*/
+	.card-formm {
+		background: #f3f5f7;
+		width: 100%;
+		max-width: 545px;
+		padding: 150px 30px 30px 30px;
+		border-radius: 10px;
+		position: relative;
+		top: -150px;
+		z-index: 1;
+		clip-path: polygon(0 0, 100% 0, 100% 0, 0 0);
+		transition: clip-path .3s ease-out;
+		/* margin: 0 !important; */
+		margin: auto;
+		border: 1px solid #707070;
+	}
+
+	.card-formm.active {
+		clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+	}
+
+	.card-formm label {
+		display: block;
+		color: #3b3e41;
+		-webkit-text-stroke: 0.1px #6e7881;
+		margin-bottom: 5px;
+		font-size: 16px;
+	}
+
+	.card-formm input,
+	.card-formm select,
+	.btn-submitt {
+		border: 2px solid #CED6E0;
+		font-size: 18px;
+		height: 50px;
+		width: 100%;
+		padding: 5px 12px;
+		transition: .3s ease all;
+		border-radius: 5px;
+	}
+
+	.card-formm input:hover,
+	.card-formm select:hover {
+		border: 2px solid #93BDED;
+	}
+
+	.card-formm input:focus,
+	.card-formm select:focus {
+		outline: rgb(4, 4, 4);
+		box-shadow: 1px 7px 10px -5px rgba(90, 116, 148, 0.3);
+	}
+
+	.card-formm input {
+		margin-bottom: 20px;
+		text-transform: uppercase;
+	}
+
+	.card-formm .flexbox {
+		display: flex;
+		justify-content: space-between;
+	}
+
+	.card-formm .expire {
+		width: 100%;
+	}
+
+	.card-formm .ccv {
+		min-width: 100px;
+	}
+
+	.card-formm .group-select {
+		width: 100%;
+		margin-right: 15px;
+		position: relative;
+	}
+
+	.card-formm select {
+		-webkit-appearance: none;
+	}
+
+	.card-formm .group-select i {
+		position: absolute;
+		color: #CED6E0;
+		top: 18px;
+		right: 15px;
+		transition: .3s ease all;
+	}
+
+	.card-formm .group-select:hover i {
+		color: #93bfed;
+	}
+
+	.card-formm .btn-submitt {
+		border: none;
+		padding: 10px;
+		font-size: 15px;
+		color: #fff;
+		background: #707070;
+		box-shadow: 2px 2px 10px 0px rgba(0, 85, 212, 0.4);
+		cursor: pointer;
+
+	}
+
+	.card-formm .btn-submitt:hover {
+		outline: 0;
+		box-shadow: 0 4px 10px 0 rgb(0 0 0 / 20%), 0 4px 20px 0 rgb(0 0 0 / 10%);
+	}
+
+	.successs,
+	.errorr {
+		display: none;
+		font-size: 13px;
+	}
+
+	.successs.visible,
+	.errorr.visible {
+		display: inline;
+	}
+</style>
+<script src="https://js.stripe.com/v3/"></script>
+
+{% endblock %}
+{% block content %}
+
+<div class="container">
+	<div class="row ">
+		<div class="col-xl-9">
+			<div class="center-section">
+				<h4 class="title mb-5 fw-400 pb-2"> Manage Credit Card</h4>
+			</div>
+		</div>
+	</div>
+
+
+	<div class="custom-card">
+
+		<section class="card-custom" id="card">
+
+			<div class="front main-card">
+
+				<img src="https://raw.githubusercontent.com/falconmasters/formulario-tarjeta-credito-3d/master/img/chip-tarjeta.png"
+					class="chip">
+
+				<div class="details">
+
+					<div class="group" id="number">
+						<p class="label">Card Number</p>
+						<p class="number" id="cardNum">
+						<div class="d-flex card-spinner justify-content-center align-items-center">
+							<div class="spinner-border card-spinner text-dark  spinner-border-sm" role="status">
+								<span class="visually-hidden">Loading...</span>
+							</div>
+						</div>
+						</p>
+					</div>
+					<div class="flexbox">
+
+						<div class="group" id="name">
+							<p class="label"> Card's Holder </p>
+							<p class="name" id="cardHolder">
+							<div class="d-flex  card-spinner justify-content-center align-items-center">
+								<div class="spinner-border card-spinner  text-dark spinner-border-sm" role="status">
+									<span class="visually-hidden ">Loading...</span>
+								</div>
+							</div>
+							</p>
+						</div>
+
+						<div class="group" id="expiration">
+							<p class="label">Expiration</p>
+							<div class="d-flex  card-spinner justify-content-center align-items-center">
+								<div class="spinner-border card-spinner  text-dark spinner-border-sm" role="status">
+									<span class="visually-hidden ">Loading...</span>
+								</div>
+							</div>
+							<p class="expiration" id="expiration2" style="display: none;"> <span class="month"
+									id="mnth">
+									MM
+								</span> / <span class="year" id="year">
+									YY
+								</span>
+							</p>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="card-not-found p-5" style="display: none;">
+				<div class="details m-5">
+
+					<h3 class="text-center">Card Data Not Found</h3>
+
+				</div>
+			</div>
+			<!-- <div class="back">
+						<div class="magnetic-bar"></div>
+						<div class="details">
+							<div class="group" id="signature">
+								<p class="label">Signature</p>
+								<div class="signature">
+									<p></p>
+								</div>
+							</div>
+							<div class="group" id="ccv">
+								<p class="label">CCV</p>
+								<p class="ccv"></p>
+							</div>
+						</div>
+						<p class="legend">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Assumenda dicta quos
+							quas porro fuga, accusamus necessitatibus expedita illo, ipsum blanditiis quaerat deserunt
+							illum minima ex distinctio veritatis aliquid, ipsam ut.</p>
+						<a href="#" class="bank-link">http://dabank.onion</a>
+
+					</div> -->
+		</section>
+
+		<!-- Container Button to open the form -->
+		<div class="container-btn">
+			<button class="btn-open-form" id="btn-open-form">
+				<i class="fas fa-plus"></i>
+			</button>
+		</div>
+
+		<!-- Form -->
+		<form action="" id="card-formm" class="card-formm paymentt">
+			<input type="hidden" name="card_token " id="tokenn" />
+			<span class="brand"><i class="pf pf-credit-card" id="brand-icon"></i></span>
+			<div class="">
+				<!--<label>Card Number</label> -->
+				<div id="cc-numberr" class="form-control mb-3">
+					<!-- a Stripe Element will be inserted. -->
+				</div>
+				<!-- <label>Expiration</label>-->
+				<div id="cc-expp" class="form-control mb-3">
+					<!-- a Stripe Element will be inserted. -->
+				</div>
+				<!-- <label>CVC</label> -->
+				<div id="cc-cvcc" class="form-control mb-3">
+					<!-- a Stripe Element will be inserted. -->
+				</div>
+
+			</div>
+			<div class="d-flex justify-content-center">
+				<button type="submit" class="btn--paymentt btn-submitt  btn-block" style="width:50%">
+					<span class="card-spinner">
+						<div class="spinner-border spinner-border-sm" role="status">
+							<span class="visually-hidden">Loading...</span>
+						</div>
+					</span>
+					Confirm
+				</button>
+			</div>
+			<!-- <button type="button" class="btn--save">Save</button> -->
+			<div class="outcome">
+				<div class="errorr text-red"></div>
+				<div class="successs text-green">
+					Success! Your Stripe token is <span class="tokenn"></span>
+				</div>
+			</div>
+		</form>
+		<script src="https://kit.fontawesome.com/2c36e9b7b1.js" crossorigin="anonymous"></script>
+
+	</div>
+
+
+</div>
+
+{% endblock %}
+
+{% block extrascript %}
+<script src="https://cdn.rawgit.com/julmot/mark.js/master/dist/jquery.mark.min.js"></script>
+<script src="{% static 'subscription_module/js/manage_credit_card.js' %}"></script>
+
+{% endblock %}

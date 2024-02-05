@@ -1,0 +1,1144 @@
+{% extends "base2.html" %}
+{% load static %}
+{% block extrahead %}
+<link href="https://cdn.lineicons.com/3.0/lineicons.css" rel="stylesheet">
+<!-- <link href="{% static 'site_audit/css/bootstrap.min.css' %}" rel="stylesheet"> -->
+<link rel='stylesheet' id='nustart-reboot-21-css' href="{% static 'stripe_payment_module/css/jsonschema.css' %}">
+<style>
+  .table-head.errorTypes {
+    height: auto;
+  }
+
+  ::-webkit-scrollbar {
+    width: 3px;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background-color: #707070;
+  }
+
+  {% comment %} body {
+    background-color: #efefef
+  } {% endcomment %}
+
+  select {
+    width: 100%;
+    border-top: none !important;
+    border-left: none !important;
+    border-right: none !important;
+    padding: 5px;
+    cursor: pointer;
+  }
+
+  input {
+    width: 100%;
+    border-top: none !important;
+    border-left: none !important;
+    border-right: none !important;
+    padding: 0;
+    cursor: pointer;
+  }
+
+  .md-input-container {
+    position: relative;
+    padding: 2px;
+    margin: 18px 0;
+    vertical-align: middle;
+  }
+
+  md-input-container .md-placeholder {
+    position: absolute;
+    top: 0;
+    opacity: 0;
+    transition-property: opacity, -webkit-transform;
+    transition-property: opacity, transform;
+    transition-property: opacity, transform, -webkit-transform;
+    -webkit-transform: translate3d(0, 30px, 0);
+    transform: translate3d(0, 30px, 0);
+  }
+
+  .panel2 {
+    display: none;
+  }
+
+  .md-placeholder {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    width: 100%;
+    order: 1;
+    pointer-events: none;
+    -webkit-font-smoothing: antialiased;
+    padding-left: 3px;
+    padding-right: 0;
+    z-index: 1;
+    -webkit-transform: translate3d(0, 28px, 0) scale(1);
+    transform: translate3d(0, 28px, 0) scale(1);
+    transition: -webkit-transform .4s cubic-bezier(.25, .8, .25, 1);
+    transition: transform .4s cubic-bezier(.25, .8, .25, 1);
+    transition: transform .4s cubic-bezier(.25, .8, .25, 1), -webkit-transform .4s cubic-bezier(.25, .8, .25, 1);
+    max-width: 100%;
+    -webkit-transform-origin: left top;
+    transform-origin: left top;
+  }
+
+  .noty_body .d-flex span.px-2 {
+    font-size: 14px;
+  }
+
+  .modal_title {
+    color: #1a237e;
+    font-size: 20px;
+    font-weight: 500;
+  }
+
+  .error-message {
+    color: rgb(213, 0, 0);
+    font-size: 14px
+  }
+
+  .dropdown-content {
+    display: none;
+    position: absolute;
+    z-index: 1;
+  }
+
+  .dropdown-content {
+    padding: 0.5rem 0;
+    margin: 25px;
+    font-size: 1rem;
+    color: #212529;
+    text-align: left;
+    list-style: none;
+    background-color: #fff;
+    background-clip: padding-box;
+    border: 1px solid rgba(0, 0, 0, .15);
+    border-radius: 0.25rem;
+    z-index: 99999999;
+  }
+
+  .dropdown-content a {
+    display: block;
+  }
+
+  .show {
+    display: block;
+  }
+
+
+  .icons {
+    gap: 10px
+  }
+
+  .panel {
+    padding: 50px;
+    border-radius: 0;
+    margin: 0 0 30px 0;
+    height: calc(100% - 30px);
+    box-shadow: 0 0 3px rgb(0 0 0 / 10%);
+    border-color: #ddd;
+    background-color: #f3f5f7;
+    border: 1px solid transparent;
+  }
+
+  .panel2 {
+    padding: 50px;
+    border-radius: 0;
+    margin: 0 0 30px 0;
+    min-height: 500px;
+    box-shadow: 0 0 3px rgb(0 0 0 / 10%);
+    border-color: #ddd;
+    background-color: #f3f5f7;
+    border: 1px solid transparent;
+  }
+
+  .font-14 {
+    font-size: 14px;
+    color: black
+  }
+
+  :focus {
+    color: #707070;
+    outline: 0;
+  }
+
+  .anchor {
+    color: #d84315;
+    text-decoration: none;
+  }
+
+  .tb_loader {
+    position: absolute;
+    z-index: 999;
+    margin: 8% 40%;
+  }
+
+  table thead th:first-child {
+    width: 10%;
+  }
+
+  table thead th:nth-child(5) {
+    width: 10%;
+  }
+
+  .btn-prim {
+    min-width: 50px !important;
+    min-height: 30px !important;
+  }
+
+  table thead th:nth-child(6) {
+    width: 7%;
+  }
+
+  .checkmark {
+    border-radius: 50%;
+    border: 2px solid rgb(35, 199, 35);
+    background: rgb(35, 199, 35);
+    color: white;
+  }
+
+  .crossmark {
+    border-radius: 50%;
+    border: 2px solid #eb4335;
+    background: #eb4335;
+    color: white;
+    padding: 0 2px;
+  }
+
+  .text-elpsis-class {
+    max-width: 150px !important;
+    display: block !important;
+  }
+
+  .text-remarks-class {
+    max-width: 100px !important;
+    display: block !important;
+  }
+
+  .text-elipses {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .copyJson,
+  .deleteJson,
+  .testJson {
+    border-radius: 50%;
+    padding: 4px;
+    cursor: pointer;
+  }
+
+  .copyJson {
+    color: #fff;
+    border: 2px solid #1a237e;
+    background: #1a237e;
+  }
+
+  .deleteJson {
+    color: #fff;
+    border: 2px solid #f44336;
+    background: #f44336;
+  }
+
+  .testJson {
+    color: #fff;
+    border: 2px solid #f44336;
+    background: #f44336;
+  }
+
+
+  .labeldata {
+    font-size: 14px;
+    color: #707070;
+  }
+
+  @media (max-width: 1300px) {
+    .sort-table {
+      overflow: hidden;
+      overflow-x: auto;
+    }
+
+    .sort-table .table {
+      width: 1320px;
+      overflow-x: scroll;
+    }
+
+    main {
+      padding-left: 16%;
+    }
+  }
+
+  @media (max-width: 1199px) {
+    main {
+      padding-left: 19%;
+    }
+  }
+
+  @media (max-width: 991px) {
+    main {
+      padding-left: 0;
+      margin-top: 125px;
+    }
+  }
+
+  .form__group {
+    position: relative;
+    padding: 12px;
+    /* margin-top: 10px;
+  width: 50%; */
+  }
+
+  .form__field,
+  .select_field {
+    font-family: inherit;
+    width: 100%;
+    border: 0;
+    border-bottom: 1px solid #9b9b9b;
+    outline: 0;
+    font-size: 14px !important;
+    color: black;
+    background: transparent;
+    transition: border-color 0.2s;
+  }
+
+  .form__field::placeholder {
+    color: transparent;
+  }
+
+  .form__label {
+    position: absolute;
+    /* margin:-1px; */
+    top: 18px;
+    display: block;
+    transition: 0.2s;
+    font-size: 1rem;
+    color: #9b9b9b;
+    cursor: pointer;
+  }
+
+  .form__field:focus,
+  .select_field:focus {
+    padding-bottom: 6px;
+    /* font-weight: 700; */
+    border-width: 2px;
+    border-image: linear-gradient(to right, rgb(26, 35, 126), #11998e);
+    border-image-slice: 1;
+  }
+
+
+  /* reset input */
+  .form__field:required,
+  .form__field:invalid {
+    box-shadow: none;
+  }
+
+  .top_label {
+    font-size: 14px;
+    line-height: 1.42857143;
+    color: #333 !important;
+    font-weight: 400;
+  }
+
+  input,
+  select,
+  textarea {
+    font-size: 14px !important;
+  }
+
+  #select_head {
+    font-weight: 700;
+    font-size: 18px;
+    color: #60607d;
+  }
+
+  .form__label--invalid {
+    color: rgb(213, 0, 0) !important;
+  }
+
+  .bottom-schema-heading {
+    font-weight: 700;
+    font-size: 14px !important;
+    color: #60607d;
+  }
+
+  .bottom-schema-url li {
+    list-style-type: disc;
+    color: #60607d;
+  }
+
+  .bottom-schema-url a {
+    font-size: 14px !important;
+    color: rgb(213, 0, 0) !important;
+  }
+
+  ul.bottom-schema-url {
+    padding-left: 50px !important;
+  }
+
+  .input-container input {
+    border: none;
+    box-sizing: border-box;
+    outline: 0;
+    padding: .75rem;
+    position: relative;
+    width: 100%;
+  }
+
+  input[type="date"]::-webkit-calendar-picker-indicator {
+    background: transparent;
+    bottom: 0;
+    color: transparent;
+    cursor: pointer;
+    height: auto;
+    left: 0;
+    position: absolute;
+    right: 0;
+    top: 0;
+    width: auto;
+  }
+
+  #footer .footer {
+    margin-left: 15% !important;
+  }
+</style>
+{% endblock %}
+{% block content %}
+
+
+<div class="container">
+  <div class="row ">
+    <div class="col-xl-9">
+      <div class="center-section">
+        <h4 class="title mb-3 fw-400 pb-2">Schema Generator</h4>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-12 panel panel-default mt-5">
+      <div class='row'>
+        <div class='col-md-6'>
+          <ol class="nonumbers">
+            <li>
+              <div class="schema-select mt-3">
+                <label for="select_1" class="top_label ">Which Schema.org markup would you like to create?</label>
+                <select class="form-select" id="select_1" aria-label="Which Schema would you like to create?"
+                  data-bind="options: schemas, value: schema, optionsText: 'title', valueAllowUnset: true">
+                </select>
+              </div>
+            </li>
+          </ol>
+        </div>
+
+        <div class='col-md-6'>
+          <p class="font-14 text-gray"> Use this <a href='javascript(void)' class='anchor'>WRE </a> structured data
+            generator to create JSON-LD markups, including all of the required item properties and more. Click on the
+            Google icon to test your markup with the <span class='anchor'>Structured Data Testing Tool </span> and/or
+            the <span class='anchor'>Rich Results Test</span>.</p>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-12 panel2 panel-default mt-5">
+      <div id="ko-ready" class="readout" style="display:none;">
+        <div class="one-half first" data-bind="if: schema">
+          <h4 id='select_head'> </h4>
+          <table>
+            <tbody>
+
+              <!-- ko foreach: schemaItems -->
+              <tr>
+                <td>
+                  <!-- <strong class='labeldata' data-bind="text: title"></strong> -->
+                  <div class="form__group field">
+
+                    <div data-bind="template: { name: type }"></div>
+                    <label class="form__label" data-bind="text: title"></label>
+                  </div>
+                </td>
+              </tr>
+              <!-- /ko -->
+            </tbody>
+          </table>
+          <div class="row article" style="display: none;">
+            <div class="col-sm-6">
+              <p class="bottom-schema-heading">Schema.org's references:</p>
+              <ul class="bottom-schema-url">
+                <li><a href="https://schema.org/Article" target="_blank" rel="noopener">Article</a></li>
+                <li><a href="https://schema.org/NewsArticle" target="_blank" rel="noopener">NewArticle</a></li>
+                <li><a href="https://schema.org/BlogPosting" target="_blank" rel="noopener">BlogPosting</a></li>
+              </ul>
+            </div>
+            <div class="col-sm-6">
+              <p class="bottom-schema-heading">Google's documentation:</p>
+              <ul class="bottom-schema-url">
+                <li><a href="https://developers.google.com/search/docs/data-types/article" target="_blank"
+                    rel="noopener">Article</a></li>
+              </ul>
+            </div>
+          </div>
+          <div class="row breadcrumb" style="display: none;">
+            <div class="col-sm-6">
+              <p class="bottom-schema-heading">Schema.org's references:</p>
+              <ul class="bottom-schema-url">
+                <li><a href="https://schema.org/BreadcrumbList" target="_blank" rel="noopener">BreadcrumbList</a></li>
+              </ul>
+            </div>
+            <div class="col-sm-6">
+              <p class="bottom-schema-heading">Google's documentation:</p>
+              <ul class="bottom-schema-url">
+                <li><a href="https://developers.google.com/search/docs/data-types/breadcrumb" target="_blank"
+                    rel="noopener">Breadcrumb</a></li>
+              </ul>
+            </div>
+          </div>
+          <div class="row event" style="display: none;">
+            <div class="col-sm-6">
+              <p class="bottom-schema-heading">Schema.org's references:</p>
+              <ul class="bottom-schema-url">
+                <li><a href="https://schema.org/Event" target="_blank" rel="noopener">Event</a></li>
+              </ul>
+            </div>
+            <div class="col-sm-6">
+              <p class="bottom-schema-heading">Google's documentation:</p>
+              <ul class="bottom-schema-url">
+                <li><a href="https://developers.google.com/search/docs/data-types/event" target="_blank"
+                    rel="noopener">Event</a></li>
+              </ul>
+            </div>
+          </div>
+          <div class="row faqPage" style="display: none;">
+            <div class="col-sm-6">
+              <p class="bottom-schema-heading">Schema.org's references:</p>
+              <ul class="bottom-schema-url">
+                <li><a href="https://schema.org/FAQPage" target="_blank" rel="noopener">FAQ Page</a></li>
+              </ul>
+            </div>
+            <div class="col-sm-6">
+              <p class="bottom-schema-heading">Google's documentation:</p>
+              <ul class="bottom-schema-url">
+                <li><a href="https://developers.google.com/search/docs/data-types/faqpage" target="_blank"
+                    rel="noopener">FAQ Page</a></li>
+              </ul>
+            </div>
+          </div>
+          <div class="row howTo" style="display: none;">
+            <div class="col-sm-6">
+              <p class="bottom-schema-heading">Schema.org's references:</p>
+              <ul class="bottom-schema-url">
+                <li><a href="https://schema.org/HowTo" target="_blank" rel="noopener">How-to</a></li>
+              </ul>
+            </div>
+            <div class="col-sm-6">
+              <p class="bottom-schema-heading">Google's documentation:</p>
+              <ul class="bottom-schema-url">
+                <li><a href="https://developers.google.com/search/docs/data-types/how-to" target="_blank"
+                    rel="noopener">How-to</a></li>
+              </ul>
+            </div>
+          </div>
+          <div class="row jobPosting" style="display: none;">
+            <div class="col-sm-6">
+              <p class="bottom-schema-heading">Schema.org's references:</p>
+              <ul class="bottom-schema-url">
+                <li><a href="https://schema.org/JobPosting" target="_blank" rel="noopener">Job Posting</a></li>
+              </ul>
+            </div>
+            <div class="col-sm-6">
+              <p class="bottom-schema-heading">Google's documentation:</p>
+              <ul class="bottom-schema-url">
+                <li><a href="https://developers.google.com/search/docs/data-types/job-posting" target="_blank"
+                    rel="noopener">Job Posting</a></li>
+              </ul>
+            </div>
+          </div>
+          <div class="row localBusiness" style="display: none;">
+            <div class="col-sm-6">
+              <p class="bottom-schema-heading">Schema.org's references:</p>
+              <ul class="bottom-schema-url">
+                <li><a href="https://schema.org/LocalBusiness" target="_blank" rel="noopener">Local Business</a></li>
+              </ul>
+            </div>
+            <div class="col-sm-6">
+              <p class="bottom-schema-heading">Google's documentation:</p>
+              <ul class="bottom-schema-url">
+                <li><a href="https://developers.google.com/search/docs/data-types/local-business" target="_blank"
+                    rel="noopener">Local Business</a></li>
+              </ul>
+            </div>
+          </div>
+          <div class="row organization" style="display: none;">
+            <div class="col-sm-6">
+              <p class="bottom-schema-heading">Schema.org's references:</p>
+              <ul class="bottom-schema-url">
+                <li><a href="https://schema.org/Organization" target="_blank" rel="noopener">Organization</a></li>
+              </ul>
+            </div>
+            <div class="col-sm-6">
+              <p class="bottom-schema-heading">Google's documentation:</p>
+              <ul class="bottom-schema-url">
+                <li><a href="https://developers.google.com/search/docs/data-types/logo" target="_blank"
+                    rel="noopener">Logo</a></li>
+                <li><a href="https://developers.google.com/search/docs/data-types/corporate-contacts" target="_blank"
+                    rel="noopener">Corporate Contacts</a></li>
+                <li><a href="https://developers.google.com/search/docs/data-types/social-profile" target="_blank"
+                    rel="noopener">Social Profile Links</a></li>
+              </ul>
+            </div>
+          </div>
+          <div class="row person" style="display: none;">
+            <div class="col-sm-6">
+              <p class="bottom-schema-heading">Schema.org's references:</p>
+              <ul class="bottom-schema-url">
+                <li><a href="https://schema.org/Person" target="_blank" rel="noopener">Person</a></li>
+              </ul>
+            </div>
+            <div class="col-sm-6">
+              <p class="bottom-schema-heading">Google's documentation:</p>
+              <ul class="bottom-schema-url">
+                <li><a href="https://developers.google.com/search/docs/data-types/social-profile" target="_blank"
+                    rel="noopener">Social Profile Links</a></li>
+              </ul>
+            </div>
+          </div>
+          <div class="row product" style="display: none;">
+            <div class="col-sm-6">
+              <p class="bottom-schema-heading">Schema.org's references:</p>
+              <ul class="bottom-schema-url">
+                <li><a href="https://schema.org/Product" target="_blank" rel="noopener">Product</a></li>
+                <li><a href="https://schema.org/Review" target="_blank" rel="noopener">Review</a></li>
+              </ul>
+            </div>
+            <div class="col-sm-6">
+              <p class="bottom-schema-heading">Google's documentation:</p>
+              <ul class="bottom-schema-url">
+                <li><a href="https://developers.google.com/search/docs/data-types/product" target="_blank"
+                    rel="noopener">Product</a></li>
+                <li><a href="https://developers.google.com/search/docs/data-types/review-snippet" target="_blank"
+                    rel="noopener">Review snippet</a></li>
+              </ul>
+            </div>
+          </div>
+          <div class="row recipe" style="display: none;">
+            <div class="col-sm-6">
+              <p class="bottom-schema-heading">Schema.org's references:</p>
+              <ul class="bottom-schema-url">
+                <li><a href="https://schema.org/Recipe" target="_blank" rel="noopener">Recipe</a></li>
+              </ul>
+            </div>
+            <div class="col-sm-6">
+              <p class="bottom-schema-heading">Google's documentation:</p>
+              <ul class="bottom-schema-url">
+                <li><a href="https://developers.google.com/search/docs/data-types/recipe" target="_blank"
+                    rel="noopener">Recipe</a></li>
+              </ul>
+            </div>
+          </div>
+          <div class="row video" style="display: none;">
+            <div class="col-sm-6">
+              <p class="bottom-schema-heading">Schema.org's references:</p>
+              <ul class="bottom-schema-url">
+                <li><a href="https://schema.org/VideoObject" target="_blank" rel="noopener">VideoObject</a></li>
+              </ul>
+            </div>
+            <div class="col-sm-6">
+              <p class="bottom-schema-heading">Google's documentation:</p>
+              <ul class="bottom-schema-url">
+                <li><a href="https://developers.google.com/search/docs/data-types/video" target="_blank"
+                    rel="noopener">Video</a></li>
+              </ul>
+            </div>
+          </div>
+          <div class="row webSite" style="display: none;">
+            <div class="col-sm-6">
+              <p class="bottom-schema-heading">Schema.org's references:</p>
+              <ul class="bottom-schema-url">
+                <li><a href="https://schema.org/WebSite" target="_blank" rel="noopener">WebSite</a></li>
+                <li><a href="https://schema.org/docs/actions.html" target="_blank" rel="noopener">potentialAction</a>
+                </li>
+              </ul>
+            </div>
+            <div class="col-sm-6">
+              <p class="bottom-schema-heading">Google's documentation:</p>
+              <ul class="bottom-schema-url">
+                <li><a href="https://developers.google.com/search/docs/data-types/sitelinks-searchbox" target="_blank"
+                    rel="noopener">Sitelinks Searchbox</a></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <div class="one-half" data-bind='if: schema'>
+          <div class="d-flex justify-content-end mb-2 icons">
+            <i class="fa-brands fa-google testJson" title="Test Json" onclick="toggleDropdown()"></i>
+            <div id="myDropdown" class="dropdown-content">
+              <form id='rich_result' method="post" target="_blank" action="https://search.google.com/test/rich-results">
+                <a onclick="richTestFunc()" class='d-flex justify-content-start'>
+                  <button type="submit" class="btn btn-defualt"><i class="fa-regular fa-star"></i>Rich Results Text
+                  </button>
+                </a>
+                <textarea name="code_snippet" id="snipt_area" class="d-none" cols="30" rows="10"></textarea>
+              </form>
+
+              <form id='data_tool' method="post" target="_blank" action="https://validator.schema.org">
+                <a onclick="richTestFunc()" class='d-flex justify-content-start'>
+                  <button type="submit" class="btn btn-defualt"><span class="px-1">{ }</span>Structured Data Testing
+                    Tool </button>
+                </a>
+                <textarea name="code" id="code_area" class="d-none" cols="30" rows="10"></textarea>
+              </form>
+            </div>
+            <i class="fa fa-copy copyJson" title="Copy Json"></i>
+            <i class="fa-solid fa-trash deleteJson" title="Reset"></i>
+
+          </div>
+          <form method="post" id="lbvalidate" target="_blank" action="">
+
+            <pre class="code" id="jsonCode" name="code" data-bind="text: jsonLD"></pre>
+          </form>
+          <form method="post" id="test" class="help" target="_blank" enctype="multipart/form-data" action="">
+
+            <pre class="code" name="code" data-bind="text: jsonLD" style="visibility:hidden;"></pre>
+          </form>
+        </div>
+      </div>
+    </div>
+
+  </div>
+  <template id="combo">
+    <select class='select_field' data-bind="options: choices, value: value, valueAllowUnset: true"
+      style='margin-top:5px'>
+  </template>
+
+  <template id="country">
+    <select
+      data-bind="options: choices, value: value, optionsText: 'countryName', optionsValue: 'countryCode', valueAllowUnset: true">
+  </template>
+
+  <template id="string">
+    <input class='form__field' type="text" data-bind="value: value" />
+  </template>
+
+  <template id="textbox">
+    <textarea type="text" data-bind="value: value, attr: {placeholder:placeholder}"></textarea>
+  </template>
+
+  <template id="defaultdiv">
+    <div class="defaultcode" type="text" data-bind="text: macro"></div>
+  </template>
+
+  <template id="businessHours">
+    <table>
+      <tbody>
+        <tr>
+          <th>Day</td>
+          <th>Opens</td>
+          <th>Closes</td>
+        </tr>
+        <tr>
+          <td>Monday</td>
+          <td><input class='form-control' data-bind="value: orgMonOpen" /></td>
+          <td><input class='form-control' data-bind="value: orgMonClose" /></td>
+        </tr>
+        <tr>
+          <td>Tuesday</td>
+          <td><input class='form-control' data-bind="value: orgTueOpen" /></td>
+          <td><input class='form-control' data-bind="value: orgTueClose" /></td>
+        </tr>
+        <tr>
+          <td>Wednesday</td>
+          <td><input class='form-control' data-bind="value: orgWedOpen" /></td>
+          <td><input class='form-control' data-bind="value: orgWedClose" /></td>
+        </tr>
+        <tr>
+          <td>Thursday</td>
+          <td><input class='form-control' data-bind="value: orgThuOpen" /></td>
+          <td><input class='form-control' data-bind="value: orgThuClose" /></td>
+        </tr>
+        <tr>
+          <td>Friday</td>
+          <td><input class='form-control' data-bind="value: orgFriOpen" /></td>
+          <td><input class='form-control' data-bind="value: orgFriClose" /></td>
+        </tr>
+        <tr>
+          <td>Saturday</td>
+          <td><input class='form-control' data-bind="value: orgSatOpen" /></td>
+          <td><input class='form-control' data-bind="value: orgSatClose" /></td>
+        </tr>
+        <tr>
+          <td>Sunday</td>
+          <td><input class='form-control' data-bind="value: orgSunOpen" /></td>
+          <td><input class='form-control' data-bind="value: orgSunClose" /></td>
+        </tr>
+      </tbody>
+    </table>
+  </template>
+
+  </article>
+  </main>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="modal fade" id="reset" tabindex="{-1}" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered modal-sm">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" />
+      </div>
+      <div class="modal-body p-0 ">
+        <div class="d-flex justify-content-center">
+          <h4 class="font-22 mb-3 modal_title">Clear all entries?</h4>
+        </div>
+        <div class="addMyWeb-body d-flex justify-content-center">
+          <button type="button" id="reset_btn" class="btn btn-prim btn-sm mb-3 ">
+            Reset
+          </button>
+          <button type="button" class="btn btn-prim btn-sm mb-3 mx-1 " data-bs-dismiss="modal" aria-label="Close">
+            Cancel
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endblock %}
+{% block extrascript %}
+<script src="{% static 'site_audit/js/schema_generator1.js'%}" id='jquery-core-js'></script>
+<script src="{% static 'site_audit/js/schema_generator2.js'%}" id='knockout-js'></script>
+<script src="{% static 'site_audit/js/schema_generator3.js'%}" id='json-tools-js'></script>
+<script src="{% static 'site_audit/js/schema_generator4.js'%}" id='gts-lighslider-js'></script>
+
+<!-- <script src="{% static 'stripe_payment_module/js/jquery_json1.js' %}" id='jquery-core-js'></script>
+<script src="{% static 'stripe_payment_module/js/jquery_json2.js' %}" id='knockout-js'></script>
+<script src="{% static 'stripe_payment_module/js/jquery_json3.js' %}" id='json-tools-js'></script>
+<script src="{% static 'stripe_payment_module/js/jquery_json4.js' %}" id='gts-lighslider-js'></script> -->
+
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
+<link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+
+<script src="{% static 'site_audit/libs/jquery/jquery.js' %}"></script>
+<!-- <script src="{% static 'site_audit/js/bootstrap.bundle.js' %}"></script> -->
+<script src="{% static 'site_audit/libs/jquery-ui-1.12.1/jquery-ui.js' %}"></script>
+<script>
+
+  function richTestFunc() {
+    var jsonData = $('#jsonCode').text(); // get the JSON code from the #jsonCode element
+    $('#snipt_area').val(jsonData)
+    $('#code_area').val(jsonData)
+
+    // send the JSON data as a POST request to the URL specified in the form's action attribute
+    $.ajax({
+      type: 'POST',
+      url: $('#rich_result').attr('action'),
+      data: jsonData,
+      success: function (response) {
+        // handle the response from the server (if any)
+        console.log(response);
+      },
+      error: function (xhr, status, error) {
+        // handle any errors that occur during the AJAX request
+        console.error(error);
+      }
+    })
+  }
+
+  $(document).on("change", ".form-select", function () {
+
+    $('.form__group').each(function () {
+      if ($(this).find('.select_field').val() || $(this).find('.form__field').val()) {
+        $(this).find('.form__label').css({
+          "position": "absolute",
+          "top": "0px",
+          "display": "block",
+          "transition": "all 0.2s ease 0s",
+          "font-size": "14px",
+          "color": "#707070",
+          "font-weight": "500",
+          "cursor": "pointer"
+        });
+      }
+
+    })
+    var current_schema = $(this).find(":selected").text()
+    const schemaClasses = {
+      'Article': '.article',
+      'Breadcrumb': '.breadcrumb',
+      'Event': '.event',
+      'FAQ Page': '.faqPage',
+      'How-to': '.howTo',
+      'Job Posting': '.jobPosting',
+      'LocalBusiness': '.localBusiness',
+      'Organization': '.organization',
+      'Person': '.person',
+      'Product': '.product',
+      "Recipe": '.recipe',
+      "Video": '.video',
+      "Website": '.webSite',
+    };
+
+    // hide all elements by default
+    $('.article, .breadcrumb, .event, .faqPage, .howTo, .jobPosting, .localBusiness ,.organization, .person,  .product,.recipe, .video, .webSite ').hide();
+
+    if (current_schema in schemaClasses) {
+      const selector = schemaClasses[current_schema];
+      $(selector).show();
+    }
+    $("#select_head").text(current_schema)
+    var initialJsonLD = document.getElementById("jsonCode").innerText.trim();
+    var initialJsonLDTest = document.querySelector("#test pre").innerText.trim();
+    setTimeout(() => {
+      const invalidInputs = new Set();
+      $(".one-half.first tbody tr").each((i, val) => {
+        const labell = $(val).find("label");
+        if (/url/i.test(labell.text())) {
+          const input = $(val).find("input");
+          if (input.length) {
+            input.attr("type", "url");
+          }
+        }
+
+        const label = $(val).find("label");
+        const input = $(val).find("input");
+        if (input.length) {
+          const type = input.attr("type");
+          if (type === "url") {
+            input.on("input", function () {
+              const value = $(this).val();
+              if (!value) { // value is empty
+                invalidInputs.delete(this);
+                $(this).siblings(".error-message").remove();
+                label.removeClass("form__label--invalid"); // remove the invalid class
+              } else {
+                if (/video\s+(image|file|embed)\s+url/i.test(label.text())) {
+                  const videoUrlRegex = /^(ftp|http|https):\/\/[^ "]+\.(mp4|avi|mov|wmv|flv|mkv)$/i; // matches URLs with vedio  extension
+                  if (!videoUrlRegex.test(value)) {
+                    if (!invalidInputs.has(this)) {
+                      invalidInputs.add(this);
+                      const errorMessage = $("<span>").addClass("error-message").text("Invalid URL  (only vedio extension files allowed)");
+                      $(this).after(errorMessage);
+                      label.addClass("form__label--invalid"); // add the invalid class
+                    }
+                  } else {
+                    invalidInputs.delete(this);
+                    $(this).siblings(".error-message").remove();
+                    label.removeClass("form__label--invalid"); // remove the invalid class
+                  }
+                } else {
+                  const urlRegex = /^(ftp|http|https):\/\/[^ "]+$/;
+                  if (!urlRegex.test(value)) {
+                    if (!invalidInputs.has(this)) {
+                      invalidInputs.add(this);
+                      const errorMessage = $("<span>").addClass("error-message").text("Invalid URL");
+                      $(this).after(errorMessage);
+                      label.addClass("form__label--invalid"); // add the invalid class
+                    }
+                  } else {
+                    invalidInputs.delete(this);
+                    $(this).siblings(".error-message").remove();
+                    label.removeClass("form__label--invalid"); // remove the invalid class
+                  }
+                }
+              }
+            });
+          }
+
+          const label2 = $(val).find("label");
+          if (/email/i.test(label2.text())) {
+            const input = $(val).find("input");
+            if (input.length) {
+              input.attr("type", "email");
+              input.on("input", function () {
+                const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                const value = $(this).val();
+                if (!emailRegex.test(value)) {
+                  if (!invalidInputs.has(this)) {
+                    invalidInputs.add(this);
+                    const errorMessage = $("<span>").addClass("error-message").text("Please enter a valid email");
+                    $(this).after(errorMessage);
+                  }
+                } else {
+                  invalidInputs.delete(this);
+                  $(this).siblings(".error-message").remove();
+                }
+              });
+            } else {
+              invalidInputs.delete(this);
+              $(this).siblings(".error-message").remove();
+            }
+          }
+        }
+
+        const label3 = $(val).find("label");
+        if (/date/i.test(label3.text())) {
+          const input3 = $(val).find("input");
+          if (input3.length) {
+            input3.attr("type", "text");
+
+            input3.on("focus", function () {
+              if (input3.attr("type") == "text") {
+                input3.datepicker({
+                  onClose: function () {
+                    // Trigger click event on the input element
+                    input3.trigger("click");
+                    $(this).datepicker("destroy");
+                  }
+                }).datepicker("show");
+              }
+            });
+
+            // if (input3.attr("type") == "text") {
+            //   label3.css("top", "0px");
+            // }
+
+            input3.on("input", function () {
+              if (input3.attr("type") == "text") {
+                label3.css("top", "0px");
+              }
+            });
+          }
+        }
+
+        $('label.form__label').each(function () {
+          if ($(this).text().toLowerCase().includes('type')) {
+            var selectEl = $(this).siblings('div').find('select');
+            selectEl.prop('selectedIndex', 0) // set selected index to 0
+              .attr('required', 'required')
+              .click(); // trigger click event on the select element
+            $(this).attr('for', 'required');
+            $(this).closest('.form__group').find('.form__label').css({
+              'position': 'absolute',
+              'top': 0,
+              'display': 'block',
+              'transition': '0.2s',
+              'font-size': '14px',
+              'color': 'rgb(26,35,126)',
+              'font-weight': '500',
+              "cursor": "pointer"
+            });
+          }
+        });
+
+        $(val).find("label").attr("for", i)
+        if ($(val).find("input")) {
+          $(val).find("input").attr("id", i)
+        }
+        // else if ($(val).find("select").length) {
+        //   $(val).find("select").attr("id", i)
+        // }
+        if ($(val).find("select").length) {
+          const select = $(val).find("select");
+          select.attr("id", i);
+        }
+
+      })
+    }, 100);
+    setTimeout(function () {
+      //  $(".form__group field").find('.label_inputs').css('border', '1px solid red');
+      $(document).on('input change click focus keyup', '.form__group select, .form__group .form__field', function () {
+        var inputVal = $(this).val();
+        if (inputVal) {
+          $(this).closest('.form__group').find('.form__label').css({
+            'position': 'absolute',
+            'top': 0,
+            'display': 'block',
+            'transition': '0.2s',
+            'font-size': '14px',
+            'color': 'rgb(26,35,126)',
+            'font-weight': '500',
+            "cursor": "pointer"
+          });
+        } else {
+          $(this).closest('.form__group').find('.form__label').css({
+            'position': 'absolute',
+            'top': "0px",
+            'display': 'block',
+            'transition': '0.2s',
+            'font-size': '14px',
+            'color': 'rgb(26, 35, 126)',
+            "font-weight": "500",
+            "cursor": "pointer"
+          });
+        }
+      });
+      $(document).on('click', '#reset_btn', function () {
+        $('.form__field').val('');
+        $(".select_field").val('');
+        document.getElementById("lbvalidate").reset();
+        document.getElementById("test").reset();
+        document.getElementById("jsonCode").innerText = initialJsonLD;
+        document.querySelector("#test pre").innerText = initialJsonLDTest;
+        $(".error-message").remove();
+        $('.form__group').each(function () {
+          var inputType = $(this).find('.form__field').attr('type');
+          if (inputType !== 'date') {
+            $(this).find('.form__label').css({
+              "position": "absolute",
+              "top": "20px",
+              "display": "block",
+              "transition": "all 0.2s ease 0s",
+              "font-size": "14px",
+              "color": "#707070",
+              "font-weight": "500",
+              "cursor": "pointer"
+            });
+            $(this).find('.form__label').removeClass("form__label--invalid")
+          } else {
+            $(this).find('.form__label').removeAttr('style');
+            // $(this).find(".form__label--invalid").removeAttr('style');
+            $(this).find('.form__label').css({
+              "position": "absolute",
+              "top": "0px",
+              "display": "block",
+              "transition": "all 0.2s ease 0s",
+              "font-size": "14px",
+              "color": "#707070",
+              "font-weight": "500",
+              "cursor": "pointer"
+            });
+          }
+        });
+      });
+
+    }, 1000);
+  })
+  jQuery(function ($) {
+    $(document).ready(function () {
+      schemas.sort(function (a, b) {
+        return a.title.localeCompare(b.title);
+      });
+      ko.applyBindings(new ViewModelPage(schemas));
+      $('#ko-ready').show();
+    });
+
+  });
+
+  $("#select_1").on('change', function () {
+    $(".panel2").css('display', 'block')
+  })
+  $(document).on('click', '.copyJson', function () {
+    ShowNoty('Json-LD copied to clipboard', 'success')
+    let json = $('#jsonCode').text();
+    navigator.clipboard.writeText(json)
+  })
+
+  function toggleDropdown() {
+    var dropdown = document.getElementById("myDropdown");
+    dropdown.classList.toggle("show");
+  }
+
+  window.onclick = function (event) {
+    if (!event.target.matches('.fa-google')) {
+      var dropdowns = document.getElementsByClassName("dropdown-content");
+      for (var i = 0; i < dropdowns.length; i++) {
+        var openDropdown = dropdowns[i];
+        if (openDropdown.classList.contains('show')) {
+          openDropdown.classList.remove('show');
+        }
+      }
+    }
+  }
+
+</script>
+{% endblock %}

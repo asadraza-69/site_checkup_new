@@ -1,0 +1,2539 @@
+{% extends "base2.html" %}
+{% load static %}
+{% block extrahead %}
+<link href="https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/0.8.2/css/flag-icon.min.css" rel="stylesheet" />
+<script src="https://cdn.jsdelivr.net/gh/google/code-prettify@master/loader/run_prettify.js"></script>
+<link type='text/css' rel="stylesheet" href="{% static 'site_audit/css/dashboard2.css' %}">
+<style>
+    .health_mobile_spinner.hello {
+        position: relative;
+        top: 50%;
+        left: 50%;
+        transform: translate(-3%, -50%);
+        z-index: 9;
+    }
+
+    .domain-name {
+        font-size: 18px;
+    }
+
+    #strong {
+        display: none;
+        font-weight: 600;
+    }
+
+    .mt-95 {
+        margin-top: 95px;
+    }
+
+    .accordionSummaryWrapper {
+        height: 350px;
+        overflow-y: scroll;
+        overflow-x: hidden;
+    }
+
+
+    .p_spinner_cls {
+        display: none;
+    }
+
+    #donut_spinner {
+        position: absolute;
+        top: 45%;
+        left: 45%;
+        /* transform: translate(-50%, -50%); */
+    }
+
+    #imagesCount_spinner {
+        position: absolute;
+        top: 53%;
+        left: 45%;
+    }
+
+    .image-data {
+        padding-top: 570%
+    }
+
+    a.font-12.accordionLink.text-elipses {
+        display: inherit;
+    }
+
+    .multiColorProgress.text-center.my-4.position-relative {
+        min-height: 322px;
+    }
+
+
+    .no-data {
+        position: absolute;
+        top: 50%;
+        left: 27%;
+    }
+
+    .p_spinner {
+        margin-right: 20px;
+        margin-left: 20px;
+    }
+
+    .percent_spinner {
+        position: absolute;
+
+    }
+
+    .strongOne {
+        font-weight: 600;
+        color: rgb(251, 124, 56);
+        margin: 0px 3px;
+    }
+
+    .strongTwo {
+        font-weight: 600;
+        color: rgb(207, 19, 34);
+        margin: 0px 3px;
+    }
+
+    .strongCore {
+        font-weight: 600;
+        margin: 0px 3px;
+        color: #2f54eb;
+    }
+
+    #pages_circle {
+        display: none;
+    }
+
+    #donutchart>div>div {
+        width: 0px !important;
+        height: 0 !important;
+        position: static !important;
+    }
+
+    /* #mainChart{
+    display: inline !important;
+  } */
+    .round {
+        height: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .custom-font {
+        font-size: 12px;
+        font-weight: 500;
+    }
+
+    .imagesCount_spinner {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin: 0 auto;
+        height: 3vh;
+    }
+
+    .box1 .percent1 .number1 {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        color: #111;
+    }
+
+    .box1 .percent1 .number1 h2 {
+        font-size: 35px;
+        letter-spacing: -3px;
+        color: #707070;
+        position: absolute;
+        top: 46px !important;
+        /* left: 72px!important; */
+    }
+
+    button.btn.btn-primary.text-capitalize.d-flex.align-items-center.gap-2.cls {
+        border-color: transparent;
+        box-shadow: 0 2px 5px 0 rgb(0 0 0 / 20%), 0 2px 10px 0 rgb(0 0 0 / 10%);
+    }
+
+    .chartRelative {
+        position: relative;
+    }
+
+    .absolute-center {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+    }
+
+    .text-center {
+        text-align: center;
+    }
+
+    #scoreDonutChart {
+        font-size: 30px;
+        font-weight: 600;
+    }
+
+    .custom-card {
+        padding: 5px;
+    }
+
+    button.btn.btn-primary.text-capitalize.d-flex.align-items-center.gap-2.cls:hover {
+        box-shadow: 0 4px 10px 0 rgb(0 0 0 / 20%), 0 4px 20px 0 rgb(0 0 0 / 10%);
+    }
+
+    .consoleErrorList li {
+        background: #dde2e3ad;
+    }
+
+    .UnminifiedCssList li,
+    .MinifiedCssList li,
+    .MinifiedCssListThirdParty li {
+        background: #dde2e3ad;
+    }
+
+
+    .border_bottom_modal {
+        border-bottom: 2px solid #dde2e3ad
+    }
+
+    .tb_loader {
+        position: absolute;
+        z-index: 999;
+        margin: 3% 40%;
+    }
+
+    .tb_loader_bottom {
+        position: absolute;
+        z-index: 999;
+        margin: 3% 40%;
+    }
+
+    .progress-sec.sts {
+
+        box-shadow: 0 7px 14px 0 rgba(65, 69, 88, 0.1), 0 3px 6px 0 rgba(0, 0, 0, 0.07);
+    }
+
+    .btn-outline-danger,
+    .btn-outline-danger:hover {
+        border: 2px solid #eb4335 !important;
+        color: #eb4335 !important;
+        box-shadow: 0 7px 14px 0 rgb(65 69 88 / 41%), 0 3px 6px 0 rgb(0 0 0 / 7%) !important;
+        background-color: #d5666638 !important;
+    }
+
+    .btn-outline-success,
+    .btn-outline-success:hover {
+        border: 2px solid rgb(0, 172, 69) !important;
+        color: rgb(0, 172, 69) !important;
+        box-shadow: 0 7px 14px 0 rgb(65 69 88 / 41%), 0 3px 6px 0 rgb(0 0 0 / 7%) !important;
+        background-color: rgb(223, 254, 236) !important
+    }
+
+    .progress {
+        height: 4px;
+        font-size: .75rem;
+        background-color: #fff;
+        border-radius: 0.25rem;
+        box-shadow: 0 7px 14px 0 rgba(65, 69, 88, 0.1), 0 3px 6px 0 rgba(0, 0, 0, 0.07);
+
+    }
+
+
+    .status-count {
+        display: flex;
+        gap: 5px;
+    }
+
+    #pie-chartt {
+        max-width: 245px;
+    }
+
+    @media (max-width:767.5px) {
+        .mobile_chartt {
+            padding-top: 15px
+        }
+
+        .custom-gap {
+            gap: 16px;
+        }
+
+        .no-data {
+            left: 38%;
+        }
+
+
+    }
+
+    @media (min-width: 767.5px) and (max-width:1199px) {
+        .no-data {
+            left: 42%;
+        }
+
+    }
+
+    @media (max-width:1199px) {
+        #imagesCount_spinner {
+            left: 49%;
+        }
+
+        .seoWebAudit {
+            padding-top: 9%
+        }
+
+        .accordianArrow {
+            float: right !important;
+        }
+
+        button.btn.btn-primary.text-capitalize.d-flex.align-items-center.gap-2.cls {
+            float: right;
+        }
+
+    }
+
+    .card_box {
+        box-shadow: 0 7px 14px 0 rgb(65 69 88 / 41%), 0 3px 6px 0 rgb(0 0 0 / 7%) !important;
+        min-height: 352px;
+        border-radius: 0px !important;
+        background-color: #f3f5f7 !important;
+    }
+
+    .scrollbartab {
+        height: 180px;
+        overflow-y: auto;
+        overflow-x: hidden;
+    }
+
+
+    /* .rangeSliderMain{
+        width: 100px!important;
+    } */
+</style>
+{% endblock %}
+<!-- <body style="background-color: #666666;"> -->
+{% block content %}
+<!-- popup -->
+<!-- Button trigger modal -->
+
+<input type="hidden" id="authenticUser" value="{{ request.user.is_authenticated }}">
+<input type="hidden" name="website_url" id="inptvalue" />
+<!-- project list start -->
+
+<div class="container">
+    <!-- Crawler Heading Section  -->
+
+    <div class="row">
+        <div class="col-xl-9">
+            <h2 class="title red fw-400 mb-md-3 pb-2">Project - <span id='current_project'> </span> </h2>
+            <p class="text-black fw-400 p-0 font-12 mb-3">Core Vitals are now a part of Google’s search algorithm and
+                can
+                positively
+                or negatively impact your
+                keyword rankings. Low Core Vitals scores can also negatively impact your visitors’ overall
+                experience on your website. Google has assigned different weights (i.e. importance) to each Core
+                Vital metric.</p>
+            <!-- Spider SVG Animated Start-->
+
+            <div class="crawler-spider mb-3">
+                <div class="battery-spider mb-lg-1">
+                    <div class="battery-spider-inner">
+                        <img src="{%static '/site_audit/assets/spider-active.svg' %}" alt="" id='spider_img'
+                            data-move='' />
+
+                        <span></span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Spider SVG Animated End-->
+            <div class="mb-2  d">
+                <div class="row ">
+                    <div class="col-xl-9 col-md-8 pe-md-0">
+                        <!-- Spider Progress Bar Start -->
+                        <div class="crawler-progress">
+                            <div class="battery-outer">
+                                <div class="battery-inner">
+                                    <span class="lines"></span>
+                                    <span class="lines"></span>
+                                    <span class="lines"></span>
+                                    <span class="lines"></span>
+                                    <span class="lines"></span>
+                                </div>
+                                <div class="battery-inner">
+                                    <span class="lines"></span>
+                                    <span class="lines"></span>
+                                    <span class="lines"></span>
+                                    <span class="lines"></span>
+                                    <span class="lines"></span>
+                                </div>
+                                <div class="battery-inner">
+                                    <span class="lines"></span>
+                                    <span class="lines"></span>
+                                    <span class="lines"></span>
+                                    <span class="lines"></span>
+                                    <span class="lines"></span>
+                                </div>
+                                <div class="battery-inner">
+                                    <span class="lines"></span>
+                                    <span class="lines"></span>
+                                    <span class="lines"></span>
+                                    <span class="lines"></span>
+                                    <span class="lines"></span>
+                                </div>
+                                <div class="battery-inner">
+                                    <span class="lines"></span>
+                                    <span class="lines"></span>
+                                    <span class="lines"></span>
+                                    <span class="lines"></span>
+                                    <span class="lines"></span>
+                                </div>
+                                <div class="battery-inner">
+                                    <span class="lines"></span>
+                                    <span class="lines"></span>
+                                    <span class="lines"></span>
+                                    <span class="lines"></span>
+                                    <span class="lines"></span>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Spider Progress Bar End -->
+                    </div>
+                    <!-- Circular Progress Bar Start  -->
+
+                    <div class="col-xl-3 col-md-4  mt-lg-0 ">
+                        <div id="tb_loader" class="round">
+                            <div class="d-flex justify-content-center align-items-center ">
+                                <div class="spinner-border" role="status">
+                                    <span class="visually-hidden">Loading...</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div id="pages_circle">
+                            <div class="text-center health-score">
+                                <div class="p-relative mobile_chartt">
+                                    <div class="box box1 ">
+                                        <div class="percent  percent1 crawled">
+
+                                            <div class="number number1">
+                                                <h2 id="percentage_count" class="m-0">-<span></span></h2>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="pages_crawled_circle"></div>
+                                    <div class="status-btn-main crawled">
+                                        <button class="status-btn text-white b-none">
+                                            <span id="total-crawler-page">-</span>/<span id="total-web-page">-</span>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <h4 class="font-16 text-center progrs-txt text-gray ">Pages Crawled</h4>
+                            <p class="text-gray text-center m-0 custom-font ">Issues Found: 30-jan-2022</p>
+                        </div>
+                    </div>
+
+                    <!-- Circular Progress Bar End  -->
+                </div>
+            </div>
+            <!-- Core Vital Heading Paragraph Start -->
+            <h2 class="title fw-400 mb-3 ps-md-0  ms-md-0 pb-2">Core Vitals </h2>
+
+            <p class="text-black font-12 fw-400 p-md-0 mb-4">Core Vitals are now a part of Google’s
+                search
+                algorithm and
+                can
+                positively or negatively impact your keyword rankings. Low Core Vitals scores can also
+                negatively impact your visitors’ overall experience on your website. Google has assigned
+                different weights (i.e. importance) to each Core Vital metric. That said, if you score
+                very
+                bad for any Core Vital it is always going to be a top priority to fix even if it isn’t
+                the
+                most important Core Vital.</p>
+
+            <!-- Core Vital Heading Paragraph End -->
+
+            <div class="coreVital_categorize">
+                <div class="row">
+                    <div class="col-xl-6">
+                        <p class="vital_title text-gray mb-3" id="domain-title_main">
+                            <span class="domain-title vital_title d-flex flex-wrap " id="domain-title">
+                                <div id="tb_loader_new" style="display: none;" class="round">
+                                    <div class="d-flex justify-content-center align-items-center ">
+                                        <div class="spinner-border" role="status">
+                                            <span class="visually-hidden">Loading...</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </span>
+                        </p>
+                    </div>
+                    <div class="col-xl-6">
+
+                        <div class="vital_title d-flex align-items-center text-gray mt-5 mt-lg-0 mb-3"><span
+                                class="metrics__title me-1 d-inline-block">Overview :</span>
+                            <div class="metric-info mr-2">
+                                <span class=" metrics-info__value metrics-info__static-value-overview  strong"
+                                    id="strong"></span>
+
+                                <div class="spinner-border text-primary spinner-border-sm" id="overview_spinner"
+                                    role="status">
+                                    <span class="visually-hidden">Loading...</span>
+                                </div><span class="metrics-info__static-value ">/100</span>
+                            </div>
+
+                            <div class="overview mx-3" id="circle-a">
+
+                            </div>
+                            <div> |
+                                <span class="metrics-info__status ml-4" id="si_status_overview"></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-6 mt-5">
+
+                        <div class="vital_resultBar bg-light-green w-100 py-2 px-3 mb-4 fcp_bar">
+                            <div class="left-side">
+                                <span class="vital-resultSeconds text-gray font-13">
+                                    First Contentful Paint : <var class=" font-13  p_spinner_cls" id="fcp"></var>
+                                    <div class="spinner-border text-primary spinner-border-sm  p_spinner mt-1 mr-1"
+                                        role="status">
+                                        <span class="visually-hidden">Loading...</span>
+                                    </div>
+                                </span>
+                                <span class="vital_resultName font-12" id="fcp_status"></span>
+                            </div>
+                            <span class="vital-toltp">
+                                <a href="#" class="tooltp mb-3 font-18" data-bs-placement="right"
+                                    data-bs-toggle="tooltip" title=""
+                                    data-bs-original-title="More than half of all website traffic comes from mobile phones so it is very important your website loads fast. We review your website's speed daily and will alert you if we find any issues."
+                                    aria-label="More than half of all website traffic comes from mobile phones so it is very important your website loads fast. We review your website's speed daily and will alert you if we find any issues."><i
+                                        class="far fa-question-circle"></i></a>
+                            </span>
+
+                        </div>
+
+                        <div class="p_spinner_cls rangeSliderMain ">
+                            <div class="rangeSeconds">
+                                <span class="range LessThan text-gray font-12 me-4">Less than 1.8
+                                    sec</span>
+                                <span class="range greaterThan text-gray font-12">Over 3 sec</span>
+                            </div>
+                            <div class="rangeSlider" id="rangeSlider">
+                                <div id="tooltipTitle_fcp" data-bs-toggle="tooltip" data-bs-placement="right" title=""
+                                    class="indicator indicator_FCP slider-circle">
+                                </div>
+
+                                <div class="fast-main">
+                                    <div class="fast-status">
+                                        <div class="battery-inner1 bg-green"></div>
+                                        <div class="battery-inner1 bg-green"></div>
+                                        <div class="battery-inner1 bg-green"></div>
+                                        <div class="battery-inner1 bg-green"></div>
+                                        <div class="battery-inner1 bg-green"></div>
+                                        <div class="battery-inner1 bg-green"></div>
+                                    </div>
+                                    <span class="status-name font-13 text-black">Fast</span>
+                                </div>
+
+                                <div class="moderate-main">
+                                    <div class="moderate-status">
+                                        <div class="battery-inner1 bg-yellow"></div>
+                                        <div class="battery-inner1 bg-yellow"></div>
+                                        <div class="battery-inner1 bg-yellow"></div>
+                                        <div class="battery-inner1 bg-yellow"></div>
+                                        <div class="battery-inner1 bg-light-orange"></div>
+                                        <div class="battery-inner1 bg-light-orange"></div>
+                                        <div class="battery-inner1 bg-light-orange"></div>
+                                        <div class="battery-inner1 bg-light-orange"></div>
+                                    </div>
+                                    <span class="status-name font-13 text-black">Moderate</span>
+                                </div>
+
+                                <div class="slow-main">
+                                    <div class="slow-status">
+                                        <div class="battery-inner1 bg-red"></div>
+                                        <div class="battery-inner1 bg-red"></div>
+                                        <div class="battery-inner1 bg-red"></div>
+                                        <div class="battery-inner1 bg-red"></div>
+                                        <div class="battery-inner1 bg-dark-red"></div>
+                                        <div class="battery-inner1 bg-mehroon"></div>
+                                        <div class="battery-inner1 bg-mehroon"></div>
+                                    </div>
+                                    <span class="status-name font-13 text-black">Slow</span>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-6 mt-5">
+                        <div class="vital_resultBar bg-light-green w-100 py-2 px-3 mb-4 tbt_bar">
+                            <div class="left-side">
+                                <span class="vital-resultSeconds text-gray font-13">
+                                    Total Blocking Time : <var class="font-13  p_spinner_cls" id="tbt"></var>
+                                    <div class="spinner-border text-primary spinner-border-sm  p_spinner mt-1 mr-1"
+                                        role="status">
+                                        <span class="visually-hidden">Loading...</span>
+                                    </div>
+                                </span>
+                                <span class="vital_resultName font-12" id="tbt_status"></span>
+                            </div>
+                            <span class="vital-toltp">
+                                <a href="#" class="tooltp mb-3 font-18" data-bs-placement="right"
+                                    data-bs-toggle="tooltip" title=""
+                                    data-bs-original-title="More than half of all website traffic comes from mobile phones so it is very important your website loads fast. We review your website's speed daily and will alert you if we find any issues."
+                                    aria-label="More than half of all website traffic comes from mobile phones so it is very important your website loads fast. We review your website's speed daily and will alert you if we find any issues."><i
+                                        class="far fa-question-circle"></i></a>
+                            </span>
+                        </div>
+
+                        <div class="p_spinner_cls rangeSliderMain">
+                            <div class="rangeSeconds">
+                                <span class="range LessThan text-gray font-12 me-4">Less than 200
+                                    ms</span>
+                                <span class="range greaterThan text-gray font-12">Over 600 ms</span>
+                            </div>
+
+                            <div class="rangeSlider" id="rangeSlider">
+
+                                <div id="tooltipTitle_tbt" data-bs-toggle="tooltip" data-bs-placement="right" title=""
+                                    class="indicator indicator_TBT slider-circle">
+                                </div>
+
+
+                                <div class="fast-main">
+                                    <div class="fast-status">
+                                        <div class="battery-inner1 bg-green"></div>
+                                        <div class="battery-inner1 bg-green"></div>
+                                        <div class="battery-inner1 bg-green"></div>
+                                        <div class="battery-inner1 bg-green"></div>
+                                        <div class="battery-inner1 bg-green"></div>
+                                        <div class="battery-inner1 bg-green"></div>
+                                    </div>
+                                    <span class="status-name font-13 text-black">Fast</span>
+                                </div>
+
+                                <div class="moderate-main">
+                                    <div class="moderate-status">
+                                        <div class="battery-inner1 bg-yellow"></div>
+                                        <div class="battery-inner1 bg-yellow"></div>
+                                        <div class="battery-inner1 bg-yellow"></div>
+                                        <div class="battery-inner1 bg-yellow"></div>
+                                        <div class="battery-inner1 bg-light-orange"></div>
+                                        <div class="battery-inner1 bg-light-orange"></div>
+                                        <div class="battery-inner1 bg-light-orange"></div>
+                                        <div class="battery-inner1 bg-light-orange"></div>
+                                    </div>
+                                    <span class="status-name font-13 text-black">Moderate</span>
+                                </div>
+
+                                <div class="slow-main">
+                                    <div class="slow-status">
+                                        <div class="battery-inner1 bg-red"></div>
+                                        <div class="battery-inner1 bg-red"></div>
+                                        <div class="battery-inner1 bg-red"></div>
+                                        <div class="battery-inner1 bg-red"></div>
+                                        <div class="battery-inner1 bg-dark-red"></div>
+                                        <div class="battery-inner1 bg-mehroon"></div>
+                                        <div class="battery-inner1 bg-mehroon"></div>
+                                    </div>
+                                    <span class="status-name font-13 text-black">Slow</span>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-6 mt-5">
+                        <div class="vital_resultBar bg-light-green w-100 py-2 px-3 mb-4 lcp_bar">
+                            <div class="left-side">
+                                <span class="vital-resultSeconds text-gray font-13">
+                                    Largest Contentful Paint : <var class=" font-13  p_spinner_cls" id="lcp"></var>
+                                    <div class="spinner-border text-primary spinner-border-sm  p_spinner mt-1 mr-1"
+                                        role="status">
+                                        <span class="visually-hidden">Loading...</span>
+                                    </div>
+                                </span>
+                                <span class="vital_resultName  font-12" id="lcp_status"></span>
+                            </div>
+                            <span class="vital-toltp">
+                                <a href="#" class="tooltp mb-3 font-18" data-bs-placement="right"
+                                    data-bs-toggle="tooltip" title=""
+                                    data-bs-original-title="More than half of all website traffic comes from mobile phones so it is very important your website loads fast. We review your website's speed daily and will alert you if we find any issues."
+                                    aria-label="More than half of all website traffic comes from mobile phones so it is very important your website loads fast. We review your website's speed daily and will alert you if we find any issues."><i
+                                        class="far fa-question-circle"></i></a>
+                            </span>
+                        </div>
+
+                        <div class="p_spinner_cls rangeSliderMain">
+                            <div class="rangeSeconds">
+                                <span class="range LessThan text-gray font-12 me-4">Less than 2500 ms
+                                    sec</span>
+                                <span class="range greaterThan text-gray font-12">Over 4000 ms</span>
+                            </div>
+                            <div class="rangeSlider" id="rangeSlider">
+
+                                <div id="tooltipTitle_lcp" data-bs-toggle="tooltip" data-bs-placement="right" title=""
+                                    class="indicator indicator_LCP slider-circle">
+                                </div>
+                                <div class="fast-main">
+                                    <div class="fast-status">
+                                        <div class="battery-inner1 bg-green"></div>
+                                        <div class="battery-inner1 bg-green"></div>
+                                        <div class="battery-inner1 bg-green"></div>
+                                        <div class="battery-inner1 bg-green"></div>
+                                        <div class="battery-inner1 bg-green"></div>
+                                        <div class="battery-inner1 bg-green"></div>
+                                    </div>
+                                    <span class="status-name font-13 text-black">Fast</span>
+                                </div>
+
+                                <div class="moderate-main">
+                                    <div class="moderate-status">
+                                        <div class="battery-inner1 bg-yellow"></div>
+                                        <div class="battery-inner1 bg-yellow"></div>
+                                        <div class="battery-inner1 bg-yellow"></div>
+                                        <div class="battery-inner1 bg-yellow"></div>
+                                        <div class="battery-inner1 bg-light-orange"></div>
+                                        <div class="battery-inner1 bg-light-orange"></div>
+                                        <div class="battery-inner1 bg-light-orange"></div>
+                                        <div class="battery-inner1 bg-light-orange"></div>
+                                    </div>
+                                    <span class="status-name font-13 text-black">Moderate</span>
+                                </div>
+
+                                <div class="slow-main">
+                                    <div class="slow-status">
+                                        <div class="battery-inner1 bg-red"></div>
+                                        <div class="battery-inner1 bg-red"></div>
+                                        <div class="battery-inner1 bg-red"></div>
+                                        <div class="battery-inner1 bg-red"></div>
+                                        <div class="battery-inner1 bg-dark-red"></div>
+                                        <div class="battery-inner1 bg-mehroon"></div>
+                                        <div class="battery-inner1 bg-mehroon"></div>
+                                    </div>
+                                    <span class="status-name font-13 text-black">Slow</span>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-6 mt-5">
+                        <div class="vital_resultBar bg-light-green  w-100 py-2 px-3 mb-4 speed_ind_bar">
+                            <div class="left-side">
+                                <span class="vital-resultSeconds text-gray font-13">
+                                    Speed Index : <var class="font-13  p_spinner_cls" id="si"> </var>
+                                    <div class="spinner-border text-primary spinner-border-sm  p_spinner mt-1 mr-1"
+                                        role="status">
+                                        <span class="visually-hidden">Loading...</span>
+                                    </div>
+                                </span>
+                                <span class="vital_resultName  font-12" id="si_status"></span>
+                            </div>
+                            <span class="vital-toltp">
+                                <a href="#" class="tooltp mb-3 font-18" data-bs-placement="right"
+                                    data-bs-toggle="tooltip" title=""
+                                    data-bs-original-title="More than half of all website traffic comes from mobile phones so it is very important your website loads fast. We review your website's speed daily and will alert you if we find any issues."
+                                    aria-label="More than half of all website traffic comes from mobile phones so it is very important your website loads fast. We review your website's speed daily and will alert you if we find any issues."><i
+                                        class="far fa-question-circle"></i></a>
+                            </span>
+                        </div>
+
+                        <div class="p_spinner_cls rangeSliderMain">
+                            <div class="rangeSeconds">
+                                <span class="range LessThan text-gray font-12 me-4">Less than
+                                    3.4 sec</span>
+                                <span class="range greaterThan text-gray font-12">Over 5.8 sec</span>
+                            </div>
+                            <div class="rangeSlider" id="rangeSlider">
+
+                                <div id="tooltipTitle_si" data-bs-toggle="tooltip" data-bs-placement="right" title=""
+                                    class="indicator indicator_SI slider-circle">
+                                </div>
+
+                                <div class="fast-main">
+                                    <div class="fast-status">
+                                        <div class="battery-inner1 bg-green"></div>
+                                        <div class="battery-inner1 bg-green"></div>
+                                        <div class="battery-inner1 bg-green"></div>
+                                        <div class="battery-inner1 bg-green"></div>
+                                        <div class="battery-inner1 bg-green"></div>
+                                        <div class="battery-inner1 bg-green"></div>
+                                    </div>
+                                    <span class="status-name font-13 text-black">Fast</span>
+                                </div>
+
+                                <div class="moderate-main">
+                                    <div class="moderate-status">
+                                        <div class="battery-inner1 bg-yellow"></div>
+                                        <div class="battery-inner1 bg-yellow"></div>
+                                        <div class="battery-inner1 bg-yellow"></div>
+                                        <div class="battery-inner1 bg-yellow"></div>
+                                        <div class="battery-inner1 bg-light-orange"></div>
+                                        <div class="battery-inner1 bg-light-orange"></div>
+                                        <div class="battery-inner1 bg-light-orange"></div>
+                                        <div class="battery-inner1 bg-light-orange"></div>
+                                    </div>
+                                    <span class="status-name font-13 text-black">Moderate</span>
+                                </div>
+
+                                <div class="slow-main">
+                                    <div class="slow-status">
+                                        <div class="battery-inner1 bg-red"></div>
+                                        <div class="battery-inner1 bg-red"></div>
+                                        <div class="battery-inner1 bg-red"></div>
+                                        <div class="battery-inner1 bg-red"></div>
+                                        <div class="battery-inner1 bg-dark-red"></div>
+                                        <div class="battery-inner1 bg-mehroon"></div>
+                                        <div class="battery-inner1 bg-mehroon"></div>
+                                    </div>
+                                    <span class="status-name font-13 text-black">Slow</span>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-6 mt-5">
+                        <div class="vital_resultBar bg-light-green w-100 py-2 px-3 mb-4 cls_bar">
+                            <div class="left-side">
+                                <span class="vital-resultSeconds text-gray font-13">
+                                    Cumulative Layout Shift :<var class=" font-13  p_spinner_cls" id="cls"></var>
+                                    <div class="spinner-border text-primary spinner-border-sm  p_spinner mt-1 mr-1"
+                                        role="status">
+                                        <span class="visually-hidden">Loading...</span>
+                                    </div>
+                                </span>
+                                <span class="vital_resultName  font-12" id="cls_status"></span>
+                            </div>
+                            <span class="vital-toltp">
+                                <a href="#" class="tooltp mb-3 font-18" data-bs-placement="right"
+                                    data-bs-toggle="tooltip" title=""
+                                    data-bs-original-title="More than half of all website traffic comes from mobile phones so it is very important your website loads fast. We review your website's speed daily and will alert you if we find any issues."
+                                    aria-label="More than half of all website traffic comes from mobile phones so it is very important your website loads fast. We review your website's speed daily and will alert you if we find any issues."><i
+                                        class="far fa-question-circle"></i></a>
+                            </span>
+                        </div>
+
+                        <div class="p_spinner_cls rangeSliderMain">
+                            <div class="rangeSeconds">
+                                <span class="range LessThan text-gray font-12 me-4">Less than 0.1
+                                    sec</span>
+                                <span class="range greaterThan text-gray font-12">Over 0.25 sec</span>
+                            </div>
+                            <div class="rangeSlider" id="rangeSlider">
+                                <div id="tooltipTitle_cls" data-bs-toggle="tooltip" data-bs-placement="right" title=""
+                                    class="indicator indicator_CLS slider-circle">
+                                </div>
+
+                                <div class="fast-main">
+                                    <div class="fast-status">
+                                        <div class="battery-inner1 bg-green"></div>
+                                        <div class="battery-inner1 bg-green"></div>
+                                        <div class="battery-inner1 bg-green"></div>
+                                        <div class="battery-inner1 bg-green"></div>
+                                        <div class="battery-inner1 bg-green"></div>
+                                        <div class="battery-inner1 bg-green"></div>
+                                    </div>
+                                    <span class="status-name font-13 text-black">Fast</span>
+                                </div>
+
+                                <div class="moderate-main">
+                                    <div class="moderate-status">
+                                        <div class="battery-inner1 bg-yellow"></div>
+                                        <div class="battery-inner1 bg-yellow"></div>
+                                        <div class="battery-inner1 bg-yellow"></div>
+                                        <div class="battery-inner1 bg-yellow"></div>
+                                        <div class="battery-inner1 bg-light-orange"></div>
+                                        <div class="battery-inner1 bg-light-orange"></div>
+                                        <div class="battery-inner1 bg-light-orange"></div>
+                                        <div class="battery-inner1 bg-light-orange"></div>
+                                    </div>
+                                    <span class="status-name font-13 text-black">Moderate</span>
+                                </div>
+
+                                <div class="slow-main">
+                                    <div class="slow-status">
+                                        <div class="battery-inner1 bg-red"></div>
+                                        <div class="battery-inner1 bg-red"></div>
+                                        <div class="battery-inner1 bg-red"></div>
+                                        <div class="battery-inner1 bg-red"></div>
+                                        <div class="battery-inner1 bg-dark-red"></div>
+                                        <div class="battery-inner1 bg-mehroon"></div>
+                                        <div class="battery-inner1 bg-mehroon"></div>
+                                    </div>
+                                    <span class="status-name font-13 text-black">Slow</span>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-6 mt-5">
+                        <div class="vital_resultBar bg-light-green w-100 py-2 px-3 mb-4 tti_bar">
+                            <div class="left-side">
+                                <span class="vital-resultSeconds text-gray font-13">
+                                    Time to Interactive : <var class=" font-13  p_spinner_cls" id="tti"></var>
+                                    <div class="spinner-border text-primary spinner-border-sm  p_spinner mt-1 mr-1"
+                                        role="status">
+                                        <span class="visually-hidden">Loading...</span>
+                                    </div>
+                                </span>
+                                <span class="vital_resultName  font-12" id="tti_status"></span>
+                            </div>
+                            <span class="vital-toltp">
+                                <a href="#" class="tooltp mb-3 font-18" data-bs-placement="right"
+                                    data-bs-toggle="tooltip" title=""
+                                    data-bs-original-title="More than half of all website traffic comes from mobile phones so it is very important your website loads fast. We review your website's speed daily and will alert you if we find any issues."
+                                    aria-label="More than half of all website traffic comes from mobile phones so it is very important your website loads fast. We review your website's speed daily and will alert you if we find any issues."><i
+                                        class="far fa-question-circle"></i></a>
+                            </span>
+                        </div>
+
+                        <div class="p_spinner_cls rangeSliderMain">
+                            <div class="rangeSeconds">
+                                <span class="range LessThan text-gray font-12 me-4">Less than 3.8
+                                    sec</span>
+                                <span class="range greaterThan text-gray font-12">Over 7.3 sec</span>
+                            </div>
+                            <div class="rangeSlider" id="rangeSlider">
+                                <div id="tooltipTitle_tti" data-bs-toggle="tooltip" data-bs-placement="right" title=""
+                                    class="indicator indicator_TTI slider-circle">
+                                </div>
+
+                                <div class="fast-main">
+                                    <div class="fast-status">
+                                        <div class="battery-inner1 bg-green"></div>
+                                        <div class="battery-inner1 bg-green"></div>
+                                        <div class="battery-inner1 bg-green"></div>
+                                        <div class="battery-inner1 bg-green"></div>
+                                        <div class="battery-inner1 bg-green"></div>
+                                        <div class="battery-inner1 bg-green"></div>
+                                    </div>
+                                    <span class="status-name font-13 text-black">Fast</span>
+                                </div>
+
+                                <div class="moderate-main">
+                                    <div class="moderate-status">
+                                        <div class="battery-inner1 bg-yellow"></div>
+                                        <div class="battery-inner1 bg-yellow"></div>
+                                        <div class="battery-inner1 bg-yellow"></div>
+                                        <div class="battery-inner1 bg-yellow"></div>
+                                        <div class="battery-inner1 bg-light-orange"></div>
+                                        <div class="battery-inner1 bg-light-orange"></div>
+                                        <div class="battery-inner1 bg-light-orange"></div>
+                                        <div class="battery-inner1 bg-light-orange"></div>
+                                    </div>
+                                    <span class="status-name font-13 text-black">Moderate</span>
+                                </div>
+
+                                <div class="slow-main">
+                                    <div class="slow-status">
+                                        <div class="battery-inner1 bg-red"></div>
+                                        <div class="battery-inner1 bg-red"></div>
+                                        <div class="battery-inner1 bg-red"></div>
+                                        <div class="battery-inner1 bg-red"></div>
+                                        <div class="battery-inner1 bg-dark-red"></div>
+                                        <div class="battery-inner1 bg-mehroon"></div>
+                                        <div class="battery-inner1 bg-mehroon"></div>
+                                    </div>
+                                    <span class="status-name font-13 text-black">Slow</span>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <div class='col-xl-3'>
+
+            <div class="progress-sideBar ps-md-3">
+                <div class="crawled gray-bg py-3 mt-5 grey-box">
+                    <div class="upgrade-sec px-2">
+                        <img src="{%static '/site_audit/assets/crawler-lock-rd.png'%}"
+                            class="mb-2 mx-auto d-table crawler-lock-rd" alt="crawler-lock-rd" />
+                        <p class="crwl-pra font-12 text-gray text-center p-2 mb-2"> Membership Allowed User
+                            To
+                            Use
+                            Crawler To
+                            <a href="javascript:;" class="text-red">Crawl Up To 20 Pages</a>
+                            Of
+                            Your Website.
+                        </p>
+                    </div>
+                  <div class="crawlerFreeProSection" style="display: none;">
+                    <div class="unlock-sec p-2">
+                        <img src="{%static '/site_audit/assets/crawler-lock-green.png'%}"
+                            class="mb-2 mx-auto d-table crawler-lock-green" alt="crawler-lock-green" />
+                        <p class="font-12 text-gray text-center mb-2"><a href="javascript:;" class="text-green">Upgrade
+                                To Professional Plan</a> And Unlock The Potential To
+                            Optimize Your Website And Rank On Top Of Search Engine</p>
+                    </div>
+                    <a href="javascript:;" id='unlock-btn' class="mx-xl-2 mx-auto unlock-btn ">
+                        <span class="lock">
+                            <img id='success_lock' src="{% static 'site_audit/assets/img/lock.png'%}" alt="lock">
+                        </span>
+                        <span class="lock-txt">Unlock me to Rank High</span>
+                    </a>
+                  </div>
+                </div>
+            </div>
+
+            <div class="progress-sideBar mt-3 ps-md-3">
+                <div class="crawled gray-bg py-4 px-3 grey-box">
+                    <p class="text-center text-gray">How Google generally weighs
+                        the importance of eachcan
+                        main Core Vital</p>
+                    <div class="multiColorProgress text-center my-4 position-relative">
+                        <div id="donut_spinner" class="spinner-border text-primary spinner-border-lg  mr-1"
+                            role="status">
+                            <span class="visually-hidden">Loading...</span>
+                        </div>
+
+                        <div class="chartRelative">
+                            <canvas id="mainChart"></canvas>
+
+
+                            <div class="absolute-center text-center" id="scoreDonutChart">
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="overview-information-container">
+                        <ul class="overview-list coreVitalStatus">
+                            <li class="mb-2  font-10 p-relative ">
+                                <span class="font-8 text-red me-1"><i class="fa-solid fa-circle"></i></span>
+                                Total Blocking Time (TBT) <span class="overview-value percentage_TBT"></span>
+                                <div class="spinner-border text-primary spinner-border-sm percent_spinner mt-1 mr-1"
+                                    role="status">
+                                    <span class="visually-hidden">Loading...</span>
+                                </div>
+                            </li>
+                            <li class="mb-2  font-10 p-relative ">
+                                <span class="font-8 text-yellow me-1"><i class="fa-solid fa-circle"></i></span>
+                                Largest Contentful Paint (LCP)
+                                <span class="overview-value percentage_LCP"></span>
+                                <div class="spinner-border text-primary spinner-border-sm  percent_spinner mt-1 mr-1"
+                                    role="status">
+                                    <span class="visually-hidden">Loading...</span>
+                                </div>
+                            </li>
+                            <li class="mb-2  font-10 p-relative ">
+                                <span class="font-8 text-orange me-1"><i class="fa-solid fa-circle"></i></span>
+                                Cumulative Layout Shift (CLS) <span class="overview-value percentage_CLS"></span>
+                                <div class="spinner-border text-primary spinner-border-sm  percent_spinner mt-1 mr-1"
+                                    role="status">
+                                    <span class="visually-hidden">Loading...</span>
+                                </div>
+                            </li>
+                            <li class="mb-2  font-10 p-relative">
+                                <span class="font-8 text-green me-1"><i class="fa-solid fa-circle"></i></span>
+                                First Contentful Paint (FCP) <span class="overview-value percentage_FCP"></span>
+                                <div class="spinner-border text-primary spinner-border-sm  percent_spinner mt-1 mr-1"
+                                    role="status">
+                                    <span class="visually-hidden">Loading...</span>
+                                </div>
+                            </li>
+                            <li class="mb-2  font-10 p-relative">
+                                <span class="font-8 text-d-blue me-1"><i class="fa-solid fa-circle"></i></span>
+                                Speed Index (SI) <span class="overview-value percentage_SI"></span>
+                                <div class="spinner-border text-primary spinner-border-sm  percent_spinner mt-1 mr-1"
+                                    role="status">
+                                    <span class="visually-hidden">Loading...</span>
+                                </div>
+                            </li>
+                            <li class="mb-2  font-10 p-relative">
+                                <span class="font-8 text-gray me-1"><i class="fa-solid fa-circle"></i></span>
+                                Time
+                                to Interact (TTI) <span class="overview-value percentage_TTI"></span>
+                                <div class="spinner-border text-primary spinner-border-sm percent_spinner mt-1 mr-1"
+                                    role="status">
+                                    <span class="visually-hidden">Loading...</span>
+                                </div>
+                            </li>
+
+                        </ul>
+                    </div>
+                </div>
+
+
+            </div>
+        </div>
+    </div>
+
+
+
+
+    <!-- Sidebar, Spider and Circular Progress Bar Section  -->
+
+    <section>
+        <div class="row">
+            <div class="col-xl-9">
+                <h2 class="title fw-400 mt-md-5 mt-5 mb-3 ps-md-0 pb-2">Images Type: </h2>
+                <p class="font-14 mb-4">Core Vitals are now a part of Google’s search algorithm and can
+                    positively or negatively impact your keyword rankings. Low Core Vitals scores can
+                    also negatively impact your visitors’ overall experience on your website. Google has
+                    assigned different weights (i.e. importance) to each Core Vital metric. That said,
+                    if you score very bad for any Core Vital it is always going to be a top priority to
+                    fix even if it isn’t the most important Core Vital.</p>
+                <div class="row">
+                    <div class="col-lg-6 col-md-4">
+                        <div class="imgTypes">
+                            <ul class="imgType-list" id="ImgTypeList">
+                                <li class="mb-2">
+                                    <span class="font-8 text-green me-1"><i class="fa-solid fa-circle"></i></span>
+                                    <div class="font-14 text-gray imgName">PNG</div>
+                                    <span class="border-btm"></span>
+                                    <span class="font-14 text-gray">
+                                        <span class="default-val"></span>
+
+                                    </span>
+                                    <div class="img_spinner1">
+                                        <div class="spinner-border text-primary spinner-border-sm" role="status">
+                                            <span class="sr-only">Loading...</span>
+                                        </div>
+                                    </div>
+                                </li>
+                                <li class="mb-2">
+                                    <span class="font-8 text-red me-1"><i class="fa-solid fa-circle"></i></span>
+                                    <div class="font-14 text-gray imgName">SVG</div>
+                                    <span class="border-btm"></span>
+                                    <span class="font-14 text-gray">
+                                        <span class="default-val"></span>
+
+                                    </span>
+                                    <div class=" img_spinner1">
+                                        <div class="spinner-border text-primary spinner-border-sm" role="status">
+                                            <span class="sr-only">Loading...</span>
+                                        </div>
+                                    </div>
+                                </li>
+                                <li class="mb-2">
+                                    <span class="font-8 text-blue me-1"><i class="fa-solid fa-circle"></i></span>
+                                    <div class="font-14 text-gray imgName">JPEG</div>
+                                    <span class="border-btm"></span>
+                                    <span class="font-14 text-gray">
+                                        <span class="default-val"></span>
+
+                                    </span>
+                                    <div class=" img_spinner1">
+                                        <div class="spinner-border text-primary spinner-border-sm" role="status">
+                                            <span class="sr-only">Loading...</span>
+                                        </div>
+                                    </div>
+                                </li>
+                                <li class="mb-2">
+                                    <span class="font-8 text-purple me-1"><i class="fa-solid fa-circle"></i></span>
+                                    <div class="font-14 text-gray imgName">GIF</div>
+                                    <span class="border-btm"></span>
+                                    <span class="font-14 text-gray">
+                                        <span class="default-val"></span>
+
+                                    </span>
+                                    <div class=" img_spinner1">
+                                        <div class="spinner-border text-primary spinner-border-sm" role="status">
+                                            <span class="sr-only">Loading...</span>
+                                        </div>
+                                    </div>
+                                </li>
+                                <li class="mb-2">
+                                    <span class="font-8 text-orange me-1"><i class="fa-solid fa-circle"></i></span>
+                                    <div class="font-14 text-gray imgName">WebP</div>
+                                    <span class="border-btm"></span>
+                                    <span class="font-14 text-gray">
+                                        <span class="default-val"></span>
+
+                                    </span>
+                                    <div class=" img_spinner1">
+                                        <div class="spinner-border text-primary spinner-border-sm" role="status">
+                                            <span class="sr-only">Loading...</span>
+                                        </div>
+                                    </div>
+                                </li>
+                                <li>
+                                    <span class="font-8 text-yellow me-1"><i class="fa-solid fa-circle"></i></span>
+                                    <div class="font-14 text-gray imgName">Other</div>
+                                    <span class="border-btm"></span>
+                                    <span class="font-14 text-gray">
+                                        <span class="default-val"></span>
+
+                                    </span>
+                                    <div class=" img_spinner1">
+                                        <div class="spinner-border text-primary spinner-border-sm " role="status">
+                                            <span class="sr-only">Loading...</span>
+                                        </div>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-lg-6 col-md-8  ps-md-0">
+                        <div class="issueFound">
+                            <ul class="issueFBtn">
+                                <li>
+                                    <a href="javascript:;">
+                                        <div class="issuesStatus">
+                                            <span>
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14"
+                                                    viewBox="0 0 14 14">
+                                                    <path id="broken-link"
+                                                        d="M14.805,2.205a.7.7,0,1,1,.99.99L9.99,9l1.485,1.485a.7.7,0,0,1-.99.99L9,9.99,3.195,15.795a.7.7,0,0,1-.99-.99ZM9.01,6.039,10,5.05,9.99,5.04,9,4.05A3.5,3.5,0,1,0,4.051,9l.99.99L5.05,10l.99-.99L6.03,9l-.99-.99A2.1,2.1,0,0,1,8.01,5.04L9,6.03Zm-.99.99-.99.99-.5-.5a.7.7,0,0,1,.99-.99ZM9.99,12.96,9,11.97a.7.7,0,1,0-.99.99l.99.99A3.5,3.5,0,0,0,13.95,9l-.99-.99a.7.7,0,1,0-.99.99l.99.99a2.1,2.1,0,0,1-2.97,2.97Z"
+                                                        transform="translate(-2 -2)" fill="#707070"
+                                                        fill-rule="evenodd" />
+                                                </svg>
+                                            </span>
+                                            <span class="font-10 text-gray">Broken Links</span>
+                                        </div>
+                                        <div class="issueStats issueStats1  font-12" id="broken_links_count">
+                                            <span class="default-val1"></span>
+
+                                        </div>
+                                        <div class="img_spinner1">
+                                            <div class="spinner-border text-primary spinner-border-sm " role="status">
+                                                <span class="sr-only">Loading...</span>
+                                            </div>
+                                        </div>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="javascript:;">
+                                        <div class="issuesStatus">
+                                            <span>
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="13.999"
+                                                    viewBox="0 0 14 13.999">
+                                                    <path id="alt"
+                                                        d="M12.832,10.121V3.878a2.037,2.037,0,1,0-2.712-2.712H3.878A2.037,2.037,0,1,0,1.166,3.878V10.12a2.037,2.037,0,1,0,2.712,2.713H10.12a2.037,2.037,0,1,0,2.713-2.712ZM9.946,11.666H4.053a2.033,2.033,0,0,0-1.72-1.72V4.053a2.033,2.033,0,0,0,1.72-1.72H9.945a2.033,2.033,0,0,0,1.721,1.72V9.945a2.033,2.033,0,0,0-1.72,1.721Zm2.012-10.5a.875.875,0,1,1-.875.875.875.875,0,0,1,.875-.875Zm-9.916,0a.875.875,0,1,1-.875.875.875.875,0,0,1,.875-.875Zm0,11.666a.875.875,0,1,1,.875-.875A.875.875,0,0,1,2.041,12.832Zm9.916,0a.875.875,0,1,1,.875-.875A.875.875,0,0,1,11.958,12.832ZM7.583,5.25V7h.583a.583.583,0,0,1,0,1.167H7.583v.583a.583.583,0,0,0,.583.583.583.583,0,0,1,0,1.167A1.739,1.739,0,0,1,7,10.044a1.739,1.739,0,0,1-1.167.455.583.583,0,1,1,0-1.167.583.583,0,0,0,.583-.583V8.166H5.833A.583.583,0,0,1,5.833,7h.583V5.25a.583.583,0,0,0-.583-.583.583.583,0,0,1,0-1.167A1.739,1.739,0,0,1,7,3.955,1.739,1.739,0,0,1,8.166,3.5a.583.583,0,1,1,0,1.167A.583.583,0,0,0,7.583,5.25Z"
+                                                        transform="translate(0.001 0.001)" fill="#707070" />
+                                                </svg>
+
+                                            </span>
+                                            <span class="font-10 text-gray">Missing Alt</span>
+                                        </div>
+                                        <div class="issueStats issueStats1  font-12" id="missing_alt_count">
+                                            <span class="default-val1"></span>
+
+                                        </div>
+                                        <div class=" img_spinner1">
+                                            <div class="spinner-border text-primary spinner-border-sm" role="status">
+                                                <span class="sr-only">Loading...</span>
+                                            </div>
+                                        </div>
+                                    </a>
+                                </li>
+                            </ul>
+                            <ul class="issueFBtn">
+                                <li>
+                                    <a href="javascript:;">
+                                        <div class="issuesStatus">
+                                            <span>
+                                                <svg id="images-square-outlined-interface-button-symbol"
+                                                    xmlns="http://www.w3.org/2000/svg" width="14" height="14"
+                                                    viewBox="0 0 14 14">
+                                                    <g id="_x36__40_">
+                                                        <g id="Group_41034" data-name="Group 41034">
+                                                            <path id="Path_34455" data-name="Path 34455"
+                                                                d="M3.5,1.75A1.75,1.75,0,1,0,5.25,3.5,1.75,1.75,0,0,0,3.5,1.75Zm0,2.625A.875.875,0,1,1,4.375,3.5.875.875,0,0,1,3.5,4.375ZM12.25,0H1.75A1.75,1.75,0,0,0,0,1.75v10.5A1.75,1.75,0,0,0,1.75,14h10.5A1.75,1.75,0,0,0,14,12.25V1.75A1.75,1.75,0,0,0,12.25,0ZM1.75,13.125a.875.875,0,0,1-.875-.875v-.411L4.351,8.726l4.4,4.4Zm11.375-.875a.875.875,0,0,1-.875.875H9.989L6.766,9.859,10.5,6.125,13.125,8.75Zm0-4.756L10.5,4.813,6.15,9.236l-1.775-1.8-3.5,3.21V1.75A.875.875,0,0,1,1.75.875h10.5a.875.875,0,0,1,.875.875Z"
+                                                                fill="#707070" />
+                                                        </g>
+                                                    </g>
+                                                </svg>
+
+                                            </span>
+                                            <span class="font-10 text-gray">Big Images</span>
+                                        </div>
+                                        <div class=" font-12">
+                                            <span id="big_images_count"></span>
+                                            <div id="big_images_count_loader"
+                                                class="spinner-border text-primary spinner-border-sm" role="status">
+                                                <span class="sr-only">Loading...</span>
+                                            </div>
+                                        </div>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="javascript:;">
+                                        <div class="issuesStatus">
+                                            <span>
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14"
+                                                    viewBox="0 0 14 14">
+                                                    <g id="Group_41041" data-name="Group 41041"
+                                                        transform="translate(-0.392)">
+                                                        <rect id="Rectangle_17705" data-name="Rectangle 17705"
+                                                            width="14" height="14" rx="2" transform="translate(0.392)"
+                                                            fill="#707070" />
+                                                        <g id="header" transform="translate(4 4)">
+                                                            <g id="Group_41038" data-name="Group 41038"
+                                                                transform="translate(0 0)">
+                                                                <path id="Path_34457" data-name="Path 34457"
+                                                                    d="M3.616,6.125V5.769h.112A1.727,1.727,0,0,0,4,5.748a.538.538,0,0,0,.22-.085.449.449,0,0,0,.15-.184.765.765,0,0,0,.056-.32V3.169H1.663v1.99a.768.768,0,0,0,.056.32.445.445,0,0,0,.149.184.539.539,0,0,0,.222.085,1.718,1.718,0,0,0,.27.021h.112v.357H0V5.769H.108A1.707,1.707,0,0,0,.38,5.748.55.55,0,0,0,.6,5.663a.433.433,0,0,0,.15-.184A.8.8,0,0,0,.8,5.159V1A.689.689,0,0,0,.749.7.435.435,0,0,0,.6.519.546.546,0,0,0,.375.438,1.8,1.8,0,0,0,.108.42H0V.063H2.472V.42H2.359A1.676,1.676,0,0,0,2.09.44a.535.535,0,0,0-.222.085A.448.448,0,0,0,1.719.71a.763.763,0,0,0-.056.319V2.746H4.424V1.029A.768.768,0,0,0,4.368.71.443.443,0,0,0,4.219.525.534.534,0,0,0,4,.44,1.659,1.659,0,0,0,3.727.42H3.615V.063H6.087V.42H5.979A1.661,1.661,0,0,0,5.708.44a.551.551,0,0,0-.222.085A.428.428,0,0,0,5.336.71a.786.786,0,0,0-.054.319V5.2a.691.691,0,0,0,.056.3.4.4,0,0,0,.152.172.583.583,0,0,0,.222.077,1.832,1.832,0,0,0,.267.019h.108v.357H3.616Z"
+                                                                    transform="translate(0 -0.063)" fill="#f3f3f3" />
+                                                            </g>
+                                                        </g>
+                                                    </g>
+                                                </svg>
+                                            </span>
+                                            <span class="font-10 text-gray">Missing Title</span>
+                                        </div>
+                                        <div class="issueStats issueStats1  font-12" id="missing_title_count">
+                                            <span class="default-val1"></span>
+
+                                        </div>
+                                        <div class=" img_spinner1">
+                                            <div class="spinner-border text-primary spinner-border-sm" role="status">
+                                                <span class="sr-only">Loading...</span>
+                                            </div>
+                                        </div>
+                                    </a>
+                                </li>
+                            </ul>
+                            <ul class="issueFBtn">
+                                <li>
+                                    <a href="javascript:;">
+                                        <div class="issuesStatus">
+                                            <span>
+                                                <svg id="maximize" xmlns="http://www.w3.org/2000/svg" width="14"
+                                                    height="14" viewBox="0 0 14 14">
+                                                    <path id="Path_34456" data-name="Path 34456"
+                                                        d="M72.444,243H70.111A3.111,3.111,0,0,0,67,246.111v7.778A3.111,3.111,0,0,0,70.111,257h7.778A3.111,3.111,0,0,0,81,253.889v-2.333H79.444v2.333a1.555,1.555,0,0,1-1.556,1.556H70.111a1.555,1.555,0,0,1-1.556-1.556v-7.778a1.555,1.555,0,0,1,1.556-1.556h2.333Zm5.9,1.556L73.45,249.45l1.1,1.1,4.895-4.895v2.789H81v-4.667a.778.778,0,0,0-.778-.778H75.556v1.556Z"
+                                                        transform="translate(-67 -243)" fill="#707070"
+                                                        fill-rule="evenodd" />
+                                                </svg>
+                                            </span>
+                                            <span class="font-10 text-gray">Redirect</span>
+                                        </div>
+                                        <div class="issueStats issueStats1  font-12" id="redirect_count">
+                                            <span class="default-val1"></span>
+
+                                        </div>
+                                        <div class=" img_spinner1">
+                                            <div class="spinner-border text-primary spinner-border-sm" role="status">
+                                                <span class="sr-only">Loading...</span>
+                                            </div>
+                                        </div>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="javascript:;">
+                                        <div class="issuesStatus">
+                                            <span>
+                                                <svg id="_6_Attention" data-name="6 Attention"
+                                                    xmlns="http://www.w3.org/2000/svg" width="14" height="14"
+                                                    viewBox="0 0 14 14">
+                                                    <path id="Path_34462" data-name="Path 34462"
+                                                        d="M11.949,2.053A7,7,0,1,0,9.014,13.708a.684.684,0,1,0-.393-1.31,5.63,5.63,0,1,1,3.09-2.306.684.684,0,1,0,1.142.751,7,7,0,0,0-.9-8.79Z"
+                                                        transform="translate(0 -0.002)" fill="#707070" />
+                                                    <path id="Path_34463" data-name="Path 34463"
+                                                        d="M231,109.684v4.348a.684.684,0,1,0,1.367,0v-4.348a.684.684,0,1,0-1.367,0Z"
+                                                        transform="translate(-224.684 -106.02)" fill="#707070" />
+                                                    <path id="Path_34464" data-name="Path 34464"
+                                                        d="M231.684,354.367a.684.684,0,1,1,.684-.684A.684.684,0,0,1,231.684,354.367Z"
+                                                        transform="translate(-224.684 -343.348)" fill="#707070" />
+                                                </svg>
+                                            </span>
+                                            <span class="font-10 text-gray">Slow Image</span>
+                                        </div>
+                                        <div class="issueStats issueStats1  font-12" id="slow_image_count">
+                                            <span class="default-val1"></span>
+
+                                        </div>
+                                        <div class=" img_spinner1">
+                                            <div class="spinner-border text-primary spinner-border-sm" role="status">
+                                                <span class="sr-only">Loading...</span>
+                                            </div>
+                                        </div>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class='col-xl-3'>
+
+                {% comment %} <div class="custom-card text-center gray-bg px-1 s-flex justify-content-center my-5"
+                    id="">
+                    <div class="p-relative">
+                        <div class="box green">
+                            <div id="donutchart" style="height: 320px; overflow: hidden;"></div>
+                            <div class="percent multi-color" id="NumberOfImages">
+                                <div class="number">
+                                    <div class="fw-400 font-15 text-gray">Images <br>
+                                        <span class="font-15" id="imgCount1"></span>
+                                        <div class="imagesCount_spinner">
+                                            <div class="spinner-border text-primary spinner-border-sm mt-1"
+                                                role="status" style="display: block;">
+                                                <span class="visually-hidden">Loading...</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div> {% endcomment %}
+                    <div class="progress-sideBar mt-95 ps-md-3">
+                        <div class="crawled gray-bg px-3 grey-box">
+                            <div class="multiColorProgress text-center my-4 position-relative">
+                                <span class="no-data" style="margin-top: 10px; display: none;"></span>
+                                <div id="imagesCount_spinner"
+                                    class="spinner-border text-primary spinner-border-sm  mr-1" role="status">
+                                    <span class="visually-hidden">Loading...</span>
+                                </div>
+
+
+                                <div class="chartRelative chartRelativeTwo">
+
+                                    <div id="donutchartTT">
+
+                                    </div>
+                                    <div class="absolute-center text-center">
+                                        <p class="image-data">Images <br> </p>
+                                        <div id="imgCount"> </div>
+                                    </div>
+
+
+                                </div>
+
+                            </div>
+
+
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+    </section>
+
+    <div class="container">
+        <section class="seoWebAudit mb-4 mt-5">
+            <div class="row">
+                <div class="col-xl-9">
+                    <h2 class="title fw-400 mb-3 ps-md-0 pb-2 seoWebsiteAudit-hdng" style="margin-top:-38px ;">SEO
+                        Website
+                        Audit - <div class="spinner-border text-primary spinner-border-sm" style="font-size:12px"
+                            id="seoHdg_spinner" role="status">
+                            <span class="visually-hidden">Loading...</span>
+                        </div>
+                        <span id="seoHdg_URL">
+                        </span>
+                    </h2>
+
+
+                    <p class="text-black fw-400 p-0 font-12">Core Vitals are now a part of Google’s search
+                        algorithm and can positively or negatively impact your keyword rankings. Low Core
+                        Vitals scores can also negatively impact your visitors’ overall experience on your
+                        website. Google has assigned different weights (i.e. importance) to each Core Vital
+                        metric. That said, if you score very bad for any Core Vital it is always going to be
+                        a top priority to fix even if it isn’t the most important Core Vital.</p>
+
+                    <div class="row mt-3">
+                        <div class="col-xl-3 ">
+                            <div class="card card_box py-2 px-3">
+                                <a href="#" class="tooltp mb-3 font-18" data-bs-placement="right"
+                                    data-bs-toggle="tooltip" title=""
+                                    data-bs-original-title="More than half of all website traffic comes from mobile phones so it is very important your website loads fast. We review your website's speed daily and will alert you if we find any issues."
+                                    aria-label="More than half of all website traffic comes from mobile phones so it is very important your website loads fast. We review your website's speed daily and will alert you if we find any issues."><i
+                                        class="far fa-question-circle"></i></a>
+                                <ul class="ifo-box">
+                                    <li class="mb-3">
+                                        <div class="status failed">
+                                            <span class="st-circle red"><i class="fa-solid fa-circle"></i></span>
+                                            <span class="st-name font-16">Failed</span>
+
+                                        </div>
+                                        <div class="error">
+                                            <span class="error-txt font-10">Critical Errors</span>
+                                            <div class="border-cst"></div>
+                                            <div class="spinner-border text-primary spinner-border-sm  p_spinner mt-1 mr-1"
+                                                role="status">
+                                                <span class="visually-hidden">Loading...</span>
+                                            </div>
+                                            <div class="count-main p_spinner_cls">
+
+                                                <span class="count red font-12 failed_val "></span>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li class="mb-3">
+                                        <div class="status warn">
+                                            <span class="st-circle yellow"><i class="fa-solid fa-circle"></i></span>
+                                            <span class="st-name font-16">Warnings</span>
+                                        </div>
+                                        <div class="error">
+                                            <span class="error-txt font-10">Non-Critical Errors</span>
+                                            <div class="border-cst"></div>
+                                            <div class="spinner-border text-primary spinner-border-sm  p_spinner mt-1 mr-1"
+                                                role="status">
+                                                <span class="visually-hidden">Loading...</span>
+                                            </div>
+                                            <div class="count-main p_spinner_cls">
+                                                <span class="count yellow font-12 text-right warning_val"></span>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li class="mb-md-5">
+                                        <div class="status pass">
+                                            <span class="st-circle green"><i class="fa-solid fa-circle"></i></span>
+                                            <span class="st-name font-16">Passed</span>
+                                        </div>
+                                        <div class="error">
+                                            <span class="error-txt font-10">No Action Required</span>
+                                            <div class="border-cst"></div>
+                                            <div class="spinner-border text-primary spinner-border-sm  p_spinner mt-1 mr-1"
+                                                role="status">
+                                                <span class="visually-hidden">Loading...</span>
+                                            </div>
+                                            <div class="count-main p_spinner_cls">
+                                                <span class="count green font-12 passed_val"></span>
+                                            </div>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="col-xl-9">
+                            <div class="row mb-4 custom-gap">
+                                <div class="col-xl-4">
+                                    <div class="progress-sec sts" id='site_map'>
+                                        <span class="sitemap_colorr">Sitemap <br>
+                                            <div class="spinner-border text-primary spinner-border-sm  p_spinner mt-1 mr-1"
+                                                role="status">
+                                                <span class="visually-hidden">Loading...</span>
+                                            </div>
+                                            <small class="detectedd"></small>
+                                        </span>
+                                        <a href="#" class="text-gray font-18" data-bs-placement="right"
+                                            data-bs-toggle="tooltip" title=""
+                                            data-bs-original-title="More than half of all website traffic comes from mobile phones so it is very important your website loads fast. We review your website's speed daily and will alert you if we find any issues."
+                                            aria-label="More than half of all website traffic comes from mobile phones so it is very important your website loads fast. We review your website's speed daily and will alert you if we find any issues."><i
+                                                class="far fa-question-circle"></i></a>
+                                    </div>
+                                </div>
+                                <div class="col-xl-4 gy-xl-0 gy-md-3">
+                                    <div class="progress-sec sts" id='ssl--cer'>
+                                        <span class="ssl-certificate">SSL Certificate <br>
+                                            <div class="spinner-border text-primary spinner-border-sm  p_spinner mt-1 mr-1"
+                                                role="status">
+                                                <span class="visually-hidden">Loading...</span>
+                                            </div>
+                                            <small class="ssl_valid"></small>
+                                        </span>
+                                        <a href="#" class="text-gray font-18" data-bs-placement="right"
+                                            data-bs-toggle="tooltip" title=""
+                                            data-bs-original-title="More than half of all website traffic comes from mobile phones so it is very important your website loads fast. We review your website's speed daily and will alert you if we find any issues."
+                                            aria-label="More than half of all website traffic comes from mobile phones so it is very important your website loads fast. We review your website's speed daily and will alert you if we find any issues."><i
+                                                class="far fa-question-circle"></i></a>
+                                    </div>
+                                </div>
+                                <div class="col-xl-4 gy-xl-0 gy-md-3">
+                                    <div class="progress-sec sts green btn-outline-success">
+                                        <span>Blacklists <br> <small>Clear</small></span>
+                                        <a href="#" class="text-gray font-18" data-bs-placement="right"
+                                            data-bs-toggle="tooltip" title=""
+                                            data-bs-original-title="More than half of all website traffic comes from mobile phones so it is very important your website loads fast. We review your website's speed daily and will alert you if we find any issues."
+                                            aria-label="More than half of all website traffic comes from mobile phones so it is very important your website loads fast. We review your website's speed daily and will alert you if we find any issues."><i
+                                                class="far fa-question-circle"></i></a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="progress-bars">
+                                <div class='row'>
+                                    <div class='col-xl-4 p-absolute'>
+                                        <div class="health_mobile_spinner hello">
+                                            <div class="spinner-border text-primary spinner-border-sm" role="status">
+                                                <span class="visually-hidden">Loading...</span>
+                                            </div>
+                                        </div>
+                                        <div id="siteHealth_radiall" style="min-height: 140px;"></div>
+                                    </div>
+                                    <div class='col-xl-8'>
+                                        <div class="progressRow mb-3">
+                                            <label for="failed" class="font-12 text-gray">Failed</label>
+                                            <div class="progress red  progress-striped active">
+                                                <div class="progress-bar red progress-bar-success gn progress-bar bg-fail"
+                                                    style="min-width: 8% !important;">
+                                                    <div class="progress-count red failed_val">
+
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="progressRow mb-3">
+                                            <label for="failed" class="font-12 text-gray">Warnings</label>
+                                            <div class="progress yellow progress-striped active">
+                                                <div class="progress-bar yellow progress-bar-success gn progress-bar bg-warn"
+                                                    style="min-width: 8% !important;">
+                                                    <div class="progress-count yellow warning_val">
+
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="progressRow mb-3">
+                                            <label for="failed" class="font-12 text-gray">Passed</label>
+                                            <div class="progress green progress-striped active">
+                                                <div class="progress-bar green progress-bar-success gn progress-bar bg-pass"
+                                                    style="min-width: 8% !important;">
+                                                    <div class="progress-count green passed_val">
+
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xl-3">
+                    <div class="result-tabs crawler bg-transparent">
+                        <ul class="tabs tab">
+                            <li class="active tab-column General2 active" id="General" data-targetit="tabs-1">
+                                <a href="javascript:;" class="">
+                                    <span class="font-10 ">Summary Of Issues</span>
+                                    <div class="spinner-border text-primary spinner-border-sm  p_spinner mt-1 mr-1"
+                                        role="status">
+                                        <span class="visually-hidden">Loading...</span>
+                                    </div>
+                                    <div class="p_spinner_cls">
+                                        <div class="status-count tab-status ">
+                                            <div class="status-w-result failed failedScore" data-category-type="errors"
+                                                data-category-name="errors">
+                                                <span class="font-10 ScoreValue ">0</span>
+                                                <span class="text-red font-10"><i class="fa-solid fa-circle"></i></span>
+                                            </div>
+                                            <div class="status-w-result warning warningScore"
+                                                data-category-type="warning" data-category-name="warning">
+                                                <span class="font-10 ScoreValue">0</span>
+                                                <span class="text-yellow font-10"><i
+                                                        class="fa-solid fa-circle"></i></span>
+                                            </div>
+                                            <div class="status-w-result passed passedScore" data-category-type="success"
+                                                data-category-name="success">
+                                                <span class="font-10 ScoreValue ">0</span>
+                                                <span class="text-green font-10"><i
+                                                        class="fa-solid fa-circle"></i></span>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </a>
+                            </li>
+                            <li data-targetit="tabs-2" class="tab-column commonSeoIssuesList2" id="commonSeoIssuesList">
+                                <a href="javascript:;" class="text-black">
+                                    <span class="font-10 ">Common SEO Issues</span>
+                                    <div class="spinner-border text-primary spinner-border-sm  p_spinner mt-1 mr-1"
+                                        role="status">
+                                        <span class="visually-hidden">Loading...</span>
+                                    </div>
+                                    <div class="p_spinner_cls">
+                                        <div class="status-count tab-status">
+                                            <div class="status-w-result failed" data-category-type="errors"
+                                                data-category-name="errors">
+                                                <span class="font-10 ScoreValue">0</span>
+                                                <span class="text-red font-10"><i class="fa-solid fa-circle"></i></span>
+                                            </div>
+                                            <div class="status-w-result warning" data-category-type="warning"
+                                                data-category-name="warning">
+                                                <span class="font-10 ScoreValue">0</span>
+                                                <span class="text-yellow font-10"><i
+                                                        class="fa-solid fa-circle"></i></span>
+                                            </div>
+                                            <div class="status-w-result passed" data-category-type="success"
+                                                data-category-name="success">
+                                                <span class="font-10 ScoreValue">0</span>
+                                                <span class="text-green font-10"><i
+                                                        class="fa-solid fa-circle"></i></span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </a>
+                            </li>
+                            <li data-targetit="tabs-3" class="tab-column speedOptimizationlist2"
+                                id="speedOptimizationlist">
+                                <a href="javascript:;" class="text-black">
+                                    <span class="font-10 ">Speed Optimization</span>
+                                    <div class="spinner-border text-primary spinner-border-sm  p_spinner mt-1 mr-1"
+                                        role="status">
+                                        <span class="visually-hidden">Loading...</span>
+                                    </div>
+                                    <div class="p_spinner_cls">
+                                        <div class="status-count tab-status">
+                                            <div class="status-w-result failed">
+                                                <span class="font-10 ScoreValue">0</span>
+                                                <span class="text-red font-10"><i class="fa-solid fa-circle"></i></span>
+                                            </div>
+                                            <div class="status-w-result warning">
+                                                <span class="font-10 ScoreValue">0</span>
+                                                <span class="text-yellow font-10"><i
+                                                        class="fa-solid fa-circle"></i></span>
+                                            </div>
+                                            <div class="status-w-result passed">
+                                                <span class="font-10 ScoreValue">0</span>
+                                                <span class="text-green font-10"><i
+                                                        class="fa-solid fa-circle"></i></span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </a>
+                            </li>
+                            <li data-targetit="tabs-4" class="tab-column serverAndSecurity2" id="serverAndSecurity">
+                                <a href="javascript:;" class="text-black">
+                                    <span class="font-10 ">Server & Security</span>
+                                    <div class="spinner-border text-primary spinner-border-sm  p_spinner mt-1 mr-1"
+                                        role="status">
+                                        <span class="visually-hidden">Loading...</span>
+                                    </div>
+                                    <div class="p_spinner_cls">
+                                        <div class="status-count tab-status">
+                                            <div class="status-w-result failed">
+                                                <span class="font-10 ScoreValue">0</span>
+                                                <span class="text-red font-10"><i class="fa-solid fa-circle"></i></span>
+                                            </div>
+                                            <div class="status-w-result warning">
+                                                <span class="font-10 ScoreValue">0</span>
+                                                <span class="text-yellow font-10"><i
+                                                        class="fa-solid fa-circle"></i></span>
+                                            </div>
+                                            <div class="status-w-result passed">
+                                                <span class="font-10 ScoreValue">0</span>
+                                                <span class="text-green font-10"><i
+                                                        class="fa-solid fa-circle"></i></span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </a>
+                            </li>
+                            <li data-targetit="tabs-5" class="tab-column mobileUsability2" id="mobileUsability">
+                                <a href="javascript:;" class="text-black">
+                                    <span class="font-10 ">Mobile Usability</span>
+                                    <div class="spinner-border text-primary spinner-border-sm  p_spinner mt-1 mr-1"
+                                        role="status">
+                                        <span class="visually-hidden">Loading...</span>
+                                    </div>
+                                    <div class="p_spinner_cls">
+                                        <div class="status-count tab-status">
+                                            <div class="status-w-result failed">
+                                                <span class="font-10 ScoreValue">0</span>
+                                                <span class="text-red font-10"><i class="fa-solid fa-circle"></i></span>
+                                            </div>
+                                            <div class="status-w-result warning">
+                                                <span class="font-10 ScoreValue">0</span>
+                                                <span class="text-yellow font-10"><i
+                                                        class="fa-solid fa-circle"></i></span>
+                                            </div>
+                                            <div class="status-w-result passed">
+                                                <span class="font-10 ScoreValue">0</span>
+                                                <span class="text-green font-10"><i
+                                                        class="fa-solid fa-circle"></i></span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </a>
+                            </li>
+                            <li data-targetit="tabs-6" class="tab-column advancedSeo2" id="advancedSeo">
+                                <a href="javascript:;" class="text-black">
+                                    <span class="font-10">Advanced Seo</span>
+                                    <div class="spinner-border text-primary spinner-border-sm  p_spinner mt-1 mr-1"
+                                        role="status">
+                                        <span class="visually-hidden">Loading...</span>
+                                    </div>
+                                    <div class="p_spinner_cls">
+                                        <div class="status-count tab-status">
+                                            <div class="status-w-result failed">
+                                                <span class="font-10 ScoreValue">0</span>
+                                                <span class="text-red font-10"><i class="fa-solid fa-circle"></i></span>
+                                            </div>
+                                            <div class="status-w-result warning">
+                                                <span class="font-10 ScoreValue">0</span>
+                                                <span class="text-yellow font-10"><i
+                                                        class="fa-solid fa-circle"></i></span>
+                                            </div>
+                                            <div class="status-w-result passed">
+                                                <span class="font-10 ScoreValue">0</span>
+                                                <span class="text-green font-10"><i
+                                                        class="fa-solid fa-circle"></i></span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+
+                </div>
+
+            </div>
+        </section>
+
+        <!-- EDIT PROJECT MODAL START -->
+
+
+        <div class="urlSearchBar mb-5">
+            <input type="hidden" name="keywords" id="OtherKeywords" value="">
+            <input type="hidden" name="country_name" id="countryName" value="">
+            <div class="row">
+                <div class="col-xl-8">
+                    <div class="urlForm crawler">
+                        <div class="search-input rounded-0">
+                            <input type="text" id="search" placeholder="Search Page Url" autocomplete="off"
+                                class="urlInput">
+                            <div class="">
+                                <button type="button"
+                                    class="srch-btn rounded-0 d-flex align-items-center justify-content-center gap-3"
+                                    id="searchBtn"><span class="btn-text">Search</span>
+                                    <span><i class="fa-solid fa-magnifying-glass"></i></span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="sort-table audit crawler">
+
+            <div class="container">
+                <div class="issueTye-row mb-1">
+                    <span class="text-gray">Issues Type</span>
+                    <div class="status-count in-table d-flex">
+                        <div class="status-w-result">
+                            <span class="text-red font-14"><i class="fa-solid fa-circle"></i></span>
+                            <span class="font-14 text-gray">Failed</span>
+                        </div>
+                        <div class="status-w-result">
+                            <span class="text-yellow font-14"><i class="fa-solid fa-circle"></i></span>
+                            <span class="font-14 text-gray">Warning</span>
+                        </div>
+                        <div class="status-w-result">
+                            <span class="text-green font-14"><i class="fa-solid fa-circle"></i></span>
+                            <span class="font-14 text-gray">Passed</span>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="custom-thead">
+                    <div class="row gy-md-0 gy-2">
+                        <div class="col-xl-4">
+                            <h5>Website URL</h5>
+                        </div>
+                        <div class="col-lg-3 col-md-4">
+                            <h5>Page Title</h5>
+                        </div>
+                        <!-- <div class="col-lg-2">
+                <h5>Found</h5>
+            </div> -->
+                        <div class="col-xl-4">
+                            <h5>Issues Type</h5>
+                        </div>
+                        <div class="col-xl-1">
+                            <h5></h5>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="accordionSummaryWrapper">
+                    <div class="tb_loader_bottom">
+                        <div class="spinner-border" role="status">
+                            <span class="visually-hidden">Loading...</span>
+                        </div>
+                    </div>
+                    <div class="custom-tbody accordionSummary">
+                        <div class="row gy-md-0 gy-2">
+                            <div class="col-xl-4">
+                                <a href="" class="font-12 accordionLink text-elipses" title="" target="_blank">
+
+                                </a>
+                            </div>
+                            <div class="col-xl-3">
+                                <p class="text-gray text-left mb-0 font-12  text-elipses text-capitalize titleTag">
+
+                                </p>
+                            </div>
+                            <!-- <div class="col-lg-2">
+                <p class="mb-0 text-gray">30-Jan-2022</p>
+            </div> -->
+                            <div class="col-xl-4">
+                                <div class="status-count in-table justify-content-start d-flex">
+                                    <a href="#" class="status-w-result failed ">
+                                        <span class="font-10 text-gray ScoreValue ScoreValueFailed">0</span>
+                                        <span class="text-red font-10"><i class="fa-solid fa-circle"></i></span>
+                                    </a>
+                                    <a href="#" class="status-w-result warning mx-1">
+                                        <span class="font-10 text-gray ScoreValue ScoreValueWarning">0</span>
+                                        <span class="text-yellow font-10"><i class="fa-solid fa-circle"></i></span>
+                                    </a>
+                                    <a href="#" class="status-w-result passed">
+                                        <span class="font-10 text-gray ScoreValue ScoreValuePassed">0</span>
+                                        <span class="text-green font-10"><i class="fa-solid fa-circle"></i></span>
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="col-xl-1 float-end">
+                                <small class="font-16 accordianArrow text-gray" data-bs-toggle="collapse"
+                                    href="#collapseExample232" role="button" aria-expanded="false"
+                                    aria-controls="collapseExample">
+                                    <i class="fa-solid fa-chevron-down"></i>
+                                </small>
+                            </div>
+                        </div>
+
+
+                        <!-- 2nd row -->
+                        <div class="collapse" id="collapseExample232">
+
+                            <div class="result-section  crawler scroll-section px-md-0">
+                                <div class="result-top-bar p-3 rounded-0">
+                                    <h4 class="m-0 fw-400 font-16 text-blue">Test Results Summary Distribution Segment
+                                        Wise</h4>
+                                </div>
+                                <div class="result-tabs">
+                                    <ul class="tabs">
+                                        <li data-targetit="tabs-1" class="active tab-column" id='General'>
+                                            <a href="javascript:;" class="" data-targetit="tabs-1">
+                                                <span class="font-9 activeTabText">Summary Of Issues</span>
+                                                <div class="status-count ms-07rem d-flex">
+                                                    <div class="status-w-result failed" data-category-type="errors"
+                                                        data-category-name="errors">
+                                                        <span class="font-8 ScoreValue"></span>
+                                                        <span class="text-red font-8"><i
+                                                                class="fa-solid fa-circle"></i></span>
+                                                    </div>
+                                                    <div class="status-w-result warning" data-category-type="warning"
+                                                        data-category-name="warning">
+                                                        <span class="font-8 ScoreValue"></span>
+                                                        <span class="text-yellow font-8"><i
+                                                                class="fa-solid fa-circle"></i></span>
+                                                    </div>
+                                                    <div class="status-w-result passed" data-category-type="success"
+                                                        data-category-name="success">
+                                                        <span class="font-8 ScoreValue"></span>
+                                                        <span class="text-green font-8"><i
+                                                                class="fa-solid fa-circle"></i></span>
+                                                    </div>
+                                                </div>
+                                            </a>
+                                        </li>
+                                        <li data-targetit="tabs-2" class="tab-column " id="commonSeoIssuesList">
+                                            <a href="javascript:;" class="text-black">
+                                                <span class="font-9 activeTabText">Common SEO Issues</span>
+                                                <div class="status-count ms-07rem d-flex">
+                                                    <div class="status-w-result failed">
+                                                        <span class="font-8 ScoreValue"></span>
+                                                        <span class="text-red font-8"><i
+                                                                class="fa-solid fa-circle"></i></span>
+                                                    </div>
+                                                    <div class="status-w-result warning">
+                                                        <span class="font-8 ScoreValue"></span>
+                                                        <span class="text-yellow font-8"><i
+                                                                class="fa-solid fa-circle"></i></span>
+                                                    </div>
+                                                    <div class="status-w-result passed">
+                                                        <span class="font-8 ScoreValue"></span>
+                                                        <span class="text-green font-8"><i
+                                                                class="fa-solid fa-circle"></i></span>
+                                                    </div>
+                                                </div>
+                                            </a>
+                                        </li>
+                                        <li data-targetit="tabs-3" class="tab-column" id="speedOptimizationlist">
+                                            <a href="javascript:;" class="text-black">
+                                                <span class="font-9 activeTabText">Speed Optimization</span>
+                                                <div class="status-count ms-07rem d-flex">
+                                                    <div class="status-w-result failed">
+                                                        <span class="font-8 ScoreValue"></span>
+                                                        <span class="text-red font-8"><i
+                                                                class="fa-solid fa-circle"></i></span>
+                                                    </div>
+                                                    <div class="status-w-result warning">
+                                                        <span class="font-8 ScoreValue"></span>
+                                                        <span class="text-yellow font-8"><i
+                                                                class="fa-solid fa-circle"></i></span>
+                                                    </div>
+                                                    <div class="status-w-result passed">
+                                                        <span class="font-8 ScoreValue"></span>
+                                                        <span class="text-green font-8"><i
+                                                                class="fa-solid fa-circle"></i></span>
+                                                    </div>
+                                                </div>
+                                            </a>
+                                        </li>
+                                        <li data-targetit="tabs-4" class="tab-column " id="serverAndSecurity">
+                                            <a href="javascript:;" class="text-black">
+                                                <span class="font-9 activeTabText">Server & Security</span>
+                                                <div class="status-count ms-07rem d-flex">
+                                                    <div class="status-w-result failed">
+                                                        <span class="font-8 ScoreValue"></span>
+                                                        <span class="text-red font-8"><i
+                                                                class="fa-solid fa-circle"></i></span>
+                                                    </div>
+                                                    <div class="status-w-result warning">
+                                                        <span class="font-8 ScoreValue"></span>
+                                                        <span class="text-yellow font-8"><i
+                                                                class="fa-solid fa-circle"></i></span>
+                                                    </div>
+                                                    <div class="status-w-result passed">
+                                                        <span class="font-8 ScoreValue"></span>
+                                                        <span class="text-green font-8"><i
+                                                                class="fa-solid fa-circle"></i></span>
+                                                    </div>
+                                                </div>
+                                            </a>
+                                        </li>
+                                        <li data-targetit="tabs-5" class="tab-column " id="mobileUsability">
+                                            <a href="javascript:;" class="text-black">
+                                                <span class="font-9 activeTabText">Mobile Usability</span>
+                                                <div class="status-count ms-07rem d-flex">
+                                                    <div class="status-w-result failed">
+                                                        <span class="font-8 ScoreValue"></span>
+                                                        <span class="text-red font-8"><i
+                                                                class="fa-solid fa-circle"></i></span>
+                                                    </div>
+                                                    <div class="status-w-result warning">
+                                                        <span class="font-8 ScoreValue"></span>
+                                                        <span class="text-yellow font-8"><i
+                                                                class="fa-solid fa-circle"></i></span>
+                                                    </div>
+                                                    <div class="status-w-result passed">
+                                                        <span class="font-8 ScoreValue"></span>
+                                                        <span class="text-green font-8"><i
+                                                                class="fa-solid fa-circle"></i></span>
+                                                    </div>
+                                                </div>
+                                            </a>
+                                        </li>
+                                        <li data-targetit="tabs-6" class="tab-column " id='advancedSeo'>
+                                            <a href="javascript:;" class="text-black">
+                                                <span class="font-9 activeTabText">Advanced Seo</span>
+                                                <div class="status-count ms-07rem ">
+                                                    <div class="status-w-result failed">
+                                                        <span class="font-8 ScoreValue"></span>
+                                                        <span class="text-red font-8"><i
+                                                                class="fa-solid fa-circle"></i></span>
+                                                    </div>
+                                                    <div class="status-w-result warning">
+                                                        <span class="font-8 ScoreValue"></span>
+                                                        <span class="text-yellow font-8"><i
+                                                                class="fa-solid fa-circle"></i></span>
+                                                    </div>
+                                                    <div class="status-w-result passed">
+                                                        <span class="font-8 ScoreValue"></span>
+                                                        <span class="text-green font-8"><i
+                                                                class="fa-solid fa-circle"></i></span>
+                                                    </div>
+                                                </div>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <div class="result-content">
+                                    <div class="tab-content">
+                                        <div class="tabs-1 showfirst mb-3">
+                                            <div class="row gx-3">
+                                                <div class="col-xl-4">
+                                                    <ul class="error-sucees-list" id="allIssuesDetails_failed">
+                                                        <li class="bg-red text-white py-2 px-3 font-14"
+                                                            data-category-type="error" data-category-name="error">
+                                                            <span class="text-white">Failed</span>
+                                                        </li>
+                                                        <li class="bg-white py-2 px-3 font-12 text-red scrollbartab"
+                                                            data-category-type="error" data-category-name="error">
+                                                            <ul></ul>
+                                                        </li>
+
+                                                    </ul>
+                                                </div>
+                                                <div class="col-xl-4">
+                                                    <ul class="error-sucees-list" id="allIssuesDetails_warning">
+                                                        <li class="bg-yellow text-white py-2 px-3 font-14"
+                                                            data-category-type="warning" data-category-name="warning">
+                                                            <span class="text-white">Warnings</span>
+                                                        </li>
+                                                        <li class="bg-white py-2 px-3 font-12 text-yellow scrollbartab"
+                                                            data-category-type="warning" data-category-name="warning">
+                                                            <ul></ul>
+                                                        </li>
+
+                                                    </ul>
+                                                </div>
+                                                <div class="col-xl-4">
+                                                    <ul class="error-sucees-list" id="allIssuesDetails_passed">
+                                                        <li class="bg-green text-white py-2 px-3 font-14"
+                                                            data-category-type="success" data-category-name="success">
+                                                            <span class="text-white">Passed</span>
+                                                        </li>
+                                                        <li class="bg-white py-2 px-3 font-12 text-green scrollbartab"
+                                                            data-category-type="success" data-category-name="success">
+                                                            <ul></ul>
+                                                        </li>
+
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="tabs-2 mb-3">
+                                            <div class="row gx-3">
+                                                <div class="col-xl-4">
+                                                    <ul class="error-sucees-list" id="commonSeoIssuesDetails_failed">
+                                                        <li class="bg-red text-white py-2 px-3 font-14"
+                                                            data-category-type="error" data-category-name="error">
+                                                            <span class="text-white">Failed</span>
+                                                        </li>
+                                                        <li class="bg-white py-2 px-3 font-12 text-red scrollbartab"
+                                                            data-category-type="error" data-category-name="error">
+                                                            <ul></ul>
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                                <div class="col-xl-4">
+                                                    <ul class="error-sucees-list" id="commonSeoIssuesDetails_warning">
+                                                        <li class="bg-yellow text-white py-2 px-3 font-14"
+                                                            data-category-type="warning" data-category-name="warning">
+                                                            <span class="text-white">Warnings</span>
+                                                        </li>
+                                                        <li class="bg-white py-2 px-3 font-12 text-yellow scrollbartab"
+                                                            data-category-type="warning" data-category-name="warning">
+                                                            <ul></ul>
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                                <div class="col-xl-4">
+                                                    <ul class="error-sucees-list" id="commonSeoIssuesDetails_passed">
+                                                        <li class="bg-green text-white py-2 px-3 font-14"
+                                                            data-category-type="success" data-category-name="success">
+                                                            <span class="text-white">Passed</span>
+                                                        </li>
+                                                        <li class="bg-white py-2 px-3 font-12 text-green scrollbartab"
+                                                            data-category-type="success" data-category-name="success">
+                                                            <ul></ul>
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </div>
+
+
+                                        <div class="tabs-3 mb-3">
+                                            <div class="row gx-3">
+                                                <div class="col-xl-4">
+                                                    <ul class="error-sucees-list"
+                                                        id="speedOptimizaionIssuesDetails_failed">
+                                                        <li class="bg-red text-white py-2 px-3 font-14"
+                                                            data-category-type="error" data-category-name="error">
+                                                            <span class="text-white">Failed</span>
+                                                        </li>
+                                                        <li class="bg-white py-2 px-3 font-12 text-red scrollbartab"
+                                                            data-category-type="error" data-category-name="error">
+                                                            <ul></ul>
+                                                        </li>
+
+                                                    </ul>
+                                                </div>
+                                                <div class="col-xl-4">
+                                                    <ul class="error-sucees-list"
+                                                        id="speedOptimizaionIssuesDetails_warning">
+                                                        <li class="bg-yellow text-white py-2 px-3 font-14"
+                                                            data-category-type="warning" data-category-name="warning">
+                                                            <span class="text-white">Warnings</span>
+                                                        </li>
+                                                        <li class="bg-white py-2 px-3 font-12 text-yellow scrollbartab"
+                                                            data-category-type="warning" data-category-name="warning">
+                                                            <ul></ul>
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                                <div class="col-xl-4">
+                                                    <ul class="error-sucees-list"
+                                                        id="speedOptimizaionIssuesDetails_passed">
+                                                        <li class="bg-green text-white py-2 px-3 font-14"
+                                                            data-category-type="success" data-category-name="success">
+                                                            <span class="text-white">Passed</span>
+                                                        </li>
+                                                        <li class="bg-white py-2 px-3 font-12 text-green scrollbartab"
+                                                            data-category-type="success" data-category-name="success">
+                                                            <ul></ul>
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="tabs-4 mb-3">
+                                            <div class="row gx-3">
+                                                <div class="col-xl-4">
+                                                    <ul class="error-sucees-list"
+                                                        id="serverAndSecurityIssuesDetails_failed">
+                                                        <li class="bg-red text-white py-2 px-3 font-14"
+                                                            data-category-type="error" data-category-name="error">
+                                                            <span class="text-white">Failed</span>
+                                                        </li>
+                                                        <li class="bg-white py-2 px-3 font-12 text-red scrollbartab"
+                                                            data-category-type="error" data-category-name="error">
+                                                            <ul></ul>
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                                <div class="col-xl-4">
+                                                    <ul class="error-sucees-list"
+                                                        id="serverAndSecurityIssuesDetails_warning">
+                                                        <li class="bg-yellow text-white py-2 px-3 font-14"
+                                                            data-category-type="warning" data-category-name="warning">
+                                                            <span class="text-white">Warnings</span>
+                                                        </li>
+                                                        <li class="bg-white py-2 px-3 font-12 text-yellow scrollbartab"
+                                                            data-category-type="warning" data-category-name="warning">
+                                                            <ul></ul>
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                                <div class="col-xl-4">
+                                                    <ul class="error-sucees-list"
+                                                        id="serverAndSecurityIssuesDetails_passed">
+                                                        <li class="bg-green text-white py-2 px-3 font-14"
+                                                            data-category-type="success" data-category-name="success">
+                                                            <span class="text-white">Passed</span>
+                                                        </li>
+                                                        <li class="bg-white py-2 px-3 font-12 text-green scrollbartab"
+                                                            data-category-type="success" data-category-name="success">
+                                                            <ul></ul>
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="tabs-5 mb-3">
+                                            <div class="row gx-3">
+                                                <div class="col-xl-4">
+                                                    <ul class="error-sucees-list"
+                                                        id="mobileUsabilityIssuesDetails_failed">
+                                                        <li class="bg-red text-white py-2 px-3 font-14"
+                                                            data-category-type="error" data-category-name="error">
+                                                            <span class="text-white">Failed</span>
+                                                        </li>
+                                                        <li class="bg-white py-2 px-3 font-12 text-red scrollbartab"
+                                                            data-category-type="error" data-category-name="error">
+                                                            <ul></ul>
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                                <div class="col-xl-4">
+                                                    <ul class="error-sucees-list"
+                                                        id="mobileUsabilityIssuesDetails_warning">
+                                                        <li class="bg-yellow text-white py-2 px-3 font-14"
+                                                            data-category-type="warning" data-category-name="warning">
+                                                            <span class="text-white">Warnings</span>
+                                                        </li>
+                                                        <li class="bg-white py-2 px-3 font-12 text-yellow scrollbartab"
+                                                            data-category-type="warning" data-category-name="warning">
+                                                            <ul></ul>
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                                <div class="col-xl-4">
+                                                    <ul class="error-sucees-list"
+                                                        id="mobileUsabilityIssuesDetails_passed">
+                                                        <li class="bg-green text-white py-2 px-3 font-14"
+                                                            data-category-type="success" data-category-name="success">
+                                                            <span class="text-white">Passed</span>
+                                                        </li>
+                                                        <li class="bg-white py-2 px-3 font-12 text-green scrollbartab"
+                                                            data-category-type="success" data-category-name="success">
+                                                            <ul></ul>
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="tabs-6 mb-3">
+                                            <div class="row gx-3">
+                                                <div class="col-xl-4">
+                                                    <ul class="error-sucees-list" id="advancedSeoIssuesDetails_failed">
+                                                        <li class="bg-red text-white py-2 px-3 font-14"
+                                                            data-category-type="error" data-category-name="error">
+                                                            <span class="text-white">Failed</span>
+                                                        </li>
+                                                        <li class="bg-white py-2 px-3 font-12 text-red scrollbartab"
+                                                            data-category-type="error" data-category-name="error">
+                                                            <ul></ul>
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                                <div class="col-xl-4">
+                                                    <ul class="error-sucees-list" id="advancedSeoIssuesDetails_warning">
+                                                        <li class="bg-yellow text-white py-2 px-3 font-14"
+                                                            data-category-type="warning" data-category-name="warning">
+                                                            <span class="text-white">Warnings</span>
+                                                        </li>
+                                                        <li class="bg-white py-2 px-3 font-12 text-yellow scrollbartab"
+                                                            data-category-type="warning" data-category-name="warning">
+                                                            <ul></ul>
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                                <div class="col-xl-4">
+                                                    <ul class="error-sucees-list" id="advancedSeoIssuesDetails_passed">
+                                                        <li class="bg-green text-white py-2 px-3 font-14"
+                                                            data-category-type="success" data-category-name="success">
+                                                            <span class="text-white">Passed</span>
+                                                        </li>
+                                                        <li class="bg-white py-2 px-3 font-12 text-green scrollbartab"
+                                                            data-category-type="success" data-category-name="success">
+                                                            <ul></ul>
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="status-preview-top crawler">
+                                    <span class="font-22 text-white line-height-1" id="statusPreviewTop">Summary Of
+                                        Issues</span>
+
+                                    <div class="preview-progress-row">
+                                        <div class="previewProgressBar">
+                                            <p class="font-14 text-white m-0 mb-1 d-flex justify-content-between">
+                                                <span>Failed</span>
+                                                <span class='failed_val'>0</span>
+                                            </p>
+                                            <div class="progress">
+                                                <div class="progress-bar bg-red" role="progressbar" aria-valuenow="75"
+                                                    aria-valuemin="0" aria-valuemax="100"></div>
+                                            </div>
+                                        </div>
+                                        <div class="previewProgressBar">
+                                            <p class="font-14 text-white m-0 mb-1 d-flex justify-content-between">
+                                                <span>Warnings</span>
+                                                <span class='warning_val'>0</span>
+                                            </p>
+                                            <div class="progress">
+                                                <div class="progress-bar bg-yellow" role="progressbar"
+                                                    aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+                                            </div>
+                                        </div>
+                                        <div class="previewProgressBar">
+                                            <p class="font-14 text-white m-0 mb-1 d-flex justify-content-between">
+                                                <span>Passed</span>
+                                                <span class='passed_val'>0</span>
+                                            </p>
+                                            <div class="progress">
+                                                <div class="progress-bar bg-green" role="progressbar" aria-valuenow="75"
+                                                    aria-valuemin="0" aria-valuemax="100"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="status-preview-main crawler">
+                                    <div class="status-preview" id="Categories_Failed">
+                                        <div class="status-title" data-category-type="errors"
+                                            data-category-name="errors">
+                                            <div class="ttt w-100 hide">
+                                                <h6 class="text-gray mb-2 font-18 fw-400 d-inline-block align-middle ">
+                                                    <span class="font-12 text-red me-1 d-inline-block align-middle"><i
+                                                            class="fa-solid fa-circle"></i></span>
+                                                    Console Errors Test
+                                                </h6>
+                                                <p class="text-light-gray ms-4">
+                                                    Congratulations! Your webpage is using a title tag!
+                                                    <span class="text-gray d-block">First Contentful Paint marks the
+                                                        time at
+                                                        which
+                                                        the
+                                                        first text or image is painted. Learn more.</span>
+                                                </p>
+                                                <a href="#"
+                                                    class="btn btn-primary bg-red rounded-0 err-btn ms-4 font-20 d-table">How
+                                                    To
+                                                    Fix</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="status-preview" id="Categories_Warning">
+                                        <div class="status-title" data-category-type="warning"
+                                            data-category-name="warning">
+                                            <div class="ttt w-100 hide">
+                                                <h6 class="text-gray mb-2 font-18 fw-400 d-inline-block align-middle ">
+                                                    <span
+                                                        class="font-12 text-yellow me-1 d-inline-block align-middle"><i
+                                                            class="fa-solid fa-circle"></i></span>
+                                                    Console Errors Test
+                                                </h6>
+                                                <p class="text-light-gray ms-4">
+                                                    Congratulations! Your webpage is using a title tag!
+                                                    <span class="text-gray d-block">First Contentful Paint marks the
+                                                        time at
+                                                        which
+                                                        the
+                                                        first text or image is painted. Learn more.</span>
+                                                </p>
+                                                <a href="#"
+                                                    class="btn btn-primary bg-yellow rounded-0 err-btn ms-4 font-20 d-table">How
+                                                    To
+                                                    Fix</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="status-preview" id="Categories_Passed">
+                                        <div class="status-title" data-category-type="success"
+                                            data-category-name="success">
+                                            <div class="ttt w-100 hide">
+                                                <h6 class="text-gray mb-2 font-18 fw-400 d-inline-block align-middle ">
+                                                    <span class="font-12 text-green me-1 d-inline-block align-middle"><i
+                                                            class="fa-solid fa-circle"></i></span>
+                                                    Console Errors Test
+                                                </h6>
+                                                <p class="text-light-gray ms-4">
+                                                    Congratulations! Your webpage is using a title tag!
+                                                    <span class="text-gray d-block">First Contentful Paint marks the
+                                                        time at
+                                                        which
+                                                        the
+                                                        first text or image is painted. Learn more.</span>
+                                                </p>
+                                                <a href="#"
+                                                    class="btn btn-primary bg-green rounded-0 err-btn ms-4 font-20 d-table">How
+                                                    To
+                                                    Fix</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="accordionSummary"></div>
+                </div>
+                <div class="est"></div>
+            </div>
+        </div>
+        <div class="limit-alert-bar my-5 freeProSection" style="display: none;">
+            <div class="limit-alert">
+                <img src="{% static '/site_audit/assets/limit-alert.png'%}" alt="limit-alert">
+            </div>
+            <p class="font-14 text-black m-0  freeProSectionText">You've reached your limits for the free plan. You can
+                see more by
+                upgrading to the higher plan.</p>
+            <a href="/subscription/upgrade_subscription/" class="upgrade-btn">
+                <img src="{% static '/site_audit/assets/king.png'%}" alt="king" />
+                Upgrade plan
+            </a>
+        </div>
+    </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="seo_CheckupModal_lg" tabindex="-1" aria-labelledby="seo_CheckupModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title m-0" id="seo_CheckupModalLabel"></h5>
+                <button type="button" class="btn-close px-0 m-0" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div id="ModalData"></div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger btn-sm" data-bs-dismiss="modal">Close</button>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- Modal -->
+<div class="modal fade" id="seo_CheckupModal" tabindex="-1" aria-labelledby="seo_CheckupModalLabelMD"
+    aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title m-0" id="seo_CheckupModalLabelMD"></h5>
+                <button type="button" class="btn-close px-0 m-0" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div id="ModalDataMD"></div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger btn-sm" data-bs-dismiss="modal">Close</button>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- modal -->
+
+
+{% endblock %}
+{% block extrascript %}
+
+<!-- projectlist js -->
+{% if request.user.is_authenticated %}
+
+{% endif %}
+
+<!-- <script src="{% static 'user_management/libs/Fileuploader/jquery.dm-uploader.min.js' %}"></script>
+<script src="{% static 'user_management/libs/Fileuploader/demo-ui.js' %}"></script> -->
+<!-- <script src="{% static 'site_audit/js/websiteRankCharts.js' %}"></script> -->
+<script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+<script src="https://cdn.anychart.com/releases/v8/js/anychart-base.min.js"></script>
+<script src="https://cdn.anychart.com/releases/v8/js/anychart-ui.min.js"></script>
+<script src="https://cdn.anychart.com/releases/v8/js/anychart-exports.min.js"></script>
+<script src="https://cdn.anychart.com/releases/v8/js/anychart-tag-cloud.min.js"></script>
+<link href="https://cdn.anychart.com/releases/v8/css/anychart-ui.min.css" type="text/css" rel="stylesheet">
+
+<script src="{% static 'site_audit/libs/select2/js/select2.full.min.js'%}"></script>
+<!-- <script src="{% static 'site_audit/js/alerts.js' %}"></script> -->
+<!-- <script src="{% static 'site_audit/js/objectives.js' %}"></script> -->
+<!-- <script src="{% static 'site_audit/js/dashboard2.js' %}"></script> -->
+<!-- <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script> -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-circle-progress/1.1.3/circle-progress.min.js"></script>
+<!-- <script src="{% static 'site_audit/js/scripts.js' %}"></script> -->
+<script src="{% static 'site_audit/js/crawler.js' %}"></script>
+
+<script>
+    // {% if messages %}
+    //   {% for message in messages %}
+    //     ShowNoty('{{message}}','alert');
+    //   {% endfor %}
+    //   {% endif %}
+
+    $(document).ready(function () {
+        $('#detect_exis_url').prop('disabled', false)
+        var setP_func = setInterval(getUrl, 1000);
+        $("#selectedDomain").change(function () {
+            getUrl();
+        });
+
+    })
+
+
+
+    function getUrl() {
+        var url = $("#selectedDomain :selected").val();
+        $("#current_project").html(url);
+        if (url !== undefined && url !== "") {
+            clearInterval(setP_func);
+        }
+    }
+
+
+
+
+</script>
+<style>
+    .progress-bar-success {
+        min-width: 5.4% !important;
+    }
+</style>
+{% endblock %}

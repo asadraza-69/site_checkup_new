@@ -1,0 +1,39 @@
+{% extends "bw_base.html" %}
+{% load humanize %}
+{% block extrahead %}
+
+<style>
+
+</style>
+{% endblock %}
+{% block content %}
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <div id="tableApp"></div>
+        </div>
+    </div>
+</div>
+
+
+{% endblock %}
+
+
+{% block extrascript %}
+
+
+<script>
+
+$(document).ready(function () {
+ var param = window.location.search
+  $("[rel='data-bs-toggle']").tooltip();
+  $('[data-bs-toggle="tooltip"]').tooltip();
+
+  getAndRenderDynamicTable('../../loggings/system_logs_listview/'+param+'', 'dynamicTable', 'tableApp');
+
+});
+
+
+</script>
+{% endblock %}

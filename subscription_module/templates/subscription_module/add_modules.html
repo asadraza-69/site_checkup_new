@@ -1,0 +1,238 @@
+{% extends "base2.html" %}
+{% load static %}
+{% block extrahead %}
+<style>
+    .membership-card-body {
+        min-height: 300px;
+        background: #f1f1f1;
+        border-radius: 10px;
+    }
+
+    .addModuleContainer {
+        min-height: 190px;
+    }
+
+    .multiSelectorContainer {
+        display: flex;
+        justify-content: center;
+    }
+
+    .membership-card {
+        width: 30rem;
+    }
+
+    @media only screen and (max-width: 670px) {
+        .membership-card {
+            width: 20rem;
+        }
+    }
+
+    .img-width {
+        width: 4%;
+    }
+
+    .membership-action-loader {
+        display: none;
+    }
+
+    .billing-cycle:first-letter {
+        text-transform: capitalize
+    }
+
+    .date-letter-spacing {
+        letter-spacing: 0.2em;
+    }
+
+    .active-color {
+        color: green;
+    }
+
+    .custom-badge {
+        /* display: flex !important;
+  align-items: center !important;
+  height: 24px; */
+        min-width: 125px;
+    }
+
+    .custom-badge2 {
+        min-width: 125px;
+    }
+
+    .membership-heading {
+        background-color: #707070;
+        line-height: 1.5;
+        color: #fff;
+        text-transform: uppercase;
+        box-shadow: 0 2px 5px 0 rgb(0 0 0 / 20%), 0 2px 10px 0 rgb(0 0 0 / 10%);
+        border-radius: 6px;
+    }
+
+    .tb_loader {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        z-index: 999;
+        /* margin: 5% 40%; */
+    }
+
+    .limit-alert-bar {
+        display: flex;
+        align-items: center;
+        background-color: #f3f5f7;
+        border-radius: 10px;
+        padding: 15px 20px;
+    }
+
+    .limit-alert>img {
+        max-width: 80%;
+    }
+
+    .upgrade-btn {
+        margin-left: auto;
+        background-color: #167ee6;
+        color: #fff;
+        border-radius: 10px;
+        text-transform: uppercase;
+        padding: 10px;
+        font-weight: 500;
+        font-size: 15px;
+        transition: all 0.3s ease-in-out;
+        border: 1px solid transparent;
+    }
+
+    .upgrade-btn:hover {
+        background-color: transparent;
+        color: #167ee6;
+        border-color: #167ee6;
+    }
+
+    .upgrade-btn>img {
+        margin-right: 5px;
+    }
+
+    .membership-action-btn {
+        display: none;
+    }
+
+    .membership-action-btn:hover {
+        background-color: #f1f1f1 !important;
+    }
+
+    .membership-action-btn:active {
+        background-color: #f1f1f1 !important;
+    }
+
+
+    .table-head.errorTypes {
+        height: auto;
+    }
+
+    .tb_loader {
+        position: absolute;
+        z-index: 999;
+        /* margin: 5% 40%; */
+    }
+
+    @media (max-width: 1300px) {
+        main {
+            padding-left: 16%;
+        }
+    }
+
+    @media only screen and (min-width: 992px) {
+        main {
+            padding-left: 16%;
+            padding-top: 20px;
+        }
+    }
+
+    @media (max-width: 1199px) {
+        main {
+            padding-left: 20%;
+        }
+    }
+
+    @media (max-width: 991px) {
+        main {
+            padding-left: 0;
+            margin-top: 125px;
+        }
+    }
+
+    @import url('https://fonts.googleapis.com/css?family=Quicksand:400,500,700&subset=latin-ext');
+
+    body {
+        font-family: 'Quicksand', sans-serif;
+        font-weight: 450;
+        min-height: 100vh;
+        color: #ADAFB6;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background: #fff;
+        transition: all .2s ease;
+    }
+</style>
+
+{% endblock %}
+{% block content %}
+<div class="container">
+    <!-- Crawler Heading Section  -->
+    <div class="row ">
+        <div class="col-xl-9">
+            <div class="center-section">
+                <h4 class="title mb-5 fw-400 pb-2">Add Modules</h4>
+            </div>
+        </div>
+
+        <!-- table code start  -->
+
+        <!-- card code start here  -->
+        <div class="d-flex justify-content-center align-items-center mb-5">
+
+            <div class="card membership-card" style=" border: none;">
+                <div class="card-body membership-card-body">
+                    <h4 class="mb-3 p-2 text-center membership-heading">Add Modules</h4>
+                    <form id="add_module_form" class="p-5 px-5 py-5 ">
+                        <div class="mb-3">
+                            <input type="text" id="module_name" name="module_name" autofocus="" class="form-control"
+                                placeholder="Module Name" required="">
+                        </div>
+                        <div class="mb-3">
+                                <textarea id="description" name="description" autofocus="" class="form-control" rows="5" cols="30" placeholder="Remarks" required=""></textarea>
+                        </div>
+                        
+                        <div class="button-container d-flex justify-content-center">
+                            <button type="submit" class="btn custom-subscription-btn" href=''
+                                style="background-color: #707070; width: 120px; color: #fff;">Save</button>
+                        </div>
+                    </form>
+
+                </div>
+            </div>
+
+
+        </div>
+       
+
+    </div>
+    <div class="limit-alert-bar mt-md-5 mb-md-4 mx-4 mt-5 mb-4">
+        <div class="limit-alert">
+            <img src="../../static/site_audit/assets/limit-alert.png" alt="limit-alert" />
+        </div>
+        <p class="font-14 text-black m-0">
+            You've reached your limits for the free plan. You can see more by
+            upgrading to the higher plan.
+        </p>
+        <a href="/subscription/upgrade_subscription/" class="upgrade-btn">
+            <img src="../../static/site_audit/assets/king.png" alt="king" />
+            Upgrade plan
+        </a>
+    </div>
+    {% endblock %}
+
+    {% block extrascript %}
+    <script src="{% static 'subscription_module/js/add_modules.js' %}"></script>
+
+    {% endblock %}

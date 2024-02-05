@@ -1,0 +1,2795 @@
+{% extends "base2.html" %}
+{% load static %}
+{% block extrahead %}
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"/>
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick-theme.css"/>
+<style>
+    @media (min-width: 1150px) {
+        .c348 {
+            background: rgba(250, 250, 250, .9);
+            border: 1px solid #ffffff;
+            border-radius: 5px;
+            margin: 16px 0 16px 16px;
+            grid-gap: 48px;
+            padding: 28px 44px;
+        }
+    }
+
+    .c348 {
+        grid-template-columns: repeat(2, 1fr);
+        grid-gap: 32px;
+
+    }
+
+    .c348 {
+
+        padding: 24px 20px;
+        font-family: Poppins, sans-serif;
+    }
+
+
+
+    .c348 .label {
+        grid-gap: 20px;
+    }
+
+    .c348 .label {
+        font-family: Poppins, sans-serif;
+        font-style: normal;
+        font-weight: 600;
+        font-size: 16px;
+        line-height: 20px;
+        color: #000;
+        display: grid;
+        grid-gap: 12px;
+        grid-template-columns: auto 1fr;
+        align-items: center;
+        margin-bottom: 8px;
+        position: relative;
+    }
+
+    .mat-icon {
+        -webkit-user-select: none;
+        user-select: none;
+        background-repeat: no-repeat;
+        display: inline-block;
+        fill: currentColor;
+        height: 24px;
+        width: 24px;
+    }
+
+    .c202.description {
+        margin-left: 40px;
+    }
+
+
+    .c202.description {
+        font-family: Poppins, sans-serif;
+        font-style: normal;
+        font-weight: 400;
+        font-size: 13px;
+        line-height: 20px;
+        color: #262626;
+    }
+
+    .c203.label {
+        font-family: Poppins, sans-serif;
+        font-style: normal;
+        font-weight: 600;
+        font-size: 13px;
+        line-height: 18px;
+        display: flex;
+        align-items: center;
+        margin-top: 16px;
+        color: #000;
+    }
+
+    .c203.label mat-icon {
+        width: 42px;
+        height: 35px;
+        margin-right: 10px;
+    }
+
+    .c203.label p {
+        margin: 0;
+        line-height: 22px;
+    }
+
+    .c203.label p a {
+        white-space: nowrap;
+        color: #2f54eb;
+    }
+
+    .c203.label p {
+        margin: 0;
+        line-height: 22px;
+    }
+
+    .c203.label p a {
+        white-space: nowrap;
+        color: #2f54eb;
+    }
+
+    section.content {
+    background-color: #fff;
+}
+</style>
+{% endblock %}
+{% block content %}
+
+
+
+
+       
+                <section>
+                    <div class="seo-services-banner">
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-12">
+                                    <span class="f-18 f-500 f-white d-block mb-2">Professional Search Engine Optimization Services</span>
+                                    <h1 class="f-50 f-600 f-height-1 f-white mb-3">SEO Services That Grow Traffic And Increase Revenue</h1>
+                                    <p class="f-16 f-400 f-white mb-3">WebsiteRankingExpert is the best SEO services provider that guarantees your brand wins more audience, drives sales, and maximizes return on investment. With our experienced SEO team and state-of-the-art technology, we help you be FOUND the way you have found us!</p>
+                                </div>
+                                <div class="col-12 col-sm-12 col-md-12 col-lg-8 col-xl-8 col-xxl-8">
+                                    <div class="row">
+                                        <div class="col-12 col-sm-12 col-md-6 col-lg-5 col-xl-5 col-xxl-5 mt-3 mt-lg-0">
+                                            <div class="counter-box">
+                                                <div class="f-24 f-500 f-white"><span class="counter">1500</span>+</div>
+                                                <p class="f-14 f-400 f-white mb-0">CLIENTS WORKING WITH US GLOBALLY</p>
+                                            </div>
+                                        </div>
+                                        <div class="col-12 col-sm-12 col-md-6 col-lg-4 col-xl-4 col-xxl-4 mt-3 mt-lg-0">
+                                            <div class="counter-box">
+                                                <div class="f-24 f-500 f-white"><span class="counter">2</span>MIL+</div>
+                                                <p class="f-14 f-400 f-white mb-0">QUALIFIED LEADS DELIVERED</p>
+                                            </div>
+                                        </div>
+                                        <div class="col-12 col-sm-12 col-md-6 col-lg-3 col-xl-3 col-xxl-3 mt-3 mt-lg-0">
+                                            <div class="counter-box">
+                                                <div class="f-24 f-500 f-white"><span class="counter">93</span>%</div>
+                                                <p class="f-14 f-400 f-white mb-0">CLIENT RETENTION RATE</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                <!-- <section>
+                    <div class="audit-form-wrapper light-background pt-60 pb-60">
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 col-xxl-12">
+                                    <h2 class="f-32 f-600 f-height-1-1 f-black text-center mb-3">Get A Free SEO Audit</h2>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 col-xxl-12">
+                                    <form action="none.html" autocomplete="off">
+                                        <div class="row">
+                                            <div class="col-12 col-sm-12 col-md-6 col-lg-3 col-xl-3 col-xxl-3">
+                                                <input type="text" placeholder="Type Name" required="">
+                                            </div>
+                                            <div class="col-12 col-sm-12 col-md-6 col-lg-3 col-xl-3 col-xxl-3 mt-3 mt-lg-0">
+                                                <input type="text" placeholder="(000) 000-0000" required="">
+                                            </div>
+                                            <div class="col-12 col-sm-12 col-md-6 col-lg-3 col-xl-3 col-xxl-3 mt-3 mt-lg-0">
+                                                <input type="email" placeholder="Type Email" required="">
+                                            </div>
+                                            <div class="col-12 col-sm-12 col-md-6 col-lg-3 col-xl-3 col-xxl-3 mt-3 mt-lg-0">
+                                                <input type="url" placeholder="Type Website" required="">
+                                            </div>
+                                        </div>
+                                        <button type="submit">Audit Now</button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section> -->
+                <section>
+                    <div class="bussines-problems-seo-services d-none d-lg-block pb-5">
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 col-xxl-12">
+                                    <h2 class="f-32 f-600 f-height-1-1 f-black text-center my-5">Is Your Business Facing These Problems?</h2>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-12 col-sm-12 col-md-12 col-lg-6 col-xl-6 col-xxl-6 box mb-3">
+                                    <div class="row align-items-center">
+                                        <div class="col-12 col-sm-12 col-md-12 col-lg-3 col-xl-2 col-xxl-2">
+                                            <img src="https://imagedelivery.net/nJwaBs__P2JfMUeYJ4vmjQ/b99d0a13-5907-4301-0ece-286345559d00/public" alt="websiterankingexpert" width="65" height="65">
+                                        </div>
+                                        <div class="col-12 col-sm-12 col-md-12 col-lg-9 col-xl-10 col-xxl-10">
+                                            <p class="f-16 f-500 f-black-light mb-0">Your Business Is Not Showing On Top Search Results.</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-sm-12 col-md-12 col-lg-6 col-xl-6 col-xxl-6 box mb-3">
+                                    <div class="row align-items-center">
+                                        <div class="col-12 col-sm-12 col-md-12 col-lg-3 col-xl-2 col-xxl-2">
+                                            <img src="https://imagedelivery.net/nJwaBs__P2JfMUeYJ4vmjQ/b99d0a13-5907-4301-0ece-286345559d00/public" alt="websiterankingexpert" width="65" height="65">
+                                        </div>
+                                        <div class="col-12 col-sm-12 col-md-12 col-lg-9 col-xl-10 col-xxl-10">
+                                            <p class="f-16 f-500 f-black-light mb-0">Your SEO Strategy Is Failing.</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-sm-12 col-md-12 col-lg-6 col-xl-6 col-xxl-6 box mb-3">
+                                    <div class="row align-items-center">
+                                        <div class="col-12 col-sm-12 col-md-12 col-lg-3 col-xl-2 col-xxl-2">
+                                            <img src="https://imagedelivery.net/nJwaBs__P2JfMUeYJ4vmjQ/b7f0e4fd-ac39-441d-e92e-e2a62a3f8000/public" alt="websiterankingexpert" width="66" height="68">
+                                        </div>
+                                        <div class="col-12 col-sm-12 col-md-12 col-lg-9 col-xl-10 col-xxl-10">
+                                            <p class="f-16 f-500 f-black-light mb-0">You Are Only Investing But Not Making Any Profits.</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-sm-12 col-md-12 col-lg-6 col-xl-6 col-xxl-6 box mb-3">
+                                    <div class="row align-items-center">
+                                        <div class="col-12 col-sm-12 col-md-12 col-lg-3 col-xl-2 col-xxl-2">
+                                            <img src="https://imagedelivery.net/nJwaBs__P2JfMUeYJ4vmjQ/21dc4c1e-c51c-41ac-3566-c424648b6200/public" alt="websiterankingexpert" width="66" height="66">
+                                        </div>
+                                        <div class="col-12 col-sm-12 col-md-12 col-lg-9 col-xl-10 col-xxl-10">
+                                            <p class="f-16 f-500 f-black-light mb-0">You Are Not Getting Organic Traffic On Your Website.</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-sm-12 col-md-12 col-lg-6 col-xl-6 col-xxl-6 box mb-3 mb-lg-0">
+                                    <div class="row align-items-center">
+                                        <div class="col-12 col-sm-12 col-md-12 col-lg-3 col-xl-2 col-xxl-2">
+                                            <img src="https://imagedelivery.net/nJwaBs__P2JfMUeYJ4vmjQ/e5026c83-705f-4c2e-67a7-d9c0499c5f00/public" alt="websiterankingexpert" width="60" height="60">
+                                        </div>
+                                        <div class="col-12 col-sm-12 col-md-12 col-lg-9 col-xl-10 col-xxl-10">
+                                            <p class="f-16 f-500 f-black-light mb-0">You Are Not Getting Qualified Leads.</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-sm-12 col-md-12 col-lg-6 col-xl-6 col-xxl-6 box">
+                                    <div class="row align-items-center">
+                                        <div class="col-12 col-sm-12 col-md-12 col-lg-3 col-xl-2 col-xxl-2">
+                                            <img src="https://imagedelivery.net/nJwaBs__P2JfMUeYJ4vmjQ/047d8d24-3756-4d08-8625-89497991a400/public" alt="websiterankingexpert" width="65" height="65">
+                                        </div>
+                                        <div class="col-12 col-sm-12 col-md-12 col-lg-9 col-xl-10 col-xxl-10">
+                                            <p class="f-16 f-500 f-black-light mb-0">Your Current SEO Company Is Not Providing Results.</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                <section>
+                    <div class="blue-background pt-60 pb-60">
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 col-xxl-12">
+                                    <h2 class="f-32 f-600 f-height-1-1 f-white text-center mb-3">Optimize Your Website Today, As There Comes <br> No Better Tomorrow!</h2>
+                                    <p class="f-16 f-400 f-white text-center mb-3">Let's face it. Whether you are new to the business arena or have been running an enterprise for many years, there are certain things you wish to have, ALWAYS. Sales, Revenue, and Profit! And who brings these requisites? Customers and only CUSTOMERS! But are you having trouble getting those ideal customers? If yes, need not worry. Have WebsiteRankingExpert on your side to</p>
+                                    <h3 class="f-32 f-600 f-height-1-1 f-white text-center mb-3">BE THE NUMBER 1, BE ON NUMBER 1</h3>
+                                    <p class="f-16 f-400 f-white text-center mb-0">And enjoy heavy footfalls in your business arena!</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                <section>
+                    <div class="pt-60 pb-60">
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 col-xxl-12">
+                                    <h2 class="f-32 f-600 f-height-1-1 f-black text-center mb-3">Break Your Competition Without <br> Breaking Your Bank!</h2>
+                                    <p class="f-16 f-400 f-black text-center mb-0">Our result-oriented SEO services come at the most sensible rates ever. We propose multiple pricing <br> SEO packages to best suit your varying budgets and business goals.</p>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 col-xxl-12">
+                                    <div id="seo-services-pkgs"><ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
+        <li class="nav-item" role="presentation">
+            <button class="nav-link active" id="pills-annually-tab" data-bs-toggle="pill" data-bs-target="#pills-annually" type="button" role="tab" aria-controls="pills-annually" aria-selected="true">Annually <span>(SAVE 33%)</span></button>
+        </li>
+        <li class="nav-item" role="presentation">
+            <button class="nav-link" id="pills-quarterly-tab" data-bs-toggle="pill" data-bs-target="#pills-quarterly" type="button" role="tab" aria-controls="pills-quarterly" aria-selected="false">Quarterly <span>(SAVE 25%)</span></button>
+        </li>
+        <li class="nav-item" role="presentation">
+            <button class="nav-link" id="pills-monthly-tab" data-bs-toggle="pill" data-bs-target="#pills-monthly" type="button" role="tab" aria-controls="pills-monthly" aria-selected="false">Monthly <span>(SAVE 10%)</span></button>
+        </li>
+        </ul>
+        <div class="tab-content" id="pills-tabContent">
+        <div class="tab-pane fade show active" id="pills-annually" role="tabpanel" aria-labelledby="pills-annually-tab">
+            <div class="row">
+                <div class="col-lg-4">
+                    <div class="pricing-box blue">
+                        <div class="head">
+                            <h3>Basic</h3>
+                            <h4>$199<span>/month</span></h4>
+                            <p>Great for new start ups and businesses new to SEO! A solid first step towards conversions.</p>
+                        </div>
+                        <div class="scroll-area">
+                            <span>Keyword Research</span>
+                            <li>15-20 Keywords</li>
+                            <span>Content</span>
+                            <li>2 Articles (400 words)</li>
+                            <li>2 Blogs (500 words)</li>
+                            <span>Link Building</span>
+                            <li>10 Submissions</li>
+                            <li>10 Classifieds</li>
+                            <li>10 Community Participation</li>
+                            <li>10 Business Profiles</li>
+                            <span>Website</span>
+                            <li>Meta Tags Creation</li>
+                            <li>Web Content Optimization</li>
+                            <li>Keyword Optimization</li>
+                            <li>Anchor Text Optimization</li>
+                            <span>Conversion Tracking</span>
+                            <li>Google Analytics Installation</li>
+                            <span>Reporting</span>
+                            <li>Monthly Progress Report</li>
+                            <span>Features</span>
+                            <li>Dedicated Project Manager</li>
+                            <li>Support, 5 Days a Week</li>
+                        </div>
+                        <a href="#" class="order-cta">Enquire Now</a>
+                        <p class="offer">Call Now to get 10% off</p>
+                        <a href="tel:xxx-xxx-xxx" class="call-cta"><i class="fa-solid fa-phone"></i> Call : xxx-xxx-xxx</a>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="pricing-box green">
+                        <div class="head">
+                            <h3>Standard</h3>
+                            <h4>$249<span>/month</span></h4>
+                            <p>Highly sought after by companies who want to increase their conversions and market share!</p>
+                        </div>
+                        <div class="scroll-area">
+                            <span>Keyword Research</span>
+                            <li>20-25 Keywords</li>
+                            <span>Content</span>
+                            <li>4 Articles (400 words)</li>
+                            <li>4 Blogs (500 words)</li>
+                            <li>1 Press Releases</li>
+                            <span>Promotional Content</span>
+                            <li>1 infographics</li>
+                            <span>Link Building</span>
+                            <li>15 Submissions</li>
+                            <li>15 Classifieds</li>
+                            <li>15 Community Participation</li>
+                            <li>15 Business Profiles</li>
+                            <span>Website</span>
+                            <li>Meta Tags Creation</li>
+                            <li>Web Content Optimization</li>
+                            <li>Keyword Optimization</li>
+                            <li>Landing page Optimization</li>
+                            <li>Anchor Text Optimization</li>
+                            <li>Image Optimization</li>
+                            <span>Conversion Tracking</span>
+                            <li>Google Analytics Installation</li>
+                            <span>Reporting</span>
+                            <li>Monthly Progress Report</li>
+                            <span>Features</span>
+                            <li>Dedicated Project Manager</li>
+                            <li>Support, 5 Days a Week</li>
+                        </div>
+                        <a href="#" class="order-cta">Enquire Now</a>
+                        <p class="offer">Call Now to get 10% off</p>
+                        <a href="tel:xxx-xxx-xxx" class="call-cta"><i class="fa-solid fa-phone"></i> Call : xxx-xxx-xxx</a>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="pricing-box yellow">
+                        <div class="head">
+                            <h3>Professional</h3>
+                            <h4>$349<span>/month</span></h4>
+                            <p>Highly recommended by our SEO experts, this package has delivered clients the best results!</p>
+                        </div>
+                        <div class="scroll-area">
+                            <span>Keyword Research</span>
+                            <li>25-30 Keywords</li>
+                            <span>Content</span>
+                            <li>6 Articles (400 words)</li>
+                            <li>6 Blogs (500 words)</li>
+                            <li>2 Press Releases</li>
+                            <span>Promotional Content</span>
+                            <li>1 infographics</li>
+                            <li>1 Videos (non Voice-over)</li>
+                            <span>Link Building</span>
+                            <li>20 Submissions</li>
+                            <li>20 Classifieds</li>
+                            <li>20 Community Participation</li>
+                            <li>20 Business Profiles</li>
+                            <span>Website</span>
+                            <li>Meta Tags Creation</li>
+                            <li>Web Content Optimization</li>
+                            <li>Keyword Optimization</li>
+                            <li>Landing page Optimization</li>
+                            <li>Call To Actions</li>
+                            <li>Site Speed Optimization</li>
+                            <li>Anchor Text Optimization</li>
+                            <li>Image Optimization</li>
+                            <span>Conversion Tracking</span>
+                            <li>Google Analytics Installation</li>
+                            <span>Reporting</span>
+                            <li>Monthly Progress Report</li>
+                            <span>Features</span>
+                            <li>Dedicated Project Manager</li>
+                            <li>Support, 5 Days a Week</li>
+                        </div>
+                        <a href="#" class="order-cta">Enquire Now</a>
+                        <p class="offer">Call Now to get 10% off</p>
+                        <a href="tel:xxx-xxx-xxx" class="call-cta"><i class="fa-solid fa-phone"></i> Call : xxx-xxx-xxx</a>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="pricing-box blue mt-3">
+                        <div class="head">
+                            <h3>PRO</h3>
+                            <h4>$1005<span>/month</span></h4>
+                            <p>Hands down our most popular package! Ideal for practically all types of business big and small!</p>
+                        </div>
+                        <div class="scroll-area">
+                            <span>Keyword Research</span>
+                            <li>30-40 Keywords</li>
+                            <li>Competitor Analysis</li>
+                            <span>Content</span>
+                            <li>6 Articles (400 words)</li>
+                            <li>6 Blogs (500 words)</li>
+                            <li>1 Press Releases (1 Paid)</li>
+                            <span>Guest Blogs (DA 40 +)</span>
+                            <li>6 Articles (400 words)</li>
+                            <span>Promotional Content</span>
+                            <li>2 infographics</li>
+                            <li>1 Videos (w/ Voice-over)</li>
+                            <span>Link Building</span>
+                            <li>30 Submissions</li>
+                            <li>30 Classifieds</li>
+                            <li>30 Community Participation</li>
+                            <li>30 Business Profiles</li>
+                            <span>Website</span>
+                            <li>Meta Tags Creation</li>
+                            <li>Web Content Optimization</li>
+                            <li>Keyword Optimization</li>
+                            <li>Anchor Text Optimization</li>
+                            <li>Landing page Optimization</li>
+                            <li>Call To Actions</li>
+                            <li>Site Speed Optimization</li>
+                            <li>Image Optimization</li>
+                            <li>Mobile Optimization</li>
+                            <span>Conversion Tracking</span>
+                            <li>Google Analytics Installation</li>
+                            <li>Google Webmaster Installation</li>
+                            <li>Google Places Submissions</li>
+                            <span>Reporting</span>
+                            <li>Weekly Progress Report</li>
+                            <li>Monthly Progress Report</li>
+                            <li>Google Analytics Report</li>
+                            <span>Features</span>
+                            <li>Dedicated Project Manager</li>
+                            <li>Support, 5 Days a Week</li>
+                            <span>Social Media</span>
+                            <li>Facebook &amp; Twitter Page Creation</li>
+                            <li>15 Facebook Posts</li>
+                            <li>15 Twitter Posts</li>
+                            <li>Instagram Page Creation</li>
+                            <li>Instagram Page Creation</li>
+                        </div>
+                        <a href="#" class="order-cta">Enquire Now</a>
+                        <p class="offer">Call Now to get 10% off</p>
+                        <a href="tel:xxx-xxx-xxx" class="call-cta"><i class="fa-solid fa-phone"></i> Call : xxx-xxx-xxx</a>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="pricing-box green mt-3">
+                        <div class="head">
+                            <h3>Premium</h3>
+                            <h4>$1350<span>/month</span></h4>
+                            <p>Outrank your competitors with this package - Ideal for ecommerce websites and businesses!</p>
+                        </div>
+                        <div class="scroll-area">
+                            <span>Keyword Research</span>
+                            <li> 40-50 Keywords</li>
+                            <li> Competitor Analysis</li>
+                            <span>Content</span>
+                            <li>8 Articles (400 words)</li>
+                            <li>8 Blogs (500 words)</li>
+                            <li>3 Press Releases (1 Paid)</li>
+                            <span>Guest Blogs (DA 40 +)</span>
+                            <li>1 Guest Blogs (1000 words)</li>
+                            <span>Guest Blogs (DA 60 +)</span>
+                            <li>1 Guest Blogs (1000 words)</li>
+                            <span>Promotional Content</span>
+                            <li>2 infographics</li>
+                            <li>2 Videos (w/ Voice-over)</li>
+                            <span>Power Posts</span>
+                            <li>1 Power Post (2000 words)</li>
+                            <span>Link Building</span>
+                            <li>35 Submissions</li>
+                            <li>35 Classifieds</li>
+                            <li>35 Community Participation</li>
+                            <li>35 Business Profiles</li>
+                            <span>Website</span>
+                            <li>Meta Tags Creation</li>
+                            <li>Web Content Optimization</li>
+                            <li>Keyword Optimization</li>
+                            <li>Anchor Text Optimization</li>
+                            <li>Landing page Optimization</li>
+                            <li>Call To Actions</li>
+                            <li>Site Speed Optimization</li>
+                            <li>Image Optimization</li>
+                            <li>Mobile Optimization</li>
+                            <span>Conversion Tracking</span>
+                            <li>Google Analytics Installation</li>
+                            <li>Google Webmaster Installation</li>
+                            <li>Google Places Submissions</li>
+                            <span>Reporting</span>
+                            <li>Weekly Progress Report</li>
+                            <li>Monthly Progress Report</li>
+                            <li>Google Analytics Report</li>
+                            <span>Features</span>
+                            <li>Dedicated Project Manager</li>
+                            <li>Support, 5 Days a Week</li>
+                            <span>Social Media</span>
+                            <li>Facebook &amp; Twitter Page Creation</li>
+                            <li>15 Facebook Posts</li>
+                            <li>15 Twitter Posts</li>
+                            <li>Instagram Page Creation</li>
+                            <li>15 Instagram Posts</li>
+                        </div>
+                        <a href="#" class="order-cta">Enquire Now</a>
+                        <p class="offer">Call Now to get 10% off</p>
+                        <a href="tel:xxx-xxx-xxx" class="call-cta"><i class="fa-solid fa-phone"></i> Call : xxx-xxx-xxx</a>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="pricing-box yellow mt-3">
+                        <div class="head">
+                            <h3>On-Page</h3>
+                            <h4>$199<span>/month</span></h4>
+                            <p>Optimize your webpages using our comprehensive on-page optimization process.</p>
+                        </div>
+                        <div class="scroll-area">
+                            <span>Keyword Research</span>
+                            <li> Keywords</li>
+                            <span>Website</span>
+                            <li>Meta Tags Creation</li>
+                            <li>Web Content Optimization</li>
+                            <li>Keyword Optimization</li>
+                            <li>Landing page Optimization</li>
+                            <li>Call To Actions</li>
+                            <li>Site Speed Optimization</li>
+                            <li>Anchor Text Optimization</li>
+                            <li>Image Optimization</li>
+                        </div>
+                        <a href="#" class="order-cta">Enquire Now</a>
+                        <p class="offer">Call Now to get 10% off</p>
+                        <a href="tel:xxx-xxx-xxx" class="call-cta"><i class="fa-solid fa-phone"></i> Call : xxx-xxx-xxx</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="tab-pane fade" id="pills-quarterly" role="tabpanel" aria-labelledby="pills-quarterly-tab">
+            <div class="row">
+                <div class="col-lg-4">
+                    <div class="pricing-box blue">
+                        <div class="head">
+                            <h3>Basic</h3>
+                            <h4>$399<span>/month</span></h4>
+                            <p>Great for new start ups and businesses new to SEO! A solid first step towards conversions.</p>
+                        </div>
+                        <div class="scroll-area">
+                            <span>Keyword Research</span>
+                            <li>15-20 Keywords</li>
+                            <span>Content</span>
+                            <li>2 Articles (400 words)</li>
+                            <li>2 Blogs (500 words)</li>
+                            <span>Link Building</span>
+                            <li>10 Submissions</li>
+                            <li>10 Classifieds</li>
+                            <li>10 Community Participation</li>
+                            <li>10 Business Profiles</li>
+                            <span>Website</span>
+                            <li>Meta Tags Creation</li>
+                            <li>Web Content Optimization</li>
+                            <li>Keyword Optimization</li>
+                            <li>Anchor Text Optimization</li>
+                            <span>Conversion Tracking</span>
+                            <li>Google Analytics Installation</li>
+                            <span>Reporting</span>
+                            <li>Weekly Ranking Report</li>
+                            <li>Google Analytics Report</li>
+                            <li>Monthly Progress Report</li>
+                            <span>Features</span>
+                            <li>Dedicated Project Manager</li>
+                           <li>Support, 5 Days a Week</li>
+                        </div>
+                        <a href="#" class="order-cta">Enquire Now</a>
+                        <p class="offer">Call Now to get 10% off</p>
+                        <a href="tel:xxx-xxx-xxx" class="call-cta"><i class="fa-solid fa-phone"></i> Call : xxx-xxx-xxx</a>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="pricing-box green">
+                        <div class="head">
+                            <h3>Standard</h3>
+                            <h4>$449<span>/month</span></h4>
+                            <p>Highly sought after by companies who want to increase their conversions and market share!</p>
+                        </div>
+                        <div class="scroll-area">
+                            <span>Keyword Research</span>
+                            <li>20-25 Keywords</li>
+                            <span>Content</span>
+                            <li>4 Articles (400 words)</li>
+                            <li>4 Blogs (500 words)</li>
+                            <li>1 Press Releases</li>
+                            <span>Promotional Content</span>
+                            <li>Promotional Content</li>
+                            <span>Link Building</span>
+                            <li>15 Submissions</li>
+                            <li>15 Classifieds</li>
+                            <li>15 Community Participation</li>
+                            <li>15 Business Profiles</li>
+                            <span>Website</span>
+                            <li>Meta Tags Creation</li>
+                            <li>Web Content Optimization</li>
+                            <li>Keyword Optimization</li>
+                            <li>Landing page Optimization</li>
+                            <li>Anchor Text Optimization</li>
+                            <li>Image Optimization</li>
+                            <span>Conversion Tracking</span>
+                            <li>Google Analytics Installation</li>
+                            <span>Reporting</span>
+                            <li>Monthly Progress Report</li>
+                            <span>Features</span>
+                            <li>Dedicated Project Manager</li>
+                            <li>Support, 5 Days a Week</li>
+                        </div>
+                        <a href="#" class="order-cta">Enquire Now</a>
+                        <p class="offer">Call Now to get 10% off</p>
+                        <a href="tel:xxx-xxx-xxx" class="call-cta"><i class="fa-solid fa-phone"></i> Call : xxx-xxx-xxx</a>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="pricing-box yellow">
+                        <div class="head">
+                            <h3>Professional</h3>
+                            <h4>$549<span>/month</span></h4>
+                            <p>Highly recommended by our SEO experts, this package has delivered clients the best results!</p>
+                        </div>
+                        <div class="scroll-area">
+                            <span>Keyword Research</span>
+                            <li>25-30 Keywords</li>
+                            <span>Content</span>
+                            <li>6 Articles (400 words)</li>
+                            <li>6 Blogs (500 words)</li>
+                            <li>6 Articles (400 words)</li>
+                            <li>2 Press Releases</li>
+                            <span>Promotional Content</span>
+                            <li>1 infographics</li>
+                            <li>1 Videos (non Voice-over)</li>
+                            <span>Link Building</span>
+                            <li>20 Submissions</li>
+                            <li>20 Classifieds</li>
+                            <li>20 Community Participation</li>
+                            <li>20 Business Profiles</li>
+                            <span>Website</span>
+                            <li>Meta Tags Creation</li>
+                            <li>Web Content Optimization</li>
+                            <li>Keyword Optimization</li>
+                            <li>Landing page Optimization</li>
+                            <li>Call To Actions</li>
+                            <li>Site Speed Optimization</li>
+                            <li>Anchor Text Optimization</li>
+                            <li>Image Optimization</li>
+                            <span>Conversion Tracking</span>
+                            <li>Google Analytics Installation</li>
+                            <span>Reporting</span>
+                            <li>Monthly Progress Report</li>
+                            <span>Features</span>
+                            <li>Dedicated Project Manager</li>
+                            <li>Support, 5 Days a Week</li>
+                        </div>
+                        <a href="#" class="order-cta">Enquire Now</a>
+                        <p class="offer">Call Now to get 10% off</p>
+                        <a href="tel:xxx-xxx-xxx" class="call-cta"><i class="fa-solid fa-phone"></i> Call : xxx-xxx-xxx</a>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="pricing-box blue mt-3">
+                        <div class="head">
+                            <h3>Pro</h3>
+                            <h4>$1125<span>/month</span></h4>
+                            <p>Hands down our most popular package! Ideal for practically all types of business big and small!</p>
+                        </div>
+                        <div class="scroll-area">
+                            <span>Keyword Research</span>
+                            <li> 30-40 Keywords</li>
+                            <li> Competitor Analysis</li>
+                            <span>Content</span>
+                            <li>6 Articles (400 words)</li>
+                            <li>6 Blogs (500 words)</li>
+                            <li>1 Press Releases (1 Paid)</li>
+                            <span>Guest Blogs (DA 40 +)</span>
+                            <li>1 Guest Blogs (Upto 1000 words)</li>
+                            <span>Promotional Content</span>
+                            <li>2 infographics</li>
+                            <li>1 Videos (w/ Voice-over)</li>
+                            <span>Link Building</span>
+                            <li>10 Submissions</li>
+                            <li>10 Classifieds</li>
+                            <li>10 Community Participation</li>
+                            <li>10 Business Profiles</li>
+                            <span>Website</span>
+                            <li>Meta Tags Creation</li>
+                            <li>Web Content Optimization</li>
+                            <li>Keyword Optimization</li>
+                            <li>Anchor Text Optimization</li>
+                            <li>Landing page Optimization</li>
+                            <li>Call To Actions</li>
+                            <li>Site Speed Optimization</li>
+                            <li>Image Optimization</li>
+                            <li>Mobile Optimization</li>
+                            <span>Social Media</span>
+                            <li>Facebook &amp; Twitter Page Creation</li>
+                            <li>15 Facebook Posts</li>
+                            <li>15 Twitter Posts</li>
+                            <li>Instagram Page Creation</li>
+                            <li>15 Instagram Posts</li>
+                            <span>Conversion Tracking</span>
+                            <li>Google Analytics Installation</li>
+                            <li>Google Webmaster Installation</li>
+                            <li>Google Places Submissions</li>
+                            <span>Reporting</span>
+                            <li>Weekly Ranking Report</li>
+                            <li>Google Analytics Report</li>
+                            <li>Monthly Progress Report</li>
+                            <span>Features</span>
+                            <li>Dedicated Project Manager</li>
+                            <li>Support, 5 Days a Week</li>
+                        </div>
+                        <a href="#" class="order-cta">Enquire Now</a>
+                        <p class="offer">Call Now to get 10% off</p>
+                        <a href="tel:xxx-xxx-xxx" class="call-cta"><i class="fa-solid fa-phone"></i> Call : xxx-xxx-xxx</a>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="pricing-box green mt-3">
+                        <div class="head">
+                            <h3>Premium</h3>
+                            <h4>$1500<span>/month</span></h4>
+                            <p>Outrank your competitors with this package - Ideal for ecommerce websites and businesses!</p>
+                        </div>
+                        <div class="scroll-area">
+                            <span>Keyword Research</span>
+                            <li> 30-40 Keywords</li>
+                            <li> Competitor Analysis</li>
+                            <span>Content</span>
+                            <li>6 Articles (400 words)</li>
+                            <li>6 Blogs (500 words)</li>
+                            <li>1 Press Releases (1 Paid)</li>
+                            <span>Guest Blogs (DA 40 +)</span>
+                            <li>1 Guest Blogs (Upto 1000 words)</li>
+                            <span>Promotional Content</span>
+                            <li>2 infographics</li>
+                            <li>1 Videos (w/ Voice-over)</li>
+                            <span>Link Building</span>
+                            <li>10 Submissions</li>
+                            <li>10 Classifieds</li>
+                            <li>10 Community Participation</li>
+                            <li>10 Business Profiles</li>
+                            <span>Website</span>
+                            <li>Meta Tags Creation</li>
+                            <li>Web Content Optimization</li>
+                            <li>Keyword Optimization</li>
+                            <li>Anchor Text Optimization</li>
+                            <li>Landing page Optimization</li>
+                            <li>Call To Actions</li>
+                            <li>Site Speed Optimization</li>
+                            <li>Image Optimization</li>
+                            <li>Mobile Optimization</li>
+                            <span>Social Media</span>
+                            <li>Facebook &amp; Twitter Page Creation</li>
+                            <li>15 Facebook Posts</li>
+                            <li>15 Twitter Posts</li>
+                            <li>Instagram Page Creation</li>
+                            <li>15 Instagram Posts</li>
+                            <span>Conversion Tracking</span>
+                            <li>Google Analytics Installation</li>
+                            <li>Google Webmaster Installation</li>
+                            <li>Google Places Submissions</li>
+                            <span>Reporting</span>
+                            <li>Weekly Ranking Report</li>
+                            <li>Google Analytics Report</li>
+                            <li>Monthly Progress Report</li>
+                            <span>Features</span>
+                            <li>Dedicated Project Manager</li>
+                            <li>Support, 5 Days a Week</li>
+                        </div>
+                        <a href="#" class="order-cta">Enquire Now</a>
+                        <p class="offer">Call Now to get 10% off</p>
+                        <a href="tel:xxx-xxx-xxx" class="call-cta"><i class="fa-solid fa-phone"></i> Call : xxx-xxx-xxx</a>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="pricing-box yellow mt-3">
+                        <div class="head">
+                            <h3>On-Page</h3>
+                            <h4>$199<span>/month</span></h4>
+                            <p>Optimize your webpages using our comprehensive on-page optimization process.</p>
+                        </div>
+                        <div class="scroll-area">
+                            <span>Keyword Research</span>
+                            <li>Keywords</li>
+                            <span>Website</span>
+                            <li>Meta Tags Creation</li>
+                            <li>Web Content Optimization</li>
+                            <li>Keyword Optimization</li>
+                            <li>Landing page Optimization</li>
+                            <li>Call To Actions</li>
+                            <li>Site Speed Optimization</li>
+                            <li>Anchor Text Optimization</li>
+                            <li>Image Optimization</li>
+                        </div>
+                        <a href="#" class="order-cta">Enquire Now</a>
+                        <p class="offer">Call Now to get 10% off</p>
+                        <a href="tel:xxx-xxx-xxx" class="call-cta"><i class="fa-solid fa-phone"></i> Call : xxx-xxx-xxx</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="tab-pane fade" id="pills-monthly" role="tabpanel" aria-labelledby="pills-monthly-tab">
+            <div class="row">
+                <div class="col-lg-4">
+                    <div class="pricing-box blue">
+                        <div class="head">
+                            <h3>Basic</h3>
+                            <h4>$599<span>/month</span></h4>
+                            <p>Great for new start ups and businesses new to SEO! A solid first step towards conversions.</p>
+                        </div>
+                        <div class="scroll-area">
+                            <span>Keyword Research</span>
+                            <li>15-20 Keywords</li>
+                            <span>Content</span>
+                            <li>2 Articles (400 words)</li>
+                            <li>2 Blogs (500 words)</li>
+                            <span>Link Building</span>
+                            <li>10 Submissions</li>
+                            <li>10 Classifieds</li>
+                            <li>10 Community Participation</li>
+                            <li>10 Business Profiles</li>
+                            <span>Website</span>
+                            <li>Meta Tags Creation</li>
+                            <li>Web Content Optimization</li>
+                            <li>Keyword Optimization</li>
+                            <li>Anchor Text Optimization</li>
+                            <span>Conversion Tracking</span>
+                            <li>Google Analytics Installation</li>
+                            <span>Reporting</span>
+                            <li>Monthly Progress Report</li>
+                            <span>Features</span>
+                            <li>Dedicated Project Manager</li>
+                            <li>Support, 5 Days a Week</li>
+                        </div>
+                        <a href="#" class="order-cta">Enquire Now</a>
+                        <p class="offer">Call Now to get 10% off</p>
+                        <a href="tel:xxx-xxx-xxx" class="call-cta"><i class="fa-solid fa-phone"></i> Call : xxx-xxx-xxx</a>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="pricing-box green">
+                        <div class="head">
+                            <h3>Standard</h3>
+                            <h4>$649<span>/month</span></h4>
+                            <p>Highly sought after by companies who want to increase their conversions and market share!</p>
+                        </div>
+                        <div class="scroll-area">
+                            <span>Keyword Research</span>
+                            <li>20-25 Keywords</li>
+                            <span>Content</span>
+                            <li>4 Articles (400 words)</li>
+                            <li>4 Blogs (500 words)</li>
+                            <li>1 Press Releases</li>
+                            <span>Promotional Content</span>
+                            <li>1 infographics</li>
+                            <span>Link Building</span>
+                            <li>15 Submissions</li>
+                            <li>15 Classifieds</li>
+                            <li>15 Community Participation</li>
+                            <li>15 Business Profiles</li>
+                            <span>Website</span>
+                            <li>Meta Tags Creation</li>
+                            <li>Web Content Optimization</li>
+                            <li>Keyword Optimization</li>
+                            <li>Landing page Optimization</li>
+                            <li>Anchor Text Optimization</li>
+                            <li>Image Optimization</li>
+                            <span>Conversion Tracking</span>
+                            <li>Google Analytics Installation</li>
+                            <span>Reporting</span>
+                            <li>Monthly Progress Report</li>
+                            <span>Features</span>
+                            <li>Dedicated Project Manager</li>
+                            <li>Support, 5 Days a Week</li>
+                        </div>
+                        <a href="#" class="order-cta">Enquire Now</a>
+                        <p class="offer">Call Now to get 10% off</p>
+                        <a href="tel:xxx-xxx-xxx" class="call-cta"><i class="fa-solid fa-phone"></i> Call : xxx-xxx-xxx</a>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="pricing-box yellow">
+                        <div class="head">
+                            <h3>Professional</h3>
+                            <h4>$749<span>/month</span></h4>
+                            <p>Highly recommended by our SEO experts, this package has delivered clients the best results!</p>
+                        </div>
+                        <div class="scroll-area">
+                            <span>Keyword Research</span>
+                            <li>25-30 Keywords</li>
+                            <span>Content</span>
+                            <li>6 Articles (400 words)</li>
+                            <li>6 Blogs (500 words)</li>
+                            <li>2 Press Releases</li>
+                            <span>Promotional Content</span>
+                            <li>1 infographics</li>
+                            <li>1 Videos (non Voice-over)</li>
+                            <span>Link Building</span>
+                            <li>20 Submissions</li>
+                            <li>20 Community Participation</li>
+                            <li>20 Business Profiles</li>
+                            <li>20 Classifieds</li>
+                            <span>Website</span>
+                            <li>Meta Tags Creation</li>
+                            <li>Web Content Optimization</li>
+                            <li>Keyword Optimization</li>
+                            <li>Landing page Optimization</li>
+                            <li>Call To Actions</li>
+                            <li>Site Speed Optimization</li>
+                            <li>Anchor Text Optimization</li>
+                            <li>Image Optimization</li>
+                            <span>Conversion Tracking</span>
+                            <li>Google Analytics Installation</li>
+                            <span>Reporting</span>
+                            <li>Monthly Progress Report</li>
+                            <span>Features</span>
+                            <li>Dedicated Project Manager</li>
+                            <li>Support, 5 Days a Week</li>
+                        </div>
+                        <a href="#" class="order-cta">Enquire Now</a>
+                        <p class="offer">Call Now to get 10% off</p>
+                        <a href="tel:xxx-xxx-xxx" class="call-cta"><i class="fa-solid fa-phone"></i> Call : xxx-xxx-xxx</a>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="pricing-box blue mt-3">
+                        <div class="head">
+                            <h3>Pro</h3>
+                            <h4>$1350<span>/month</span></h4>
+                            <p>Hands down our most popular package! Ideal for practically all types of business big and small!</p>
+                        </div>
+                        <div class="scroll-area">
+                            <span>Keyword Research</span>
+                            <li> 30-40 Keywords</li>
+                            <li> Competitor Analysis</li>
+                            <span>Content</span>
+                            <li>6 Articles (400 words)</li>
+                            <li>6 Blogs (500 words)</li>
+                            <li>1 Press Releases (1 Paid)</li>
+                            <span>Guest Blogs (DA 40 +)</span>
+                            <li>1 Guest Blogs (Upto 1000 words)</li>
+                            <span>Promotional Content</span>
+                            <li>2 infographics</li>
+                            <li>1 Videos (w/ Voice-over)</li>
+                            <span>Link Building</span>
+                            <li>10 Submissions</li>
+                            <li>10 Classifieds</li>
+                            <li>10 Community Participation</li>
+                            <li>10 Business Profiles</li>
+                            <span>Website</span>
+                            <li>Meta Tags Creation</li>
+                            <li>Web Content Optimization</li>
+                            <li>Keyword Optimization</li>
+                            <li>Anchor Text Optimization</li>
+                            <li>Landing page Optimization</li>
+                            <li>Call To Actions</li>
+                            <li>Site Speed Optimization</li>
+                            <li>Image Optimization</li>
+                            <li>Mobile Optimization</li>
+                            <span>Social Media</span>
+                            <li>Facebook &amp; Twitter Page Creation</li>
+                            <li>15 Facebook Posts</li>
+                            <li>15 Twitter Posts</li>
+                            <li>Instagram Page Creation</li>
+                            <li>15 Instagram Posts</li>
+                            <span>Conversion Tracking</span>
+                            <li>Google Analytics Installation</li>
+                            <li>Google Webmaster Installation</li>
+                            <li>Google Places Submissions</li>
+                            <span>Reporting</span>
+                            <li>Weekly Ranking Report</li>
+                            <li>Google Analytics Report</li>
+                            <li>Monthly Progress Report</li>
+                            <span>Features</span>
+                            <li>Dedicated Project Manager</li>
+                           <li>Support, 5 Days a Week</li>
+                        </div>
+                        <a href="#" class="order-cta">Enquire Now</a>
+                        <p class="offer">Call Now to get 10% off</p>
+                        <a href="tel:xxx-xxx-xxx" class="call-cta"><i class="fa-solid fa-phone"></i> Call : xxx-xxx-xxx</a>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="pricing-box green mt-3">
+                        <div class="head">
+                            <h3>Premium</h3>
+                            <h4>$1800<span>/month</span></h4>
+                            <p>Highly sought after by companies who want to increase their conversions and market share!</p>
+                        </div>
+                        <div class="scroll-area">
+                            <span>Keyword Research</span>
+                            <li> 40-50 Keywords</li>
+                            <li> Competitor Analysis</li>
+                            <span>Content</span>
+                            <li>8 Articles (400 words)</li>
+                            <li>8 Blogs (500 words)</li>
+                            <li>3 Press Releases (1 Paid)</li>
+                            <span>Guest Blogs (DA 40 +)</span>
+                            <li>1 Guest Blogs (1000 words)</li>
+                            <span>Guest Blogs (DA 60 +)</span>
+                            <li>1 Guest Blogs (1000 words)</li>
+                            <span>Promotional Content</span>
+                            <li>2 infographics</li>
+                            <li>2 Videos (w/ Voice-over)</li>
+                            <span>Power Posts</span>
+                            <li>1 Power Post (2000 words)</li>
+                            <h5 class="heading3">Link Building</h5>
+                            <li>35 Submissions</li>
+                            <li>35 Classifieds</li>
+                            <li>35 Community Participation</li>
+                            <li>35 Business Profiles</li>
+                            <span>Website</span>
+                            <li>Meta Tags Creation</li>
+                            <li>Web Content Optimization</li>
+                            <li>Keyword Optimization</li>
+                            <li>Anchor Text Optimization</li>
+                            <li>Landing page Optimization</li>
+                            <li>Call To Actions</li>
+                            <li>Site Speed Optimization</li>
+                            <li>Image Optimization</li>
+                            <li>Mobile Optimization</li>
+                            <span>Conversion Tracking</span>
+                            <li>Google Analytics Installation</li>
+                            <li>Google Webmaster Installation</li>
+                            <li>Google Places Submissions</li>
+                            <span>Reporting</span>
+                            <li>Weekly Progress Report</li>
+                            <li>Monthly Progress Report</li>
+                            <li>Google Analytics Report</li>
+                            <span>Features</span>
+                            <li>Dedicated Project Manager</li>
+                            <li>Support, 5 Days a Week</li>
+                            <span>Social Media</span>
+                            <li>Facebook &amp; Twitter Page Creation</li>
+                            <li>15 Facebook Posts</li>
+                            <li>15 Twitter Posts</li>
+                            <li>Instagram Page Creation</li>
+                            <li>15 Instagram Posts</li>
+                        </div>
+                        <a href="#" class="order-cta">Enquire Now</a>
+                        <p class="offer">Call Now to get 10% off</p>
+                        <a href="tel:xxx-xxx-xxx" class="call-cta"><i class="fa-solid fa-phone"></i> Call : xxx-xxx-xxx</a>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="pricing-box yellow mt-3">
+                        <div class="head">
+                            <h3>On-Page</h3>
+                            <h4>$199<span>/month</span></h4>
+                            <p>Optimize your webpages using our comprehensive on-page optimization process.</p>
+                        </div>
+                        <div class="scroll-area">
+                            <span>Keyword Research</span>
+                            <li> Keywords</li>
+                            <span>Website</span>
+                            <li>Meta Tags Creation</li>
+                            <li>Web Content Optimization</li>
+                            <li>Keyword Optimization</li>
+                            <li>Landing page Optimization</li>
+                            <li>Call To Actions</li>
+                            <li>Site Speed Optimization</li>
+                            <li>Anchor Text Optimization</li>
+                            <li>Image Optimization</li>
+                        </div>
+                        <a href="#" class="order-cta">Enquire Now</a>
+                        <p class="offer">Call Now to get 10% off</p>
+                        <a href="tel:xxx-xxx-xxx" class="call-cta"><i class="fa-solid fa-phone"></i> Call : xxx-xxx-xxx</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        </div></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                <section>
+                    <div class="seo-services-marketing-list pb-60 pt-30 light-background d-none d-lg-block">
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 col-xxl-12">
+                                    <h2 class="f-32 f-600 f-height-1-1 f-black text-center mb-5">The Complete Internet Marketing Package!</h2>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-12 col-sm-12 col-md-6 col-lg-3 col-xl-3 col-xxl-3">
+                                    <h3>SEO</h3>
+                                    <ul class="growth-list">
+                                        <li>Upto 100 Keywords</li>
+                                        <li>Competitor Analysis</li>
+                                        <li>Articles</li>
+                                        <li>Blog Posts</li>
+                                        <li>Press Releases</li>
+                                        <li>Guest Blogs</li>
+                                        <li>Power Posts</li>
+                                        <li>Featured Posts</li>
+                                        <li>Infographics</li>
+                                        <li>Videos</li>
+                                        <li>Directory Submissions</li>
+                                        <li>Classified Ads</li>
+                                        <li>Community Participation</li>
+                                        <li>Business Profiles</li>
+                                        <li>Google Analytics Installation</li>
+                                        <li>Google Webmaster Installation</li>
+                                        <li>Google Places Submissions</li>
+                                        <li>Conversation Tracking</li>
+                                        <li>Weekly Rankings Report</li>
+                                        <li>Before and After Progress Reports</li>
+                                        <li>Social Media Posts</li>
+                                        <li>Monthly Progress Report</li>
+                                    </ul>
+                                </div>
+                                <div class="col-12 col-sm-12 col-md-6 col-lg-3 col-xl-3 col-xxl-3">
+                                    <h3>Paid Search Advertizing</h3>
+                                    <ul class="growth-list">
+                                        <li>Google Ads</li>
+                                        <li>Bing Ads</li>
+                                        <li>Keyword Research</li>
+                                        <li>Competitor Analysis</li>
+                                        <li>Ads Creation</li>
+                                        <li>Banner Creation</li>
+                                        <li>AdWords Account Setup</li>
+                                        <li>AdWords Account Configuration</li>
+                                        <li>Daily Spend Configuration</li>
+                                        <li>Search Metrics Configuration</li>
+                                        <li>Daily Bid Adjustment</li>
+                                        <li>Daily Campaign Monitoring</li>
+                                        <li>Keyword Optimization</li>
+                                        <li>Negative Keyword Identification</li>
+                                        <li>Google Webmaster Installation</li>
+                                        <li>Weekly Ranking Report</li>
+                                        <li>Google Analytics Report</li>
+                                        <li>Monthly Progress Report</li>
+                                    </ul>
+                                    <h3 class="mt-2">Branding</h3>
+                                    <ul class="growth-list">
+                                        <li>Featured Posts on Yahoo</li>
+                                        <li>Featured Posts On Entrepreneur</li>
+                                        <li>Featured Blog Posts</li>
+                                    </ul>
+                                </div>
+                                <div class="col-12 col-sm-12 col-md-6 col-lg-3 col-xl-3 col-xxl-3">
+                                    <h3>Social Media Marketing</h3>
+                                    <ul class="growth-list">
+                                        <li>Facebook/Twitter Page Creation</li>
+                                        <li>Facebook/Twitter Posts &amp; Outreach</li>
+                                        <li>LinkedIn Profile Creation</li>
+                                        <li>LinkedIn Posts and Outreach</li>
+                                        <li>Instagram/Pinterest Page Creation</li>
+                                        <li>Instagram/Pinterest Posts and Outreach</li>
+                                        <li>YouTube Channel Creation</li>
+                                        <li>YouTube Videos and Outreach</li>
+                                        <li>Weekly/Monthly Progress Reports</li>
+                                    </ul>
+                                    <h3 class="mt-2">Paid Social Marketing</h3>
+                                    <ul class="growth-list">
+                                        <li>Facebook Ads</li>
+                                        <li>Twitter Ads</li>
+                                        <li>LinkedIn Ads</li>
+                                        <li>Instagram Ads</li>
+                                        <li>YouTube Ads</li>
+                                    </ul>
+                                    <h3 class="mt-2">Website Optimization</h3>
+                                    <ul class="growth-list">
+                                        <li>Landing Page Optimization</li>
+                                        <li>Call to Action Optimization</li>
+                                        <li>Content Optimization</li>
+                                        <li>Mobile Friendly Optimization</li>
+                                    </ul>
+                                </div>
+                                <div class="col-12 col-sm-12 col-md-6 col-lg-3 col-xl-3 col-xxl-3">
+                                    <img width="150" height="153" alt="websiterankingexpert" src="https://imagedelivery.net/nJwaBs__P2JfMUeYJ4vmjQ/ebbe7250-c47c-4e5c-c70e-864d86bfe300/public">
+                                    <div class="features-box">
+                                        <h3>Features</h3>
+                                        <ul class="growth-list">
+                                            <li>Dedicated Project Manager</li>
+                                            <li>24 HR Support, 6 Days a Week</li>
+                                            <li>Client Dashboard Access</li>
+                                            <li>100% Money Back Guarantee</li>
+                                        </ul>
+                                    </div>
+                                    <a href="#" class="primary-btn mb-3 mt-4"><span>Live Chat Now</span></a>
+                                    <a href="tel:xxx-xxx-xxx" class="secondary-btn"><span>Call : xxx-xxx-xxx</span></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                <section>
+                    <div class="seo-services-wrapper pb-30 pt-30">
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 col-xxl-12">
+                                    <h2 class="f-32 f-600 f-height-1-1 f-black text-center mb-2">Our SEO Services</h2>
+                                    <p class="f-17 f-400 f-black text-center mb-4">Increase Your Search Rankings and Get Discovered More Online</p>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-12 col-sm-12 col-md-12 col-lg-6 col-xl-6 col-xxl-4 col-xs-12">
+                                    <div class="flip-card">
+                                        <div class="flip-card-inner">
+                                            <div class="flip-card-front">
+                                                <div>
+                                                    <img alt="websiterankingexpert" src="https://imagedelivery.net/nJwaBs__P2JfMUeYJ4vmjQ/ea316494-d34d-4fab-9254-9e6c2def8800/public" width="108" height="107">
+                                                    <h4>Keyword Research<br>&amp; Strategy</h4>
+                                                    <p><strong>Keyword Research</strong> serves as the lifeline of <strong>Search Engine Optimization</strong> efforts. Our <strong>SEO company</strong> has a</p>
+                                                </div>
+                                            </div>
+                                            <div class="flip-card-back">
+                                                <h5>Keyword Research &amp; Strategy</h5>
+                                                <p>Keyword Research serves as the lifeline of Search Engine Optimization efforts. Our SEO company has a team of professional and highly skilled digital marketing and <strong>WordPress SEO experts</strong> who know the art of conducting comprehensive Keyword Research. They will assess your business needs using in-depth <strong>keyword research</strong> and thorough <strong>site audits</strong> to provide the best online marketing strategies for your <strong>SEO campaigns</strong>.</p>
+                                                <a href="tel:xxx-xxx-xxx" class="primary-btn">Call Now</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-sm-12 col-md-12 col-lg-6 col-xl-6 col-xxl-4 col-xs-12">
+                                    <div class="flip-card">
+                                        <div class="flip-card-inner">
+                                            <div class="flip-card-front">
+                                                <div>
+                                                    <img alt="websiterankingexpert" src="https://imagedelivery.net/nJwaBs__P2JfMUeYJ4vmjQ/3bbdd8ff-d707-45f2-a74d-8d40e3548900/public" width="101" height="101">
+                                                    <h4>Link Building</h4>
+                                                    <p><strong>Backlinks</strong> are a major component of ranking higher in search engines. Hence you should work with an SEO</p>
+                                                </div>
+                                            </div>
+                                            <div class="flip-card-back">
+                                                <h5>Link Building</h5>
+                                                <p>Backlinks are a major component of ranking higher in search engines. Hence you should work with an <strong>SEO company</strong> like WebsiteRankingExpert, which has a dedicated SEO link building service driving traffic to your site through backlinks. We offer fully managed and bespoke <strong>link building services</strong> that speed up your ranking game and help you grow your BUSINESS, AUDIENCE, AND REVENUE!</p>
+                                                <a href="tel:xxx-xxx-xxx" class="primary-btn">Call Now</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-sm-12 col-md-12 col-lg-6 col-xl-6 col-xxl-4">
+                                    <div class="flip-card">
+                                        <div class="flip-card-inner">
+                                            <div class="flip-card-front">
+                                                <div>
+                                                    <img alt="websiterankingexpert" src="https://imagedelivery.net/nJwaBs__P2JfMUeYJ4vmjQ/733c6f26-8cf8-4268-715f-eb714a43a200/public" width="100" height="100">
+                                                    <h2>Technical SEO</h2>
+                                                    <p>The fix for slow-loading websites is simple - optimize your back end! By optimizing these errors, you'll be</p>
+                                                </div>
+                                            </div>
+                                            <div class="flip-card-back">
+                                                <h5>Technical SEO</h5>
+                                                <p>The fix for slow-loading websites is simple - optimize your back end! By optimizing these errors, you'll be helping search engines crawl and index better. This, in turn, will give users a more reliable experience when they use the internet to find information about products or services that are relevant to them personally. To say the least, <strong>Technical SEO</strong> is the foremost step in fashioning a better search experience. WebsiteRankingExpert masters the art of improvising your website performance via their legendary understanding of <strong>Technical SEO</strong>.</p>
+                                                <a href="tel:xxx-xxx-xxx" class="primary-btn">Call Now</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-sm-12 col-md-12 col-lg-6 col-xl-6 col-xxl-4 col-xs-12">
+                                    <div class="flip-card">
+                                        <div class="flip-card-inner">
+                                            <div class="flip-card-front">
+                                                <div>
+                                                    <img alt="websiterankingexpert" src="https://imagedelivery.net/nJwaBs__P2JfMUeYJ4vmjQ/0063b623-9bb4-436b-ea1a-5ee40e596100/public" width="102" height="106">
+                                                    <h4>Local SEO</h4>
+                                                    <p>The majority of customers search for local businesses online, and you can improve your company's ranking </p>
+                                                </div>
+                                            </div>
+                                            <div class="flip-card-back">
+                                                <h5>Local SEO</h5>
+                                                <p>The majority of customers search for local businesses online, and you can improve your company's ranking with <strong>Google Business Profile</strong> or <strong>GMB optimization</strong>. Our <strong>local SEO</strong> expert ensures that your business, no matter the size, ranks high in local search queries with conversion-driven optimization efforts. By managing an organization's reputation with <strong>local SEO</strong>, we help it grow its presence in the community as well!</p>
+                                                <a href="tel:xxx-xxx-xxx" class="primary-btn">Call Now</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-sm-12 col-md-12 col-lg-6 col-xl-6 col-xxl-4 col-xs-12">
+                                    <div class="flip-card">
+                                        <div class="flip-card-inner">
+                                            <div class="flip-card-front">
+                                                <div>
+                                                    <img alt="websiterankingexpert" src="https://imagedelivery.net/nJwaBs__P2JfMUeYJ4vmjQ/5d6acc7c-58f0-499a-da8d-339758d98500/public" width="106" height="105">
+                                                    <h4>On-Page SEO</h4>
+                                                    <p>With our <strong>On Page SEO services</strong>, you can enhance your website's trustworthiness and increase traffic.</p>
+                                                </div>
+                                            </div>
+                                            <div class="flip-card-back">
+                                                <h5>On-Page SEO</h5>
+                                                <p>With our On Page SEO services, you can enhance your website's trustworthiness and increase traffic.  <strong>On page SEO</strong> research entails a mix of activities that reveal your website's existing position and authority in search and highlight avenues for business growth. We use the latest search engine optimization tactics to help your brand rank high in Google for targeted keywords that will bring more users to your website.</p>
+                                                <a href="tel:xxx-xxx-xxx" class="primary-btn">Call Now</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-sm-12 col-md-12 col-lg-6 col-xl-6 col-xxl-4 col-xs-12">
+                                    <div class="flip-card">
+                                        <div class="flip-card-inner">
+                                            <div class="flip-card-front">
+                                                <div>
+                                                    <img alt="websiterankingexpert" src="https://imagedelivery.net/nJwaBs__P2JfMUeYJ4vmjQ/887aacef-503a-4dae-f17e-13ca98304700/public" width="105" height="105">
+                                                    <h4>Off-Page SEO</h4>
+                                                    <p>Our SEO company offers <strong>Off Page SEO</strong> featuring a unique blend of digital marketing services to help you </p>
+                                                </div>
+                                            </div>
+                                            <div class="flip-card-back">
+                                                <h5>Off-Page SEO</h5>
+                                                <p>Our SEO company offers Off Page SEO featuring a unique blend of digital marketing services to help you build your brand and generate qualified links. We work with social media and influencer campaigns as well link building strategies as part of <strong>Off Page</strong> SEO that will improve the search engine rankings for all pages on our website by utilizing On Page Treatments like keyword research &amp; deep linking analysis, among others!</p>
+                                                <a href="tel:xxx-xxx-xxx" class="primary-btn">Call Now</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-sm-12 col-md-12 col-lg-6 col-xl-6 col-xxl-4 col-xs-12">
+                                    <div class="flip-card">
+                                        <div class="flip-card-inner">
+                                            <div class="flip-card-front">
+                                                <div>
+                                                    <img alt="websiterankingexpert" src="https://imagedelivery.net/nJwaBs__P2JfMUeYJ4vmjQ/d5a3112e-5de9-4ea8-5b18-db1b987d6c00/public" width="103" height="93">
+                                                    <h4>Shopify SEO</h4>
+                                                    <p>We are here with our <strong>Shopify SEO services</strong> to help you strengthen your online store's digital presence and </p>
+                                                </div>
+                                            </div>
+                                            <div class="flip-card-back">
+                                                <h5>Shopify SEO</h5>
+                                                <p>We are here with our Shopify SEO services to help you strengthen your online store's digital presence and expand the reach of what it offers. Our Shopify SEO experts offer 24/7 customer support, so please don't hesitate to contact us if anything is urgent or concerning! We also provide <strong>Shopify web design services</strong> that include an audit and other advertising solutions like review response publishing that can optimize customers' experiences on this platform for success at every turn.</p>
+                                                <a href="tel:xxx-xxx-xxx" class="primary-btn">Call Now</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-sm-12 col-md-12 col-lg-6 col-xl-6 col-xxl-4 col-xs-12">
+                                    <div class="flip-card">
+                                        <div class="flip-card-inner">
+                                            <div class="flip-card-front">
+                                                <div>
+                                                    <img alt="websiterankingexpert" src="https://imagedelivery.net/nJwaBs__P2JfMUeYJ4vmjQ/1897515e-f046-4b74-71cb-4b74d38fba00/public" width="112" height="100">
+                                                    <h4>eCommerce SEO</h4>
+                                                    <p>WebsiteRankingExpert specializes in <strong>eCommerce website marketing</strong> strategies to help companies supercharge their </p>
+                                                </div>
+                                            </div>
+                                            <div class="flip-card-back">
+                                                <h5>eCommerce SEO</h5>
+                                                <p>WebsiteRankingExpert specializes in eCommerce website marketing strategies to help companies supercharge their online campaigns and attract more buyers.  Our <strong>eCommerce SEO strategies</strong> aim to help your online store punch above its weight and dominate the competition. Our <strong>eCommerce SEO services</strong> include keyword research, product markup, content promotion,eCommerce SEO strategy, and online product management. Partner with WebsiteRankingExpert and let us help you drive in more revenue to your eCommerce store.</p>
+                                                <a href="tel:xxx-xxx-xxx" class="primary-btn">Call Now</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-sm-12 col-md-12 col-lg-6 col-xl-6 col-xxl-4 col-xs-12">
+                                    <div class="flip-card">
+                                        <div class="flip-card-inner">
+                                            <div class="flip-card-front">
+                                                <div>
+                                                    <img alt="websiterankingexpert" src="https://imagedelivery.net/nJwaBs__P2JfMUeYJ4vmjQ/764e2fea-3af7-4ef4-cc6a-dc2b7700fa00/public" width="110" height="100">
+                                                    <h4>Content Writing</h4>
+                                                    <p>Our industry-leading content writing services are engineered to achieve your business goals. WebsiteRankingExpert</p>
+                                                </div>
+                                            </div>
+                                            <div class="flip-card-back">
+                                                <h5>Content Writing</h5>
+                                                <p>Our industry-leading content writing services are engineered to achieve your business goals. WebsiteRankingExpert content marketing agency manages keyword research, content strategy, content distribution, and content writing at the backend to assist you in reaching out to untapped demographics. Our content writing services cater to writing blog posts and optimizing pre-existing service or product pages, so search engines love visiting your website!</p>
+                                                <a href="tel:xxx-xxx-xxx" class="primary-btn">Call Now</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                <section>
+                    <div>
+                        <div class="container my-5">
+                            <div class="row mb-5">
+                                <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 col-xxl-12">
+                                    <h2 class="f-32 f-600 f-height-1-1 f-black text-center mb-3">Why Choose Us?</h2>
+                                    <p class="f-17 f-400 f-black text-center mb-0">Because our Local SEO agency makes your brand a success story by helping you rank HIGH!</p>
+                                </div>
+                            </div>
+                            <div class="row justify-content-center">
+                                <div class="col-10 col-sm-10 col-md-10 col-lg-6 col-xl-6 col-xxl-6">
+                                    <h2 class="f-32 f-600 f-height-1-1 f-black mb-3">You Do Business, And WebsiteRankingExpert Will Do The Professional SEO</h2>
+                                    <p class="f-15 f-400 f-black mb-2">Did you know that websites without proper optimization can harm your brand's credibility? YES, indeed. But, don't worry. WebsiteRankingExpert won't let that happen.</p>
+                                    <p class="f-15 f-400 f-black mb-2">Unlike other local SEO companies, WebsiteRankingExpert never follows a one-size-fits-all approach to serve your business goals.</p>
+                                    <p class="f-15 f-400 f-black mb-2">The reason you are witnessing higher bounce rates is that there is something wrong with how you appear digitally. Our company, with years of experience, top-tier talent, the right marketing tools, and a rock-solid SEO strategy, remedies the faults and helps you gain a competitive edge.</p>
+                                    <p class="f-15 f-400 f-black mb-0">With comprehensive keyword research, careful website audits, white hat practice, and other organic improvement efforts, we simply help you <span class="f-20 f-600 f-blue">WebsiteRankingExpert!</span></p>
+                                    <a href="#" class="primary-btn mt-3">Click to Grow</a>
+                                </div>
+                                <div class="col-10 col-sm-10 col-md-10 col-lg-4 col-xl-4 col-xxl-4">
+                                    <img src="https://imagedelivery.net/nJwaBs__P2JfMUeYJ4vmjQ/8c0828dc-6c6f-4dfa-1719-cda7aa38eb00/public" alt="websiterankingexpert" class="img-fluid">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                <section>
+                    <div class="pt-30 pb-60">
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 col-xxl-12">
+                                    <h2 class="f-32 f-600 f-height-1-1 f-black text-center mb-2">Industries We Serve</h2>
+                                    <p class="f-17 f-400 f-black text-center mb-4">We have worked with thousands of businesses across the world. We specialize in providing comprehensive internet marketing services for clients working in some of today's most demanding and competitive industries.</p>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 col-xxl-12">
+                                    <div class="best-choice-slider">
+                                       
+                                            <div class="box slick-slide" data-slick-index="0" aria-hidden="true" tabindex="-1" style="width: 244px;">
+                                            <img src="https://imagedelivery.net/nJwaBs__P2JfMUeYJ4vmjQ/a95bda88-a8b3-4cbc-6bbf-d8925fbfa100/public" alt="websiterankingexpert" class="filter-dark" width="75" height="75">
+                                            <p class="f-14 f-400 f-black-light text-center mb-0">Automotive</p>
+                                        </div><div class="box slick-slide" data-slick-index="1" aria-hidden="true" tabindex="-1" style="width: 244px;">
+                                            <img src="https://imagedelivery.net/nJwaBs__P2JfMUeYJ4vmjQ/2c48009f-15cf-45a8-1fa8-eaa910820800/public" alt="websiterankingexpert" class="filter-dark" width="75" height="75">
+                                            <p class="f-14 f-400 f-black-light text-center mb-0">Finance</p>
+                                        </div><div class="box slick-slide" data-slick-index="2" aria-hidden="true" tabindex="-1" style="width: 244px;">
+                                            <img src="https://imagedelivery.net/nJwaBs__P2JfMUeYJ4vmjQ/d13067b4-9290-430b-01ba-dfdac2ffb600/public" alt="websiterankingexpert" class="filter-dark" width="75" height="75">
+                                            <p class="f-14 f-400 f-black-light text-center mb-0">Pest Control</p>
+                                        </div><div class="box slick-slide" data-slick-index="3" aria-hidden="true" tabindex="-1" style="width: 244px;">
+                                            <img src="https://imagedelivery.net/nJwaBs__P2JfMUeYJ4vmjQ/86d0c64e-6771-49e0-cf81-ad137d31bd00/public" alt="websiterankingexpert" class="filter-dark" width="75" height="75">
+                                            <p class="f-14 f-400 f-black-light text-center mb-0">ail Bonds</p>
+                                        </div><div class="box slick-slide" data-slick-index="4" aria-hidden="true" tabindex="-1" style="width: 244px;">
+                                            <img src="https://imagedelivery.net/nJwaBs__P2JfMUeYJ4vmjQ/7d996920-7ce4-4bf2-b991-f7b1b8fa5400/public" alt="websiterankingexpert" class="filter-dark" width="75" height="75">
+                                            <p class="f-14 f-400 f-black-light text-center mb-0">Movers</p>
+                                        </div><div class="box slick-slide" data-slick-index="5" aria-hidden="true" tabindex="-1" style="width: 244px;">
+                                            <img src="https://imagedelivery.net/nJwaBs__P2JfMUeYJ4vmjQ/9b898537-8497-4889-5bf5-1332598b0300/public" alt="websiterankingexpert" class="filter-dark" width="75" height="75">
+                                            <p class="f-14 f-400 f-black-light text-center mb-0">Florist</p>
+                                        </div><div class="box slick-slide" data-slick-index="6" aria-hidden="true" tabindex="-1" style="width: 244px;">
+                                            <img src="https://imagedelivery.net/nJwaBs__P2JfMUeYJ4vmjQ/ed3ef4e2-7a67-42df-1183-68aff542c200/public" alt="websiterankingexpert" class="filter-dark" width="75" height="75">
+                                            <p class="f-14 f-400 f-black-light text-center mb-0">Photographers</p>
+                                        </div><div class="box slick-slide" data-slick-index="7" aria-hidden="true" tabindex="-1" style="width: 244px;">
+                                            <img src="https://imagedelivery.net/nJwaBs__P2JfMUeYJ4vmjQ/326a9dc4-bae0-4460-57c2-09594b8e4400/public" alt="websiterankingexpert" class="filter-dark" width="75" height="75">
+                                            <p class="f-14 f-400 f-black-light text-center mb-0">Healthcare</p>
+                                        </div><div class="box slick-slide" data-slick-index="8" aria-hidden="true" tabindex="-1" style="width: 244px;">
+                                            <img src="https://imagedelivery.net/nJwaBs__P2JfMUeYJ4vmjQ/2c6a4386-0059-49fc-db27-e84a40cb6d00/public" alt="websiterankingexpert" class="filter-dark" width="75" height="75">
+                                            <p class="f-14 f-400 f-black-light text-center mb-0">Event Planner</p>
+                                        </div><div class="box slick-slide" data-slick-index="9" aria-hidden="true" tabindex="-1" style="width: 244px;">
+                                            <img src="https://imagedelivery.net/nJwaBs__P2JfMUeYJ4vmjQ/af2ceca5-cf69-4ea8-8593-929a820e6800/public" alt="websiterankingexpert" class="filter-dark" width="75" height="75">
+                                            <p class="f-14 f-400 f-black-light text-center mb-0">Plumbers</p>
+                                        </div><div class="box slick-slide" data-slick-index="10" aria-hidden="true" tabindex="-1" style="width: 244px;">
+                                            <img src="https://imagedelivery.net/nJwaBs__P2JfMUeYJ4vmjQ/81e5f679-705c-41db-f7c0-8b87ad1c5200/public" alt="websiterankingexpert" class="filter-dark" width="75" height="75">
+                                            <p class="f-14 f-400 f-black-light text-center mb-0">Car Dealer</p>
+                                        </div><div class="box slick-slide" data-slick-index="11" aria-hidden="true" tabindex="-1" style="width: 244px;">
+                                            <img src="https://imagedelivery.net/nJwaBs__P2JfMUeYJ4vmjQ/d3acd9cf-b8c2-4e12-9ea5-bd92cc1cca00/public" alt="websiterankingexpert" class="filter-dark" width="75" height="75">
+                                            <p class="f-14 f-400 f-black-light text-center mb-0">Hotels</p>
+                                        </div><div class="box slick-slide" data-slick-index="12" aria-hidden="true" tabindex="-1" style="width: 244px;">
+                                            <img src="https://imagedelivery.net/nJwaBs__P2JfMUeYJ4vmjQ/5f038c2e-49f4-4296-349f-9ff41d9cc300/public" alt="websiterankingexpert" class="filter-dark" width="75" height="75">
+                                            <p class="f-14 f-400 f-black-light text-center mb-0">Real Estates</p>
+                                        </div><div class="box slick-slide" data-slick-index="13" aria-hidden="true" tabindex="-1" style="width: 244px;">
+                                            <img src="https://imagedelivery.net/nJwaBs__P2JfMUeYJ4vmjQ/84424911-b634-4f3e-fc9e-ecb19a473500/public" alt="websiterankingexpert" class="filter-dark" width="75" height="75">
+                                            <p class="f-14 f-400 f-black-light text-center mb-0">Locksmith</p>
+                                        </div><div class="box slick-slide" data-slick-index="14" aria-hidden="true" tabindex="-1" style="width: 244px;">
+                                            <img src="https://imagedelivery.net/nJwaBs__P2JfMUeYJ4vmjQ/5ccbe4bb-e755-4915-1c50-ef8329fd3300/public" alt="websiterankingexpert" class="filter-dark" width="75" height="75">
+                                            <p class="f-14 f-400 f-black-light text-center mb-0">Carpet Cleaning</p>
+                                        </div><div class="box slick-slide" data-slick-index="15" aria-hidden="true" tabindex="-1" style="width: 244px;">
+                                            <img src="https://imagedelivery.net/nJwaBs__P2JfMUeYJ4vmjQ/bd8c6be0-45d4-42ee-8f1d-046436e17300/public" alt="websiterankingexpert" class="filter-dark" width="75" height="75">
+                                            <p class="f-14 f-400 f-black-light text-center mb-0">HVAC</p>
+                                        </div><div class="box slick-slide" data-slick-index="16" aria-hidden="true" tabindex="-1" style="width: 244px;">
+                                            <img src="https://imagedelivery.net/nJwaBs__P2JfMUeYJ4vmjQ/0c65051f-1b8c-4fbb-291f-65f55a7e9d00/public" alt="websiterankingexpert" class="filter-dark" width="75" height="75">
+                                            <p class="f-14 f-400 f-black-light text-center mb-0">Restaurants</p>
+                                        </div><div class="box slick-slide" data-slick-index="17" aria-hidden="true" tabindex="-1" style="width: 244px;">
+                                            <img src="https://imagedelivery.net/nJwaBs__P2JfMUeYJ4vmjQ/b2be42f3-e28b-4ea2-955f-70484ef5fd00/public" alt="websiterankingexpert" class="filter-dark" width="75" height="75">
+                                            <p class="f-14 f-400 f-black-light text-center mb-0">Electricians</p>
+                                        </div><div class="box slick-slide" data-slick-index="18" aria-hidden="true" tabindex="-1" style="width: 244px;">
+                                            <img src="https://imagedelivery.net/nJwaBs__P2JfMUeYJ4vmjQ/ee6cd3e5-c3e4-4145-3495-a214078bab00/public" alt="websiterankingexpert" class="filter-dark" width="75" height="75">
+                                            <p class="f-14 f-400 f-black-light text-center mb-0">Chiropractors</p>
+                                        </div><div class="box slick-slide" data-slick-index="19" aria-hidden="true" tabindex="-1" style="width: 244px;">
+                                            <img src="https://imagedelivery.net/nJwaBs__P2JfMUeYJ4vmjQ/24b2628c-bf80-4292-6e7b-a41ab9d17200/public" alt="websiterankingexpert" class="filter-dark" width="75" height="75">
+                                            <p class="f-14 f-400 f-black-light text-center mb-0">Insurance</p>
+                                        </div><div class="box slick-slide" data-slick-index="20" aria-hidden="true" tabindex="-1" style="width: 244px;">
+                                            <img src="https://imagedelivery.net/nJwaBs__P2JfMUeYJ4vmjQ/31e08f17-b279-44d9-c23c-1fea393e3700/public" alt="websiterankingexpert" class="filter-dark" width="75" height="75">
+                                            <p class="f-14 f-400 f-black-light text-center mb-0">Retail/FMCG</p>
+                                        </div><div class="box slick-slide slick-active" data-slick-index="21" aria-hidden="false" tabindex="-1" style="width: 244px;">
+                                            <img src="https://imagedelivery.net/nJwaBs__P2JfMUeYJ4vmjQ/d97b3d32-3fc5-4a01-a6a5-84f1224f0d00/public" alt="websiterankingexpert" class="filter-dark" width="75" height="75">
+                                            <p class="f-14 f-400 f-black-light text-center mb-0">Cleaning Business</p>
+                                        </div><div class="box slick-slide slick-active" data-slick-index="22" aria-hidden="false" tabindex="-1" style="width: 244px;">
+                                            <img src="https://imagedelivery.net/nJwaBs__P2JfMUeYJ4vmjQ/3315cea0-7434-4fb5-21ef-d16be4e7dd00/public" alt="websiterankingexpert" class="filter-dark" width="75" height="75">
+                                            <p class="f-14 f-400 f-black-light text-center mb-0">Travel/Tourism</p>
+                                        </div><div class="box slick-slide slick-current slick-active slick-center" data-slick-index="23" aria-hidden="false" tabindex="0" style="width: 244px;">
+                                            <img src="https://imagedelivery.net/nJwaBs__P2JfMUeYJ4vmjQ/75dc8bf0-62b4-4c4e-894b-40e3a3c06700/public" alt="websiterankingexpert" class="filter-dark" width="75" height="75">
+                                            <p class="f-14 f-400 f-black-light text-center mb-0">Kitchen Remodel</p>
+                                        </div><div class="box slick-slide slick-active" data-slick-index="24" aria-hidden="false" tabindex="0" style="width: 244px;">
+                                            <img src="https://imagedelivery.net/nJwaBs__P2JfMUeYJ4vmjQ/8b43976b-370c-45c1-f4b8-83630453f200/public" alt="websiterankingexpert" class="filter-dark" width="75" height="75">
+                                            <p class="f-14 f-400 f-black-light text-center mb-0">Roofers</p>
+                                        </div><div class="box slick-slide slick-active" data-slick-index="25" aria-hidden="false" tabindex="0" style="width: 244px;">
+                                            <img src="https://imagedelivery.net/nJwaBs__P2JfMUeYJ4vmjQ/d67c87b5-00c1-435c-429e-910a1bee9400/public" alt="websiterankingexpert" class="filter-dark" width="75" height="75">
+                                            <p class="f-14 f-400 f-black-light text-center mb-0">Dentist</p>
+                                        </div><div class="box slick-slide" data-slick-index="26" aria-hidden="true" tabindex="0" style="width: 244px;">
+                                            <img src="https://imagedelivery.net/nJwaBs__P2JfMUeYJ4vmjQ/febae4a3-ea55-421d-b20c-2d00c415c300/public" alt="websiterankingexpert" class="filter-dark" width="75" height="75">
+                                            <p class="f-14 f-400 f-black-light text-center mb-0">Landscapers</p>
+                                        </div><div class="box slick-slide" data-slick-index="27" aria-hidden="true" tabindex="0" style="width: 244px;">
+                                            <img src="https://imagedelivery.net/nJwaBs__P2JfMUeYJ4vmjQ/73e1a5a3-3a00-4bb0-d6cd-3f17b407e300/public" alt="websiterankingexpert" class="filter-dark" width="75" height="75">
+                                            <p class="f-14 f-400 f-black-light text-center mb-0">Solicitors</p>
+                                        </div><div class="box slick-slide" data-slick-index="28" aria-hidden="true" tabindex="-1" style="width: 244px;">
+                                            <img src="https://imagedelivery.net/nJwaBs__P2JfMUeYJ4vmjQ/37c6e2b6-83bb-4a3e-109c-0a83be890900/public" alt="websiterankingexpert" class="filter-dark" width="75" height="75">
+                                            <p class="f-14 f-400 f-black-light text-center mb-0">Doctors</p>
+                                        </div><div class="box slick-slide" data-slick-index="29" aria-hidden="true" tabindex="-1" style="width: 244px;">
+                                            <img src="https://imagedelivery.net/nJwaBs__P2JfMUeYJ4vmjQ/b7d6417d-2247-44e1-fd00-a874fc7b3300/public" alt="websiterankingexpert" class="filter-dark" width="75" height="75">
+                                            <p class="f-14 f-400 f-black-light text-center mb-0">Lawyers</p>
+                                        </div><div class="box slick-slide" data-slick-index="30" aria-hidden="true" tabindex="-1" style="width: 244px;">
+                                            <img src="https://imagedelivery.net/nJwaBs__P2JfMUeYJ4vmjQ/39863850-afae-43e2-b60c-7221f1e65100/public" alt="websiterankingexpert" class="filter-dark" width="75" height="75">
+                                            <p class="f-14 f-400 f-black-light text-center mb-0">Speakers</p>
+                                        </div><div class="box slick-slide" data-slick-index="31" aria-hidden="true" tabindex="-1" style="width: 244px;">
+                                            <img src="https://imagedelivery.net/nJwaBs__P2JfMUeYJ4vmjQ/cab9dc74-df4c-47c0-ba87-2620a712ea00/public" alt="websiterankingexpert" class="filter-dark" width="75" height="75">
+                                            <p class="f-14 f-400 f-black-light text-center mb-0">Ecommerce</p>
+                                        </div><div class="box slick-slide" data-slick-index="32" aria-hidden="true" tabindex="-1" style="width: 244px;">
+                                            <img src="https://imagedelivery.net/nJwaBs__P2JfMUeYJ4vmjQ/111866a0-dedb-4dbb-eb14-81a1e79b5100/public" alt="websiterankingexpert" class="filter-dark" width="75" height="75">
+                                            <p class="f-14 f-400 f-black-light text-center mb-0">Limo</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                <section>
+                    <div class="pt-70 pb-70">
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 col-xxl-12">
+                                    <h2 class="f-32 f-600 f-height-1-1 f-black mb-3">FAQs</h2>
+                                </div>
+                                <div id="site-faqs"><div class="accordion" id="faqAccordion">
+        <div class="row">
+            <div class="col-12 col-sm-12 col-md-12 col-lg-6 col-xl-6 col-xxl-6">
+                <div class="accordion-item">
+                    <h2 class="accordion-header" id="faqOne">
+                        <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#faqCollapseOne" aria-expanded="true" aria-controls="faqCollapseOne">Is WebsiteRankingExpert a SEO checker?</button>
+                    </h2>
+                    <div id="faqCollapseOne" class="accordion-collapse collapse show" aria-labelledby="faqOne" data-bs-parent="#faqAccordion">
+                        <div class="accordion-body">Yes, WebsiteRankingExpert is a SEO checker, but WebsiteRankingExpert also does much more than just scan your SEO. We look at and monitor the overall health of your website (speed, security, core vitals), we help you track competitors and benchmark against their traffic and keywords. Moving beyond SEO, WebsiteRankingExpert looks at your social data from Facebook and Instagram, and even analyzes local map rankings! Last, we provide our users with actionable insights on how to grow their website traffic and improve conversions. Think of us as an SEO tool but also as an overall growth tool focused on growing your website traffic, improving your rankings, and monitoring your website.</div>
+                    </div>
+                </div>
+                <div class="accordion-item">
+                    <h2 class="accordion-header" id="faqTwo">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faqCollapseTwo" aria-expanded="false" aria-controls="faqCollapseTwo">What is an SEO checker?</button>
+                    </h2>
+                    <div id="faqCollapseTwo" class="accordion-collapse collapse" aria-labelledby="faqTwo" data-bs-parent="#faqAccordion">
+                        <div class="accordion-body">A SEO checker is a type of SEO tool that analyses your website's traffic and keyword rankings as well as does a technical audit of your website's overall structure. WebsiteRankingExpert does all of this and more. WebsiteRankingExpert's proprietary technology goes deeper than just scanning your external website and giving you a quick SEO score. WebsiteRankingExpert uses your real data and even your competitors' keyword and backlink data to give you deep insights into how to quickly improve your SEO. We also automatically provide you with easy-to-understand suggestions on how to improve in each area.</div>
+                    </div>
+                </div>
+                <div class="accordion-item">
+                    <h2 class="accordion-header" id="faqThree">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faqCollapseThree" aria-expanded="false" aria-controls="faqCollapseThree">How often should you use a SEO checker?</button>
+                    </h2>
+                    <div id="faqCollapseThree" class="accordion-collapse collapse" aria-labelledby="faqThree" data-bs-parent="#faqAccordion">
+                        <div class="accordion-body">A modern automated SEO checker like WebsiteRankingExpert will automatically scan your website and data daily. Fluctuations in keyword ranking positions and competitors rankings can quickly impact your traffic. Additionally, WebsiteRankingExpert will automatically look for keywords that you rank for that we feel you can already rank higher for and alert you when we find an opportunity.</div>
+                    </div>
+                </div>
+                <div class="accordion-item">
+                    <h2 class="accordion-header" id="faqFour">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faqCollapseFour" aria-expanded="false" aria-controls="faqCollapseFour">Do SEO checkers test for things like mobile speed and security?</button>
+                    </h2>
+                    <div id="faqCollapseFour" class="accordion-collapse collapse" aria-labelledby="faqFour" data-bs-parent="#faqAccordion">
+                        <div class="accordion-body">Yes, keyword rankings are not just based on the quality of your content and the authority of your website. Google wants to help searchers find the best answer to their “search query”. Next, they want to make sure that when the searcher visits your website, they have a great and safe experience. This means that your website needs an active SSL and is secure, it needs to load fast, and have good core vitals. WebsiteRankingExpert is an SEO tool that checks for all these issues and more on a regular basis. Fact, if your website isn't fast and secure Google is not ever going to rank it very high so be sure to monitor it constantly with an SEO tool like WebsiteRankingExpert.</div>
+                    </div>
+                </div>
+                <div class="accordion-item">
+                    <h2 class="accordion-header" id="faqFive">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faqCollapseFive" aria-expanded="false" aria-controls="faqCollapseFive">What don't SEO checkers and tools do? Is WebsiteRankingExpert an SEO company?</button>
+                    </h2>
+                    <div id="faqCollapseFive" class="accordion-collapse collapse" aria-labelledby="faqFive" data-bs-parent="#faqAccordion">
+                        <div class="accordion-body">Yes, keyword rankings are not just based on the quality of your content and the authority of your website. Google wants to help searchers find the best answer to their “search query”. Next, they want to make sure that when the searcher visits your website, they have a great and safe experience. This means that your website needs an active SSL and is secure, it needs to load fast, and have good core vitals. WebsiteRankingExpert is an SEO tool that checks for all these issues and more on a regular basis. Fact, if your website isn't fast and secure Google is not ever going to rank it very high so be sure to monitor it constantly with an SEO tool like WebsiteRankingExpert.</div>
+                    </div>
+                </div>
+                <div class="accordion-item">
+                    <h2 class="accordion-header" id="faqSix">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faqCollapseSix" aria-expanded="false" aria-controls="faqCollapseSix">Does  WebsiteRankingExpert provide keyword ranking positions for my website?</button>
+                    </h2>
+                    <div id="faqCollapseSix" class="accordion-collapse collapse" aria-labelledby="faqSix" data-bs-parent="#faqAccordion">
+                        <div class="accordion-body">Yes, WebsiteRankingExpert will show you what keywords you currently rank for in Google. Alongside your keyword rankings we will also show you how much volume or search traffic that keyword gets and if your ranking increases or decreases we will alert you. Tracking your keywords with a keyword tracker is an important part of any SEO tool.</div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-12 col-sm-12 col-md-12 col-lg-6 col-xl-6 col-xxl-6">
+                <div class="accordion-item">
+                    <h2 class="accordion-header" id="faqSeven">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faqCollapseSeven" aria-expanded="false" aria-controls="faqCollapseSeven">Does WebsiteRankingExpert provide keyword ranking positions for my competitors?</button>
+                    </h2>
+                    <div id="faqCollapseSeven" class="accordion-collapse collapse" aria-labelledby="faqSeven" data-bs-parent="#faqAccordion">
+                        <div class="accordion-body">Yes, you can enter up to six competitors and WebsiteRankingExpert will track their keyword rankings and any changes to the rankings. You can also use WebsiteRankingExpert's keyword explorer to look for new keyword ideas for articles and blogs.</div>
+                    </div>
+                </div>
+                <div class="accordion-item">
+                    <h2 class="accordion-header" id="faqEight">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faqCollapseEight" aria-expanded="false" aria-controls="faqCollapseEight">Does WebsiteRankingExpert provide a backlink analysis for my competitors?</button>
+                    </h2>
+                    <div id="faqCollapseEight" class="accordion-collapse collapse" aria-labelledby="faqEight" data-bs-parent="#faqAccordion">
+                        <div class="accordion-body">WebsiteRankingExpert will not only show you your current backlinks, but also will show you up to 6 competitors backlinks. This is very useful and lets you get new ideas for relevant backlinking sites that may link to your site in the future if you reach out to them. WebsiteRankingExpert also will alert you if we detect any spammy backlinks that may be hurting your rankings.</div>
+                    </div>
+                </div>
+                <div class="accordion-item">
+                    <h2 class="accordion-header" id="faqNine">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faqCollapseNine" aria-expanded="false" aria-controls="faqCollapseNine">Is WebsiteRankingExpert a free SEO tool?</button>
+                    </h2>
+                    <div id="faqCollapseNine" class="accordion-collapse collapse" aria-labelledby="faqNine" data-bs-parent="#faqAccordion">
+                        <div class="accordion-body">WebsiteRankingExpert offers an initial free and limited SEO check of your website and data. As a free member we'll continue to test your SEO and look for opportunities but on a limited scale. We'll also continue to monitor your website for free, but it is limited. Most SEO checkers and tool use a lot of data and processing, so it is unrealistic to expect 100% performance and functionality with a free SEO checker. That said, we try to make our free version useful to everyone and we're sure you will get some great insights from WebsiteRankingExpert whether you are on a free or paid plan.</div>
+                    </div>
+                </div>
+                <div class="accordion-item">
+                    <h2 class="accordion-header" id="faqTen">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faqCollapseTen" aria-expanded="false" aria-controls="faqCollapseTen">What is a SEO company?</button>
+                    </h2>
+                    <div id="faqCollapseTen" class="accordion-collapse collapse" aria-labelledby="faqTen" data-bs-parent="#faqAccordion">
+                        <div class="accordion-body">Seo companies help their clients rank higher in search engines like Google for keywords that are important to their business. SEO companies come in all forms and shapes. Some are very expensive and specialize in helping the world's largest companies. There are also local SEO companies that tend to focus on helping local business rank in Google maps and for easier local terms. Most SEO companies will do periodic SEO audits and checks of their clients' websites and ensure that everything is running smoothly, and all the important pages are optimized. Many will build or buy backlinks for their clients to increase their clients' website authorities. One of the most important things an SEO company needs to do is add high-quality, optimized content to their clients websites.</div>
+                    </div>
+                </div>
+                <div class="accordion-item">
+                    <h2 class="accordion-header" id="faqEleven">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faqCollapseEleven" aria-expanded="false" aria-controls="faqCollapseEleven">Is WebsiteRankingExpert a SEO company?</button>
+                    </h2>
+                    <div id="faqCollapseEleven" class="accordion-collapse collapse" aria-labelledby="faqEleven" data-bs-parent="#faqAccordion">
+                        <div class="accordion-body">Yes, beyond just being an SEO checker and tool, WebsiteRankingExpert is a global SEO company. We also work with a lot of SEO agencies and often refer clients to them (we don't take a commission). If you already are working with a good SEO company, you will still find WebsiteRankingExpert very helpful, but you probably won't need any of our additional services. If you aren't working with an SEO company, we'd be happy to help you grow your website. With over 250k members we know how to do SEO in just about every industry and country. We offer our Pro members wholesale SEO pricing and don't have a single salesperson or pay our team members commissions. As a result, 100% of your SEO budget goes to work on building content and backlinks. That said, if you'd prefer to work with a local SEO company feel free to ask one of our Growth Experts and they can likely point you towards a few SEO companies in your country.</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        </div></div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                <section id="contact-us">
+                    <div class="pt-70 pb-70">
+                        <div class="container">
+                            <div class="row justify-content-between">
+                                <div class="col-12 col-sm-12 col-md-12 col-lg-6 col-xl-6 col-xxl-6">
+                                    <h2 class="f-28 f-600 f-height-1-1 f-black mb-3">Contact Us</h2>
+                                    <p class="f-17 f-400 f-black-light mb-5">WebsiteRankingExpert is located in Salt Lake City, Utah, at the base of the Wasatch Mountains. We are having a wonderful time here, and there are an amazing number of analytics businesses within 50 miles of our headquarters.</p>
+                                    <div class="d-flex align-items-start justify-content-start gap-3 mb-3">
+                                        <div>
+                                            <img src="/static/site_audit/assets/building-icon.png" alt="websiterankingexpert" width="" height="">
+                                        </div>
+                                        <div>
+                                            <h6 class="f-18 f-500 f-black mb-0"><strong>Address:</strong></h6>
+                                            <p class="f-15 f-400 f-black mb-0">123 ABC Lane, ABCview, FL 12345</p>
+                                        </div>
+                                    </div>
+                                    <div class="d-flex align-items-start justify-content-start gap-3 mb-3">
+                                        <div>
+                                            <img src="/static/site_audit/assets/envelope-icon.png" alt="websiterankingexpert" width="" height="">
+                                        </div>
+                                        <div>
+                                            <h6 class="f-18 f-500 f-black mb-0"><strong>Email:</strong></h6>
+                                            <p class="f-15 f-400 f-black mb-2">hello@WebsiteRankingExpert.com</p>
+                                            <p class="f-15 f-400 f-black mb-0">Customers frequently are responded within 1-2 business days</p>
+                                        </div>
+                                    </div>
+                                    <div class="d-flex align-items-start justify-content-start gap-3">
+                                        <div>
+                                            <img src="/static/site_audit/assets/fax-icon.png" alt="websiterankingexpert" width="" height="">
+                                        </div>
+                                        <div>
+                                            <h6 class="f-18 f-500 f-black mb-0"><strong>Phone number:</strong></h6>
+                                            <p class="f-15 f-400 f-black mb-2">Xxx xxx- xxxx</p>
+                                            <p class="f-15 f-400 f-black mb-0">Please contact us only if you have billing questions</p>
+                                        </div>
+                                    </div>
+                                </div>
+                             <div class="col-12 col-sm-12 col-md-12 col-lg-5 col-xl-5 col-xxl-5">
+                                    <div class="contact-box">
+                                        <form id="Contact_us">
+                                            <div class="row mb-lg-3">
+                                                <div class=" col-12 col-sm-12 col-md-12 col-lg-6 col-xl-6 col-xxl-6">
+                                                    <input type="text" class="cls" name="name"  placeholder="Name" required="">
+                                                </div>
+                                                <div class="col-12 col-sm-12 col-md-12 col-lg-6 col-xl-6 col-xxl-6">
+                                                    <input type="email" class="cls" name="email "  placeholder="Email Address" required="">
+                                                </div>
+                                            </div>
+                                            <div class="row mb-lg-3">
+                                                <div class=" col-12 col-sm-12 col-md-12 col-lg-6 col-xl-6 col-xxl-6">
+                                                   <div class="mb-3 input-group"> 
+                                                    <span class="input-group-text">+1</span>
+                                                    <input type="hidden" name="phone_number"  id="phone_number" maxlength="254" class="form-control" placeholder="phone number">
+                                                
+                                                    
+                                                    <input type="text"  name=""  id="phoneNumber"  maxlength="254" class="cls form-control mb-0 onlyNumber" placeholder="Phone Number" required="">
+                                                    
+                                                    </div>
+                                                </div>
+                                                <div class="cls col-12 col-sm-12 col-md-12 col-lg-6 col-xl-6 col-xxl-6">
+                                                    <input type="text" class="cls" name="subject " placeholder="Subject" required="">
+                                                </div>
+                                            </div>
+                                            <div class="row mb-lg-3">
+                                                <div class="cls col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 col-xxl-12">
+                                                    <input type="text" class="cls" name="address " placeholder="Address" required="">
+                                                </div>
+                                            </div>
+                                            <div class="row mb-lg-3">
+                                                <div class="cls col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 col-xxl-12">
+                                                    <textarea class="cls" required name="message " placeholder="Message...."></textarea>
+                                                </div>
+                                            </div>
+                                             <div class="d-block text-center mb-3">
+                                                <input type="hidden" id="captchaResponse" name="captcha_response">
+                                            <script src='https://www.google.com/recaptcha/api.js'></script>
+                                            <div class="g-recaptcha d-inline-block" data-sitekey="{{recaptcha_site_key}}" data-callback="correctCaptcha"></div>
+                                            </div>
+                                            <button type="submit"  id="submit"  >GET IN TOUCH</button>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+           
+<!-- Modal -->
+<!-- <div class="modal fade" id="captchaModal" tabindex="-1" aria-labelledby="captchaModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+    
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+      
+      </div>
+    
+    </div>
+  </div>
+</div> -->
+
+
+    
+{% endblock %}
+{% block extrascript %}
+<script>
+$('#submit').attr('disabled',true)
+  function correctCaptcha(res) {
+    $('#captchaResponse').val(res)
+$('#submit').attr('disabled',false)
+
+
+  }
+$('#Contact_us').on('submit',function(e){
+  e.preventDefault();
+       // Get form
+ var form = $('#Contact_us')[0];
+
+// Create an FormData object 
+ var data = new FormData(form);
+
+ $.ajax({
+     type: "POST",  
+     url: "/api/save_contact_details/",
+     data: data,
+     processData: false,
+    contentType: false,
+    cache: false,
+     success: function (data) {
+  
+   if(data.status){
+ $('#captchaModal').modal('hide');
+       
+      ShowNoty(data.message,'success');
+      $('.cls').val('');
+      grecaptcha.reset();
+   
+   }else{
+ 
+
+      ShowNoty(data.error,'error');
+      grecaptcha.reset();
+
+
+   
+   }
+        
+  
+     },
+   
+ });
+
+
+})
+
+
+      // $("#bitsWiseNavigation").remove();
+      $(document).ready(function(){
+
+        $('input.onlyNumber').keyup(function (event) {
+          
+        if (event.which != 8 && event.which != 0 && event.which < 48 || event.which > 57) {
+          $(this).val(function (index, value) {
+            let val;
+            
+             val = value.replace(/\D/g, "");
+           
+             return  val
+          });
+        }
+     
+             $("#phone_number").val("+1"+$('input.onlyNumber').val());
+      });
+
+      $('input.onlyNumber').change(function (event) {
+     
+          $(this).val(function (index, value) {
+            let val;
+            
+             val = value.replace(/\D/g, "");
+           
+             return  val
+          });
+        
+     
+             $("#phone_number").val("+1"+$('input.onlyNumber').val());
+      });
+
+      })
+    </script>
+
+<script src="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
+<script>
+
+let seoServicesPkgs = `<ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
+<li class="nav-item" role="presentation">
+    <button class="nav-link active" id="pills-annually-tab" data-bs-toggle="pill" data-bs-target="#pills-annually" type="button" role="tab" aria-controls="pills-annually" aria-selected="true">Annually <span>(SAVE 33%)</span></button>
+</li>
+<li class="nav-item" role="presentation">
+    <button class="nav-link" id="pills-quarterly-tab" data-bs-toggle="pill" data-bs-target="#pills-quarterly" type="button" role="tab" aria-controls="pills-quarterly" aria-selected="false">Quarterly <span>(SAVE 25%)</span></button>
+</li>
+<li class="nav-item" role="presentation">
+    <button class="nav-link" id="pills-monthly-tab" data-bs-toggle="pill" data-bs-target="#pills-monthly" type="button" role="tab" aria-controls="pills-monthly" aria-selected="false">Monthly <span>(SAVE 10%)</span></button>
+</li>
+</ul>
+<div class="tab-content" id="pills-tabContent">
+<div class="tab-pane fade show active" id="pills-annually" role="tabpanel" aria-labelledby="pills-annually-tab">
+    <div class="row">
+        <div class="col-lg-4">
+            <div class="pricing-box blue">
+                <div class="head">
+                    <h3>Basic</h3>
+                    <h4>$199<span>/month</span></h4>
+                    <p>Great for new start ups and businesses new to SEO! A solid first step towards conversions.</p>
+                </div>
+                <div class="scroll-area">
+                    <span>Keyword Research</span>
+                    <li>15-20 Keywords</li>
+                    <span>Content</span>
+                    <li>2 Articles (400 words)</li>
+                    <li>2 Blogs (500 words)</li>
+                    <span>Link Building</span>
+                    <li>10 Submissions</li>
+                    <li>10 Classifieds</li>
+                    <li>10 Community Participation</li>
+                    <li>10 Business Profiles</li>
+                    <span>Website</span>
+                    <li>Meta Tags Creation</li>
+                    <li>Web Content Optimization</li>
+                    <li>Keyword Optimization</li>
+                    <li>Anchor Text Optimization</li>
+                    <span>Conversion Tracking</span>
+                    <li>Google Analytics Installation</li>
+                    <span>Reporting</span>
+                    <li>Monthly Progress Report</li>
+                    <span>Features</span>
+                    <li>Dedicated Project Manager</li>
+                    <li>Support, 5 Days a Week</li>
+                </div>
+                <a href="#" class="order-cta">Enquire Now</a>
+                <p class="offer">Call Now to get 10% off</p>
+                <a href="tel:xxx-xxx-xxx" class="call-cta"><i class="fa-solid fa-phone"></i> Call : xxx-xxx-xxx</a>
+            </div>
+        </div>
+        <div class="col-lg-4">
+            <div class="pricing-box green">
+                <div class="head">
+                    <h3>Standard</h3>
+                    <h4>$249<span>/month</span></h4>
+                    <p>Highly sought after by companies who want to increase their conversions and market share!</p>
+                </div>
+                <div class="scroll-area">
+                    <span>Keyword Research</span>
+                    <li>20-25 Keywords</li>
+                    <span>Content</span>
+                    <li>4 Articles (400 words)</li>
+                    <li>4 Blogs (500 words)</li>
+                    <li>1 Press Releases</li>
+                    <span>Promotional Content</span>
+                    <li>1 infographics</li>
+                    <span>Link Building</span>
+                    <li>15 Submissions</li>
+                    <li>15 Classifieds</li>
+                    <li>15 Community Participation</li>
+                    <li>15 Business Profiles</li>
+                    <span>Website</span>
+                    <li>Meta Tags Creation</li>
+                    <li>Web Content Optimization</li>
+                    <li>Keyword Optimization</li>
+                    <li>Landing page Optimization</li>
+                    <li>Anchor Text Optimization</li>
+                    <li>Image Optimization</li>
+                    <span>Conversion Tracking</span>
+                    <li>Google Analytics Installation</li>
+                    <span>Reporting</span>
+                    <li>Monthly Progress Report</li>
+                    <span>Features</span>
+                    <li>Dedicated Project Manager</li>
+                    <li>Support, 5 Days a Week</li>
+                </div>
+                <a href="#" class="order-cta">Enquire Now</a>
+                <p class="offer">Call Now to get 10% off</p>
+                <a href="tel:xxx-xxx-xxx" class="call-cta"><i class="fa-solid fa-phone"></i> Call : xxx-xxx-xxx</a>
+            </div>
+        </div>
+        <div class="col-lg-4">
+            <div class="pricing-box yellow">
+                <div class="head">
+                    <h3>Professional</h3>
+                    <h4>$349<span>/month</span></h4>
+                    <p>Highly recommended by our SEO experts, this package has delivered clients the best results!</p>
+                </div>
+                <div class="scroll-area">
+                    <span>Keyword Research</span>
+                    <li>25-30 Keywords</li>
+                    <span>Content</span>
+                    <li>6 Articles (400 words)</li>
+                    <li>6 Blogs (500 words)</li>
+                    <li>2 Press Releases</li>
+                    <span>Promotional Content</span>
+                    <li>1 infographics</li>
+                    <li>1 Videos (non Voice-over)</li>
+                    <span>Link Building</span>
+                    <li>20 Submissions</li>
+                    <li>20 Classifieds</li>
+                    <li>20 Community Participation</li>
+                    <li>20 Business Profiles</li>
+                    <span>Website</span>
+                    <li>Meta Tags Creation</li>
+                    <li>Web Content Optimization</li>
+                    <li>Keyword Optimization</li>
+                    <li>Landing page Optimization</li>
+                    <li>Call To Actions</li>
+                    <li>Site Speed Optimization</li>
+                    <li>Anchor Text Optimization</li>
+                    <li>Image Optimization</li>
+                    <span>Conversion Tracking</span>
+                    <li>Google Analytics Installation</li>
+                    <span>Reporting</span>
+                    <li>Monthly Progress Report</li>
+                    <span>Features</span>
+                    <li>Dedicated Project Manager</li>
+                    <li>Support, 5 Days a Week</li>
+                </div>
+                <a href="#" class="order-cta">Enquire Now</a>
+                <p class="offer">Call Now to get 10% off</p>
+                <a href="tel:xxx-xxx-xxx" class="call-cta"><i class="fa-solid fa-phone"></i> Call : xxx-xxx-xxx</a>
+            </div>
+        </div>
+        <div class="col-lg-4">
+            <div class="pricing-box blue mt-3">
+                <div class="head">
+                    <h3>PRO</h3>
+                    <h4>$1005<span>/month</span></h4>
+                    <p>Hands down our most popular package! Ideal for practically all types of business big and small!</p>
+                </div>
+                <div class="scroll-area">
+                    <span>Keyword Research</span>
+                    <li>30-40 Keywords</li>
+                    <li>Competitor Analysis</li>
+                    <span>Content</span>
+                    <li>6 Articles (400 words)</li>
+                    <li>6 Blogs (500 words)</li>
+                    <li>1 Press Releases (1 Paid)</li>
+                    <span>Guest Blogs (DA 40 +)</span>
+                    <li>6 Articles (400 words)</li>
+                    <span>Promotional Content</span>
+                    <li>2 infographics</li>
+                    <li>1 Videos (w/ Voice-over)</li>
+                    <span>Link Building</span>
+                    <li>30 Submissions</li>
+                    <li>30 Classifieds</li>
+                    <li>30 Community Participation</li>
+                    <li>30 Business Profiles</li>
+                    <span>Website</span>
+                    <li>Meta Tags Creation</li>
+                    <li>Web Content Optimization</li>
+                    <li>Keyword Optimization</li>
+                    <li>Anchor Text Optimization</li>
+                    <li>Landing page Optimization</li>
+                    <li>Call To Actions</li>
+                    <li>Site Speed Optimization</li>
+                    <li>Image Optimization</li>
+                    <li>Mobile Optimization</li>
+                    <span>Conversion Tracking</span>
+                    <li>Google Analytics Installation</li>
+                    <li>Google Webmaster Installation</li>
+                    <li>Google Places Submissions</li>
+                    <span>Reporting</span>
+                    <li>Weekly Progress Report</li>
+                    <li>Monthly Progress Report</li>
+                    <li>Google Analytics Report</li>
+                    <span>Features</span>
+                    <li>Dedicated Project Manager</li>
+                    <li>Support, 5 Days a Week</li>
+                    <span>Social Media</span>
+                    <li>Facebook &amp; Twitter Page Creation</li>
+                    <li>15 Facebook Posts</li>
+                    <li>15 Twitter Posts</li>
+                    <li>Instagram Page Creation</li>
+                    <li>Instagram Page Creation</li>
+                </div>
+                <a href="#" class="order-cta">Enquire Now</a>
+                <p class="offer">Call Now to get 10% off</p>
+                <a href="tel:xxx-xxx-xxx" class="call-cta"><i class="fa-solid fa-phone"></i> Call : xxx-xxx-xxx</a>
+            </div>
+        </div>
+        <div class="col-lg-4">
+            <div class="pricing-box green mt-3">
+                <div class="head">
+                    <h3>Premium</h3>
+                    <h4>$1350<span>/month</span></h4>
+                    <p>Outrank your competitors with this package - Ideal for ecommerce websites and businesses!</p>
+                </div>
+                <div class="scroll-area">
+                    <span>Keyword Research</span>
+                    <li> 40-50 Keywords</li>
+                    <li> Competitor Analysis</li>
+                    <span>Content</span>
+                    <li>8 Articles (400 words)</li>
+                    <li>8 Blogs (500 words)</li>
+                    <li>3 Press Releases (1 Paid)</li>
+                    <span>Guest Blogs (DA 40 +)</span>
+                    <li>1 Guest Blogs (1000 words)</li>
+                    <span>Guest Blogs (DA 60 +)</span>
+                    <li>1 Guest Blogs (1000 words)</li>
+                    <span>Promotional Content</span>
+                    <li>2 infographics</li>
+                    <li>2 Videos (w/ Voice-over)</li>
+                    <span>Power Posts</span>
+                    <li>1 Power Post (2000 words)</li>
+                    <span>Link Building</span>
+                    <li>35 Submissions</li>
+                    <li>35 Classifieds</li>
+                    <li>35 Community Participation</li>
+                    <li>35 Business Profiles</li>
+                    <span>Website</span>
+                    <li>Meta Tags Creation</li>
+                    <li>Web Content Optimization</li>
+                    <li>Keyword Optimization</li>
+                    <li>Anchor Text Optimization</li>
+                    <li>Landing page Optimization</li>
+                    <li>Call To Actions</li>
+                    <li>Site Speed Optimization</li>
+                    <li>Image Optimization</li>
+                    <li>Mobile Optimization</li>
+                    <span>Conversion Tracking</span>
+                    <li>Google Analytics Installation</li>
+                    <li>Google Webmaster Installation</li>
+                    <li>Google Places Submissions</li>
+                    <span>Reporting</span>
+                    <li>Weekly Progress Report</li>
+                    <li>Monthly Progress Report</li>
+                    <li>Google Analytics Report</li>
+                    <span>Features</span>
+                    <li>Dedicated Project Manager</li>
+                    <li>Support, 5 Days a Week</li>
+                    <span>Social Media</span>
+                    <li>Facebook &amp; Twitter Page Creation</li>
+                    <li>15 Facebook Posts</li>
+                    <li>15 Twitter Posts</li>
+                    <li>Instagram Page Creation</li>
+                    <li>15 Instagram Posts</li>
+                </div>
+                <a href="#" class="order-cta">Enquire Now</a>
+                <p class="offer">Call Now to get 10% off</p>
+                <a href="tel:xxx-xxx-xxx" class="call-cta"><i class="fa-solid fa-phone"></i> Call : xxx-xxx-xxx</a>
+            </div>
+        </div>
+        <div class="col-lg-4">
+            <div class="pricing-box yellow mt-3">
+                <div class="head">
+                    <h3>On-Page</h3>
+                    <h4>$199<span>/month</span></h4>
+                    <p>Optimize your webpages using our comprehensive on-page optimization process.</p>
+                </div>
+                <div class="scroll-area">
+                    <span>Keyword Research</span>
+                    <li> Keywords</li>
+                    <span>Website</span>
+                    <li>Meta Tags Creation</li>
+                    <li>Web Content Optimization</li>
+                    <li>Keyword Optimization</li>
+                    <li>Landing page Optimization</li>
+                    <li>Call To Actions</li>
+                    <li>Site Speed Optimization</li>
+                    <li>Anchor Text Optimization</li>
+                    <li>Image Optimization</li>
+                </div>
+                <a href="#" class="order-cta">Enquire Now</a>
+                <p class="offer">Call Now to get 10% off</p>
+                <a href="tel:xxx-xxx-xxx" class="call-cta"><i class="fa-solid fa-phone"></i> Call : xxx-xxx-xxx</a>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="tab-pane fade" id="pills-quarterly" role="tabpanel" aria-labelledby="pills-quarterly-tab">
+    <div class="row">
+        <div class="col-lg-4">
+            <div class="pricing-box blue">
+                <div class="head">
+                    <h3>Basic</h3>
+                    <h4>$399<span>/month</span></h4>
+                    <p>Great for new start ups and businesses new to SEO! A solid first step towards conversions.</p>
+                </div>
+                <div class="scroll-area">
+                    <span>Keyword Research</span>
+                    <li>15-20 Keywords</li>
+                    <span>Content</span>
+                    <li>2 Articles (400 words)</li>
+                    <li>2 Blogs (500 words)</li>
+                    <span>Link Building</span>
+                    <li>10 Submissions</li>
+                    <li>10 Classifieds</li>
+                    <li>10 Community Participation</li>
+                    <li>10 Business Profiles</li>
+                    <span>Website</span>
+                    <li>Meta Tags Creation</li>
+                    <li>Web Content Optimization</li>
+                    <li>Keyword Optimization</li>
+                    <li>Anchor Text Optimization</li>
+                    <span>Conversion Tracking</span>
+                    <li>Google Analytics Installation</li>
+                    <span>Reporting</span>
+                    <li>Weekly Ranking Report</li>
+                    <li>Google Analytics Report</li>
+                    <li>Monthly Progress Report</li>
+                    <span>Features</span>
+                    <li>Dedicated Project Manager</li>
+                   <li>Support, 5 Days a Week</li>
+                </div>
+                <a href="#" class="order-cta">Enquire Now</a>
+                <p class="offer">Call Now to get 10% off</p>
+                <a href="tel:xxx-xxx-xxx" class="call-cta"><i class="fa-solid fa-phone"></i> Call : xxx-xxx-xxx</a>
+            </div>
+        </div>
+        <div class="col-lg-4">
+            <div class="pricing-box green">
+                <div class="head">
+                    <h3>Standard</h3>
+                    <h4>$449<span>/month</span></h4>
+                    <p>Highly sought after by companies who want to increase their conversions and market share!</p>
+                </div>
+                <div class="scroll-area">
+                    <span>Keyword Research</span>
+                    <li>20-25 Keywords</li>
+                    <span>Content</span>
+                    <li>4 Articles (400 words)</li>
+                    <li>4 Blogs (500 words)</li>
+                    <li>1 Press Releases</li>
+                    <span>Promotional Content</span>
+                    <li>Promotional Content</li>
+                    <span>Link Building</span>
+                    <li>15 Submissions</li>
+                    <li>15 Classifieds</li>
+                    <li>15 Community Participation</li>
+                    <li>15 Business Profiles</li>
+                    <span>Website</span>
+                    <li>Meta Tags Creation</li>
+                    <li>Web Content Optimization</li>
+                    <li>Keyword Optimization</li>
+                    <li>Landing page Optimization</li>
+                    <li>Anchor Text Optimization</li>
+                    <li>Image Optimization</li>
+                    <span>Conversion Tracking</span>
+                    <li>Google Analytics Installation</li>
+                    <span>Reporting</span>
+                    <li>Monthly Progress Report</li>
+                    <span>Features</span>
+                    <li>Dedicated Project Manager</li>
+                    <li>Support, 5 Days a Week</li>
+                </div>
+                <a href="#" class="order-cta">Enquire Now</a>
+                <p class="offer">Call Now to get 10% off</p>
+                <a href="tel:xxx-xxx-xxx" class="call-cta"><i class="fa-solid fa-phone"></i> Call : xxx-xxx-xxx</a>
+            </div>
+        </div>
+        <div class="col-lg-4">
+            <div class="pricing-box yellow">
+                <div class="head">
+                    <h3>Professional</h3>
+                    <h4>$549<span>/month</span></h4>
+                    <p>Highly recommended by our SEO experts, this package has delivered clients the best results!</p>
+                </div>
+                <div class="scroll-area">
+                    <span>Keyword Research</span>
+                    <li>25-30 Keywords</li>
+                    <span>Content</span>
+                    <li>6 Articles (400 words)</li>
+                    <li>6 Blogs (500 words)</li>
+                    <li>6 Articles (400 words)</li>
+                    <li>2 Press Releases</li>
+                    <span>Promotional Content</span>
+                    <li>1 infographics</li>
+                    <li>1 Videos (non Voice-over)</li>
+                    <span>Link Building</span>
+                    <li>20 Submissions</li>
+                    <li>20 Classifieds</li>
+                    <li>20 Community Participation</li>
+                    <li>20 Business Profiles</li>
+                    <span>Website</span>
+                    <li>Meta Tags Creation</li>
+                    <li>Web Content Optimization</li>
+                    <li>Keyword Optimization</li>
+                    <li>Landing page Optimization</li>
+                    <li>Call To Actions</li>
+                    <li>Site Speed Optimization</li>
+                    <li>Anchor Text Optimization</li>
+                    <li>Image Optimization</li>
+                    <span>Conversion Tracking</span>
+                    <li>Google Analytics Installation</li>
+                    <span>Reporting</span>
+                    <li>Monthly Progress Report</li>
+                    <span>Features</span>
+                    <li>Dedicated Project Manager</li>
+                    <li>Support, 5 Days a Week</li>
+                </div>
+                <a href="#" class="order-cta">Enquire Now</a>
+                <p class="offer">Call Now to get 10% off</p>
+                <a href="tel:xxx-xxx-xxx" class="call-cta"><i class="fa-solid fa-phone"></i> Call : xxx-xxx-xxx</a>
+            </div>
+        </div>
+        <div class="col-lg-4">
+            <div class="pricing-box blue mt-3">
+                <div class="head">
+                    <h3>Pro</h3>
+                    <h4>$1125<span>/month</span></h4>
+                    <p>Hands down our most popular package! Ideal for practically all types of business big and small!</p>
+                </div>
+                <div class="scroll-area">
+                    <span>Keyword Research</span>
+                    <li> 30-40 Keywords</li>
+                    <li> Competitor Analysis</li>
+                    <span>Content</span>
+                    <li>6 Articles (400 words)</li>
+                    <li>6 Blogs (500 words)</li>
+                    <li>1 Press Releases (1 Paid)</li>
+                    <span>Guest Blogs (DA 40 +)</span>
+                    <li>1 Guest Blogs (Upto 1000 words)</li>
+                    <span>Promotional Content</span>
+                    <li>2 infographics</li>
+                    <li>1 Videos (w/ Voice-over)</li>
+                    <span>Link Building</span>
+                    <li>10 Submissions</li>
+                    <li>10 Classifieds</li>
+                    <li>10 Community Participation</li>
+                    <li>10 Business Profiles</li>
+                    <span>Website</span>
+                    <li>Meta Tags Creation</li>
+                    <li>Web Content Optimization</li>
+                    <li>Keyword Optimization</li>
+                    <li>Anchor Text Optimization</li>
+                    <li>Landing page Optimization</li>
+                    <li>Call To Actions</li>
+                    <li>Site Speed Optimization</li>
+                    <li>Image Optimization</li>
+                    <li>Mobile Optimization</li>
+                    <span>Social Media</span>
+                    <li>Facebook &amp; Twitter Page Creation</li>
+                    <li>15 Facebook Posts</li>
+                    <li>15 Twitter Posts</li>
+                    <li>Instagram Page Creation</li>
+                    <li>15 Instagram Posts</li>
+                    <span>Conversion Tracking</span>
+                    <li>Google Analytics Installation</li>
+                    <li>Google Webmaster Installation</li>
+                    <li>Google Places Submissions</li>
+                    <span>Reporting</span>
+                    <li>Weekly Ranking Report</li>
+                    <li>Google Analytics Report</li>
+                    <li>Monthly Progress Report</li>
+                    <span>Features</span>
+                    <li>Dedicated Project Manager</li>
+                    <li>Support, 5 Days a Week</li>
+                </div>
+                <a href="#" class="order-cta">Enquire Now</a>
+                <p class="offer">Call Now to get 10% off</p>
+                <a href="tel:xxx-xxx-xxx" class="call-cta"><i class="fa-solid fa-phone"></i> Call : xxx-xxx-xxx</a>
+            </div>
+        </div>
+        <div class="col-lg-4">
+            <div class="pricing-box green mt-3">
+                <div class="head">
+                    <h3>Premium</h3>
+                    <h4>$1500<span>/month</span></h4>
+                    <p>Outrank your competitors with this package - Ideal for ecommerce websites and businesses!</p>
+                </div>
+                <div class="scroll-area">
+                    <span>Keyword Research</span>
+                    <li> 30-40 Keywords</li>
+                    <li> Competitor Analysis</li>
+                    <span>Content</span>
+                    <li>6 Articles (400 words)</li>
+                    <li>6 Blogs (500 words)</li>
+                    <li>1 Press Releases (1 Paid)</li>
+                    <span>Guest Blogs (DA 40 +)</span>
+                    <li>1 Guest Blogs (Upto 1000 words)</li>
+                    <span>Promotional Content</span>
+                    <li>2 infographics</li>
+                    <li>1 Videos (w/ Voice-over)</li>
+                    <span>Link Building</span>
+                    <li>10 Submissions</li>
+                    <li>10 Classifieds</li>
+                    <li>10 Community Participation</li>
+                    <li>10 Business Profiles</li>
+                    <span>Website</span>
+                    <li>Meta Tags Creation</li>
+                    <li>Web Content Optimization</li>
+                    <li>Keyword Optimization</li>
+                    <li>Anchor Text Optimization</li>
+                    <li>Landing page Optimization</li>
+                    <li>Call To Actions</li>
+                    <li>Site Speed Optimization</li>
+                    <li>Image Optimization</li>
+                    <li>Mobile Optimization</li>
+                    <span>Social Media</span>
+                    <li>Facebook &amp; Twitter Page Creation</li>
+                    <li>15 Facebook Posts</li>
+                    <li>15 Twitter Posts</li>
+                    <li>Instagram Page Creation</li>
+                    <li>15 Instagram Posts</li>
+                    <span>Conversion Tracking</span>
+                    <li>Google Analytics Installation</li>
+                    <li>Google Webmaster Installation</li>
+                    <li>Google Places Submissions</li>
+                    <span>Reporting</span>
+                    <li>Weekly Ranking Report</li>
+                    <li>Google Analytics Report</li>
+                    <li>Monthly Progress Report</li>
+                    <span>Features</span>
+                    <li>Dedicated Project Manager</li>
+                    <li>Support, 5 Days a Week</li>
+                </div>
+                <a href="#" class="order-cta">Enquire Now</a>
+                <p class="offer">Call Now to get 10% off</p>
+                <a href="tel:xxx-xxx-xxx" class="call-cta"><i class="fa-solid fa-phone"></i> Call : xxx-xxx-xxx</a>
+            </div>
+        </div>
+        <div class="col-lg-4">
+            <div class="pricing-box yellow mt-3">
+                <div class="head">
+                    <h3>On-Page</h3>
+                    <h4>$199<span>/month</span></h4>
+                    <p>Optimize your webpages using our comprehensive on-page optimization process.</p>
+                </div>
+                <div class="scroll-area">
+                    <span>Keyword Research</span>
+                    <li>Keywords</li>
+                    <span>Website</span>
+                    <li>Meta Tags Creation</li>
+                    <li>Web Content Optimization</li>
+                    <li>Keyword Optimization</li>
+                    <li>Landing page Optimization</li>
+                    <li>Call To Actions</li>
+                    <li>Site Speed Optimization</li>
+                    <li>Anchor Text Optimization</li>
+                    <li>Image Optimization</li>
+                </div>
+                <a href="#" class="order-cta">Enquire Now</a>
+                <p class="offer">Call Now to get 10% off</p>
+                <a href="tel:xxx-xxx-xxx" class="call-cta"><i class="fa-solid fa-phone"></i> Call : xxx-xxx-xxx</a>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="tab-pane fade" id="pills-monthly" role="tabpanel" aria-labelledby="pills-monthly-tab">
+    <div class="row">
+        <div class="col-lg-4">
+            <div class="pricing-box blue">
+                <div class="head">
+                    <h3>Basic</h3>
+                    <h4>$599<span>/month</span></h4>
+                    <p>Great for new start ups and businesses new to SEO! A solid first step towards conversions.</p>
+                </div>
+                <div class="scroll-area">
+                    <span>Keyword Research</span>
+                    <li>15-20 Keywords</li>
+                    <span>Content</span>
+                    <li>2 Articles (400 words)</li>
+                    <li>2 Blogs (500 words)</li>
+                    <span>Link Building</span>
+                    <li>10 Submissions</li>
+                    <li>10 Classifieds</li>
+                    <li>10 Community Participation</li>
+                    <li>10 Business Profiles</li>
+                    <span>Website</span>
+                    <li>Meta Tags Creation</li>
+                    <li>Web Content Optimization</li>
+                    <li>Keyword Optimization</li>
+                    <li>Anchor Text Optimization</li>
+                    <span>Conversion Tracking</span>
+                    <li>Google Analytics Installation</li>
+                    <span>Reporting</span>
+                    <li>Monthly Progress Report</li>
+                    <span>Features</span>
+                    <li>Dedicated Project Manager</li>
+                    <li>Support, 5 Days a Week</li>
+                </div>
+                <a href="#" class="order-cta">Enquire Now</a>
+                <p class="offer">Call Now to get 10% off</p>
+                <a href="tel:xxx-xxx-xxx" class="call-cta"><i class="fa-solid fa-phone"></i> Call : xxx-xxx-xxx</a>
+            </div>
+        </div>
+        <div class="col-lg-4">
+            <div class="pricing-box green">
+                <div class="head">
+                    <h3>Standard</h3>
+                    <h4>$649<span>/month</span></h4>
+                    <p>Highly sought after by companies who want to increase their conversions and market share!</p>
+                </div>
+                <div class="scroll-area">
+                    <span>Keyword Research</span>
+                    <li>20-25 Keywords</li>
+                    <span>Content</span>
+                    <li>4 Articles (400 words)</li>
+                    <li>4 Blogs (500 words)</li>
+                    <li>1 Press Releases</li>
+                    <span>Promotional Content</span>
+                    <li>1 infographics</li>
+                    <span>Link Building</span>
+                    <li>15 Submissions</li>
+                    <li>15 Classifieds</li>
+                    <li>15 Community Participation</li>
+                    <li>15 Business Profiles</li>
+                    <span>Website</span>
+                    <li>Meta Tags Creation</li>
+                    <li>Web Content Optimization</li>
+                    <li>Keyword Optimization</li>
+                    <li>Landing page Optimization</li>
+                    <li>Anchor Text Optimization</li>
+                    <li>Image Optimization</li>
+                    <span>Conversion Tracking</span>
+                    <li>Google Analytics Installation</li>
+                    <span>Reporting</span>
+                    <li>Monthly Progress Report</li>
+                    <span>Features</span>
+                    <li>Dedicated Project Manager</li>
+                    <li>Support, 5 Days a Week</li>
+                </div>
+                <a href="#" class="order-cta">Enquire Now</a>
+                <p class="offer">Call Now to get 10% off</p>
+                <a href="tel:xxx-xxx-xxx" class="call-cta"><i class="fa-solid fa-phone"></i> Call : xxx-xxx-xxx</a>
+            </div>
+        </div>
+        <div class="col-lg-4">
+            <div class="pricing-box yellow">
+                <div class="head">
+                    <h3>Professional</h3>
+                    <h4>$749<span>/month</span></h4>
+                    <p>Highly recommended by our SEO experts, this package has delivered clients the best results!</p>
+                </div>
+                <div class="scroll-area">
+                    <span>Keyword Research</span>
+                    <li>25-30 Keywords</li>
+                    <span>Content</span>
+                    <li>6 Articles (400 words)</li>
+                    <li>6 Blogs (500 words)</li>
+                    <li>2 Press Releases</li>
+                    <span>Promotional Content</span>
+                    <li>1 infographics</li>
+                    <li>1 Videos (non Voice-over)</li>
+                    <span>Link Building</span>
+                    <li>20 Submissions</li>
+                    <li>20 Community Participation</li>
+                    <li>20 Business Profiles</li>
+                    <li>20 Classifieds</li>
+                    <span>Website</span>
+                    <li>Meta Tags Creation</li>
+                    <li>Web Content Optimization</li>
+                    <li>Keyword Optimization</li>
+                    <li>Landing page Optimization</li>
+                    <li>Call To Actions</li>
+                    <li>Site Speed Optimization</li>
+                    <li>Anchor Text Optimization</li>
+                    <li>Image Optimization</li>
+                    <span>Conversion Tracking</span>
+                    <li>Google Analytics Installation</li>
+                    <span>Reporting</span>
+                    <li>Monthly Progress Report</li>
+                    <span>Features</span>
+                    <li>Dedicated Project Manager</li>
+                    <li>Support, 5 Days a Week</li>
+                </div>
+                <a href="#" class="order-cta">Enquire Now</a>
+                <p class="offer">Call Now to get 10% off</p>
+                <a href="tel:xxx-xxx-xxx" class="call-cta"><i class="fa-solid fa-phone"></i> Call : xxx-xxx-xxx</a>
+            </div>
+        </div>
+        <div class="col-lg-4">
+            <div class="pricing-box blue mt-3">
+                <div class="head">
+                    <h3>Pro</h3>
+                    <h4>$1350<span>/month</span></h4>
+                    <p>Hands down our most popular package! Ideal for practically all types of business big and small!</p>
+                </div>
+                <div class="scroll-area">
+                    <span>Keyword Research</span>
+                    <li> 30-40 Keywords</li>
+                    <li> Competitor Analysis</li>
+                    <span>Content</span>
+                    <li>6 Articles (400 words)</li>
+                    <li>6 Blogs (500 words)</li>
+                    <li>1 Press Releases (1 Paid)</li>
+                    <span>Guest Blogs (DA 40 +)</span>
+                    <li>1 Guest Blogs (Upto 1000 words)</li>
+                    <span>Promotional Content</span>
+                    <li>2 infographics</li>
+                    <li>1 Videos (w/ Voice-over)</li>
+                    <span>Link Building</span>
+                    <li>10 Submissions</li>
+                    <li>10 Classifieds</li>
+                    <li>10 Community Participation</li>
+                    <li>10 Business Profiles</li>
+                    <span>Website</span>
+                    <li>Meta Tags Creation</li>
+                    <li>Web Content Optimization</li>
+                    <li>Keyword Optimization</li>
+                    <li>Anchor Text Optimization</li>
+                    <li>Landing page Optimization</li>
+                    <li>Call To Actions</li>
+                    <li>Site Speed Optimization</li>
+                    <li>Image Optimization</li>
+                    <li>Mobile Optimization</li>
+                    <span>Social Media</span>
+                    <li>Facebook &amp; Twitter Page Creation</li>
+                    <li>15 Facebook Posts</li>
+                    <li>15 Twitter Posts</li>
+                    <li>Instagram Page Creation</li>
+                    <li>15 Instagram Posts</li>
+                    <span>Conversion Tracking</span>
+                    <li>Google Analytics Installation</li>
+                    <li>Google Webmaster Installation</li>
+                    <li>Google Places Submissions</li>
+                    <span>Reporting</span>
+                    <li>Weekly Ranking Report</li>
+                    <li>Google Analytics Report</li>
+                    <li>Monthly Progress Report</li>
+                    <span>Features</span>
+                    <li>Dedicated Project Manager</li>
+                   <li>Support, 5 Days a Week</li>
+                </div>
+                <a href="#" class="order-cta">Enquire Now</a>
+                <p class="offer">Call Now to get 10% off</p>
+                <a href="tel:xxx-xxx-xxx" class="call-cta"><i class="fa-solid fa-phone"></i> Call : xxx-xxx-xxx</a>
+            </div>
+        </div>
+        <div class="col-lg-4">
+            <div class="pricing-box green mt-3">
+                <div class="head">
+                    <h3>Premium</h3>
+                    <h4>$1800<span>/month</span></h4>
+                    <p>Highly sought after by companies who want to increase their conversions and market share!</p>
+                </div>
+                <div class="scroll-area">
+                    <span>Keyword Research</span>
+                    <li> 40-50 Keywords</li>
+                    <li> Competitor Analysis</li>
+                    <span>Content</span>
+                    <li>8 Articles (400 words)</li>
+                    <li>8 Blogs (500 words)</li>
+                    <li>3 Press Releases (1 Paid)</li>
+                    <span>Guest Blogs (DA 40 +)</span>
+                    <li>1 Guest Blogs (1000 words)</li>
+                    <span>Guest Blogs (DA 60 +)</span>
+                    <li>1 Guest Blogs (1000 words)</li>
+                    <span>Promotional Content</span>
+                    <li>2 infographics</li>
+                    <li>2 Videos (w/ Voice-over)</li>
+                    <span>Power Posts</span>
+                    <li>1 Power Post (2000 words)</li>
+                    <h5 class="heading3">Link Building</h5>
+                    <li>35 Submissions</li>
+                    <li>35 Classifieds</li>
+                    <li>35 Community Participation</li>
+                    <li>35 Business Profiles</li>
+                    <span>Website</span>
+                    <li>Meta Tags Creation</li>
+                    <li>Web Content Optimization</li>
+                    <li>Keyword Optimization</li>
+                    <li>Anchor Text Optimization</li>
+                    <li>Landing page Optimization</li>
+                    <li>Call To Actions</li>
+                    <li>Site Speed Optimization</li>
+                    <li>Image Optimization</li>
+                    <li>Mobile Optimization</li>
+                    <span>Conversion Tracking</span>
+                    <li>Google Analytics Installation</li>
+                    <li>Google Webmaster Installation</li>
+                    <li>Google Places Submissions</li>
+                    <span>Reporting</span>
+                    <li>Weekly Progress Report</li>
+                    <li>Monthly Progress Report</li>
+                    <li>Google Analytics Report</li>
+                    <span>Features</span>
+                    <li>Dedicated Project Manager</li>
+                    <li>Support, 5 Days a Week</li>
+                    <span>Social Media</span>
+                    <li>Facebook &amp; Twitter Page Creation</li>
+                    <li>15 Facebook Posts</li>
+                    <li>15 Twitter Posts</li>
+                    <li>Instagram Page Creation</li>
+                    <li>15 Instagram Posts</li>
+                </div>
+                <a href="#" class="order-cta">Enquire Now</a>
+                <p class="offer">Call Now to get 10% off</p>
+                <a href="tel:xxx-xxx-xxx" class="call-cta"><i class="fa-solid fa-phone"></i> Call : xxx-xxx-xxx</a>
+            </div>
+        </div>
+        <div class="col-lg-4">
+            <div class="pricing-box yellow mt-3">
+                <div class="head">
+                    <h3>On-Page</h3>
+                    <h4>$199<span>/month</span></h4>
+                    <p>Optimize your webpages using our comprehensive on-page optimization process.</p>
+                </div>
+                <div class="scroll-area">
+                    <span>Keyword Research</span>
+                    <li> Keywords</li>
+                    <span>Website</span>
+                    <li>Meta Tags Creation</li>
+                    <li>Web Content Optimization</li>
+                    <li>Keyword Optimization</li>
+                    <li>Landing page Optimization</li>
+                    <li>Call To Actions</li>
+                    <li>Site Speed Optimization</li>
+                    <li>Anchor Text Optimization</li>
+                    <li>Image Optimization</li>
+                </div>
+                <a href="#" class="order-cta">Enquire Now</a>
+                <p class="offer">Call Now to get 10% off</p>
+                <a href="tel:xxx-xxx-xxx" class="call-cta"><i class="fa-solid fa-phone"></i> Call : xxx-xxx-xxx</a>
+            </div>
+        </div>
+    </div>
+</div>
+</div>`;
+
+document.getElementById('seo-services-pkgs').innerHTML = seoServicesPkgs;
+
+// Read More
+function AddReadMore() {
+    var carLmt = 110;
+    var readMoreTxt = " ... Read More";
+    var readLessTxt = " Read Less";
+
+    $(".addReadMore").each(function () {
+        if ($(this).find(".firstSec").length) return;
+
+        var allstr = $(this).text();
+        if (allstr.length > carLmt) {
+            var firstSet = allstr.substring(0, carLmt);
+            var secdHalf = allstr.substring(carLmt, allstr.length);
+            var strtoadd =
+                firstSet +
+                "<span class='SecSec'>" +
+                secdHalf +
+                "</span><span class='readMore f-600'>" +
+                readMoreTxt +
+                "</span><span class='readLess f-600'>" +
+                readLessTxt +
+                "</span>";
+            $(this).html(strtoadd);
+        }
+    });
+    $(document).on("click", ".readMore,.readLess", function () {
+        $(this)
+            .closest(".addReadMore")
+            .toggleClass("showlesscontent showmorecontent");
+    });
+}
+
+$(document).ready(function() {
+            $('.counter').each(function() {
+                $(this).prop('Counter', 0).animate({
+                    Counter: $(this).text()
+                }, {
+                    duration: 4000,
+                    easing: 'swing',
+                    step: function(now) {
+                        $(this).text(Math.ceil(now));
+                    }
+                });
+            });
+        });
+$(function () {
+
+        // Technologies Slider
+$('.technologies-slider').slick({
+    centerMode: true,
+    centerPadding: '60px',
+    slidesToShow: 6,
+    arrows: false,
+    dots: false,
+    autoplay: true,
+    responsive: [
+        {
+            breakpoint: 768,
+            settings: {
+                arrows: false,
+                centerMode: true,
+                centerPadding: '40px',
+                slidesToShow: 3,
+                autoplay: true
+            }
+        },
+        {
+            breakpoint: 480,
+            settings: {
+                arrows: false,
+                centerMode: true,
+                centerPadding: '40px',
+                slidesToShow: 2,
+                autoplay: true
+            }
+        }
+    ]
+});
+// Counter Animation
+
+// Technologies Slider
+$('.best-choice-slider').slick({
+    centerMode: true,
+    centerPadding: '0px',
+    slidesToShow: 5,
+    arrows: false,
+    dots: false,
+    autoplay: true,
+    responsive: [
+        {
+            breakpoint: 768,
+            settings: {
+                arrows: false,
+                centerMode: true,
+                centerPadding: '40px',
+                slidesToShow: 1,
+                autoplay: true
+            }
+        },
+        {
+            breakpoint: 480,
+            settings: {
+                arrows: false,
+                centerMode: true,
+                centerPadding: '40px',
+                slidesToShow: 1,
+                autoplay: true
+            }
+        }
+    ]
+});
+
+    AddReadMore();
+});
+
+
+    </script>
+
+<!-- <script src="https://unpkg.com/masonry-layout@4/dist/masonry.pkgd.min.js"></script> -->
+{% endblock %}s

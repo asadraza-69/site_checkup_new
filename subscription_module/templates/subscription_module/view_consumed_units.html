@@ -1,0 +1,105 @@
+
+
+{% extends "base2.html" %}
+{% load static %}
+{% block extrahead %}
+{% endblock %}
+{% block content %}
+<style>
+.table-head.errorTypes {
+    height: auto;
+}
+
+.tb_loader {
+    position: absolute;
+    z-index: 999;
+    margin: 5% 40%;
+  }
+  
+  @media (max-width: 1300px) {
+    .sort-table {
+      overflow: hidden;
+      overflow-x: auto;
+    }
+  
+    .sort-table .table {
+      width: 1320px;
+      overflow-x: scroll;
+    }
+    main {
+      padding-left: 16%;
+    }
+  }
+  
+  @media (max-width: 1199px) {
+    main {
+      padding-left: 19%;
+    }
+  }
+  @media (max-width: 991px) {
+    main {
+      padding-left: 0;
+      margin-top: 125px;
+    }
+  }
+
+</style>
+
+<div class="container">
+    <!-- Crawler Heading Section  -->
+    <div class="row ">
+        <div class="col-xl-9">
+            <div class="center-section">
+                <h4 class="title mb-5 fw-400 pb-2">All User Consumed Units</h4>
+            </div>
+        </div>
+    </div>
+  </div>
+
+    <!-- table code start  -->
+    <div class="container">
+
+      <div class='row'>
+        <div class='col-xl-12'>
+          <div class='p-3 grey-box mb-3'>
+            <div class='sort-table error-types-table'>
+              <table id="displayTable" class="table table-striped table-bordered table-sm tabs-table mt-4" cellspacing="0" width="100%">
+                <thead class="table-head errorTypes">
+                    <tr>
+                        <th class="th-sm font-14 text-center" style="font-weight:500">User Email</th>
+                        <th class="th-sm font-14 text-center" style="font-weight:500">Subscription</th>
+                        <th class="th-sm font-14 text-center" style="font-weight:500">Module</th> 
+                        <th class="th-sm font-14 text-center" style="font-weight:500">Consumed Units</th> 
+                    </tr>
+                </thead>
+                <tbody id="links_detail">
+                    <div class="tb_loader">
+                        <div class="spinner-border" role="status">
+                          <span class="visually-hidden">Loading...</span>
+                        </div>
+                      </div>
+
+                      <input type="search" id="searchInput" style="width:250px; float:right" class="form-control form-control-sm mb-2" placeholder="Search" aria-controls="example">
+
+                </tbody>
+                </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+
+
+{% endblock %}
+
+{% block extrascript %}
+<script src="https://cdn.rawgit.com/julmot/mark.js/master/dist/jquery.mark.min.js" ></script>
+<script type="text/javascript" src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
+<script type="text/javascript" src="https://cdn.datatables.net/buttons/2.2.3/js/dataTables.buttons.min.js"></script>
+<script type="text/javascript" src="https://cdn.datatables.net/buttons/2.2.3/js/buttons.html5.min.js"></script>
+<script type="text/javascript" src="https://cdn.datatables.net/plug-ins/1.12.1/dataRender/ellipsis.js"></script>
+
+<script src="{% static 'subscription_module/js/view_consumed_units.js' %}"></script>
+{% endblock %}

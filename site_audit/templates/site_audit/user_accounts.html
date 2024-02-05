@@ -1,0 +1,222 @@
+{% extends "base2.html" %}
+{% load static %}
+{% block extrahead %}
+<!-- <link type='text/css' rel="stylesheet" href="{% static 'site_audit/css/technical_site_audit.css' %}"> -->
+
+<style>
+    .ga4_box {
+        max-height: 300px;
+        height: 300px;
+        min-width: 300px;
+        background: #d3d3d32b;
+        border: 1px solid lightgrey;
+        box-shadow: inset 0 0 10px #e3dfd9;
+        overflow: auto;
+    }
+
+    #ga4 li {
+        cursor: pointer;
+    }
+
+    #ga4 li:hover {
+        background: #d3d3d32b;
+
+    }
+
+    .scrollable {
+        overflow-y: auto;
+        max-height: 300px;
+        min-height: 300px;
+
+    }
+
+    #acc_row_ga4 {
+        display: none;
+    }
+     #acc_row_ua {
+        display: none;
+    }
+    .form-select:focus {
+    border-color: #ccc;
+    outline: 0;
+    box-shadow: none
+}
+.cls{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    /* margin: 23% auto; */
+    margin: 0 auto;
+    height: 30vh;
+}
+/* width */
+.card-body::-webkit-scrollbar {
+  width: 3px;
+}
+
+/* Track */
+.card-body::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 10px;
+}
+
+/* Handle */
+.card-body::-webkit-scrollbar-thumb {
+  background: #888;
+}
+
+/* Handle on hover */
+.card-body::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
+.bg-header{
+    background-color: #707070;
+    color: #fff;
+}
+.card-header h6{
+    color: #fff;
+}
+.card-header {
+    padding: 0.1rem 1rem;
+}
+.title2 {
+    border-bottom: 2px solid #707070a3;
+    padding: 0;
+    position: relative;
+}
+.title2:before {
+    content: "";
+    display: block;
+    border-bottom: 4px solid;
+    width: 54px;
+    position: absolute;
+    top: 0;
+    bottom: -3px;
+}
+
+.UA_spinner{
+display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0 auto;
+  height: 20vh;
+}
+</style>
+{% endblock %}
+<!-- <body style="background-color: #666666;"> -->
+{% block content %}
+
+<div class="container p-4">
+   <section>
+            <div class="row">
+                <div class="col-md-9">
+                    <h2 class="title2 red fw-400 mb-md-3 pb-2">User Google Accounts </h2>
+                </div>
+            </div>
+        </section>
+    <h6 for="" class="mb-1">Select Account Name</h6>
+    <select class="form-select mb-5" id="accounts" aria-label="Default select example" >
+        <option> select Account</option>
+
+    </select>
+    <div id="acc_row_ga4">
+        <div class="row">
+            <div class="col-md-6">
+               
+              
+                <div class="card">
+                <div class="card-header bg-header"><h6>GA4</h6>   <small>Accounts</small></div>
+                    <div class="card-body scrollable">
+                        <ul class="list-group list-group-flush list-group-numbered account_list" id="ga4">
+                             <div class="spinner-border text-primary" role="status">
+                                  <span class="visually-hidden">Loading...</span>
+                             </div>
+                    </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+               
+                <div class="card">
+                    <div class="card-header bg-header"><h6>GA4</h6>   <small>Properties</small></div>
+                    <div class="card-body scrollable">
+                        <!-- <ul class="list-group list-group-flush list-group-numbered" id="ga4_prop">
+
+                
+
+                </ul> -->
+                        <div class="list-group list-group-flush list-group-numbered prop_list" id="ga4_prop">
+                               <div class="spinner-border text-primary" role="status">
+                                  <span class="visually-hidden">Loading...</span>
+                             </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+          <div class="float-end  mt-3 mb-3">
+          <button class="btn btn-primary btn-sm post_acc_ga4">Submit</button>
+        
+        </div>
+    </div>
+     <div id="acc_row_ua">
+        <div class="row">
+            <div class="col-md-4">
+               
+                <div class="card">
+                    <div class="card-header bg-header"><h6>UA</h6> <small>Accounts</small></div>
+                    <div class="card-body scrollable">
+                        <ul class="list-group list-group-flush list-group-numbered account_list" id="ua_acc">
+                               <div class="spinner-border text-primary" role="status">
+                                  <span class="visually-hidden">Loading...</span>
+                             </div>
+                    </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+             
+                <div class="card">
+                    <div class="card-header bg-header"><h6>UA</h6><small>Properties</small></div>
+
+                    <div class="card-body scrollable">
+                        <div class="list-group list-group-flush list-group-numbered prop_list" id="ua_prop">
+                              <div class="spinner-border text-primary" role="status">
+                                  <span class="visually-hidden">Loading...</span>
+                             </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+             <div class="col-md-4">
+               
+                <div class="card">
+                    <div class="card-header bg-header"><h6>UA</h6><small>Profiles</small></div>
+                    <div class="card-body scrollable">
+                        <div class="list-group list-group-flush list-group-numbered profile_list" id="ua_profile">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <div class="float-end  mt-3 mb-3">
+          <button class="btn btn-primary btn-sm post_ua">Submit</button>
+        
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+ {% block extrascript %}
+<script src="{% static 'site_audit/js/user_accounts.js' %}"></script>
+
+<script>
+  
+</script>
+
+
+
+{% endblock %}

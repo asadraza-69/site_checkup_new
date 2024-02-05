@@ -1,0 +1,1108 @@
+<!DOCTYPE html>
+<html lang="en">
+
+
+
+<head>
+  {% load static %}
+  <meta charset="utf-8">
+  <title>Site Audit</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Keyword Research">
+  <meta name="author" content="BitsWits Team">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+ />
+    <!-- mdb -->
+<!-- <link href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/4.3.0/mdb.min.css" rel="stylesheet" /> -->
+
+    <!-- mdb -->
+  <link href="{% static 'site_audit/css/select2.css' %}" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/0.8.2/css/flag-icon.min.css" rel="stylesheet" />
+  <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.12.1/css/jquery.dataTables.css">
+  <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/buttons/2.2.3/css/buttons.dataTables.min.css">
+  <link href="{% static 'site_audit/css/bootstrap.min.css' %}" rel="stylesheet">
+  <link href="{% static 'site_audit/css/styles.css' %}" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+    onload="this.onload=null;this.removeAttribute('media');" crossorigin="">
+
+  <link rel="stylesheet"
+    href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0"
+    onload="this.onload=null;this.removeAttribute('media');" />
+
+  <!-- Le fav and touch icons -->
+  <link rel="apple-touch-icon" sizes="57x57" href="{% static 'site_audit/ico/android-chrome-512x512.png' %}">
+  <link rel="apple-touch-icon" sizes="60x60" href="{% static 'site_audit/ico/android-chrome-512x512.png' %}">
+  <link rel="apple-touch-icon" sizes="72x72" href="{% static 'site_audit/ico/android-chrome-512x512.png' %}">
+  <link rel="apple-touch-icon" sizes="76x76" href="{% static 'site_audit/ico/android-chrome-512x512.png' %}">
+  <link rel="apple-touch-icon" sizes="114x114" href="{% static 'site_audit/ico/android-chrome-512x512.png' %}">
+  <link rel="apple-touch-icon" sizes="120x120" href="{% static 'site_audit/ico/android-chrome-512x512.png' %}">
+  <link rel="apple-touch-icon" sizes="144x144" href="{% static 'site_audit/ico/android-chrome-512x512.png' %}">
+  <link rel="apple-touch-icon" sizes="152x152" href="{% static 'site_audit/ico/android-chrome-512x512.png' %}">
+  <link rel="apple-touch-icon" sizes="180x180" href="{% static 'site_audit/ico/android-chrome-512x512.png' %}">
+  <link rel="icon" type="image/png" sizes="192x192" href="{% static 'site_audit/ico/android-chrome-512x512.png' %}">
+  <link rel="icon" type="image/png" sizes="32x32" href="{% static 'site_audit/ico/favicon-32x32.png' %}">
+  <link rel="icon" type="image/png" sizes="96x96" href="{% static 'site_audit/ico/favicon-32x32.png' %}">
+  <link rel="icon" type="image/png" sizes="16x16" href="{% static 'site_audit/ico/favicon-32x32.png' %}">
+  <link href="{% static 'site_audit/css/animation.css' %}" rel="stylesheet">
+  <link href="{% static 'site_audit/libs/noty/noty.css' %}" rel="stylesheet">
+  <link href="{% static 'site_audit/libs/noty/themes/light.css' %}" rel="stylesheet">
+
+  {% block extrahead %} {% endblock %}
+  <style>
+    header {
+      background-color: #1f1f21;
+      /* background-color: #2948ff; */
+      color: #fff;
+
+    }
+
+    a {
+      text-decoration: none;
+    }
+
+    header ul li a {
+      color: #fff;
+      align-items: center;
+    }
+
+    header ul li a:hover {
+      color: #fff;
+      align-items: center;
+    }
+
+    header ul {
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    header ul {
+      display: flex;
+      padding: 10px;
+      align-items: center;
+    }
+
+    #links-items ul li a {
+      /* padding: 10px;
+      display: flex; */
+      font-family: Poppins, sans-serif;
+      font-style: normal;
+      font-weight: 400;
+      font-size: 13px;
+      line-height: 20px;
+      padding: 4px 12px;
+      color: #d9d9d9;
+      
+
+    }
+    
+
+    .dropdown-content a {
+      color: #1f1f21 !important;
+    }
+
+    #menu ul li a {
+      padding: 10px;
+    }
+    .sidebar-wrapper a.act {
+      background: transparent;
+      border-right: none !important;
+    }
+    ul#crawler-drpdwn {
+      margin-left: 45px;
+      line-height: 2
+    }
+
+      .material-symbols-rounded {
+        font-variation-settings:
+        'FILL' 1,
+        'wght' 100,
+        'GRAD' -25,
+        'opsz' 20
+      }
+
+      #subbmenu {
+        list-style-type: none;
+        margin: 0;
+        padding-left: 25px!important;
+      }
+
+      .text-gery {
+        color: black;
+        font-size: 12px
+      }
+
+
+  </style>
+</head>
+
+<body class="hold-transition sidebar-mini sidebar-collapse">
+  <header class="sticky-top">
+    <nav id="menu">
+      <ul>
+        <li> <a class="navbar-brand" href="/site_audit/seo_checkup/"><img src="{%static '/site_audit/assets/logo.svg'%}"
+              alt=""></a></li>
+        <li>
+        </li>
+      </ul>
+    </nav>
+    <div id="selectWebsite" class=" d-none d-xl-block d-lg-block d-md-none d-sm-none d-xs-none">
+      <mat-icon _ngcontent-ffb-c201="" role="img" svgicon="globe" class="mat-icon notranslate mat-icon-no-color"
+        aria-hidden="true" data-mat-icon-type="svg" data-mat-icon-name="globe"><svg width="100%" height="100%"
+          viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg" fit="" preserveAspectRatio="xMidYMid meet"
+          focusable="false">
+          <path
+            d="M9 16.5C13.1421 16.5 16.5 13.1421 16.5 9C16.5 4.85786 13.1421 1.5 9 1.5C4.85786 1.5 1.5 4.85786 1.5 9C1.5 13.1421 4.85786 16.5 9 16.5Z"
+            stroke="#2F54EB" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+          <path d="M1.5 9H16.5" stroke="#2F54EB" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+          <path
+            d="M9 1.5C10.876 3.55376 11.9421 6.21903 12 9C11.9421 11.781 10.876 14.4462 9 16.5C7.12404 14.4462 6.05794 11.781 6 9C6.05794 6.21903 7.12404 3.55376 9 1.5V1.5Z"
+            stroke="#2F54EB" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+        </svg></mat-icon> <span style="font-family: Poppins,sans-serif;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 13px;
+    line-height: 20px;
+    padding: 4px 3px;
+    color: #d9d9d9;">
+        Select website:</span>&nbsp;&nbsp;<div class="tooltip_custom">
+        <div class="url" class="text-white"></div> <span class="tooltiptext web_tooltip_html">
+        </span>
+      </div>
+      <mat-icon _ngcontent-lgg-c192="" role="img" svgicon="down" nz-popover="" nzpopoverplacement="bottomRight"
+        class="mat-icon notranslate mat-icon-no-color" aria-hidden="true" data-mat-icon-type="svg"
+        data-mat-icon-name="down"><svg width="100%" height="100%" viewBox="0 0 20 20"
+          preserveAspectRatio="xMidYMid meet" focusable="false">
+          <path
+            d="M9.01104 13.1059L4.40543 8.71735C4.0871 8.41402 4.0871 7.92354 4.40543 7.62345L5.17078 6.89418C5.48911 6.59086 6.00385 6.59086 6.31879 6.89418L9.58335 10.0049L12.8479 6.89418C13.1662 6.59086 13.681 6.59086 13.9959 6.89418L14.7613 7.62345C15.0796 7.92677 15.0796 8.41725 14.7613 8.71735L10.1557 13.1059C9.84411 13.4092 9.32937 13.4092 9.01104 13.1059Z"
+            fill="#fff"></path>
+        </svg></mat-icon>
+    </div>
+    <div id="needHelp">
+      <!-- <a href="">need help</a> -->
+    </div>
+    <nav id="links-items">
+      <ul>
+        <li class="d-none d-xl-block d-lg-block d-md-none d-sm-none d-xs-none"><a
+            href="/site_audit/pricing/">Pricing</a></li>
+        <li class="d-none d-xl-block d-lg-block d-md-none d-sm-none d-xs-none"><a
+            href="/site_audit/seo_services/">Service</a></li>
+        <li class="d-none d-xl-block d-lg-block d-md-none d-sm-none d-xs-none"><a
+            href="/site_audit/support/">Support</a></li>
+        <li>
+          <div class="dropdown">
+            <a class="nav-link"><i class="fa fa-user-circle"></i>&nbsp;Admin <mat-icon _ngcontent-lgg-c192="" role="img"
+                svgicon="down" nz-popover="" nzpopoverplacement="bottomRight"
+                class="mat-icon notranslate mat-icon-no-color" aria-hidden="true" data-mat-icon-type="svg"
+                data-mat-icon-name="down"><svg width="100%" height="100%" viewBox="0 0 20 20"
+                  preserveAspectRatio="xMidYMid meet" focusable="false">
+                  <path
+                    d="M9.01104 13.1059L4.40543 8.71735C4.0871 8.41402 4.0871 7.92354 4.40543 7.62345L5.17078 6.89418C5.48911 6.59086 6.00385 6.59086 6.31879 6.89418L9.58335 10.0049L12.8479 6.89418C13.1662 6.59086 13.681 6.59086 13.9959 6.89418L14.7613 7.62345C15.0796 7.92677 15.0796 8.41725 14.7613 8.71735L10.1557 13.1059C9.84411 13.4092 9.32937 13.4092 9.01104 13.1059Z"
+                    fill="#fff"></path>
+                </svg></mat-icon></a>
+
+            <div class="dropdown-content">
+              <a href="javascript:void();"><i class="fa fa-user-circle"></i>Account</a>
+              <a href="/site_audit/pricing/"><i class="fa fa-usd"></i> Pricing</a>
+              <a href="javascript:void();"><i class="fa fa-money-bill"></i>Billing</a>
+              <a href="javascript:void();"><i class="fa fa-database"></i>Data Channal</a>
+              <a href="javascript:void();"><i class="fa fa-user"></i>Profile</a>
+              <a href="/accounts/logout/" id="logout"><i class="fa fa-sign-out"></i>Logout</a>
+            </div>
+          </div>
+        </li>
+      </ul>
+      <div class="d-xl-none d-lg-none d-md-none d-sm-block d-xs-block" id="rightSidebarToggle">
+        <span class="fa fa-bars"></span>
+      </div>
+
+    </nav>
+  </header>
+  <div id="wrapper">
+    <div id="right-sidebar-wrapper" class="d-xl-none d-lg-none d-md-none">
+      <div id="selectonMobile">
+        <label>Select website:</label>
+
+        <div class="tooltip_custom d-flex">
+          <div class="url" id="url" style="display: none;"></div>
+          <div class="url">
+
+          </div> <span class="tooltiptext web_tooltip_html_mobile">
+          </span>
+
+          <mat-icon _ngcontent-lgg-c192="" role="img" svgicon="down" nz-popover="" nzpopoverplacement="bottomRight"
+            class="mat-icon notranslate mat-icon-no-color" aria-hidden="true" data-mat-icon-type="svg"
+            data-mat-icon-name="down"><svg width="100%" height="100%" viewBox="0 0 20 20"
+              preserveAspectRatio="xMidYMid meet" focusable="false">
+              <path
+                d="M9.01104 13.1059L4.40543 8.71735C4.0871 8.41402 4.0871 7.92354 4.40543 7.62345L5.17078 6.89418C5.48911 6.59086 6.00385 6.59086 6.31879 6.89418L9.58335 10.0049L12.8479 6.89418C13.1662 6.59086 13.681 6.59086 13.9959 6.89418L14.7613 7.62345C15.0796 7.92677 15.0796 8.41725 14.7613 8.71735L10.1557 13.1059C9.84411 13.4092 9.32937 13.4092 9.01104 13.1059Z"
+                fill="#000"></path>
+            </svg></mat-icon>
+        </div>
+
+
+
+      </div>
+
+      
+
+      <app-desktop-menu _ngcontent-afg-c200 class="right-sidebar-wrapper ng-star-inserted"><a
+          class="item ng-star-inserted" id="menu-dashboard-link" href="/site_audit/seo_checkup/">
+          <span class="label material-symbols-outlined me-3">Dashboard </span>
+          <span>Dashboard</span>
+        </a>
+        <a class="item ng-star-inserted" id="menu-objectives-link" href="/site_audit/objectives/">
+          <span class="label material-symbols-outlined me-3"> crisis_alert
+          </span>
+          <span>Objectives</span>
+        </a>
+        <a class="item ng-star-inserted" id="menu-alerts-link" href="/site_audit/alerts/">
+          <span class="label material-symbols-outlined me-3">notifications_active</span>
+          <span>Alerts
+          </span>
+        </a>
+
+        <button class="item ng-star-inserted" id="menu-alerts-link">
+          <span class="label material-symbols-outlined me-3">ac_unit</span>
+          <span data-toggle="collapse" data-target="#sidebar-crawler" aria-expanded="false" aria-controls="sidebar-crawler"> Crawler
+          </span>
+        </button>
+
+        <div id="sidebar-crawler" class="collapse" data-bs-parent="#right-sidebar-wrapper">
+          <ul class="nav flex-column">
+             <li class="nav-item">
+                <a class="nav-link" href="">Website</a>
+             </li>
+             <li class="nav-item">
+                <a class="nav-link" href="">Technical Site Audit</a>
+             </li>
+             <li class="nav-item">
+                <a class="nav-link" href="">Content</a>
+             </li>
+          </ul>
+       </div>
+
+
+        <a class="item ng-star-inserted" id="menu-rank-guard-link" href="/site_audit/rank_guard/">
+          <span class="label material-symbols-outlined me-3">verified_user</span><span>Rank Guard ®
+          </span>
+        </a>
+        <a class="item ng-star-inserted" id="menu-my-website-link" href="/site_audit/my_keywords">
+          <span class="label material-symbols-outlined me-3"> edit_document</span>
+          <span>My keywords
+          </span>
+        </a>
+        <a class="item ng-star-inserted" id="menu-keyword-explorer-link" href="/site_audit/keyword_explorer">
+          <span class="label material-symbols-outlined me-3">plagiarism</span><span>Keyword Explorer<span
+              class="badge ng-star-inserted">New</span>
+          </span>
+        </a>
+        <a class="item ng-star-inserted" id="menu-backlinks-link" href="/site_audit/backlinks">
+          <span class="label material-symbols-outlined me-3">link_off</span><span>My backlinks
+          </span>
+        </a>
+        <a class="item ng-star-inserted menu-competitors-link" id="" href="/site_audit/competitors/">
+          <span class="label material-symbols-outlined me-3">group</span><span>My competitors
+          </span>
+        </a>
+        <a class="item ng-star-inserted" id="menu-social-analytics-link" href="/site_audit/social_analytics/">
+          <span><i class="label fa fa-brands fa-facebook-f m-2"></i></span><span class="mx-2">Social Analytics
+          </span>
+        </a>
+        <div class="divider"></div><a class="item ng-star-inserted" id="menu-agency-link"
+          href="/site_audit/all_website/">
+          <span><i class="label fa-regular fa-window-restore m-2"></i></span><span class="mx-2">All websites</span>
+        </a>
+        <a class="item ng-star-inserted" id="menu-import-link" href="/site_audit/add_website/">
+          <span class="label material-symbols-outlined me-3"> add_circle</span><span>Add Website</span>
+        </a>
+        <a class="item ng-star-inserted" id="menu-services-link" href="/site_audit/seo_services/">
+          <span class="label material-symbols-outlined me-3">work</span><span>Services</span>
+        </a>
+        <a class="item ng-star-inserted" id="menu-support-link" href="/site_audit/support/"
+          style="padding-bottom: 20px;">
+          <span class="label material-symbols-outlined me-3">handshake</span><span>Support</span>
+        </a>
+
+        <a class="item ng-star-inserted" id="menu-support-link" href="javascript:void()">
+          <mat-icon role="img" class="mat-icon notranslate mat-icon-no-color" aria-hidden="true"
+            data-mat-icon-type="svg" data-mat-icon-name="life-ring"></mat-icon><span class="label"></span>
+        </a>
+      </app-desktop-menu> 
+    </div>
+   <div id="sidebar-wrapper" class="d-xl-block d-lg-block d-md-block d-sm-none d-xs-none">
+      <app-desktop-menu _ngcontent-afg-c200 class="sidebar-wrapper ng-star-inserted">
+        <a class="item   ng-star-inserted" id="menu-dashboard-link" href="/site_audit/seo_checkup/">
+          <span class="label material-symbols-outlined me-3">Dashboard </span>
+          <span>Dashboard</span>
+        </a>
+        <a class="item ng-star-inserted" id="menu-objectives-link" href="/site_audit/objectives/">
+          <span class="label material-symbols-outlined me-3"> crisis_alert
+          </span>
+          <span>Objectives</span>
+        </a>
+        <a class="item ng-star-inserted" id="menu-alerts-link" href="/site_audit/alerts/">
+          <span class="label material-symbols-outlined me-3">notifications_active</span>
+          <span>Alerts
+          </span>
+        </a>
+
+        <a class="item ng-star-inserted" id="menu-alerts-link" data-bs-toggle="collapse" aria-expanded="false" aria-controls="sidebar-crawler" href="#subbmenu">
+          <span class="label material-symbols-outlined me-3">ac_unit</span>
+          <span> Crawler
+          </span>
+        </a>
+
+        {% comment %} <div id="sidebar-crawler" class="collapse" data-bs-parent="#menu-alerts-link">
+          <ul class="nav flex-column">
+             <li class="nav-item">
+                <a class="nav-link" href="/site_audit/dashboard2/">Website</a>
+             </li>
+             <li class="nav-item">
+                <a class="nav-link" href="/site_audit/technical_site_audit">Technical Site Audit</a>
+             </li>
+             <li class="nav-item">
+                <a class="nav-link" href="/site_audit/content/">Content</a>
+             </li>
+          </ul>
+       </div> {% endcomment %}
+    
+       <ul class="sidenav-collapse collapse sideBar-collapse text-left ml-0" id="subbmenu">
+        <li class="sidenav-item">
+                <a href="/site_audit/dashboard2/" class="sidenav-link ripple-surface font-10 mb-3 text-gery"> <img
+                  src="{%static '/site_audit/assets/spider-web.png'%}"
+                  class="img-fluid me-1 label"
+                  width="10"
+                  height="10"
+                  alt=""
+                /> Website</a>
+        </li>
+            <li class="sidenav-item">
+                <a href="/site_audit/technical_site_audit/"
+                    class="sidenav-link ripple-surface font-10 mb-3 text-gery tech">
+                    <img
+                    src= "{%static '/site_audit/assets/spider-web.png'%}"
+                    class="img-fluid me-1 label"
+                    width="10"
+                    height="10"
+                    alt=""
+                  />Technical Site Audit</a>
+            </li>
+            <li class="sidenav-item border-left-bf">
+                <a href="/site_audit/content"
+                    class="sidenav-link ripple-surface font-10 mb-3 text-gery">
+                    <img
+                    src= "{%static '/site_audit/assets/spider-web.png'%}"
+                    class="img-fluid me-1 label"
+                    width="10"
+                    height="10"
+                    alt=""
+                  />Content</a>
+            </li>
+            <li class="sidenav-item border-left-bf"></li>
+        </ul>
+     
+
+        <a class="item ng-star-inserted" id="menu-rank-guard-link" href="/site_audit/rank_guard/">
+          <span class="label material-symbols-outlined me-3">verified_user</span><span>Rank Guard ®
+          </span>
+        </a>
+        <a class="item ng-star-inserted" id="menu-my-website-link" href="/site_audit/my_keywords">
+          <span class="label material-symbols-outlined me-3"> edit_document</span>
+          <span>My keywords
+          </span>
+        </a>
+        <a class="item ng-star-inserted" id="menu-keyword-explorer-link" href="/site_audit/keyword_explorer">
+          <span class="label material-symbols-outlined me-3">plagiarism</span><span>Keyword Explorer<span
+              class="badge ng-star-inserted">New</span>
+          </span>
+        </a>
+        <a class="item ng-star-inserted" id="menu-backlinks-link" href="/site_audit/backlinks">
+          <span class="label material-symbols-outlined me-3">link_off</span><span>My backlinks
+          </span>
+        </a>
+        <a class="item ng-star-inserted menu-competitors-link" href="/site_audit/competitors/">
+          <span class="label material-symbols-outlined me-3">group</span><span>My competitors
+          </span>
+        </a>
+        <a class="item ng-star-inserted" id="menu-social-analytics-link" href="/site_audit/social_analytics/">
+          <span><i class="label fa fa-brands fa-facebook-f m-2"></i></span><span class="mx-2">Social Analytics
+          </span>
+        </a>
+        <div class="divider"></div><a class="item ng-star-inserted" id="menu-agency-link"
+          href="/site_audit/all_website/">
+          <span><i class="label fa-regular fa-window-restore m-2"></i></span><span class="mx-2">All websites</span>
+        </a>
+        <a class="item ng-star-inserted" id="menu-import-link" href="/site_audit/add_website/">
+          <span class="label material-symbols-outlined me-3"> add_circle</span><span>Add Website</span>
+        </a>
+        <a class="item ng-star-inserted" id="menu-services-link" href="/site_audit/seo_services/">
+          <span class="label material-symbols-outlined me-3">work</span><span>Services</span>
+        </a>
+        <a class="item ng-star-inserted" id="menu-support-link" href="/site_audit/support/"
+          style="margin-bottom: 20px;">
+          <span class="label material-symbols-outlined me-3">handshake</span><span>Support</span>
+        </a>
+
+        <!-- <div id="side_toggle_button"> 
+        </div> -->
+        <div class="toggle desktop d-xl-block d-lg-block d-md-none d-sm-none" id="toggle" style="margin-top:-50px;">
+          <i class="fa fa-forward forward"></i>
+          <i class="fa fa-backward backward"></i>
+        </div>
+        <a class="item ng-star-inserted" id="menu-support-link" href="javascript:void()">
+          <mat-icon role="img" class="mat-icon notranslate mat-icon-no-color" aria-hidden="true"
+            data-mat-icon-type="svg" data-mat-icon-name="life-ring"></mat-icon><span class="label"></span>
+        </a>
+        <br>
+        <br>
+
+      </app-desktop-menu>
+    </div> 
+    <section class="content">
+      {% block content %} {% endblock %} {% block footer %} {% endblock %}
+    </section>
+    <!-- /.content -->
+    <app-footer class="c199">
+      <div class=" copyrights">© 2012-2022 All rights reserved</div>
+
+    </app-footer>
+    <div class="modal fade" id="chooseLocation" tabindex="-1" aria-labelledby="chooseDataLabel" aria-hidden="true">
+      <div class="modal-dialog modal-md modal-dialog-centered" style="max-width:622px">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body text-center" style="padding:20px 40px 40px 40px;">
+            <img decoding="async" alt="Banner illustration" src="../../static/site_audit/assets/img/global.png"
+              style="width:100px; height:100px">
+            <h4 class="modal-title" id="chooseDataLabel">Please select the country where you do the most business</h4>
+            <p>You can switch countries and we highly recommend it if it is not currently set to the country where you
+              do the most business! That said, we don’t suggest switching very often as it does use some of the data we
+              have allotted to your account and any existing keyword opportunities in the currently selected country
+              will be erased. However, will we automatically begin looking for new opportunities in the country you
+              change it to. If you need guidance or help, please email us at: support@seocheckup.com</p>
+            <select class="form-select CountrySelect" required name="country" id="searchedLocation"></select>
+            <div class="modal-footer"
+              style="margin: 10px auto;display: grid;grid-gap: 9px;margin-top: 20px;width: 100%;max-width: 430px;grid-template-columns: 1fr 1fr;padding: 0;">
+              <button class="country-change-confirmation-submit-btn btn btn-primary" type="button">Change country
+              </button>
+              <button class="country-change-confirmation-cancel-btn btn btn-outline-primary" type="button">Keep
+                existing</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- /.content-wrapper -->
+    <!-- Control Sidebar -->
+    <aside class="control-sidebar control-sidebar-dark">
+      <!-- Control sidebar content goes here -->
+    </aside>
+    <!-- /.control-sidebar -->
+  </div>
+  <script src="{% static 'site_audit/libs/jquery/jquery.js' %}"></script>
+  <script src="{% static 'site_audit/js/bootstrap.bundle.js' %}"></script>
+  <script src="{% static 'site_audit/libs/jquery-ui-1.12.1/jquery-ui.js' %}"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/7.2.0/sweetalert2.all.min.js"></script>
+  <script type="text/javascript" src="{% static 'site_audit/assets/js/moment.js' %}"></script>
+  <script type="text/javascript"
+    src="{% static 'site_audit/assets/js/responsiveTables/responsiveTables.js' %}"></script>
+  <!-- month picker -->
+  <!-- <script src="{% static 'site_audit/js/bootstrap.min.datepicker' %}"
+    integrity="sha512-T/tUfKSV1bihCnd+MxKD0Hm1uBBroVYBOYSk1knyvQ9VyZJpc/ALb4P0r6ubwVPSGB2GvjeoMAJJImBG12TiaQ=="
+    crossorigin="anonymous" referrerpolicy="no-referrer"></script> -->
+  <script type="text/javascript" src="{% static 'site_audit/assets/js/dynamicDataTable2.js' %}"></script>
+  <script>
+    function urlParse() {
+      var sPageURL = window.location.pathname
+      var urlSplit = sPageURL.split('/');
+      return urlSplit;
+    }
+    var website_regex = new RegExp(/^(http[s]?:\/\/(www\.)?|ftp:\/\/(www\.)?|www\.){1}([0-9A-Za-z-\.@:%_\+~#=]+)+((\.[a-zA-Z]{2,3})+)(\/(.)*)?(\?(.)*)?/g);
+    $(function () {
+      $("[data-bs-toggle='tooltip']").tooltip();
+    });
+    function goBack() {
+      window.history.back();
+    }
+  </script>
+  <!-- noty -->
+  <script type="text/javascript" src="{% static 'site_audit/libs/noty/noty.min.js' %}"></script>
+  <script>
+
+
+    function ShowNoty(status, type) {
+      new Noty({
+        layout: 'topRight',
+        theme: 'white',
+        type: type,
+        text: `<div class="d-flex"><span class="notyImg"><img src="{% static 'site_audit/setup/img/logo-theme.png' %}" ></span><span>${status}</span></span></div>`,
+        dismissQueue: true,
+        template: '<div class="noty_message noty_bar noty_theme_default noty_layout_top noty_success"><span class="noty_text"></span><div class="noty_close"></div></div>',
+        animation: {
+          open: 'animated bounceInDown',
+          close: 'animated bounceOutRight',
+          speed: 500
+        },
+        timeout: 10000,
+        force: false,
+        modal: false,
+        closeWith: ['click', 'button'],
+        callback: {
+          onShow: function () { },
+          afterShow: function () { },
+          onClose: function () { },
+          afterClose: function () { }
+        }
+      }).show()
+    }
+    $('[data-toggle="tooltip"]').tooltip();
+    (function ($) {
+      $.fn.inputFilter = function (inputFilter) {
+        return this.on("input keydown keyup mousedown mouseup select contextmenu drop", function () {
+          if (inputFilter(this.value)) {
+            this.oldValue = this.value;
+            this.oldSelectionStart = this.selectionStart;
+            this.oldSelectionEnd = this.selectionEnd;
+          } else if (this.hasOwnProperty("oldValue")) {
+            this.value = this.oldValue;
+            this.setSelectionRange(this.oldSelectionStart, this.oldSelectionEnd);
+          } else {
+            this.value = "";
+          }
+        });
+      };
+    }(jQuery));
+    $(document).on('remove keyup', '.select2-search__field', function (event) {
+      var selectedOptions = $(".select2-selection__choice").text().split("×")[1];
+      if ($(this).val() == selectedOptions) {
+        if ($(".select2-selection > .error").length === 0) {
+          $(".select2-selection").append("<small class='error text-danger'>Already exists !</small>");
+        }
+      }
+      else {
+        $(".select2-selection > .error").remove();
+      }
+    });
+    $(".onlyNumber").inputFilter(function (value) {
+      return /^\d*[.,]?\d*$/.test(value)
+    });
+    // popover
+    $(document).ready(function () {
+
+
+      // prevent modal to close on outside the modal
+      $('.modal').modal({
+        backdrop: 'fixed',
+        keyboard: false
+      })
+      $('[data-toggle="popover"]').popover({
+        title: function () {
+          return $(this).attr('title');
+        },
+        content: function () {
+          return $(this).attr('data-content');
+        },
+        trigger: 'hover'
+      });
+    });
+    // Ajax Loader
+    xhrPool = [];
+    $.ajaxSetup({
+      beforeSend: function (jqXHR) {
+        xhrPool.push(jqXHR);
+      }
+    })
+    // $(document).ajaxStart(function () {
+    //   if ($('body > .overlay').length == 0) {
+    //     $('body > .overlay').remove();
+    //     $('body').prepend('<div class="overlay"><div class="overlay__inner"> <div class="overlay__content"><span class="spinner"></span></div> </div></div>'); // =============
+
+    //   }
+    // })
+    // .ajaxStop(function () {
+
+    //   $('.overlay').remove();
+    //   // if table is empty
+    //   var tablength = $('.dataTables_empty').length;
+    //   // alert(tablength)
+    //   if (tablength == 1) {
+    //     $('.searchBarToggle ').css('display', 'none');
+    //   } else {
+    //     $('.searchBarToggle ').css('display', 'block');
+    //   }
+    // })
+    //
+    $(function () {
+      var current = location.pathname;
+      $('.nav li a').each(function () {
+        var $this = $(this);
+        // if the current path is like this link, make it active
+        if ($this.attr('href').indexOf(current) !== -1) {
+          $this.addClass('active');
+        }
+      })
+    });
+    //
+
+    $(document).on('click', '#toggle', function () {
+
+      var toggleWidth = $('#sidebar-wrapper').width() == 250 ? "50px" : "250px";
+      $('#sidebar-wrapper').animate({ width: toggleWidth }, 50);
+      var w = $('#wrapper')
+      var t = w.css('padding-left');
+
+      if (t === '250px') {
+        w.css('padding-left', '50px');
+        $('.backward').css('display', 'none')
+        $('.forward').css('display', 'block')
+
+
+      } else {
+        w.css('padding-left', '250px');
+        $('.forward').css('display', 'none')
+        $('.backward').css('display', 'block');
+      }
+
+    });
+    $(document).ready(function () {
+      $(document).on('click', '#rightSidebarToggle', function () {
+        $('#right-sidebar-wrapper').toggle()
+      })
+      $(".forward").css("display", "none");
+      $(document).on('change', '.radio', function () {
+        var url = $(this).val();
+        var dataId = $(this).attr('data-id')
+        $('.url,.selectedWebsite').html('')
+        $('.url').html(`${url}`);
+        $('.selectedWebsite').html(`${url.replace('https://', '').replace('http://', '').replace(/\/$/, "")}`);
+        $('.url').attr('data-id', dataId);
+        localStorage.setItem('project_id', dataId);
+        localStorage.setItem('project_url', url);
+        GetWebsitesBase();
+        window.location.reload();
+      });
+
+      var selectedWebsiteId;
+      $(document).ready(function () {
+        if ($('.CountrySelect').length > 0) {
+          $('#country-info-block-btn-modal').on('click', function () {
+            $('#chooseLocation').modal('show');
+            Get_country_languages();
+          });
+        }
+        setTimeout(() => {
+          selectedWebsiteId = $(".url").first().attr('data-id');
+          //console.log(selectedWebsiteId, ' selectedWebsiteId')
+        }, "2000")
+      });
+
+      // add active class in sidebar
+      var setDefaultActive = function () {
+        var path = window.location.pathname;
+        var element = $(".sidebar-wrapper a[href='" + path + "']");
+        element.addClass("act");
+      }
+      setDefaultActive()
+      function Get_country_languages() {
+        $.ajax({
+          type: "GET",
+          url: "/user_management/get_country_languages/",
+          success: function (response) {
+            if (response.status == true) {
+              $('.CountrySelect').empty();
+              $('.CountrySelect').html('<option></option>')
+              var json = response.country_languages;
+              var options = [];
+              for (var i = 0; i < json.length; i++) {
+                var obj = json[i];
+                let country = obj.Country;
+                let lang = obj.Language;
+                let code = obj.code;
+                options.push({ id: code + '_' + country + '_' + lang, abbreviation: code, text: country + ' / ' + lang });
+              }
+              $('.CountrySelect').select2({
+                placeholder: 'Select Location / Language',
+                templateResult: formatCountry,
+                data: options,
+                dropdownParent: $('#chooseLocation')
+              });
+              function formatCountry(country) {
+                if (!country.id) {
+                  return country.text;
+                }
+                var $country = $(
+                  '<span class="flag-icon flag-icon-' + country.abbreviation.toLowerCase() + ' flag-icon-squared"></span>' + '<span style="margin-left:10px;">' + country.text + '</span>'
+                );
+                return $country;
+              };
+              $('.CountrySelect').val($("#selectedLoaction").val()).trigger('change');
+            } else {
+
+            }
+          },
+          error: function (response) {
+            alert('error');
+
+          }
+        });
+
+      }
+
+
+      var location = '';
+      $('.CountrySelect').on('change', function () {
+        location = $(this).val();
+      });
+      $('.country-change-confirmation-submit-btn').on('click', function () {
+        var id = $('.url').attr('data-id');
+        $.ajax({
+          method: 'POST',
+          url: '/site_audit/save_project_location/',
+          data: { project_id: id, location: location },
+          success: function (response) {
+            if (response.status) {
+              console.log(response, 'response country');
+              window.location.reload();
+            } else {
+              console.log('something went wrong')
+            }
+          }
+        })
+      });
+      GetWebsitesBase();
+    });
+    // logout
+    function postID(id) {
+
+      $.ajax({
+        method: 'GET',
+        url: '/site_audit/get_project_location/?project_id=' + id,
+        success: function (res) {
+
+          if (res.status) {
+            if (res.location != '') {
+              $('.country-wrapper').find('.fa').hide();
+              const location = res.location;
+              const code = location.split('_')[0];
+              const country_name = location.split('_')[1];
+              $('.country_loader').html('')
+              $('.country-wrapper').find('.country').find('.country__name').html(`${country_name}`);
+              $('.country__flag').addClass(`flag-icon-${code}`)
+            } else {
+              $('.country-wrapper').find('.country').find('.country__name').html("United States");
+              $('.country__flag').addClass('flag-icon-us')
+            }
+          } else {
+            $('.country-wrapper').find('.country').find('.country__name').html("United States");
+            $('.country__flag').addClass('flag-icon-us')
+          }
+          $('.country-wrapper').find('.country').find('.country_loader').remove()
+        }
+      })
+    }
+    function GetWebsitesBase() {
+      var data_id = ''
+      $.ajax({
+        method: 'GET',
+        url: '/site_audit/get_websites/',
+        success: function (res) {
+          if (res.status && res.websites.length > 0) {
+            var websites = res.websites;
+            var results = websites.filter(obj => {
+              return obj.i_website__website_url != "";
+            });
+            $('.web_tooltip_html,.web_tooltip_html_mobile').html('');
+            $('.selectedWebsite').html('')
+            $('.url').html('')
+            $.each(results, function (i, val) {
+              if (i === 0 && val.i_website__website_url != "") {
+                if (localStorage.getItem('project_id') == null) {
+                  $('.url').attr('data-id', `${val.id}`);
+                  $('.url').html(`${val.i_website__website_url}`)
+                  $('#url').html(`${val.i_website__website_url}`)
+                  $('.selectedWebsite').html(`${val.i_website__website_url.replace('https://', '').replace('http://', '').replace(/\/$/, "")}`)
+                  localStorage.setItem('project_id', val.id);
+                  localStorage.setItem('project_url', val.i_website__website_url);
+                  data_id = $('.url').attr('data-id')
+                  postID(data_id)
+                  $('.web_tooltip_html').append(`
+        <div class="form-check">
+        <input class="form-check-input radio" checked data-id="${val.id}" id="desktop_${val.id}" value="${val.i_website__website_url}" type="radio" name="webRadio1" >
+        <label class="form-check-label" for="desktop_${val.id}">
+        ${val.i_website__website_url}
+        </label>
+        </div>
+      `);
+                  $('.web_tooltip_html_mobile').append(`
+        <div class="form-check">
+        <input class="form-check-input radio" checked data-id="${val.id}" id="mobile_${val.id}" value="${val.i_website__website_url}" type="radio" name="webRadio2" >
+        <label class="form-check-label" for="mobile_${val.id}">
+        ${val.i_website__website_url}
+        </label>
+        </div>
+      `)
+                } else {
+                  $('.url').attr('data-id', localStorage.getItem('project_id'));
+                  $('.url').html(localStorage.getItem('project_url'))
+                  $('.selectedWebsite').html(`${localStorage.getItem('project_url').replace('https://', '').replace('http://', '').replace(/\/$/, "")}`)
+                  data_id = $('.url').attr('data-id')
+                  postID(data_id)
+                  $('.web_tooltip_html').append(`
+        <div class="form-check">
+        <input class="form-check-input radio" checked data-id="${val.id}" id="desktop_${val.id}" value="${val.i_website__website_url}" type="radio" name="webRadio1" >
+        <label class="form-check-label" for="desktop_${val.id}">
+        ${val.i_website__website_url}
+        </label>
+        </div>
+      `);
+                  $('.web_tooltip_html_mobile').append(`
+        <div class="form-check">
+        <input class="form-check-input radio" checked data-id="${val.id}" id="mobile_${val.id}" value="${val.i_website__website_url}" type="radio" name="webRadio2" >
+        <label class="form-check-label" for="mobile_${val.id}">
+        ${val.i_website__website_url}
+        </label>
+        </div>
+      `)
+                }
+              } else {
+
+                if (localStorage.getItem('project_id') == val.id) {
+                  if (val.i_website__website_url != "") {
+                    $('.web_tooltip_html').append(`
+          <div class="form-check">
+          <input class="form-check-input radio" checked data-id="${val.id}" id="desktop_${val.id}" value="${val.i_website__website_url}" type="radio" name="webRadio1">
+          <label class="form-check-label" for="desktop_${val.id}">
+          ${val.i_website__website_url}
+          </label>
+          </div>
+       `)
+                    $('.web_tooltip_html_mobile').append(`
+          <div class="form-check">
+          <input class="form-check-input radio" checked data-id="${val.id}" id="mobile_${val.id}" value="${val.i_website__website_url}" type="radio" name="webRadio2">
+          <label class="form-check-label" for="mobile_${val.id}">
+          ${val.i_website__website_url}
+          </label>
+          </div>
+       `)
+                  }
+                } else {
+                  if (val.i_website__website_url != "") {
+                    $('.web_tooltip_html').append(`
+          <div class="form-check">
+          <input class="form-check-input radio" data-id="${val.id}" id="desktop_${val.id}" value="${val.i_website__website_url}" type="radio" name="webRadio1">
+          <label class="form-check-label" for="desktop_${val.id}">
+          ${val.i_website__website_url}
+          </label>
+          </div>
+       `)
+                    $('.web_tooltip_html_mobile').append(`
+          <div class="form-check">
+          <input class="form-check-input radio" data-id="${val.id}" id="mobile_${val.id}" value="${val.i_website__website_url}" type="radio" name="webRadio2">
+          <label class="form-check-label" for="mobile_${val.id}">
+          ${val.i_website__website_url}
+          </label>
+          </div>
+       `)
+                  }
+                }
+
+              }
+            });
+
+            selectedWebsiteId = $(".url").first().attr('data-id');
+            if (selectedWebsiteId) {
+              $.ajax({
+                url: '/site_audit/get_competitors/?project_id=' + selectedWebsiteId,
+                type: 'GET',
+                success: function (response) {
+                  if (response.competitors && response.competitors.length > 0) {
+                    $(".menu-competitors-link").attr('href', '/site_audit/competitors_step2/');
+                    $('#select_competitor').empty();
+                    if ($("#select_competitor").length > 0) {
+                      var json = response.competitors;
+                      for (const key of Object.keys(json)) {
+                        $('#select_competitor').append('<option value=' + json[key].id + '>' + json[key].i_website__website_url + '</option>');
+                      }
+                    }
+                  } else {
+                    $(".menu-competitors-link").attr('href', '/site_audit/competitors/')
+                  }
+                },
+                error: function (err) {
+                  console.log("Request failed, error= " + err);
+                }
+              });
+            }
+          }
+          else {
+            postID(data_id)
+          }
+        }
+      });
+    }
+    $(document).on('click', '#logout', function () {
+      localStorage.removeItem('project_id');
+      localStorage.removeItem('project_url');
+    })
+  </script>
+  <script type="text/javascript" src="{% static 'site_audit/libs/noty/noty.min.js' %}"></script>
+  <script>
+    function ShowNoty(status, type) {
+      new Noty({
+        layout: 'topRight',
+        theme: 'light',
+        type: type,
+        text: `<div class="d-flex"><span class="notyImg"><img src="{% static '/site_audit/assets/logo.svg' %}" ></span><span>${status}</span></span></div>`,
+        dismissQueue: true,
+        template: '<div class="noty_message noty_bar noty_theme_default noty_layout_top noty_success"><span class="noty_text"></span><div class="noty_close"></div></div>',
+        animation: {
+          open: 'animated bounceInDown',
+          close: 'animated bounceOutRight',
+          speed: 500
+        },
+        timeout: 10000,
+        force: false,
+        modal: false,
+        closeWith: ['click', 'button'],
+        callback: {
+          onShow: function () { },
+          afterShow: function () { },
+          onClose: function () { },
+          afterClose: function () { }
+        }
+      }).show()
+    }
+
+    function goBack() {
+      window.history.back();
+    }
+
+    $('[data-toggle="tooltip"]').tooltip();
+    $(document).ready(function () {
+      $('[data-toggle="popover"]').popover({
+        placement: 'right',
+        title: 'Sign in to the website builder',
+        content: function () {
+          return $(this).attr('data-content');
+        },
+        trigger: 'hover'
+      });
+    });
+    // Ajax Loader
+    xhrPool = [];
+    $.ajaxSetup({
+      beforeSend: function (jqXHR) {
+        xhrPool.push(jqXHR);
+      }
+    })
+    $(document).ajaxStart(function () {
+      // alert('ok');
+      $('.overlay').remove();
+      $('body').prepend('<div class="overlay"><div class="overlay__inner"> <div class="overlay__content"><span class="spinner"></span></div> </div></div>'); // =============
+      // setTimeout(function() {
+      //     $('#cancelAjax').show()
+      //     $('#cancelAjax').click(function() {
+      //         $.each(xhrPool, function(idx, jqXHR) {
+      //             jqXHR.abort();
+      //         });
+      //         xhrPool = [];
+      //     })
+      // }, 1000);
+    })
+      .ajaxStop(function () {
+
+        $('.overlay').remove();
+      });
+      // add website code
+      $(document).ready(function(){
+      
+   var website_url = '';
+
+  $('#detect').prop('disabled',true)
+  $('#DetectUrl').on('change input type',function(){
+     website_url  = $(this).val();
+     $("#responseText").html("")
+    var pattern = /^(http|https)?:\/\/[a-zA-Z0-9-\.]+\.[a-z]{2,4}/;
+
+    if(pattern.test(website_url)){
+       $('#detect').prop('disabled',false);
+     
+    }else{
+      
+    $('#detect').prop('disabled',true)
+     $("#responseText").html('Please enter correct url i.e https://example.com').addClass('text-danger')
+    }
+
+  });
+    $('#detect').on('click',function(e){
+    e.preventDefault();
+      //  console.log(website_url,'website_url1')
+      //  check domain start
+            var comp = new RegExp($("#url").text());
+     console.log(comp,'com')
+        $("#responseText").html('')
+         
+          if(comp.test(website_url)){
+      $("#responseText").html("Website added successfully!").addClass('text-success').removeClass('text-danger')
+      // check domain end
+       if(website_url != "" && website_url != undefined){
+         $.ajax({
+          method:'POST',
+          url:'/site_audit/add_website/',
+          data:{website_url: website_url},
+          success:function(res){
+              
+
+               if(res.status){
+                 
+                  $("#responseText").html("Website added successfully!").addClass('text-success').removeClass('text-danger')
+                   window.location.href = '/site_audit/seo_checkup/'
+                  localStorage.removeItem('project_id');
+                                    localStorage.removeItem('project_url');
+                                 
+                                    GetWebsitesBase();
+               }
+               else{
+                  $("#responseText").html(`${res.error}`).addClass('text-danger').removeClass('text-success');
+                  
+               }
+
+          }
+         })
+       }else{
+         $("#responseText").html("url is undefined")
+       }
+        }
+        else{
+        console.log('not working')
+
+           $("#responseText").html(`Please enter correct domain i.e ${$("#url").text()}`).addClass('text-danger')
+        }
+     
+      
+      
+       })
+});
+/* Tab Function */
+jQuery("[data-targetit]").on("click", function (e) {
+  jQuery(this).addClass("active");
+  jQuery(this).siblings().removeClass("active");
+  var target = jQuery(this).data("targetit");
+  jQuery("." + target)
+    .siblings('[class^="tabs-"]')
+    .hide();
+  jQuery("." + target).fadeIn();
+});
+
+  </script>
+  <script src="{% static 'site_audit/js/chart.js' %}"></script>
+  <!-- <script src="{% static 'site_audit/js/jquery.min.js' %}"></script> -->
+  {% block extrascript %}
+  {% endblock %}
+</body>
+
+</html>

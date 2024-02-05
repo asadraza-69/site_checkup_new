@@ -1,0 +1,317 @@
+{% extends "base2.html" %}
+{% load static %}
+{% block extrahead %}
+<style>
+  .keyword_list_section {
+    display: none;
+    margin-top: 30px;
+  }
+
+  #richText {
+    display: none;
+  }
+
+  .crossIcon {
+    width: 20px;
+    line-height: 19px;
+    color: #808080 !important;
+    margin-left: 6px;
+    font-size: 12px;
+    cursor: pointer;
+    border-radius: 50%;
+    background: #dfdfdf;
+  }
+
+  span.badge {
+    line-height: 18px !important;
+    display: inline-block;
+    background: #eaff8f;
+    text-align: center;
+    background: var(--primary-color) !important;
+    color: white !important;
+    margin: 3px;
+    padding: 4px 6px;
+    font-family: Poppins, sans-serif;
+    font-style: normal;
+    font-weight: 500 !important;
+    font-size: 12px !important;
+    border: 1px solid #e3e1e1;
+    margin-left: 4px;
+    border-radius: 0 !important;
+  }
+
+  #description {
+    background-color: #f7f7f7;
+    border: 1px solid #ccc;
+  }
+
+  #submit_keyword {
+    margin-top: 6px !important;
+  }
+
+  .gray-bg {
+    box-shadow: 0 7px 14px 0 rgb(65 69 88 / 41%), 0 3px 6px 0 rgb(0 0 0 / 7%) !important;
+  }
+
+  #keywords_list {
+    max-height: 180px;
+    overflow: auto;
+    display: flex;
+    flex-wrap: wrap;
+    padding: 4px;
+    border-radius: 5px;
+    border: 1px solid #a6a6a6;
+  }
+
+  .pointer {
+    cursor: pointer;
+  }
+
+  #typewriter-text {
+    font-size: 14px;
+    line-height: 1.5;
+    padding: 10px;
+    border: none;
+    margin-bottom: 10px;
+    border-radius: 1rem;
+    resize: none;
+    float: left;
+    width: 100%;
+    min-height: 400px;
+    background-color: #f3f5f7;
+    overflow-y: auto;
+    box-shadow: 0 7px 14px 0 rgb(65 69 88 / 41%), 0 3px 6px 0 rgb(0 0 0 / 7%) !important;
+  }
+</style>
+<!-- <link href="https://cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet">
+<script src="https://cdn.quilljs.com/1.3.6/quill.js"></script> -->
+{% endblock %}
+{% block content %}
+<div class="container">
+  <!-- Crawler Heading Section  -->
+  <div class="row">
+    <div class="col-xl-9">
+      <h2 class="title red fw-400 mb-md-3 pb-2">AI SEO Planner</h2>
+    </div>
+  </div>
+</div>
+<div class="container">
+  <div class="row justify-content-center">
+    <!-- <label for="" class="mt-3">Select Tool</label> -->
+    <div class="col-md-8">
+      <div class="gray-bg p-5">
+        <label for="" class=""><strong>Select Plan</strong></label>
+        <div class="d-flex mt-2">
+          <div class="form-check form-check-inline">
+            <input class="form-check-input" checked type="radio" name="inlineRadioOptions" id="keyword"
+              value="keywords">
+            <label class="form-check-label" for="keywords">Keywords</label>
+          </div>
+          <div class="form-check form-check-inline">
+            <input class="form-check-input" type="radio" name="inlineRadioOptions" id="sentences" value="sentence">
+            <label class="form-check-label" for="sentences">Sentences</label>
+          </div>
+        </div>
+        <div class="keyword_sections">
+          <label for="" class="mt-2">Add Keyword relevent to your website</label>
+          <div class="input-group mb-1">
+            <input type="text" class="form-control form-control-sm" id="word_input" placeholder="Enter Keyword">
+            <!-- <button class="btn btn-primary" id="submit_keyword">Submit</button> -->
+            <Button class="btn btn-primary" id="save_word">Add Keyword</Button>
+          </div>
+          <div id="spec_char" class="text-red"></div>
+          <!--  -->
+          <div class="keyword_list_section">
+            <label for="">Keywords</label>
+            <div id="keywords_list">
+            </div>
+            <div class="float-end">
+              <button class="btn btn-success mt-1 mb-1 d-flex align-items-center justify-content-center gap-2"
+                id="submit_keyword">
+                <div class="searchSpinner d-none">
+                  <div class="spinner-border spinner-border-sm" role="status">
+                    <span class="visually-hidden">Loading...</span>
+                  </div>
+                </div> Submit
+              </button>
+            </div>
+          </div>
+        </div>
+        <!-- sentence section start -->
+        <div class="d-none sentence_section mb-4">
+          <label for="">Enter your Sentences</label>
+          <textarea name="" id="sen_des" style=" padding: 5px;" cols="88" rows="10"></textarea>
+          <br />
+          <div class="d-flex float-end">
+          <button class="btn btn-success  mt-1 mb-1 d-flex align-items-center justify-content-center"
+            id="submit_sentences">
+            <div class="searchSpinner d-none">
+              <div class="spinner-border spinner-border-sm" role="status">
+                <span class="visually-hidden">Loading...</span>
+              </div>
+            </div>Submit
+          </button>
+          &nbsp;
+          <button class="btn btn-danger  mt-1 mb-1" id="clear_txt">Clear</button>
+         </div>
+        </div>
+        <!-- sentence section end -->
+      </div>
+    </div>
+  </div>
+</div>
+<div class="container" id='richText'>
+  <div class="row justify-content-center">
+    <div class="col-md-8">
+      <div class="mb-5 mt-3 description_container">
+        <!-- <div class="spinner-border" role="status">
+  <span class="visually-hidden">Loading...</span>
+</div> -->
+        <textarea id="typewriter-text"></textarea>
+        <!-- <div id="description" placeholder="Description" class="form-control"></div> -->
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}
+{% block extrascript %}
+<script>
+  // ai ajax function start
+  function ai_tool(text) {
+
+    $.ajax({
+      method: 'GET',
+      url: '/site_audit/seo_ai_data/?keywords=' + text,
+      success: function (res) {
+        if (res.status) {
+          //$('#submit_loader').addClass('d-none')
+          $('.searchSpinner').addClass('d-none')
+          $(".searchSpinner").hide()
+          $('#submit_keyword').prop('disabled', false)
+          $('#submit_sentences').prop('disabled', false)
+
+          $('#typewriter-text').removeClass('d-none');
+          var richText = res.data;
+          var formattedText = richText.replace(/\n/g, '<br>').trim();
+          $('#typewriter-text').empty()
+          // create a typewriter effect
+          var text = formattedText.replace(/<br>/g, '\n');
+          var i = 0;
+          $("#richText").css("display", "block")
+          var textarea = $('#typewriter-text');
+          function typeWriter() {
+            if (i < text.length) {
+              var char = text.charAt(i);
+              textarea.append(char);
+              i++;
+              textarea.scrollTop(textarea[0].scrollHeight);
+              setTimeout(typeWriter, 30);
+            }
+          }
+          typeWriter();
+          // call the typewriterEffect function with your long text
+        } else {
+          showNoty(res.error, 'error')
+        }
+      }, error: function (err) {
+        ShowNoty(err.error, 'error')
+      }
+    })
+  }
+  // ai ajax function end
+
+
+
+  $('input[name="inlineRadioOptions"]').on('change', function () {
+    var id = $(this).attr('id');
+    if (id == 'keyword') {
+      $('.keyword_sections').removeClass('d-none')
+      $('.sentence_section').addClass('d-none')
+    } else if (id == 'sentences') {
+      $('#submit_sentences').prop('disabled', true)
+      $('.keyword_sections').addClass('d-none')
+      $('.sentence_section').removeClass('d-none')
+    }
+  })
+  // submit description start
+  $('#clear_txt').on('click',function(){
+    $('#sen_des').val('')
+       $('#submit_sentences').prop('disabled', true)
+        $('#typewriter-text').addClass('d-none');
+  })
+  $('#sen_des').on('input keypress keyup change', function () {
+    let sen_length = $(this).val().length;
+    if (sen_length > 0) {
+       $('#submit_sentences').prop('disabled', false)
+    } else {
+     $('#typewriter-text').addClass('d-none');
+      $('#submit_sentences').prop('disabled', true)
+    }
+  })
+
+
+
+  $(document).on('click', '#submit_sentences', function () {
+    $('#submit_sentences').prop('disabled', true)
+    let textarea = $('#sen_des').val();
+    $(".searchSpinner").show()
+    $(".searchSpinner").removeClass('d-none')
+    if (textarea !== '') {
+      ai_tool(textarea)
+    }
+
+  })
+  // submit description end
+  $('#word_input').keypress(function (e) {
+    if ($(this).val().length > 1) {
+      var key = e.which;
+      if (key == 13)  // the enter key code
+      {
+        $('#save_word').click();
+        return false;
+      }
+    }
+  });
+  var keyword_array = [];
+  $('#save_word').on('click', function (e) {
+    e.preventDefault();
+    var keyword = '';
+    keyword = $('#word_input').val()
+    $('#keywords_list').append(`<span class="badge badge-secondary badgeCss">${keyword} &nbsp;<i class="float-end fa fa-close text-red crossIcon pointer"></i></span>`)
+    $('#word_input').val('')
+    keyword_array.push(keyword)
+    if (keyword_array.length != 0) {
+      $('.keyword_list_section').show();
+    } else {
+      $('.keyword_list_section').hide();
+    }
+  })
+  $(document).on('click', '.fa-close', function () {
+    $(this).parent().remove();
+    var remove_keyword = $(this).parent().text();
+    for (var i = keyword_array.length - 1; i >= 0; i--) {
+      if (keyword_array[i] === $.trim(remove_keyword)) {
+        keyword_array.splice(i, 1)
+      }
+    }
+    if (keyword_array.length === 0) {
+      $('.keyword_list_section').hide();
+    } else {
+      $('.keyword_list_section').show();
+
+    }
+  });
+  // richTRext description start
+  $(document).ready(function () {
+    $('#submit_keyword').on('click', function () {
+
+      $('#typewriter-text').addClass('d-none');
+      $(".searchSpinner").show()
+      $(".searchSpinner").removeClass('d-none')
+      $('#submit_keyword').prop('disabled', true);
+      ai_tool(keyword_array)
+
+    })
+  })
+</script>
+{% endblock %}

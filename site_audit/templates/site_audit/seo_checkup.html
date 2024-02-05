@@ -1,0 +1,2014 @@
+{% extends "base2.html" %}
+{% load static %}
+{% block extrahead %}
+<link href="https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/0.8.2/css/flag-icon.min.css" rel="stylesheet" />
+
+<style>
+    @media (min-width: 1280px) {
+        .c240 {
+            margin: 0 -16px;
+        }
+    }
+
+    .c240 {
+        display: block;
+        border-radius: 12px;
+    }
+
+    .warning[_nghost-qnp-c240] .container[_ngcontent-qnp-c240] {
+        background-color: #ffeab8;
+    }
+
+    @media (min-width: 1280px) {
+        .container-c240 {
+            padding: 20px 12px;
+        }
+    }
+
+    .container-c240 {
+        display: grid;
+        grid-template-columns: auto 1fr auto;
+        grid-gap: 16px;
+        align-items: center;
+        /* padding: 8px; */
+        margin: 0 -8px;
+        border-radius: 12px;
+        transition: background-color 1.5s;
+        border: 4px solid white;
+    }
+
+    .container-c240 .icon {
+        background: white;
+    }
+
+    .warning {
+        background-color: #ffeab8;
+    }
+
+    .container-c240 .icon {
+        background: #f7fbf2;
+        border-radius: 16px;
+        width: 48px;
+        height: 48px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .body-c240 {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .title-c240 {
+        font-size: 13px;
+        line-height: 24px;
+        letter-spacing: .5px;
+        color: #18253ade;
+        display: inline-flex;
+        align-items: flex-end;
+        flex: 1 1 50%;
+        font-weight: 500;
+    }
+
+    .title-c240 .help-icon {
+        margin-left: 4px;
+        margin-bottom: -3px;
+    }
+
+    .state-c240 {
+        flex: 1 1 50%;
+        margin-left: 16px;
+        font-size: 13px;
+        line-height: 24px;
+        letter-spacing: .5px;
+        text-align: right;
+        font-weight: 500;
+    }
+
+    .sub-item-body {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 5px 24px 5px 15px;
+        border: 2px solid white;
+        border-radius: 4px;
+        margin-left: 60px;
+        transition: background-color 1.5s;
+    }
+
+    @media (min-width: 1280px) {
+        .sub-item-container {
+            padding: 0 4px 0 0;
+        }
+    }
+
+    .sub-item-container {
+        padding-right: 4px;
+        margin: 0 -8px;
+    }
+
+    .sub-item-error {
+        background-color: #ffd9d9;
+    }
+
+    #data_card .card-body {
+        padding: 32px;
+    }
+
+    .state-c240 {
+        color: #2948ff;
+    }
+</style>
+{% endblock %}
+{% block content %}
+
+<div class="container mt-1">
+    <div>
+        <app-header _ngcontent-qlk-c200 _nghost-qlk-c198 class=" ">
+            <div _ngcontent-qlk-c198 class="mt-1 mb-2 secondary ">
+                <div _ngcontent-qlk-c198 class="current">
+                    <h6 class="breadCrumb">Dashboard</h6>
+                    <div _ngcontent-qlk-c198 class="websites ">
+                        <h6 class="breadCrumb">
+                            <app-url-shortener _ngcontent-qlk-c198 _nghost-qlk-c193>
+                                <div _ngcontent-qlk-c193 class="segment  url"></div>
+
+                            </app-url-shortener>
+                        </h6>
+                    </div>
+
+                </div>
+                <div _ngcontent-qlk-c198 class="tools">
+                    <div class="float-end">
+                        <button id="country-info-block-btn" class="country-wrapper"><span class="country">
+                                <i aria-hidden="true" class="country__flag flag-icon flag-icon-squared "></i>
+                                <span class="country__name"> </span></span><i data-bs-toggle="tooltip"
+                                data-bs-placement="left" class="fa fa-pencil" id="country-info-block-btn-modal"
+                                title="This tool uses data based on the country
+                                     that is selected under your primary account settings.
+                                      You can switch countries and we highly recommend it 
+                                      if it is set wrong, but it does use some of the data 
+                                      we have allotted to your account. As such, we recommend
+                                       making sure it is set correctly and then keeping it set to the country where you do the most business." aria-hidden="true">
+                            </i>
+
+                        </button>
+
+                    </div>
+                </div>
+            </div>
+
+        </app-header>
+
+    </div>
+    <!-- <div id="topCard">
+        <div class="loader">
+            <div class="lds-ellipsis">
+                <div></div>
+                <div></div>
+                <div></div>
+            </div>
+
+        </div>
+    </div> -->
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-2">
+                            <div class="illustration">
+                                <img src="../../static/site_audit/assets/img/seo-main.png" alt>
+                            </div>
+                        </div>
+                        <div class="col-md-10">
+                            <strong>Perfect! Your website already has Google Analytics so you can start using the Answer
+                                Engine.</strong>
+                            <div class="d-flex mt-3">
+                                <button class="btn btn-primary mr-3">Import from google Analytics</button>&nbsp;&nbsp;
+                                <button class="btn btn-outline-success" data-bs-toggle="modal" data-bs-target="#myModal"
+                                    role="button">Need help doing this?</button>
+
+                            </div>
+
+                            <div class="row mt-5">
+                                <div _ngcontent-gls-c223 class="logo-grid">
+                                    <div _ngcontent-gls-c223 class="logo-grid-item">
+                                        <p _ngcontent-gls-c223>
+                                            Used by over 250k companies and organizations:</p>
+                                        <div _ngcontent-gls-c223 class="logos">
+                                            <div _ngcontent-gls-c223 class="logo"><img _ngcontent-gls-c223
+                                                    src="../../static/site_audit/assets/xcart.svg" alt="XCART"
+                                                    decoding="async"></div>
+                                            <div _ngcontent-gls-c223 class="logo">
+                                                <img _ngcontent-gls-c223
+                                                    src="../../static/site_audit/assets/us-merchant-systems.svg"
+                                                    alt="US Merchant Systems" decoding="async">
+                                            </div>
+                                            <div _ngcontent-gls-c223 class="logo"><img _ngcontent-gls-c223
+                                                    src="../../static/site_audit/assets/datum-sure.svg" alt="Datum Sure"
+                                                    decoding="async"></div>
+                                            <div _ngcontent-gls-c223 class="logo"><img _ngcontent-gls-c223
+                                                    src="../../static/site_audit/assets/university-of-utah.svg"
+                                                    alt="The University of Utah" decoding="async"></div>
+                                        </div>
+                                    </div>
+                                    <div _ngcontent-gls-c223 class="logo-grid-item">
+                                        <p _ngcontent-gls-c223>As seen on:</p>
+                                        <div _ngcontent-gls-c223 class="logos">
+                                            <div _ngcontent-gls-c223 class="logo">
+                                                <img _ngcontent-gls-c223 src="../../static/site_audit/assets/cbs-2.svg"
+                                                    alt="CBS">
+                                            </div>
+                                            <div _ngcontent-gls-c223 class="logo">
+                                                <img _ngcontent-gls-c223 src="../../static/site_audit/assets/nbc.svg"
+                                                    style="width: 54px" alt="NBC">
+                                            </div>
+                                            <div _ngcontent-gls-c223 class="logo">
+                                                <img _ngcontent-gls-c223
+                                                    src="../../static/site_audit/assets/the-telegraph.svg"
+                                                    style="width: 90px" alt="The Telegraph">
+                                            </div>
+                                            <div _ngcontent-gls-c223 class="logo">
+                                                <img _ngcontent-gls-c223 src="../../static/site_audit/assets/pc-mag.svg"
+                                                    alt="PC Mag">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- second row -->
+    <div class="row mt-4">
+        <div class="col-md-12 col-lg-4" id="data_card">
+            <div class="card h-100">
+                <strong style="padding: 17px 0px 0px 17px;">
+                    <h6>Website Health</h6>
+
+                </strong>
+                <div class="card-body">
+
+                    <div class="loader">
+                        <div class="lds-ellipsis">
+                            <div></div>
+                            <div></div>
+                            <div></div>
+                        </div>
+
+                    </div>
+                    <app-website-health-block-item icon="mobile" id="mobile-speed" class="c240">
+                        <div class="container-c240  ng-star-inserted">
+                            <div class="icon">
+                                <span class="material-symbols-outlined icons-health" id="mobile">
+                                    phone_iphone
+                                </span>
+                            </div>
+                            <div class="item-wrapper">
+                                <div class="body-c240">
+                                    <div class="title-c240"><span id="mobile-speed-label">Mobile Speed</span> <i
+                                            class="far fa-question-circle help-icon" data-bs-toggle="tooltip"
+                                            data-bs-placement="top"
+                                            title="More than half of all website traffic comes from mobile phones so it is very important your website loads fast. We review your website's speed daily and will alert you if we find any issues."></i>
+
+                                    </div>
+                                    <div class="state-c240 ng-star-inserted"><span id="mobile-speed-state"
+                                            class="ng-star-inserted">
+                                            <div class="mobile_speed_spinner">
+                                                <div class="spinner-border text-primary  spinner-border-sm"
+                                                    role="status">
+
+                                                </div>
+                                            </div>
+                                        </span>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </app-website-health-block-item>
+                    <!--  -->
+                    <app-website-health-block-item icon="domain" id="domain-authority" header="Domain Authority"
+                        tooltip="This ranges from 0 to 100, with 100 being the most authoritative. Websites like Amazon, Facebook, and Wikipedia are going to be at the very high end while small local websites tend to be in the teens and twenties. If you want to rank in Google for keywords you need to have some website authority. It comes from multiple factors but primarily from other authoritative websites linking to yours (basically like a vote of confidence). We'll help you increase this and don't forget you can click on the SEO tab to view your current backlinks."
+                        class="c240 ">
+                        <div class="container-c240 ng-star-inserted">
+                            <div class="icon">
+                                <span class="material-symbols-outlined icons-health" id="d_a">
+                                    Search
+                                </span>
+                            </div>
+                            <div class="item-wrapper">
+                                <div class="body-c240">
+                                    <div class="title-c240"><span id="domain-authority-label">Domain Authority</span> <i
+                                            class="far fa-question-circle help-icon" data-bs-toggle="tooltip"
+                                            data-bs-placement="top"
+                                            title="This ranges from 0 to 100, with 100 being the most authoritative. Websites like Amazon, Facebook, and Wikipedia are going to be at the very high end while small local websites tend to be in the teens and twenties. If you want to rank in Google for keywords you need to have some website authority. It comes from multiple factors but primarily from other authoritative websites linking to yours (basically like a vote of confidence). We'll help you increase this and don't forget you can click on the SEO tab to view your current backlinks."></i>
+
+                                    </div>
+                                    <div class="state-c240 ng-star-inserted"><span id="domain-authority-state"
+                                            class="ng-star-inserted">
+                                            <div class="domain-authority-spinner">
+                                                <div class="spinner-border text-primary  spinner-border-sm"
+                                                    role="status">
+                                                </div>
+                                            </div>
+                                        </span>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </app-website-health-block-item>
+
+                    <!--  -->
+                    <app-website-health-block-item _ icon="sitemap-icon" id="sitemap"
+                        class="c240 border-bottom regular">
+                        <div class="container-c240 ng-star-inserted">
+                            <div class="icon">
+                                <span class="material-symbols-outlined icons-health">
+                                    lan
+                                </span>
+                            </div>
+                            <div class="item-wrapper">
+                                <div class="body-c240">
+                                    <div class="title-c240"><span id="sitemap-label">Sitemap</span> <i
+                                            class="far fa-question-circle help-icon" data-bs-toggle="tooltip"
+                                            data-bs-placement="top"
+                                            title="We look at a lot of websites and an accurate sitemap can help your rankings. Google is pretty specific how they want this done so if we don't detect it or it isn't done according to their guidelines, we'll notify you and tell you how to fix it (it is really easy)."></i>
+
+                                    </div>
+                                    <div class="state-c240 ng-star-inserted"><span id="sitemap-state"
+                                            class="ng-star-inserted">
+                                            <div class="site_map_spinner">
+                                                <div class="spinner-border text-primary  spinner-border-sm"
+                                                    role="status">
+
+                                                </div>
+
+                                            </div>
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </app-website-health-block-item>
+                    <!--  -->
+                    <app-website-health-block-item _ icon="keywords" header="Keywords" class="c240 regular">
+                        <div class="container-c240 ng-star-inserted">
+                            <div class="icon">
+                                <span class="material-symbols-outlined icons-health">
+                                    post_add
+                                </span>
+                            </div>
+                            <div class="item-wrapper">
+                                <div class="body-c240">
+                                    <div class="title-c240"><span id="keywords-label">Keywords</span> <i
+                                            class="far fa-question-circle help-icon" data-bs-toggle="tooltip"
+                                            data-bs-placement="right"
+                                            title="This is the total number of keywords that we found your website ranking for in Google. Click on the SEO tab to the left to see your exact keywords and your positions in Google as well as an estimate of how much traffic they send to your website. This tool can also be adjusted to any country in the world and your keywords will appear in your local language as they rank in Google locally. You can also see what keywords your competitors look for! After 30 days of learning about your website and competitors RankGuard™ will be activated and we'll show you any rankings changes as well as what we think might have caused your rankings to change."></i>
+
+
+                                    </div>
+                                    <div class="state-c240 ng-star-inserted">
+                                        <a id="keywords-state-link" href="/site_audit/my_keywords/"
+                                            class="ng-star-inserted">
+                                            <div class="keywords_spinner">
+                                                <div class="spinner-border text-primary  spinner-border-sm"
+                                                    role="status">
+
+                                                </div>
+                                            </div>
+                                        </a>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+
+
+
+                    </app-website-health-block-item>
+
+                    <!--  -->
+                    <app-website-health-block-item icon="backlinks" id="backlinks" class="border-bottom regular c240">
+                        <div class="container-c240 ng-star-inserted">
+                            <div class="icon">
+                                <span class="material-symbols-outlined icons-health">
+                                    link
+                                </span>
+                            </div>
+                            <div class="item-wrapper">
+                                <div class="body-c240">
+                                    <div class="title-c240"><span id="backlinks-label">Backlinks</span> <i
+                                            class="far fa-question-circle help-icon" data-bs-toggle="tooltip"
+                                            data-bs-placement="right"
+                                            title="We scan for both good backlinks that will help you rank higher and spammy ones that can hurt you and need to be disavowed in Google. You can see your backlinks by clicking on the SEO tab to the left. You can also see who links to your competitors. We’ll continue to monitor your website and if we detect any spammy backlinks that might hurt your rankings we’ll alert you below.">
+                                        </i>
+
+                                    </div>
+                                    <div class="state-c240 ng-star-inserted">
+                                        <a id="backlinks-state-link" href="/site_audit/backlinks/"
+                                            class="ng-star-inserted">
+                                            <div class="backlinks_spinner">
+                                                <div class="spinner-border text-primary  spinner-border-sm"
+                                                    role="status">
+
+                                                </div>
+                                            </div>
+                                        </a>
+
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+
+
+
+                    </app-website-health-block-item>
+                    <!--  -->
+                    <app-website-health-block-item icon="ssl" id="ssl" class="border-bottom regular c240">
+                        <div class="container-c240 ng-star-inserted">
+                            <div class="icon">
+                                <span class="material-symbols-outlined icons-health">
+                                    verified_user
+                                </span>
+                            </div>
+                            <div class="item-wrapper">
+                                <div class="body-c240">
+                                    <div class="title-c240"><span id="ssl-label">SSL Certificate</span> <i
+                                            class="far fa-question-circle help-icon" data-bs-toggle="tooltip"
+                                            data-bs-placement="right"
+                                            title="We check that you have an SSL certificate and that it is correctly activated and installed. Your website needs an SSL certificate If you're asking for any personal information. Search engines and browsers are also cracking down on perceived 'non-secure' websites by penalizing them in the rankings and they'll usually show your visitors a warning message before they arrive.">
+                                        </i>
+
+                                    </div>
+                                    <div class="state-c240 ng-star-inserted">
+                                    <div class="ssl_loader">
+                                      <div class="spinner-border spinner-border-sm" role="status">
+ 
+
+</div>
+   </div>
+    <span id="ssl-state" class="ng-star-inserted"></span>
+                                 
+                                  
+
+                                 
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </app-website-health-block-item>
+                    <!--  -->
+                    <app-website-health-block-item icon="blacklists" id="blacklists" class="border-bottom regular c240">
+                        <div class="container-c240 ng-star-inserted">
+                            <div class="icon">
+                                <span class="material-symbols-outlined icons-health">
+                                    mail_lock
+                                </span>
+                            </div>
+                            <div class="item-wrapper">
+                                <div class="body-c240">
+                                    <div class="title-c240"><span id="blacklists-label">Blacklists</span> <i
+                                            class="far fa-question-circle help-icon" data-bs-toggle="tooltip"
+                                            data-bs-placement="right"
+                                            title="Often known as an “email blacklist,” an email blocklist is a list of blocked emails, domains, or IP addresses that are suspected of sending spam or malicious content. Blocklists are real-time databases meant to protect users and lower the mass of spam emails sent daily. There are multiple public blocklists, and they can be created by an email provider or an email user.">
+                                        </i>
+
+                                    </div>
+                                    <div class="state-c240 ng-star-inserted"><span id="blacklists-state"
+                                            class="ng-star-inserted">---</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </app-website-health-block-item>
+                    <!--  -->
+                    <app-website-health-block-item icon="email_deliverability" class="c240 regular">
+                        <div class="container-c240 sub-items ng-star-inserted">
+                            <div class="icon">
+                                <span class="material-symbols-outlined icons-health">
+                                    mark_email_unread
+                                </span>
+                            </div>
+                            <div class="item-wrapper">
+                                <div class="body-c240">
+                                    <div class="title-c240"><span id="email-deliverability-label">Email
+                                            Deliverability</span> <i class="far fa-question-circle help-icon"
+                                            data-bs-toggle="tooltip" data-bs-placement="right"
+                                            title="No business wants their emails to go into spam folders! We regularly scan over 50 blacklists to make sure your emails are getting delivered into inboxes where people can open them. It usually only takes a few percentages of bogus email addresses in your member list or 1-2 people out of a 1000 to mark your email as spam before we start to see email deliverability issues. Don't worry we'll monitor this for you and alert you if there are any problems.">
+
+                                        </i>
+
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class="sub-item-container ng-star-inserted">
+                            <div class="sub-item-body" id="SPF">
+                                <div class="title-c240"><span id="SPF-label">SPF</span><i
+                                        class="far fa-question-circle help-icon" data-bs-toggle="tooltip"
+                                        data-bs-placement="top"
+                                        title="Sender Policy Framework (SPF) is an email authentication method designed to detect forging sender addresses during the delivery of the email.">
+                                    </i>
+
+                                </div>
+                                <div class="state-c240"><span id="SPF-state">
+                                        <div class="spf_spinner">
+                                            <div class="spinner-border text-primary  spinner-border-sm" role="status">
+
+                                            </div>
+                                        </div>
+                                    </span></div>
+                            </div>
+                        </div>
+                        <div class="sub-item-container ng-star-inserted">
+                            <div class="sub-item-body sub-item-error" id="DMARC">
+                                <div class="title-c240"><span id="DMARC-label">DMARC</span><i
+                                        class="far fa-question-circle help-icon" data-bs-toggle="tooltip"
+                                        data-bs-placement="right"
+                                        title="DMARC (Domain-based Message Authentication, Reporting and Conformance) is an email authentication protocol. It is designed to give email domain owners the ability to protect their domain from unauthorized use, commonly known as email spoofing">
+                                    </i>
+
+                                </div>
+                                <div class="state-c240" style="color: rgb(247, 40, 0);"><span
+                                        id="DMARC-state">---</span></div>
+                            </div>
+                        </div>
+                    </app-website-health-block-item>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-12 col-lg-4">
+            <div class="card h-25  h-sm-100 h-xs-100 mt-sm-4 mt-md-0">
+
+                <div class="card-body ">
+                    <div class="row">
+                        <div class="col-md-8">
+                            <h6 _ngcontent-qlk-c230>Daily Health Score™</h6>
+                        </div>
+
+                        <div class="col-md-12 col-lg-4">
+                            <div class="float-end">
+                                <i class="far fa-question-circle" data-bs-toggle="tooltip" data-bs-placement="right"
+                                    title="Your Daily Health Score(TM) tells how your website performed against our predictions. If you are close to 100%, your website is performing well. A score of over 100% means that you beat our predictions."></i>
+
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="dFlex d_loader">
+                        <div class="lds-ellipsis">
+                            <div></div>
+                            <div></div>
+                            <div></div>
+                        </div>
+
+                    </div>
+
+                    <app-daily-health-score-placeholder class="dailyH">
+                        <div class="rank">
+                            <div class="chartjs-size-monitor">
+                                <div class="chartjs-size-monitor-expand">
+                                    <div class=""></div>
+                                </div>
+                                <div class="chartjs-size-monitor-shrink">
+                                    <div class=""></div>
+                                </div>
+                            </div>
+                            <div class="chartjs-size-monitor">
+                                <div class="chartjs-size-monitor-expand">
+                                    <div class=""></div>
+                                </div>
+                                <div class="chartjs-size-monitor-shrink">
+                                    <div class=""></div>
+                                </div>
+                            </div>
+                            <div style="width: 100px; height: 100px;  position: relative;">
+                                <div id="dailyHealth_score_"
+                                    style="width: 100%; height: 40px; position: absolute; top: 50%; left: 0; margin-top: -10px; line-height:19px; text-align: center; z-index: 9">
+
+                                </div>
+                                <canvas height="106" width="106" class="dailyHealth rank-chart chartjs-render-monitor"
+                                    style="display: block; width: 106px; height: 106px;" data-rank="67"></canvas>
+                            </div>
+
+                        </div>
+
+                    </app-daily-health-score-placeholder>
+
+
+
+
+
+                    <div id="daily_health"></div>
+                </div>
+
+            </div>
+            <div class="card h-75  h-sm-100 h-xs-100 mt-md-1 mt-lg-1 mt-sm-4">
+
+                <div class="card-body ">
+                    <div class="row">
+                        <div class="col-md-8">
+                            <h6 _ngcontent-qlk-c230>Annual Growth Opportunities</h6>
+                        </div>
+
+                        <div class="col-md-12 col-lg-4">
+                            <div class="float-end">
+                                <i class="far fa-question-circle" data-bs-toggle="tooltip" data-bs-placement="right"
+                                    title="This is an estimate of how much more revenue your website could contribute to your business per year. This number is based on your analytics data and the opportunities we see for your website to grow."></i>
+                            </div>
+
+                        </div>
+                    </div>
+                    <!-- <div class="loader">
+                        <div class="lds-ellipsis">
+                            <div></div>
+                            <div></div>
+                            <div></div>
+                        </div>
+
+                    </div> -->
+
+                    <div class="dFlex">
+                        <!-- <a href="#" class="btn btn-outline-success ">Add Analytics</a> -->
+
+                        <div class="icon_search mt-5 mb-5">
+                            <mat-icon _ngcontent-qlk-c238 role="img" svgicon="loupe"
+                                class="mat-icon notranslate mat-icon-no-color" aria-hidden="true"
+                                data-mat-icon-type="svg" data-mat-icon-name="loupe"><svg width="100%" height="100%"
+                                    viewBox="0 0 32 32" fill="none" fit preserveAspectRatio="xMidYMid meet"
+                                    focusable="false">
+                                    <g clip-path="url('/app/dashboard#clip0')">
+                                        <path
+                                            d="M26.9267 5.41267C23.8542 2.19205 19.1322 1.69768 15.6392 3.63811C15.3374 3.80574 15.2287 4.18636 15.3964 4.48811C15.564 4.78999 15.9446 4.89855 16.2464 4.73099C19.4412 2.95593 23.4611 3.59124 26.0195 6.27292C28.6593 9.0736 28.9565 13.2483 26.9143 16.3434C24.1013 20.616 18.0258 21.2599 14.3831 17.6165C11.9286 15.1628 11.2174 11.2058 12.9905 7.98573C13.1569 7.68323 13.0465 7.30311 12.7441 7.13673C12.4417 6.97048 12.0616 7.08067 11.8951 7.38311C11.8568 7.45279 11.7887 7.58267 11.723 7.71586H11.7231C9.90506 11.4217 10.7322 15.7347 13.4992 18.5006C17.6959 22.6982 24.706 21.9712 27.9582 17.0314C30.2905 13.4965 30.0044 8.67798 26.9267 5.41267Z"
+                                            fill="#6CB61E"></path>
+                                        <path
+                                            d="M28.5276 3.47285C23.8969 -1.15721 16.3619 -1.15739 11.731 3.47291C7.56678 7.63778 7.11847 14.1676 10.5097 18.8389L8.56172 20.7864C7.87878 20.4595 7.01516 20.565 6.42704 21.1532L0.916922 26.6639C-0.304763 27.8848 -0.305763 29.8619 0.91661 31.0835C2.13779 32.3055 4.11485 32.306 5.33629 31.0836L10.8472 25.5734C11.4351 24.9854 11.541 24.1217 11.214 23.4387L13.1616 21.4906C17.834 24.8826 24.3633 24.4331 28.5276 20.2694C33.1578 15.6386 33.1578 8.10371 28.5276 3.47285ZM9.96315 24.6894L4.4521 30.1997C3.71967 30.9327 2.53404 30.9334 1.80061 30.1994C1.06748 29.4669 1.06705 28.2812 1.80073 27.548L7.31097 22.0372C7.55453 21.7936 7.9511 21.7934 8.19466 22.0372L9.96309 23.8056C10.2068 24.0492 10.2068 24.4457 9.96315 24.6894ZM10.4052 22.4796L9.52091 21.5953L11.301 19.8157C11.4406 19.9706 11.584 20.1225 11.731 20.2694C11.8779 20.4163 12.0297 20.5598 12.1848 20.6995L10.4052 22.4796ZM27.6435 19.3854C23.5012 23.5271 16.7913 23.5623 12.6149 19.3854C8.44347 15.2144 8.46828 8.50421 12.6149 4.35691C16.758 0.214416 23.4998 0.213728 27.6434 4.35691C31.7862 8.50027 31.7862 15.2421 27.6435 19.3854Z"
+                                            fill="#6CB61E"></path>
+                                        <path
+                                            d="M14.398 5.25673C14.3937 5.2511 14.3887 5.2461 14.383 5.24048C14.1386 4.99666 13.7429 4.99666 13.4985 5.24048C13.2547 5.48491 13.2547 5.8806 13.4985 6.12498C13.5042 6.1306 13.5092 6.1356 13.5148 6.1406C13.7605 6.36879 14.1443 6.36316 14.383 6.12498C14.6212 5.88616 14.6268 5.50235 14.398 5.25673Z"
+                                            fill="#6CB61E"></path>
+                                    </g>
+                                    <defs>
+                                        <clipPath id="clip0">
+                                            <rect width="32" height="32" fill="white"></rect>
+                                        </clipPath>
+                                    </defs>
+                                </svg></mat-icon>
+                        </div>
+
+                    </div>
+                    <div class="text-center mt-5">
+
+                        <div _ngcontent-qlk-c237 class="title">See yours</div>
+                        <div _ngcontent-qlk-c237 class="value">
+                            $$$</div>
+                    </div>
+                    <div _ngcontent-sir-c58="" class="dots">
+                        <div _ngcontent-sir-c58="" class="dot selected ng-star-inserted">
+                            <div _ngcontent-sir-c58="" class="inner"></div>
+                        </div>
+                        <!---->
+                    </div>
+                    <div class="text-center mt-5">
+                        We’ll analyze your traffic and calculate how much more revenue you could be earning if you
+                        complete our customized growth objectives.
+                    </div>
+
+                    <div class=" text-center ">
+                        <div _ngcontent-sir-c238="" class="actions ng-star-inserted"><button _ngcontent-sir-c238=""
+                                class="sync ng-star-inserted">
+                                <mat-icon _ngcontent-sir-c238="" role="img" svgicon="arrow-down"
+                                    class="mat-icon notranslate mat-icon-no-color" aria-hidden="true"
+                                    data-mat-icon-type="svg" data-mat-icon-name="arrow-down"
+                                    style="transform: rotate(180deg);"><svg width="100%" height="100%"
+                                        viewBox="0 0 24 24" fill="none" fit="" preserveAspectRatio="xMidYMid meet"
+                                        focusable="false">
+                                        <path
+                                            d="M17.71 11.29C17.617 11.1963 17.5064 11.1219 17.3846 11.0711C17.2627 11.0203 17.132 10.9942 17 10.9942C16.868 10.9942 16.7373 11.0203 16.6154 11.0711C16.4936 11.1219 16.383 11.1963 16.29 11.29L13 14.59V7C13 6.73478 12.8946 6.48043 12.7071 6.29289C12.5196 6.10536 12.2652 6 12 6C11.7348 6 11.4804 6.10536 11.2929 6.29289C11.1054 6.48043 11 6.73478 11 7V14.59L7.71 11.29C7.5217 11.1017 7.2663 10.9959 7 10.9959C6.7337 10.9959 6.47831 11.1017 6.29 11.29C6.1017 11.4783 5.99591 11.7337 5.99591 12C5.99591 12.2663 6.1017 12.5217 6.29 12.71L11.29 17.71C11.3851 17.801 11.4973 17.8724 11.62 17.92C11.7397 17.9729 11.8691 18.0002 12 18.0002C12.1309 18.0002 12.2603 17.9729 12.38 17.92C12.5028 17.8724 12.6149 17.801 12.71 17.71L17.71 12.71C17.8037 12.617 17.8781 12.5064 17.9289 12.3846C17.9797 12.2627 18.0058 12.132 18.0058 12C18.0058 11.868 17.9797 11.7373 17.9289 11.6154C17.8781 11.4936 17.8037 11.383 17.71 11.29Z"
+                                            fill="#FFF"></path>
+                                    </svg></mat-icon>Add analytics
+                            </button></div>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+        <div class="col-md-12 col-lg-4">
+            <div class="card h-50 mt-sm-4 mt-md-0">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-8">
+                            <h6 _ngcontent-qlk-c230>Website Rank</h6>
+                        </div>
+
+                        <div class="col-md-12 col-lg-4">
+                            <div class="float-end">
+                                <i class="far fa-question-circle" data-bs-toggle="tooltip" data-bs-placement="right"
+                                    title="Your website’s rankings are based on how your website compares to other websites. Your letter grades for traffic, social media, mobile traffic and user experience are updated regularly and are based on multiple metrics and data points."></i>
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="dFlex d_loader">
+                        <div class="lds-ellipsis">
+                            <div></div>
+                            <div></div>
+                            <div></div>
+                        </div>
+
+                    </div>
+                    <div class="dFlex2">
+                  
+                 
+                        <div class="main_webite_rank mt-4">
+                            <app-rank class="">
+                                <div class="rank">
+                                    <div class="chartjs-size-monitor">
+                                        <div class="chartjs-size-monitor-expand">
+                                            <div class=""></div>
+                                        </div>
+                                        <div class="chartjs-size-monitor-shrink">
+                                            <div class=""></div>
+                                        </div>
+                                    </div>
+                                    <div class="chartjs-size-monitor">
+                                        <div class="chartjs-size-monitor-expand">
+                                            <div class=""></div>
+                                        </div>
+                                        <div class="chartjs-size-monitor-shrink">
+                                            <div class=""></div>
+                                        </div>
+                                    </div>
+                                    <div style="width: 100px; height: 100px;  position: relative;">
+                                        <div id="traffic_score_"
+                                            style="width: 100%; height: 40px; position: absolute; top: 50%; left: 0; margin-top: -10px; line-height:19px; text-align: center;">
+
+                                        </div>
+                                        <canvas class="traffic rank-chart chartjs-render-monitor" height="106"
+                                            width="106"></canvas>
+                                    </div>
+
+                                    <div class="rank-label"></div>
+                                </div>
+                                <div class="dFlex">
+                                  <div class="traffic_loader">
+                       <div class="spinner-border spinner-border-sm text-primary" role="status">
+                        <span class="sr-only">Loading...</span>
+                        </div>
+                    </div>
+                                </div>
+                                <div class="title">Traffic</div>
+                            </app-rank>
+                            <app-rank class="">
+                                <div class="rank">
+                                    <div class="chartjs-size-monitor">
+                                        <div class="chartjs-size-monitor-expand">
+                                            <div class=""></div>
+                                        </div>
+                                        <div class="chartjs-size-monitor-shrink">
+                                            <div class=""></div>
+                                        </div>
+                                    </div>
+                                    <div class="chartjs-size-monitor">
+                                        <div class="chartjs-size-monitor-expand">
+                                            <div class=""></div>
+                                        </div>
+                                        <div class="chartjs-size-monitor-shrink">
+                                            <div class=""></div>
+                                        </div>
+                                    </div>
+                                    <div style="width: 100px; height: 100px;  position: relative;">
+                                        <div id="social_score_"
+                                            style="width: 100%; height: 40px; position: absolute; top: 50%; left: 0; margin-top: -10px; line-height:19px; text-align: center;">
+
+                                        </div>
+                                        <canvas id="" class="social rank-chart chartjs-render-monitor" height="106"
+                                            width="106"></canvas>
+                                    </div>
+                                    <div class="rank-label"></div>
+                                </div>
+                                <div class="title">Social</div>
+                            </app-rank>
+                            <app-rank class="">
+                                <div class="rank">
+                                    <div class="chartjs-size-monitor">
+                                        <div class="chartjs-size-monitor-expand">
+                                            <div class=""></div>
+                                        </div>
+                                        <div class="chartjs-size-monitor-shrink">
+                                            <div class=""></div>
+                                        </div>
+                                    </div>
+                                    <div class="chartjs-size-monitor">
+                                        <div class="chartjs-size-monitor-expand">
+                                            <div class=""></div>
+                                        </div>
+                                        <div class="chartjs-size-monitor-shrink">
+                                            <div class=""></div>
+                                        </div>
+                                    </div>
+                                    <div style="width: 100px; height: 100px;  position: relative;">
+                                    
+                                        <div id="mobile_score_"
+                                            style="width: 100%; height: 40px; position: absolute; top: 50%; left: 0; margin-top: -10px; line-height:19px; text-align: center;">
+
+                                        </div>
+                                    
+
+                                        <canvas id="" height="106" width="106"
+                                            class=" mobile rank-chart chartjs-render-monitor"
+                                            style="display: block; width: 106px; height: 106px;"
+                                            data-rank="61"></canvas>
+                                    </div>
+                                    <div class="dFlex">
+                                   
+                                    </div>
+   
+
+                                    <div class="rank-label"></div>
+                                </div>
+                                <div class="dFlex">
+                                 <div class="mobile_loader">
+                       <div class="spinner-border spinner-border-sm text-primary" role="status">
+                        <span class="sr-only">Loading...</span>
+                        </div>
+                    </div>
+                                </div>
+                                 
+                                <div class="title">Mobile</div>
+                            </app-rank>
+                            <app-rank class="">
+                                <div class="rank">
+                                    <div class="chartjs-size-monitor">
+                                        <div class="chartjs-size-monitor-expand">
+                                            <div class=""></div>
+                                        </div>
+                                        <div class="chartjs-size-monitor-shrink">
+                                            <div class=""></div>
+                                        </div>
+                                    </div>
+                                    <div class="chartjs-size-monitor">
+                                        <div class="chartjs-size-monitor-expand">
+                                            <div class=""></div>
+                                        </div>
+                                        <div class="chartjs-size-monitor-shrink">
+                                            <div class=""></div>
+                                        </div>
+                                    </div>
+                                    <div style="width: 100px; height: 100px;  position: relative;">
+                                        <div id="visitor_score_"
+                                            style="width: 100%; height: 40px; position: absolute; top: 50%; left: 0; margin-top: -10px; line-height:19px; text-align: center;">
+
+                                        </div>
+
+                                        <canvas height="106" width="106"
+                                            class="visitor rank-chart chartjs-render-monitor"
+                                            style="display: block; width: 106px; height: 106px;"
+                                            data-rank="33"></canvas>
+                                    </div>
+
+                                    <div class="rank-label"></div>
+                                </div>
+                                <div class="title">Visitor Experience</div>
+                            </app-rank>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--  -->
+            <div class="card h-50 mt-md-1 mt-sm-4 mt-lg-1">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-8">
+                            <h6 _ngcontent-qlk-c230>Data channels</h6>
+                        </div>
+
+                        <div class="col-md-12 col-lg-4">
+                            <div class="float-end">
+                                <i class="far fa-question-circle" data-bs-toggle="tooltip" data-bs-placement="left"
+                                    title="The We analytics platform integrates with your existing Google Analytics, Facebook Insights, and Google Business Profile accounts to provide you with a custom Growth Plan based on your actual data."></i>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+                    <!-- <div class="loader">
+                        <div class="lds-ellipsis">
+                            <div></div>
+                            <div></div>
+                            <div></div>
+                        </div>
+
+                    </div> -->
+
+                    <div class="dFlex mt-5">
+
+                        <div class="channel ">
+                            <div class="logo"><img src="../../static/site_audit/assets/ga-channel.svg"
+                                    alt="GA channel icon"></div>
+                            <p class="c241">Google Analytics</p>
+                        </div>
+
+                        <div class="channel channel-disabled">
+                            <div class="logo"><img src="../../static/site_audit/assets/facebook-channel.svg"
+                                    alt="Facebook channel icon"></div>
+                            <p class="c241">Facebook</p>
+                        </div>
+
+                        <div class="channel channel-disabled">
+                            <div class="logo"><img src="../../static/site_audit/assets/google-my-business-channel.svg"
+                                    alt="Google Business Profile channel icon"></div>
+                            <p class="c241">Google Business Profile</p>
+                        </div>
+
+                    </div>
+
+                    <div class=" text-center mt-3">
+                        <span class="sync btn btn-outline-primary" href="">Sync
+                            all channels</span>
+                    </div>
+                    `
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- middle row  start-->
+    <div class="row mt-4 ">
+        <div class="col-md-12 col-lg-4">
+
+            <div class="card h-100 mt-sm-4 mt-md-0">
+                <div class="ribbon"><span>New</span></div>
+
+                <div class="card-body" >
+                    <h6 class="head ">Keyword Explorer</h6>
+
+
+                    <small>Find new keywords, explore search volume, and write the best content!</small>
+                    <form id="SearchKeyWord" class="mt-4" method="post" action="/site_audit/keyword_explorer/">
+
+                        <select name="country" id="country" class="form-select" aria-label="Default select example">
+
+                        </select>
+                        <br />
+                        <div class="form-group mt-md-2">
+                            <input id="Keyword" name="keyword" type="text" class="form-control"
+                                placeholder="Enter Keyword">
+                        </div>
+
+                        <span id="keyErrors"></span>
+                        <div class="row  mt-3">
+                            <div class="col-md-6 d-flex justify-content-center">
+                                <button class="secondary_custom_what 
+       ">What is it?</button>
+                            </div>
+                            <div
+                                class="col-md-6 d-flex justify-content-center mt-sm-2 mt-md-0 mt-lg-0 mt-xl-0  mt-xs-5">
+                                <input type="submit" class="btn btn-primary col-12" value="Search">
+                    </form>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+</div>
+<div class="col-md-12 col-lg-8">
+
+    <div class="card h-100 mt-sm-4 mt-md-0">
+
+        <div class="row">
+            <div class="col-md-8">
+                <div class="card-body ">
+                    <div class="row">
+                        <div class="col-md-12 col-lg-6 mb-4">
+                            <Strong>Core Vitals
+                                <span class="help-icon">
+                                    <i class="far fa-question-circle" data-bs-toggle="tooltip" data-bs-placement="right"
+                                        title="As of June of 2021 your website’s Core Vitals will now be taken into consideration by Google’s search algorithm and can positively or negatively impact your keyword rankings. There are currently six main Core Vitals tests which, in general, examine how fast your website loads and how quickly and efficiently a visitor can interact with your website."></i>
+
+                                </span>
+                            </Strong>
+
+                        </div>
+
+
+
+                    </div>
+
+
+                    <div>
+                        <div class="row justify-content-center">
+                                <!-- coreVitalLoader -->
+                                <div class="" id="coreVitalLoader">
+                                    <div class="lds-ellipsis">
+                                        <div></div>
+                                        <div></div>
+                                        <div></div>
+                                    </div>
+
+                                </div>
+                            <div class="col-md-7 text-center coreVital_1" style="display: none;">
+                                <h3 class="issue"></h3>
+                                <p class="issue_p">.</p>
+                                <button class="secondary_custom mt-1" data-bs-toggle="modal" href="#moreDetails"
+                                    id="moreDetail" type="button">More Details</button>
+                            </div>
+                            <div class="col-md-5 text-center">
+
+                                <div class="circle" id="circle-a">
+                                    <strong class="coreVital_1" style="display: none;"> <span class="strong"></span>/100
+                                    </strong>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-12 col-lg-4">
+                <div id="coreVital_2" style="height: 100%;"></div>
+
+            </div>
+        </div>
+
+    </div>
+</div>
+</div>
+<!-- middle row  end-->
+
+<!-- last alert row -->
+<div class="row mt-4">
+    <div class="col-md-12 col-lg-6">
+
+        <div class="card  h-100 mt-sm-4 mt-md-0">
+            <div class="card-body">
+                <div class="row mt-4 mb-4">
+                    <div class="col-md-12 col-lg-6">
+                        <Strong>Objectives <span class="counter objective_counter"></span></Strong>
+                    </div>
+                    <div class="col-md-12 col-lg-6">
+                        <div class="float-end">
+                            <a class="btn-view" href="/site_audit/objectives/">View All</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="loader">
+                    <div class="lds-ellipsis">
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                    </div>
+
+                </div>
+                <div id="google_business_dashboard"></div>
+                <div id="moz_domain_authority_dashboard"></div>
+                <div id="organic_traffic_dashboard"></div>
+                <div id="back_links_dashboard"></div>
+                <div id="social_objectives_dashboard"></div>
+                <div id="traffic_objectives_dashboard"></div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-12 col-lg-6 mt-sm-4 mt-md-0">
+        <div class="card  h-100 ">
+            <div class="card-body ">
+                <div class="row mt-4 mb-4">
+                    <div class="col-md-12 col-lg-6">
+                        <Strong>Alerts <span class="counter"></span></Strong>
+                    </div>
+                    <div class="col-md-12 col-lg-6">
+                        <div class="float-end">
+                            <a class="btn-view" href="/site_audit/alerts/">View All</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="missing_back_links" class="d-none">
+                    <div class="loader dFlex">
+                        <div class="lds-ellipsis">
+                            <div></div>
+                            <div></div>
+                            <div></div>
+                        </div>
+
+                    </div>
+                </div>
+                <div id="bad_back_links">
+
+                </div>
+                <div id="doamin_authority_dashboard">
+
+                </div>
+                <div id="keywords_rank_dashboard">
+                    <div class="loader dFlex">
+                        <div class="lds-ellipsis">
+                            <div></div>
+                            <div></div>
+                            <div></div>
+                        </div>
+
+                    </div>
+                </div>
+                <div id="total_back_links_dashboard">
+
+                </div>
+                <div id="follow_unfollow_dashboard">
+
+                </div>
+                <div id="google_business">
+
+                </div>
+                <div id="new_links_dashboard"></div>
+
+
+
+
+
+
+
+
+            </div>
+        </div>
+    </div>
+
+</div>
+</div>
+
+<!-- modal -->
+<div class="modal fade" id="moreDetails" aria-hidden="true" aria-labelledby="exampleModalToggleLabel" tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-xl">
+        <div class="modal-content">
+
+            <div class="modal-body" id="modal">
+                <div class="row">
+                    <div class="col-md-12 col-lg-4">
+                        <div class="section_nav" style="margin-left: -12px">
+                            <ul class="list">
+                                <li class="list-item-nav tablinks" onclick="openTab(event, 'overview')"
+                                    id="defaultOpen">
+                                    <div class="row">
+                                        <div class="col-md-2">
+                                            <div class="info-icon">
+                                                <div class="overview mt-1" id="circle-a">
+
+                                                </div>
+                                            </div>
+                                        </div>
+
+
+                                        <div class="col-md-8">
+                                            <!--  -->
+                                            <div class="metrics"><span class="metrics__title">Overview</span>
+                                                <div class="metric-info">
+                                                    <b> <span
+                                                            class=" metrics-info__value metrics-info__static-value-overview  strong"
+                                                            id="strong"></span></b>
+                                                    <span class="metrics-info__static-value ">/100</span>
+                                                    <span class="metrics-info__status" id="si_status_overview"></span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+
+                                </li>
+                                <li class="list-item-nav tablinks" onclick="openTab(event, 'TBT')">
+                                    <div class="row ">
+                                        <div class="col-md-2">
+                                            <div class="info-icon info-icon--background" id="tbt_info-icon--background">
+                                                <mat-icon role="img" class="mat-icon notranslate mat-icon-no-color "
+                                                    aria-hidden="true" data-mat-icon-type="svg"
+                                                    data-mat-icon-name="tbt_core-vitals"><svg width="100%" height="100%"
+                                                        viewBox="0 0 18 18" fill="none"
+                                                        preserveAspectRatio="xMidYMid meet" focusable="false">
+                                                        <path
+                                                            d="M13.2633 3.96919C11.7607 2.46665 9.31391 2.46665 7.81297 3.96919L3.64988 8.12909C3.62277 8.1562 3.60841 8.19289 3.60841 8.23117C3.60841 8.26945 3.62277 8.30614 3.64988 8.33325L4.23846 8.92183C4.26536 8.94861 4.30178 8.96365 4.33974 8.96365C4.37771 8.96365 4.41413 8.94861 4.44103 8.92183L8.60412 4.76193C9.12091 4.24513 9.80838 3.96121 10.5389 3.96121C11.2694 3.96121 11.9569 4.24513 12.4721 4.76193C12.9889 5.27873 13.2728 5.96619 13.2728 6.69513C13.2728 7.42567 12.9889 8.11154 12.4721 8.62834L8.22928 12.8696L7.54181 13.557C6.89901 14.1999 5.85425 14.1999 5.21144 13.557C4.90041 13.246 4.72973 12.8329 4.72973 12.3927C4.72973 11.9524 4.90041 11.5393 5.21144 11.2283L9.42078 7.02052C9.52765 6.91525 9.66802 6.85623 9.81795 6.85623H9.81955C9.96948 6.85623 10.1083 6.91525 10.2135 7.02052C10.3204 7.12739 10.3778 7.26776 10.3778 7.41769C10.3778 7.56603 10.3188 7.7064 10.2135 7.81167L6.773 11.249C6.74588 11.2761 6.73153 11.3128 6.73153 11.3511C6.73153 11.3894 6.74588 11.4261 6.773 11.4532L7.36157 12.0417C7.38847 12.0685 7.42489 12.0836 7.46286 12.0836C7.50082 12.0836 7.53724 12.0685 7.56414 12.0417L11.0031 8.60282C11.3205 8.2854 11.4944 7.86431 11.4944 7.4161C11.4944 6.96789 11.3189 6.5452 11.0031 6.22938C10.3475 5.57381 9.28201 5.57541 8.62645 6.22938L8.21811 6.63931L4.4187 10.4371C4.16083 10.6935 3.95642 10.9985 3.81733 11.3344C3.67823 11.6704 3.60722 12.0306 3.60841 12.3943C3.60841 13.1328 3.89712 13.8266 4.4187 14.3482C4.95942 14.8873 5.66763 15.1569 6.37583 15.1569C7.08403 15.1569 7.79223 14.8873 8.33136 14.3482L13.2633 9.41948C13.989 8.69214 14.391 7.72394 14.391 6.69513C14.3926 5.66473 13.9906 4.69653 13.2633 3.96919Z"
+                                                            fill="currentColor"></path>
+                                                    </svg></mat-icon>
+
+
+                                            </div>
+                                        </div>
+                                        <div class="col-md-8">
+                                            <div class="metrics"><span class="metrics__title">Total Blocking Time</span>
+                                                <div class="metric-info"><span
+                                                        class=" metrics-info__value metrics-info__static-value "
+                                                        id="tbt"></span>
+                                                    <span class="metrics-info__status" id="tbt_status"></span>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </li>
+                                <li class="list-item-nav tablinks" onclick="openTab(event, 'LCP')">
+                                    <div class="row ">
+                                        <div class="col-md-2">
+                                            <div class="info-icon info-icon--background" id="lcp_info-icon--background">
+                                                <mat-icon role="img" class="mat-icon notranslate mat-icon-no-color "
+                                                    aria-hidden="true" data-mat-icon-type="svg"
+                                                    data-mat-icon-name="lcp_core-vitals"><svg width="100%" height="100%"
+                                                        viewBox="0 0 18 18" fill="none"
+                                                        preserveAspectRatio="xMidYMid meet" focusable="false">
+                                                        <path
+                                                            d="M15.6348 3.3855H2.36393C2.08161 3.3855 1.85352 3.61359 1.85352 3.89591V14.1042C1.85352 14.3866 2.08161 14.6147 2.36393 14.6147H15.6348C15.9171 14.6147 16.1452 14.3866 16.1452 14.1042V3.89591C16.1452 3.61359 15.9171 3.3855 15.6348 3.3855ZM14.9967 6.70321H11.6152V4.53394H14.9967V6.70321ZM14.9967 10.2761H11.6152V7.72404H14.9967V10.2761ZM7.4043 7.72404H10.5944V10.2761H7.4043V7.72404ZM10.5944 6.70321H7.4043V4.53394H10.5944V6.70321ZM3.00195 7.72404H6.38346V10.2761H3.00195V7.72404ZM3.00195 4.53394H6.38346V6.70321H3.00195V4.53394ZM3.00195 11.297H6.38346V13.4662H3.00195V11.297ZM7.4043 11.297H10.5944V13.4662H7.4043V11.297ZM14.9967 13.4662H11.6152V11.297H14.9967V13.4662Z"
+                                                            fill="currentColor"></path>
+                                                    </svg></mat-icon>
+
+
+                                            </div>
+                                        </div>
+                                        <div class="col-md-8">
+                                            <div class="metrics"><span class="metrics__title">Largest Contentful
+                                                    Paint</span>
+                                                <div class="metric-info"><span
+                                                        class=" metrics-info__value metrics-info__static-value "
+                                                        id="lcp"></span>
+
+
+                                                    <span class="metrics-info__status" id="lcp_status"></span>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </li>
+                                <li class="list-item-nav tablinks" onclick="openTab(event, 'CLS')">
+                                    <div class="row ">
+                                        <div class="col-md-2">
+                                            <div class="info-icon info-icon--background" id="cls_info-icon--background">
+                                                <mat-icon role="img" class="mat-icon notranslate mat-icon-no-color "
+                                                    aria-hidden="true" data-mat-icon-type="svg"
+                                                    data-mat-icon-name="cls_core-vitals"><svg width="100%" height="100%"
+                                                        viewBox="0 0 18 18" fill="none"
+                                                        preserveAspectRatio="xMidYMid meet" focusable="false">
+                                                        <path
+                                                            d="M14.487 6.83073H11.1693V3.51302C11.1693 3.37266 11.0544 3.25781 10.9141 3.25781H3.51302C3.37266 3.25781 3.25781 3.37266 3.25781 3.51302V10.9141C3.25781 11.0544 3.37266 11.1693 3.51302 11.1693H6.83073V14.487C6.83073 14.6273 6.94557 14.7422 7.08594 14.7422H14.487C14.6273 14.7422 14.7422 14.6273 14.7422 14.487V7.08594C14.7422 6.94557 14.6273 6.83073 14.487 6.83073ZM6.83073 7.08594V10.0846H4.34245V4.34245H10.0846V6.83073H7.08594C6.94557 6.83073 6.83073 6.94557 6.83073 7.08594ZM10.0846 7.91536V10.0846H7.91536V7.91536H10.0846ZM13.6576 13.6576H7.91536V11.1693H10.9141C11.0544 11.1693 11.1693 11.0544 11.1693 10.9141V7.91536H13.6576V13.6576Z"
+                                                            fill="currentColor"></path>
+                                                    </svg></mat-icon>
+
+
+                                            </div>
+                                        </div>
+                                        <div class="col-md-8">
+                                            <div class="metrics"><span class="metrics__title">Cumulative Layout
+                                                    Shift</span>
+                                                <div class="metric-info"><span
+                                                        class=" metrics-info__value metrics-info__static-value "
+                                                        id="cls">
+                                                    </span>
+
+                                                    <span class="metrics-info__status" id="cls_status"></span>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </li>
+                                <li class="list-item-nav tablinks" onclick="openTab(event, 'FCP')">
+                                    <div class="row ">
+                                        <div class="col-md-2">
+                                            <div class="info-icon info-icon--background" id="fcp_info-icon--background">
+                                                <mat-icon role="img" class="mat-icon notranslate mat-icon-no-color "
+                                                    aria-hidden="true" data-mat-icon-type="svg"
+                                                    data-mat-icon-name="fcp_core-vitals"><svg width="100%" height="100%"
+                                                        viewBox="0 0 18 18" fill="none"
+                                                        preserveAspectRatio="xMidYMid meet" focusable="false">
+                                                        <path
+                                                            d="M15.6348 3.3855H2.36393C2.08161 3.3855 1.85352 3.61359 1.85352 3.89591V14.1042C1.85352 14.3866 2.08161 14.6147 2.36393 14.6147H15.6348C15.9171 14.6147 16.1452 14.3866 16.1452 14.1042V3.89591C16.1452 3.61359 15.9171 3.3855 15.6348 3.3855ZM14.9967 13.4662H3.00195V12.8298L5.2111 10.2091L7.60527 13.0483L11.3297 8.63322L14.9967 12.9813V13.4662ZM14.9967 11.3959L11.427 7.16258C11.376 7.10197 11.2835 7.10197 11.2324 7.16258L7.60527 11.4628L5.3084 8.74009C5.25736 8.67948 5.16484 8.67948 5.1138 8.74009L3.00195 11.2443V4.53394H14.9967V11.3959ZM5.68164 8.10685C5.86597 8.10685 6.04849 8.07055 6.21879 8.00001C6.38909 7.92947 6.54383 7.82608 6.67417 7.69573C6.80451 7.56539 6.9079 7.41066 6.97844 7.24036C7.04898 7.07006 7.08529 6.88754 7.08529 6.70321C7.08529 6.51888 7.04898 6.33635 6.97844 6.16605C6.9079 5.99576 6.80451 5.84102 6.67417 5.71068C6.54383 5.58034 6.38909 5.47695 6.21879 5.40641C6.04849 5.33587 5.86597 5.29956 5.68164 5.29956C5.30937 5.29956 4.95235 5.44744 4.68911 5.71068C4.42588 5.97391 4.27799 6.33094 4.27799 6.70321C4.27799 7.07548 4.42588 7.4325 4.68911 7.69573C4.95235 7.95897 5.30937 8.10685 5.68164 8.10685ZM5.68164 6.25659C5.92887 6.25659 6.12826 6.45597 6.12826 6.70321C6.12826 6.95044 5.92887 7.14982 5.68164 7.14982C5.43441 7.14982 5.23503 6.95044 5.23503 6.70321C5.23503 6.45597 5.43441 6.25659 5.68164 6.25659Z"
+                                                            fill="currentColor"></path>
+                                                    </svg></mat-icon>
+
+
+                                            </div>
+                                        </div>
+                                        <div class="col-md-8">
+                                            <div class="metrics"><span class="metrics__title">First Contentful
+                                                    Paint</span>
+                                                <div class="metric-info"><span
+                                                        class=" metrics-info__value metrics-info__static-value  "
+                                                        id="fcp"></span>
+
+
+                                                    <span class="metrics-info__status" id="fcp_status"></span>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </li>
+                                <li class="list-item-nav tablinks" onclick="openTab(event, 'SI')">
+                                    <div class="row">
+                                        <div class="col-md-2">
+                                            <div class="info-icon info-icon--background" id="si_info-icon--background">
+                                                <mat-icon role="img" class="mat-icon notranslate mat-icon-no-color "
+                                                    aria-hidden="true" data-mat-icon-type="svg"
+                                                    data-mat-icon-name="si_core-vitals"><svg width="100%" height="100%"
+                                                        viewBox="0 0 18 18" fill="none"
+                                                        preserveAspectRatio="xMidYMid meet" focusable="false">
+                                                        <path
+                                                            d="M15.5837 6.98381C15.225 6.13478 14.705 5.36341 14.0525 4.71246C13.4015 4.05994 12.6302 3.53991 11.7811 3.18121C10.8991 2.80797 9.96436 2.61975 8.99935 2.61975C8.03434 2.61975 7.09964 2.80797 6.21758 3.18121C5.36855 3.53991 4.59718 4.05994 3.94622 4.71246C3.2937 5.36341 2.77368 6.13478 2.41497 6.98381C2.04173 7.86588 1.85352 8.80058 1.85352 9.76559C1.85352 11.8822 2.78343 13.876 4.404 15.2382L4.43112 15.2605C4.52363 15.3371 4.64007 15.3802 4.7597 15.3802H13.2406C13.3602 15.3802 13.4767 15.3371 13.5692 15.2605L13.5963 15.2382C15.2153 13.876 16.1452 11.8822 16.1452 9.76559C16.1452 8.80058 15.9554 7.86588 15.5837 6.98381ZM12.9774 14.1679H5.02129C4.40496 13.6122 3.91236 12.9331 3.57546 12.1747C3.23857 11.4162 3.06491 10.5955 3.06576 9.76559C3.06576 8.1801 3.68304 6.69032 4.80436 5.5706C5.92568 4.44928 7.41546 3.83199 8.99935 3.83199C10.5848 3.83199 12.0746 4.44928 13.1943 5.5706C14.3157 6.69192 14.9329 8.1817 14.9329 9.76559C14.9329 11.45 14.2231 13.0434 12.9774 14.1679ZM10.7778 7.55644C10.7538 7.53269 10.7215 7.51937 10.6877 7.51937C10.654 7.51937 10.6216 7.53269 10.5976 7.55644L9.24977 8.90426C8.9515 8.8245 8.62132 8.90107 8.38685 9.13554C8.3038 9.21843 8.23791 9.31689 8.19296 9.42527C8.148 9.53366 8.12487 9.64984 8.12487 9.76718C8.12487 9.88452 8.148 10.0007 8.19296 10.1091C8.23791 10.2175 8.3038 10.3159 8.38685 10.3988C8.46974 10.4819 8.5682 10.5478 8.67658 10.5927C8.78497 10.6377 8.90115 10.6608 9.01849 10.6608C9.13583 10.6608 9.25201 10.6377 9.3604 10.5927C9.46878 10.5478 9.56724 10.4819 9.65013 10.3988C9.76122 10.2881 9.8411 10.15 9.88171 9.99843C9.92233 9.84692 9.92222 9.68736 9.88141 9.5359L11.2292 8.18808C11.2787 8.13863 11.2787 8.05728 11.2292 8.00784L10.7778 7.55644ZM8.64844 5.93746H9.35026C9.42044 5.93746 9.47786 5.88004 9.47786 5.80986V4.53381C9.47786 4.46363 9.42044 4.40621 9.35026 4.40621H8.64844C8.57826 4.40621 8.52083 4.46363 8.52083 4.53381V5.80986C8.52083 5.88004 8.57826 5.93746 8.64844 5.93746ZM12.7956 9.41467V10.1165C12.7956 10.1867 12.853 10.2441 12.9232 10.2441H14.1992C14.2694 10.2441 14.3268 10.1867 14.3268 10.1165V9.41467C14.3268 9.34449 14.2694 9.28707 14.1992 9.28707H12.9232C12.853 9.28707 12.7956 9.34449 12.7956 9.41467ZM12.9981 6.26923L12.5021 5.77317C12.4781 5.74942 12.4457 5.7361 12.412 5.7361C12.3782 5.7361 12.3458 5.74942 12.3218 5.77317L11.419 6.67597C11.3953 6.69995 11.382 6.73234 11.382 6.76609C11.382 6.79984 11.3953 6.83223 11.419 6.85621L11.9151 7.35227C11.9646 7.40172 12.0459 7.40172 12.0953 7.35227L12.9981 6.44947C13.0476 6.40003 13.0476 6.31868 12.9981 6.26923ZM5.68324 5.77317C5.65925 5.74942 5.62687 5.7361 5.59312 5.7361C5.55936 5.7361 5.52698 5.74942 5.50299 5.77317L5.00693 6.26923C4.98319 6.29321 4.96986 6.3256 4.96986 6.35935C4.96986 6.3931 4.98319 6.42549 5.00693 6.44947L5.90973 7.35227C5.95918 7.40172 6.04053 7.40172 6.08997 7.35227L6.58604 6.85621C6.63548 6.80676 6.63548 6.72542 6.58604 6.67597L5.68324 5.77317ZM5.01172 9.28707H3.73568C3.66549 9.28707 3.60807 9.34449 3.60807 9.41467V10.1165C3.60807 10.1867 3.66549 10.2441 3.73568 10.2441H5.01172C5.0819 10.2441 5.13932 10.1867 5.13932 10.1165V9.41467C5.13932 9.34449 5.0819 9.28707 5.01172 9.28707Z"
+                                                            fill="currentColor"></path>
+                                                    </svg></mat-icon>
+
+
+                                            </div>
+
+                                        </div>
+                                        <div class="col-md-8">
+                                            <div class="metrics"><span class="metrics__title">Speed Index</span>
+                                                <div class="metric-info"><span
+                                                        class=" metrics-info__value metrics-info__static-value "
+                                                        id="si"></span>
+
+
+                                                    <span class="metrics-info__status" id="si_status"></span>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </li>
+                                <li class="list-item-nav tablinks" onclick="openTab(event, 'TTI')">
+                                    <div class="row ">
+                                        <div class="col-md-2">
+                                            <div class="info-icon info-icon--background" id="tti_info-icon--background">
+                                                <mat-icon role="img" class="mat-icon notranslate mat-icon-no-color "
+                                                    aria-hidden="true" data-mat-icon-type="svg"
+                                                    data-mat-icon-name="tti_core-vitals"><svg width="100%" height="100%"
+                                                        viewBox="0 0 18 18" fill="none"
+                                                        preserveAspectRatio="xMidYMid meet" focusable="false">
+                                                        <path
+                                                            d="M10.7857 12.0992H9.6038V8.23442C9.6038 8.16423 9.54638 8.10681 9.4762 8.10681H8.51917C8.44898 8.10681 8.39156 8.16423 8.39156 8.23442V12.0992H7.21282C7.10595 12.0992 7.04694 12.222 7.11233 12.305L8.89879 14.5652C8.91072 14.5804 8.92598 14.5928 8.94339 14.6012C8.9608 14.6097 8.97991 14.6141 8.99928 14.6141C9.01864 14.6141 9.03776 14.6097 9.05517 14.6012C9.07258 14.5928 9.08783 14.5804 9.09976 14.5652L10.8862 12.305C10.9516 12.222 10.8926 12.0992 10.7857 12.0992Z"
+                                                            fill="currentColor"></path>
+                                                        <path
+                                                            d="M13.7749 6.68247C13.0444 4.75565 11.183 3.3855 9.00254 3.3855C6.8221 3.3855 4.96068 4.75405 4.23014 6.68088C2.86318 7.03976 1.85352 8.2855 1.85352 9.76571C1.85352 11.5282 3.28109 12.9558 5.04202 12.9558H5.68164C5.75182 12.9558 5.80924 12.8984 5.80924 12.8282V11.8712C5.80924 11.801 5.75182 11.7436 5.68164 11.7436H5.04202C4.50449 11.7436 3.99886 11.5298 3.62243 11.1422C3.24759 10.7562 3.04821 10.2362 3.06576 9.69712C3.08011 9.27603 3.22367 8.88045 3.48366 8.54709C3.75003 8.20734 4.12327 7.96011 4.53799 7.85005L5.14251 7.69214L5.36423 7.10835C5.5014 6.74468 5.69281 6.40493 5.93366 6.09709C6.17144 5.79197 6.45309 5.52375 6.76947 5.30116C7.42503 4.84019 8.19704 4.59614 9.00254 4.59614C9.80804 4.59614 10.58 4.84019 11.2356 5.30116C11.553 5.52446 11.8338 5.79243 12.0714 6.09709C12.3123 6.40493 12.5037 6.74627 12.6409 7.10835L12.861 7.69054L13.4639 7.85005C14.3284 8.08293 14.9329 8.86929 14.9329 9.76571C14.9329 10.2937 14.7272 10.7913 14.3539 11.1646C14.1709 11.3487 13.9532 11.4947 13.7133 11.594C13.4735 11.6934 13.2163 11.7443 12.9567 11.7436H12.3171C12.2469 11.7436 12.1895 11.801 12.1895 11.8712V12.8282C12.1895 12.8984 12.2469 12.9558 12.3171 12.9558H12.9567C14.7176 12.9558 16.1452 11.5282 16.1452 9.76571C16.1452 8.28709 15.1387 7.04295 13.7749 6.68247Z"
+                                                            fill="currentColor"></path>
+                                                    </svg></mat-icon>
+
+
+                                            </div>
+                                        </div>
+                                        <div class="col-md-8">
+                                            <div class="metrics"><span class="metrics__title">Time to Interactive</span>
+                                                <div class="metric-info"><span
+                                                        class=" metrics-info__value metrics-info__static-value "
+                                                        id="tti"></span>
+
+
+                                                    <span class="metrics-info__status" id="tti_status"></span>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </li>
+                            </ul>
+
+                        </div>
+                    </div>
+                    <div class="col-md-8 p-4">
+                        <div class="float-end">
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <br>
+                        <br>
+
+
+                        <div id="overview" class="tabcontent">
+                            <div class="">
+                                <h1 class="domain-title " id="domain-title">
+                                </h1>
+                            </div>
+                            <section>
+                                <article class="article ">
+                                    <p class="explanation"> Core Vitals are now a part of Google’s search algorithm and
+                                        can positively or negatively impact your keyword rankings. Low Core Vitals
+                                        scores
+                                        can also negatively
+                                        impact your visitors’ overall experience on your website. Google has assigned
+                                        different weights (i.e. importance)
+                                        to each Core Vital metric. That said, if you score very bad for any Core Vital
+                                        it is
+                                        always going to be a top priority to
+                                        fix even if it isn’t the most important Core Vital. </p>
+                                    <h3 class="overview-title">How Google generally weighs the
+                                        importance of each main Core Vital</h3>
+                                    <div class="overview-information-container">
+                                        <ul class="overview-list">
+                                            <li class="overview-item " style="--marker-color:#B37FEB;">
+                                                Total Blocking Time (TBT) <span class="overview-value">30 %</span></li>
+                                            <li class="overview-item " style="--marker-color:#FFD666;">
+                                                Largest Contentful Paint (LCP)
+                                                <span class="overview-value">25 %</span>
+                                            </li>
+                                            <li class="overview-item " style="--marker-color:#ADC6FF;">
+                                                Cumulative Layout Shift (CLS) <span class="overview-value">15 %</span>
+                                            </li>
+                                            <li class="overview-item " style="--marker-color:#BAE637;">
+                                                First Contentful Paint (FCP) <span class="overview-value">10 %</span>
+                                            </li>
+                                            <li class="overview-item " style="--marker-color:#40A9FF;">
+                                                Speed Index (SI) <span class="overview-value">10 %</span></li>
+                                            <li class="overview-item " style="--marker-color:#5CDBD3;">
+                                                Time
+                                                to Interact (TTI) <span class="overview-value">10 %</span></li>
+
+                                        </ul>
+                                        <canvas id="mainChart" style="width:100%;max-width:400px"></canvas>
+                                    </div>
+                                </article>
+                            </section>
+                        </div>
+
+                        <div id="TBT" class="tabcontent">
+                            <section>
+                                <div class="ng-tns-c251-40" id="tbt_heading">
+
+                                </div>
+                                <article class="article " style="">
+                                    <div units="ms" class="range-chart">
+                                        <div class="grid">
+                                            <div class="measures">
+                                                <div class="measure-labels"><span class="measure-label"></span><span
+                                                        class="measure-label measure-label--good">Less than <span> 200
+                                                            ms</span></span><span
+                                                        class="measure-label measure-label--poor">Over <span> 600
+                                                            ms</span></span><span class="measure-label"></span></div>
+                                                <div class="measures-empty-blocks">
+                                                    <div class="measures-empty-blocks--good">
+                                                    </div>
+                                                    <div class="measures-empty-blocks--moderate">
+                                                    </div>
+                                                    <div class="measures-empty-blocks--poor">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="chart">
+                                                <div id="tooltipTitle_tbt" data-bs-toggle="tooltip"
+                                                    data-bs-placement="top" title="" class="indicator indicator_TBT">
+                                                </div>
+
+                                                <div class="good_pro"></div>
+                                                <div class="moderate"></div>
+                                                <div class="poor_pro"></div>
+                                            </div>
+                                            <div class="legend">
+                                                <div class="good-text">Fast</div>
+                                                <div class="moderate-text">Moderate</div>
+                                                <div class="poor-text">Slow</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="tbt-image-section">
+                                        <div>
+                                            <h3 class="subtitle">What is TBT?</h3>
+                                            <p class="explanation"> TBT measures the total amount
+                                                of time that a page is blocked from responding to user input, such as
+                                                mouse clicks, screen taps, or keyboard presses. </p>
+                                        </div>
+                                        <div><img src="../../static/site_audit/assets/search-solid-III-min.svg"
+                                                decoding="async" role="presentation" alt="" width="124" height="80"
+                                                class="tbt-image"></div>
+                                    </div>
+                                    <h3 class="subtitle">What is a good TBT score?</h3>
+                                    <p class="explanation">If your TBT is 200 milliseconds or
+                                        less your website is considered fast.</p>
+                                </article>
+
+                            </section>
+                            <div class="ng-tns-c251-40" id="improvement-state-tbt">
+
+                            </div>
+                        </div>
+
+                        <div id="LCP" class="tabcontent">
+                            <section>
+                                <div class="ng-tns-c251-40" id="lcp_heading">
+
+                                </div>
+                                <article class="article " style="">
+                                    <div units="ms" class="range-chart">
+                                        <div class="grid">
+                                            <div class="measures">
+                                                <div class="measure-labels"><span class="measure-label"></span><span
+                                                        class="measure-label measure-label--good">Less than <span> 2500
+                                                            ms</span></span><span
+                                                        class="measure-label measure-label--poor">Over <span> 4000
+                                                            ms</span></span><span class="measure-label"></span></div>
+                                                <div class="measures-empty-blocks">
+                                                    <div class="measures-empty-blocks--good">
+                                                    </div>
+                                                    <div class="measures-empty-blocks--moderate">
+                                                    </div>
+                                                    <div class="measures-empty-blocks--poor">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="chart">
+                                                <div id="tooltipTitle_lcp" data-bs-toggle="tooltip"
+                                                    data-bs-placement="top" title="" class="indicator indicator_LCP">
+                                                </div>
+
+                                                <div class="good_pro"></div>
+                                                <div class="moderate"></div>
+                                                <div class="poor_pro"></div>
+                                            </div>
+                                            <div class="legend">
+                                                <div class="good-text">Fast</div>
+                                                <div class="moderate-text">Moderate</div>
+                                                <div class="poor-text">Slow</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="tbt-image-section">
+                                        <div>
+                                            <h3 class="subtitle">What is LCP?</h3>
+                                            <p class="explanation"> This metric corresponds to the first impression
+                                                users have of how fast your site loads. It reports the render time of
+                                                the largest image or text block visible to a visitor, relative to when
+                                                the page first started
+                                                loading. A fast LCP helps let the user know that the page is useful.
+                                            </p>
+                                        </div>
+
+                                    </div>
+                                    <h3 class="subtitle">What is a good LCP score?</h3>
+                                    <p class="explanation">To provide a good user experience, sites should strive to
+                                        have Largest
+                                        Contentful Paint of 2.5 seconds or less.</p>
+
+                                </article>
+
+                            </section>
+                            <div class="ng-tns-c251-40" id="improvement-state-lcp">
+
+                            </div>
+                        </div>
+                        <div id="CLS" class="tabcontent">
+                            <section>
+                                <div class="ng-tns-c251-40" id="cls_heading">
+
+                                </div>
+                                <article class="article " style="">
+                                    <div units="ms" class="range-chart">
+                                        <div class="grid">
+                                            <div class="measures">
+                                                <div class="measure-labels"><span class="measure-label"></span><span
+                                                        class="measure-label measure-label--good">Less than <span> 0.1
+                                                        </span></span><span
+                                                        class="measure-label measure-label--poor">Over <span> 0.25
+                                                        </span></span><span class="measure-label"></span></div>
+                                                <div class="measures-empty-blocks">
+                                                    <div class="measures-empty-blocks--good">
+                                                    </div>
+                                                    <div class="measures-empty-blocks--moderate">
+                                                    </div>
+                                                    <div class="measures-empty-blocks--poor">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="chart">
+                                                <div id="tooltipTitle_cls" data-bs-toggle="tooltip"
+                                                    data-bs-placement="top" title="" class="indicator indicator_CLS">
+                                                </div>
+
+                                                <div class="good_pro"></div>
+                                                <div class="moderate"></div>
+                                                <div class="poor_pro"></div>
+                                            </div>
+                                            <div class="legend">
+                                                <div class="good-text">Fast</div>
+                                                <div class="moderate-text">Moderate</div>
+                                                <div class="poor-text">Slow</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="tbt-image-section">
+                                        <div>
+                                            <h3 class="subtitle">What is CLS?</h3>
+                                            <p class="explanation"> We’ve all experienced CLS and it can be annoying!
+                                                Essentially, CLS measures how much things shift around on a website page
+                                                while it is loading. For example, a visitor might start reading your
+                                                “About Us” page and then all of a sudden, a big image loads and it moves
+                                                the text down and they lose their place. Even worse, a visitor may be
+                                                about to push a “More Info” button, but it gets pushed down and instead
+                                                they end up clicking a “Buy Now” button.
+                                                A low CLS score is important if you want to provide your visitors with a
+                                                good browsing experience. </p>
+                                        </div>
+                                        <div></div>
+                                    </div>
+                                    <h3 class="subtitle">What is a good CLS?</h3>
+                                    <p class="explanation">To provide a good user experience, sites should strive to
+                                        have a CLS score of 0.1 or less.</p>
+
+                                </article>
+
+                            </section>
+                            <div class="ng-tns-c251-40" id="improvement-state-cls">
+
+                            </div>
+                        </div>
+                        <div id="FCP" class="tabcontent">
+                            <section>
+                                <div class="ng-tns-c251-40" id="fcp_heading">
+
+                                </div>
+                                <article class="article " style="">
+                                    <div units="ms" class="range-chart">
+                                        <div class="grid">
+                                            <div class="measures">
+                                                <div class="measure-labels"><span class="measure-label"></span><span
+                                                        class="measure-label measure-label--good">Less than <span> 1.8
+                                                            sec
+                                                        </span></span><span
+                                                        class="measure-label measure-label--poor">Over <span> 3 sec
+                                                        </span></span><span class="measure-label"></span></div>
+                                                <div class="measures-empty-blocks">
+                                                    <div class="measures-empty-blocks--good">
+                                                    </div>
+                                                    <div class="measures-empty-blocks--moderate">
+                                                    </div>
+                                                    <div class="measures-empty-blocks--poor">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="chart">
+                                                <div id="tooltipTitle_fcp" data-bs-toggle="tooltip"
+                                                    data-bs-placement="top" title="" class="indicator indicator_FCP">
+                                                </div>
+
+                                                <div class="good_pro"></div>
+                                                <div class="moderate"></div>
+                                                <div class="poor_pro"></div>
+                                            </div>
+                                            <div class="legend">
+                                                <div class="good-text">Fast</div>
+                                                <div class="moderate-text">Moderate</div>
+                                                <div class="poor-text">Slow</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="tbt-image-section">
+                                        <div>
+                                            <h3 class="subtitle">What is FCP?</h3>
+                                            <p class="explanation"> FCP measures how long it takes a visitor’s browser
+                                                to render the first image, text, or non-white element on your page after
+                                                they land on it. This needs to be fast,
+                                                as it lets a visitor know the page is starting to load. Until FCP, the
+                                                visitor doesn’t see anything! </p>
+                                        </div>
+                                        <div></div>
+                                    </div>
+                                    <h3 class="subtitle">What is a good FCP score?</h3>
+                                    <p class="explanation">FCP needs to occur in under 1.8 seconds in order for your
+                                        website to be considered good!</p>
+
+                                </article>
+
+                            </section>
+                            <div class="ng-tns-c251-40" id="improvement-state-fcp">
+
+                            </div>
+                        </div>
+                        <div id="SI" class="tabcontent">
+                            <section>
+                                <div class="ng-tns-c251-40" id="si_heading">
+
+                                </div>
+                                <article class="article " style="">
+                                    <div units="ms" class="range-chart">
+                                        <div class="grid">
+                                            <div class="measures">
+                                                <div class="measure-labels"><span class="measure-label"></span><span
+                                                        class="measure-label measure-label--good">Less than <span> 3.4
+                                                            sec
+                                                        </span></span><span
+                                                        class="measure-label measure-label--poor">Over <span> 5.8 sec
+                                                        </span></span><span class="measure-label"></span></div>
+                                                <div class="measures-empty-blocks">
+                                                    <div class="measures-empty-blocks--good">
+                                                    </div>
+                                                    <div class="measures-empty-blocks--moderate">
+                                                    </div>
+                                                    <div class="measures-empty-blocks--poor">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="chart">
+                                                <div id="tooltipTitle_si" data-bs-toggle="tooltip"
+                                                    data-bs-placement="top" title="" class="indicator indicator_SI">
+                                                </div>
+
+                                                <div class="good_pro"></div>
+                                                <div class="moderate"></div>
+                                                <div class="poor_pro"></div>
+                                            </div>
+                                            <div class="legend">
+                                                <div class="good-text">Fast</div>
+                                                <div class="moderate-text">Moderate</div>
+                                                <div class="poor-text">Slow</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="tbt-image-section">
+                                        <div>
+                                            <h3 class="subtitle">What is Speed Index?</h3>
+                                            <p class="explanation">Speed Index measures how quickly content is visually
+                                                displayed to your website users during page load. Basically, a video is
+                                                taken of your page
+                                                loading in the browser and then your score is computed based on the
+                                                speed of visual progression between frames. </p>
+                                        </div>
+                                        <div></div>
+                                    </div>
+                                    <h3 class="subtitle">What is a good Speed Index score?</h3>
+                                    <p class="explanation">If your Speed Index is 3.4 seconds or less your website is
+                                        considered fast.</p>
+
+                                </article>
+
+                            </section>
+                            <div class="ng-tns-c251-40" id="improvement-state-si">
+
+                            </div>
+                        </div>
+                        <div id="TTI" class="tabcontent">
+                            <section>
+                                <div class="ng-tns-c251-40" id="tti_heading">
+
+                                </div>
+                                <article class="article " style="">
+                                    <div units="ms" class="range-chart">
+                                        <div class="grid">
+                                            <div class="measures">
+                                                <div class="measure-labels"><span class="measure-label"></span><span
+                                                        class="measure-label measure-label--good">Less than <span> 3.8
+                                                            sec
+                                                        </span></span><span
+                                                        class="measure-label measure-label--poor">Over <span> 7.3 sec
+                                                        </span></span><span class="measure-label"></span></div>
+                                                <div class="measures-empty-blocks">
+                                                    <div class="measures-empty-blocks--good">
+                                                    </div>
+                                                    <div class="measures-empty-blocks--moderate">
+                                                    </div>
+                                                    <div class="measures-empty-blocks--poor">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="chart">
+                                                <div id="tooltipTitle_tti" data-bs-toggle="tooltip"
+                                                    data-bs-placement="top" title="" class="indicator indicator_TTI">
+                                                </div>
+
+                                                <div class="good_pro"></div>
+                                                <div class="moderate"></div>
+                                                <div class="poor_pro"></div>
+                                            </div>
+                                            <div class="legend">
+                                                <div class="good-text">Fast</div>
+                                                <div class="moderate-text">Moderate</div>
+                                                <div class="poor-text">Slow</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="tbt-image-section">
+                                        <div>
+                                            <h3 class="subtitle">What is TTI?</h3>
+                                            <p class="explanation">TTI measures how long it takes a page to become fully
+                                                interactive for a visitor. A page is considered fully interactive when:
+                                            </p>
+                                            <ul _ngcontent-drg-c249="" class="interactive-list">
+                                                <li _ngcontent-drg-c249="" class="interactive-list-item">The page
+                                                    displays useful content, which is measured by the First Contentful
+                                                    Paint </li>
+                                                <li _ngcontent-drg-c249="" class="interactive-list-item">Event handlers
+                                                    are registered for most visible page elements</li>
+                                                <li _ngcontent-drg-c249="" class="interactive-list-item">The page
+                                                    responds to user interactions within 50 milliseconds</li>
+                                            </ul>
+                                        </div>
+                                        <div></div>
+                                    </div>
+
+
+                                </article>
+
+                            </section>
+                            <div class="ng-tns-c251-40" id="improvement-state-tti">
+
+                            </div>
+                        </div>
+
+
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<!-- google analytics -->
+<div class="container">
+    <div class="tabs_c266">
+        <div class="scrollable ">
+            <div class="tab_c266 tablinks" onclick="openTab(event, 'Yesterday')" id="defaultOpenTab"> Yesterday </div>
+            <div class="tab_c266 tablinks" onclick="openTab(event, 'Week')"> Week </div>
+            <div class="tab_c266 tablinks" onclick="openTab(event, 'Month')"> Month </div>
+        </div>
+    </div>
+    <div class="loader" id="analytics_loader">
+        <div class="lds-ellipsis">
+            <div></div>
+            <div></div>
+            <div></div>
+        </div>
+
+    </div>
+    <div id="Yesterday" class="tabcontent">
+
+    </div>
+    <div id="Week" class="tabcontent">
+
+    </div>
+    <div id="Month" class="tabcontent">
+
+
+    </div>
+
+
+
+</div>
+<div class="modal fade" id="exampleModalToggle" aria-hidden="true" aria-labelledby="exampleModalToggleLabel"
+    tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalToggleLabel">Modal 1</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                Show a second modal and hide this one with the button below.
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-primary" data-bs-target="#exampleModalToggle2" data-bs-toggle="modal"
+                    data-bs-dismiss="modal">Open second modal</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- The Modal -->
+<div class="modal" id="myModal">
+    <div class="modal-dialog modal-lg modal-dialog-centered">
+        <div class="modal-content">
+
+            <!-- Modal Header -->
+            
+
+            <!-- Modal body -->
+            <div class="modal-body">
+            <div class="float-end mr-auto">
+            <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            
+            </div>
+            <div class="p-4">
+             <p class="c235"> Most new members sync their Google Analytics to WEBSITERANKINGEXPERT™ in less than a minute just by
+                    clicking the green “Import from Google Analytics” button. The process is automated and doesn’t
+                    require any special skills. </p>
+                <p class="c2352"> However, if you’d like more help or just don’t understand Google Analytics don’t
+                    worry, we offer an affordable New Member Growth Package that covers the following circumstances and
+                    more: </p>
+                    <div class="dFlex mb-4">
+                <img class="c235_img" src="../../static/site_audit/assets/purchase.svg" alt="" decoding="async">
+                    
+                    </div>
+
+                <ul class="c235_ul">
+                    <li class="c235_li">You need to talk to an expert about your analytics and performance</li>
+                    <li class="c235_li">You are new to Google Analytics and need help understanding it</li>
+                    <li class="c235_li">You want to make sure your Google Analytics is correctly installed</li>
+                    <li class="c235_li">You can’t access and/or sync your Google Analytics and need a fresh
+                        install</li>
+                    <li class="c235_li">You’d like us to set-up goals for you (track calls, sales, etc.. with
+                        your analytics)</li>
+                </ul>
+            </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
+
+
+
+{% block extrascript %}
+<script>
+
+    function openTab(evt, tabName) {
+        var i, tabcontent, tablinks;
+        tabcontent = document.getElementsByClass("tabcontent");
+        for (i = 0; i < tabcontent.length; i++) {
+            tabcontent[i].style.display = "none";
+        }
+        tablinks = document.getElementsByClass("tablinks");
+        for (i = 0; i < tablinks.length; i++) {
+            tablinks[i].class = tablinks[i].class.replace(" active", "");
+        }
+        document.getElementById(tabName).style.display = "block";
+        evt.currentTarget.class += " active";
+    }
+    $(document).on('click', '#moreDetail', function () {
+        // Get the element with id="defaultOpen" and click on it
+        document.getElementById("defaultOpen").click();
+    })
+
+</script>
+<script>
+
+
+    /**
+*Exampe from https://kottenator.github.io/jquery-circle-progress/
+*/
+
+
+</script>
+
+<script src="{% static 'site_audit/js/websiteRankCharts.js' %}"></script>
+
+<script src="{% static 'site_audit/libs/select2/js/select2.full.min.js'%}"></script>
+
+<script src="{% static 'site_audit/js/scripts.js' %}"></script>
+<script src="{% static 'site_audit/js/alerts.js' %}"></script>
+<script src="{% static 'site_audit/js/objectives.js' %}"></script>
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-circle-progress/1.1.3/circle-progress.min.js"></script>
+
+
+
+<script>
+
+
+
+
+    var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
+    var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
+        return new bootstrap.Tooltip(tooltipTriggerEl)
+    });
+
+    var chart_data = {
+
+    }
+
+
+
+
+    // second
+
+    function openTab(evt, tabName) {
+        var i, tabcontent, tablinks;
+        tabcontent = document.getElementsByClassName("tabcontent");
+        for (i = 0; i < tabcontent.length; i++) {
+            tabcontent[i].style.display = "none";
+        }
+        tablinks = document.getElementsByClassName("tablinks");
+        for (i = 0; i < tablinks.length; i++) {
+            tablinks[i].className = tablinks[i].className.replace(" active", "");
+        }
+        document.getElementById(tabName).style.display = "block";
+        evt.currentTarget.className += " active";
+    }
+    $(document).ready(function () {
+        // Get the element with id="defaultOpen" and click on it
+        document.getElementById("defaultOpenTab").click();
+
+    })
+
+
+</script>
+
+{% endblock %}

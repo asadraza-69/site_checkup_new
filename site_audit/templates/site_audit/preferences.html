@@ -1,0 +1,192 @@
+{% extends "base2.html" %}
+{% load static %}
+{% block extrahead %}
+<style>
+ .top_spinner {
+  display: none;
+ }
+.gn_analytics .st-circle {
+  font-size: 11px;
+  margin-right: 5px;
+}
+.status_spinner{
+    position:absolute;
+    left: 2%;
+}
+.gn_analytics{
+    position:absolute;
+    left: 2%;
+}
+</style>
+{% endblock %}
+{% block content %}
+<div class="container pb-2 mb-5">
+ <div class="row ">
+  <div class="col-xl-9">
+   <div class="center-section">
+    <h4 class="title mb-5 fw-400 pb-2">Prefrences </h4>
+   </div>
+  </div>
+ </div>
+ <div class="row">
+  <div class="col-xl-3" >
+   <div class="card">
+   <div class="status_spinner">
+    <span class="spinner-border spinner-border-sm " role="status"
+                                        aria-hidden="true"></span>
+   </div>
+  
+     <div class="gn_analytics"></div>
+    <div class="card-body"  style="box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px, rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;">
+    
+     <a data-bs-toggle="modal" href="javascript:void()" data-bs-toggle="modal" data-bs-target="#addGanalytics">
+      <div class="text-center">
+       <img src="https://www.gstatic.com/analytics-suite/header/suite/v2/ic_analytics.svg" style="width: 40px;height:40px" class="img-fluid pb-2" alt="">
+       <br>
+       <span class="text-gery font-14 ">Google Analytics</span>
+      </div>
+     </a>
+    </div>
+   </div>
+  </div>
+
+ </div>
+ <div class="modal fade" id="addGanalytics" tabIndex={-1} aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+   <div class="modal-content">
+    <div class="modal-header">
+     <!-- <img src="/static/site_audit/assets/img/google_analytics-ar21.png" style="width: 53px;"
+      class="img-fluid  google-anyl" alt=""> -->
+     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" />
+    </div>
+    <div class="modal-body d-flex justify-content-center">
+     <!-- <a href="javascript:void()" class="btn btn-primary btn-md mb-3 gogle-btn p-2" id="conect_g_analytics"  style="box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px, rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;">
+      <span class="spinner-border spinner-border-sm top_spinner" role="status" aria-hidden="true"></span>
+      Connect Google
+      Analytics</a> -->
+      <div class="center-section">
+                <h4 class="title mb-5 fw-400 pb-2">Connect Google
+                                    Analytics </h4>
+                <div class="row ">
+                    <div class="col-xl-12 text-center">
+                  
+                        <div class="card grey-box progrs-crd">
+                            <div class="card-body pt-3 pb-4">
+                            <div class="d-flex justify-content-center">
+                                <img src="{% static 'site_audit/assets/img/google_analytics-ar21.png'%}"
+                                    class="img-fluid mb-4 google-anyl" alt="">
+                              </div>
+                                <div class="d-flex justify-content-center">
+                                <a href="#" class="btn btn-primary mb-3 gogle-btn " id="conect_g_analytics">
+                                 <span
+                                        class="spinner-border spinner-border-sm top_spinner" role="status"
+                                        aria-hidden="true"></span>Connect Google
+                                    Analytics</a>
+                                    </div>
+                                <a href="#" class="btn btn-yellow btn-block  mb-3 gogle-btn">Need Help Doing
+                                    This?</a>
+                                <p class="font-13 google-txt">Every Website Already Has
+                                    Google Analytics </p>
+                            </div>
+                        </div>
+                    </div>
+                   
+                </div>
+            </div>
+
+    </div>
+
+   </div>
+  </div>
+ </div>
+</div>
+
+
+{% endblock %}
+
+{% block extrascript %}
+
+<script>
+$(document).ready(function(){
+    var setGIn = setInterval(gnFn,1000)
+    function gnFn(){
+     $('.status_spinner').show();
+        var project_id = $('option:selected').attr('data-id');
+       if(project_id !== undefined && project_id !== ''){
+        clearInterval(setGIn)
+            // const perm_url = window.location.origin + '/site_audit/get_google_analytics_status/?project_id=' + project_id;
+        $.ajax({
+            method: 'GET',
+            url: '/site_audit/get_google_analytics_status/?project_id=' + project_id,
+            success: function (response) {
+                  console.log(response,'response')
+                if (response.status) {
+                    $('.status_spinner').hide();
+                      $('.gn_analytics').html('');
+
+                    $('.gn_analytics').append(`<span class="st-circle green"><i class="fa-solid fa-circle"></i> Connected</span>`)
+                }else{
+                     $('.status_spinner').hide();
+                      $('.gn_analytics').html('');
+                     
+                    $('.gn_analytics').append(`<span class="st-circle red"><i class="fa-solid fa-circle"></i> Disconnected</span>`)
+                }
+            }
+        })
+       }
+    }
+});
+ $(document).on('change','.radio',function(){
+         $('.status_spinner').show();
+         $('.gn_analytics').html('');
+        setTimeout(()=>{
+       
+        var project_id = $('option:selected', this).attr('data-id')
+          if(project_id !== undefined && project_id !== ''){
+        // const perm_url = window.location.origin + '/site_audit/get_google_analytics_status/?project_id=' + project_id;
+
+        $.ajax({
+            method: 'GET',
+            url: '/site_audit/get_google_analytics_status/?project_id=' + project_id,
+            success: function (response) {
+                  console.log(response,'response')
+                if (response.status) {
+                    $('.status_spinner').hide();
+                      $('.gn_analytics').html('');
+                    $('.gn_analytics').append(`<span class="st-circle green"><i class="fa-solid fa-circle"></i> Connected</span>`)
+                }else{
+                     $('.status_spinner').hide();
+                      $('.gn_analytics').html('');
+                    $('.gn_analytics').append(`<span class="st-circle red"><i class="fa-solid fa-circle"></i> Disconnected</span>`)
+                }
+            }
+        })
+
+          }else{
+            ShowNoty('Project id undefined','error')
+          }
+        
+    },1000)
+     })
+// add analytics btn
+    $('.gogle-btn1').on('click', function () {
+
+        $('.top_spinner').css('opacity', '1');
+        var project_id = $('option:selected').attr('data-id')
+        // const perm_url = window.location.origin + '/site_audit/get_auth_url/?project_id=' + project_id;
+        $.ajax({
+            method: 'GET',
+            url: '/site_audit/get_google_analytics_status/?project_id=' + project_id,
+            success: function (response) {
+                if (response.status) {
+                    $('.top_spinner').css('opacity', '0');
+
+
+                    let auth_url = response.auth_url;
+                    window.location.href = auth_url
+                }
+            }
+        })
+    })
+</script>
+{% endblock %}

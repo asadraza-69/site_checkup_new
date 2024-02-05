@@ -1,0 +1,208 @@
+{% extends "base2.html" %}
+{% load static %}
+{% block extrahead %}
+
+<style>
+   .form .actions button {
+      background: #707070!important;
+   }
+
+</style>
+
+{% endblock %}
+{% block content %}
+
+<div class="container">
+<!-- <div class="row">
+<div class="col-md-8">
+  <div class="current">
+  <h1>Import Website</h1>
+ </div>
+</div>
+<div class="col-md-4">
+ <div class="float-end mt-3">
+    <button id="country-info-block-btn" class="country-wrapper"><span class="country">
+    <i aria-hidden="true" class="country__flag flag-icon flag-icon-squared "><div class="country_loader">
+                       <div class="spinner-grow text-success spinner-grow-sm" role="status">
+  <span class="sr-only">Loading...</span>
+</div>
+
+                    </div></i>
+    <span class="country__name"></span></span>
+    <i  data-bs-toggle="tooltip" data-bs-placement="left"
+                                    class="fa fa-pencil"
+                                     id="country-info-block-btn-modal"
+                                    title="This tool uses data based on the country
+                                     that is selected under your primary account settings.
+                                      You can switch countries and we highly recommend it 
+                                      if it is set wrong, but it does use some of the data 
+                                      we have allotted to your account. As such, we recommend
+                                       making sure it is set correctly and then keeping it set to the country where you do the most business." id="country-info-block-btn-modal" aria-hidden="true">
+    </i></button>
+</div>
+</div>
+
+</div> -->
+<!-- <div class="pt-4 pb-2">
+   <div class="container mt-0 margin-left" >
+       <h4 class="title mb-5 fw-400 pb-2">Import Website</h4>
+   </div>
+</div>
+<div class="col-md-12">
+ 
+   <div  class="content_web">
+    <div  class="form">
+    <div class="d-flex justify-content-between align-item-center"> -->
+      <!-- <h1 >Detect data channels</h1> -->
+      <!-- <div class="float-end ">
+       <button id="country-info-block-btn" class="country-wrapper"><span class="country">
+       <i aria-hidden="true" class="country__flag flag-icon flag-icon-squared "><div class="country_loader">
+                          <div class="spinner-grow text-success spinner-grow-sm" role="status">
+     <span class="sr-only">Loading...</span>
+   </div>
+   
+                       </div></i>
+       <span class="country__name"></span></span>
+       <i  data-bs-toggle="tooltip" data-bs-placement="left"
+                                       class="fa fa-pencil"
+                                        id="country-info-block-btn-modal"
+                                       title="This tool uses data based on the country
+                                        that is selected under your primary account settings.
+                                         You can switch countries and we highly recommend it 
+                                         if it is set wrong, but it does use some of the data 
+                                         we have allotted to your account. As such, we recommend
+                                          making sure it is set correctly and then keeping it set to the country where you do the most business." id="country-info-block-btn-modal" aria-hidden="true">
+       </i></button>
+   </div> -->
+    <!-- </div> -->
+     
+     <div class="modal fade" id="import_website" tabIndex={-1} aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+        <div class="modal-content">
+            <!-- <div class="modal-header">
+
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" />
+            </div> -->
+            <div class="modal-body">
+                <div class="d-flex justify-content-center">
+                    <h4 class="font-22 mb-3">Import Website </h4>
+                </div>
+
+                <div class="addMyWeb-body">
+                    <h4 class=" font-16 fw-600 text-gray">Active websites</h4>
+                    <h5 class="text-gray font-14 fw-400 mb-3">Enter URL / domain name</h5>
+                    <form action="" class="form">
+                        <!-- Search input -->
+                        <div class="form-outline mb-3">
+                            <input type="text" class="form-control" placeholder="Yourwebsite.com" id="Detect_Url">
+                            <!-- <label class="form-label" for="form2Example1" style="margin-left: 0px;">Yourwebsite.com</label> -->
+                           
+                            <span id="response_Text" class="mt-5"></span>
+                            <!-- <div class="form-notch">
+                                <div class="form-notch-leading" style="width: 9px;"></div>
+                                <div class="form-notch-middle" style="width: 117.6px;"></div>
+                                <div class="form-notch-trailing"></div>
+                            </div> -->
+                        </div>
+                        <button type="submit" id="detect" class="btn btn-prim mb-3">DETECT</button>
+                    </form>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<div class="modal fade " id="upgradeSub" tabindex="{-1}" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+        <div class="modal-content">
+            <div class="modal-body">
+              <div class="limit-alert-bar mt-md-4 mt-4 mb-md-4 mx-4 mb-4 justify-content-center">
+                <div class="limit-alert">
+                  <img src="../../static/site_audit/assets/limit-alert.png" alt="limit-alert" />
+                </div>
+                <p class="font-14 text-black m-0">
+                  You've reached your limits for the free plan. You can see more by
+                  upgrading to the higher plan.
+                </p>
+                <a href="/subscription/upgrade_subscription/" class="upgrade-btn mx-0">
+                  <img src="../../static/site_audit/assets/king.png" alt="king" />
+                  Upgrade plan
+                </a>
+              </div>
+            </div>
+        </div>
+    </div>
+  </div>
+{% endblock %}
+{% block extrascript %}
+<script>
+
+$(document).ready(function(){
+   $('#import_website').modal('show')
+   var website_url = '';
+
+  $('#detect').prop('disabled',true)
+  $('#Detect_Url').on('change input type',function(){
+     website_url  = $(this).val();
+     $("#response_Text").html("")
+    var pattern = /^(http|https)?:\/\/[a-zA-Z0-9-\.]+\.[a-z]{2,4}/;
+
+    if(pattern.test(website_url)){
+       $('#detect').prop('disabled',false);
+     
+    }else{
+      
+    $('#detect').prop('disabled',true)
+     $("#response_Text").html('Please enter correct url i.e https://example.com').addClass('text-danger')
+    }
+
+  });
+    $('#detect').on('click',function(){
+       console.log(website_url,'website_url1')
+       
+       if(website_url != ""){
+         $.ajax({
+          method:'POST',
+          url:'/site_audit/add_website/',
+          data:{website_url: website_url},
+          success:function(res){
+              
+
+               if(res.status){
+                 
+                  $("#response_Text").html("Website added successfully!").addClass('text-success').removeClass('text-danger')
+                   window.location.href = '/site_audit/dashboard/'
+                  localStorage.removeItem('project_id');
+                                    localStorage.removeItem('project_url');
+                                 
+                                    GetWebsitesBase();
+               }
+               else {
+
+                if(response.limits_error) {
+          
+                    $("#upgradeSub").modal('show')
+                    $("#sidebarMenu").css("z-index",'10000')
+                    $('#main-navbar').css("z-index",'99999')
+                    $('main').css('opacity', '0.07')
+                } 
+                else{
+                  ShowNoty(response.error, "error")
+                }
+
+                  $("#response_Text").html(`${res.error}`).addClass('text-danger').removeClass('text-success')
+               }
+
+          }
+         })
+       }else{
+         $("#response_Text").html("test")
+       }
+      
+       })
+})
+</script>
+<script src="{% static 'site_audit/libs/select2/js/select2.full.min.js'%}"></script>
+
+{% endblock %}

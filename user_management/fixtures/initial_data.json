@@ -1,0 +1,130 @@
+[
+{
+    "model": "user_management.globalconfiguration",
+    "pk": 1,
+    "fields": {
+        "name": "api_access_id",
+        "value": "mozscape-e5b47e649f"
+    }
+},
+{
+    "model": "user_management.globalconfiguration",
+    "pk": 2,
+    "fields": {
+        "name": "api_secret_key",
+        "value": "19e1ef5acabbf1267e1d77fdf7e401cc"
+    }
+},
+{
+    "model": "user_management.globalconfiguration",
+    "pk": 3,
+    "fields": {
+        "name": "backlinks_api_url",
+        "value": "https://lsapi.seomoz.com/v2/links"
+    }
+},
+{
+    "model": "user_management.globalconfiguration",
+    "pk": 4,
+    "fields": {
+        "name": "backlink_data_expiry_days",
+        "value": "30"
+    }
+},
+{
+    "model": "user_management.globalconfiguration",
+    "pk": 6,
+    "fields": {
+        "name": "website_seo_data_expiry_hrs",
+        "value": "24"
+    }
+},
+{
+    "model": "user_management.globalconfiguration",
+    "pk": 7,
+    "fields": {
+        "name": "sandbox_testing",
+        "value": "true"
+    }
+},
+{
+    "model": "user_management.globalconfiguration",
+    "pk": 8,
+    "fields": {
+        "name": "anchor_text_api_url",
+        "value": "https://lsapi.seomoz.com/v2/anchor_text"
+    }
+},
+{
+    "model": "user_management.globalconfiguration",
+    "pk": 9,
+    "fields": {
+        "name": "anchor_text_data_expiry_days",
+        "value": "30"
+    }
+},
+{
+    "model": "user_management.globalconfiguration",
+    "pk": 10,
+    "fields": {
+        "name": "organic_keywords_api_url",
+        "value": "https://www.spyfu.com/apis/url_api/organic_kws"
+    }
+},
+{
+    "model": "user_management.globalconfiguration",
+    "pk": 11,
+    "fields": {
+        "name": "organic_keywords_data_expiry_days",
+        "value": "30"
+    }
+},
+{
+    "model": "user_management.globalconfiguration",
+    "pk": 12,
+    "fields": {
+        "name": "organic_keywords_api_key",
+        "value": "88QVPAAR"
+    }
+},
+{
+    "model": "user_management.globalconfiguration",
+    "pk": 13,
+    "fields": {
+        "name": "google_recaptcha_secret_key",
+        "value": "6Lcy8ashAAAAAF0Sb-iXeXcHklKvopKos9cXgGTA"
+    }
+},
+{
+    "model": "user_management.globalconfiguration",
+    "pk": 14,
+    "fields": {
+        "name": "google_recaptcha_site_key",
+        "value": "6Lcy8ashAAAAAOeBTLl_NJ8yZ9dEnUus8ZoIvIld"
+    }
+},
+{
+    "model": "user_management.globalconfiguration",
+    "pk": 15,
+    "fields": {
+        "name": "contact_form_success_message",
+        "value": "Thanks for contact, our team will get back to you soon!"
+    }
+},
+{
+    "model": "user_management.globalconfiguration",
+    "pk": 16,
+    "fields": {
+        "name": "api_url",
+        "value": "http://127.0.0.1:8000"
+    }
+},
+{
+    "model": "stripe_payment_module.ExtraServices",
+    "pk": 1,
+    "fields": {
+        "name": "google_analytics",
+        "price": 200
+    }
+}
+]

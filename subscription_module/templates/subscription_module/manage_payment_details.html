@@ -1,0 +1,241 @@
+
+
+{% extends "base2.html" %}
+{% load static %}
+{% block extrahead %}
+{% endblock %}
+{% block content %}
+<style>
+.table-head.errorTypes {
+    height: auto;
+}
+
+/* body { max-width:600px; padding:10px; 
+  margin:0 auto; } */
+/* body, input { font-family: sans-serif; font-size:14px; }
+
+input:focus { outline:0 }
+
+::placeholder { color:#aaa; }
+
+
+
+#payment-form  { width:316px; margin:5px auto; }
+
+#payment-form label { 
+  display:block; 
+  margin:0 0 4px 0; 
+  font-size: 11px; color: inherit; 
+  line-height:1; height:auto; 
+}
+     
+#payment-form input,
+#payment-form .StripeElement { 
+  width: 100%; 
+  border-radius: 3px; 
+  border: 0.75px solid #aaa; 
+  padding: 0 10px; 
+  margin-bottom:10px;
+}
+
+#payment-form input { line-height:36px; }
+
+#payment-form  .StripeElement--webkit-autofill { 
+  background: transparent !important; 
+}
+
+#card-errors { margin:4px 0; color: #c12843; } */
+
+</style>
+
+<div class="container">
+    <!-- Crawler Heading Section  -->
+
+    <div class="row ">
+        <div class="col-xl-9">
+            <div class="center-section">
+                <h4 class="title mb-5 fw-400 pb-2"> Manage Payment Detail</h4>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-xl-3">
+            <div class="card">
+                <!-- <div class="status_spinner">
+          <span class="spinner-border spinner-border-sm " role="status"
+                                              aria-hidden="true"></span>
+         </div> -->
+
+                <div class="card-body"
+                    style="box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px, rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;">
+
+                    <a href="/payment/view_invoice_list/" >
+                        <div class="text-center">
+
+                            <i class="fa-solid fa-file-invoice" style="font-size: 30px; color: gray;"></i> <br>
+                            <span class="text-gery  ">View Invoice List</span>
+                        </div>
+                    </a>
+
+                </div>
+            </div>
+        </div>
+        <div class="col-xl-3">
+            <div class="card">
+                <!-- <div class="status_spinner">
+             <span class="spinner-border spinner-border-sm " role="status"
+                                                 aria-hidden="true"></span>
+            </div> -->
+
+                <div class="card-body"
+                    style="box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px, rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;">
+
+                    <a  href="/subscription/payment_list/" >
+                        <div class="text-center">
+                            <i class="fa-regular fa-credit-card" style="font-size: 30px; color: gray;"></i> <br>
+                            <span class="text-gery  ">View Payments</span>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="col-xl-3">
+            <div class="card">
+                <!-- <div class="status_spinner">
+             <span class="spinner-border spinner-border-sm " role="status"
+                                                 aria-hidden="true"></span>
+            </div> -->
+
+                <div class="card-body"
+                    style="box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px, rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;">
+                   
+              
+                      <a href="/subscription/manage_credit_card/"  >
+
+                        <div class="text-center">
+                            <i class="fa-sharp fa-solid fa-pen-to-square" style="font-size: 30px; color: gray;"></i>
+                            <br>
+                            <span class="text-gery  ">Manage Credit Cards</span>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="col-xl-3">
+            <div class="card">
+                <!-- <div class="status_spinner">
+             <span class="spinner-border spinner-border-sm " role="status"
+                                                 aria-hidden="true"></span>
+            </div> -->
+
+                <div class="card-body"
+                    style="box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px, rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;">
+                    
+                    <a href="/subscription/membership/"  >
+                        <div class="text-center">
+                            <i class="fa-solid  fa-id-card" style="font-size: 30px; color: gray;"></i> <br>
+                            <span class="text-gery  ">Membership</span>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- table code start  -->
+   
+</div>
+
+{% endblock %}
+
+{% block extrascript %}
+
+<script src="https://cdn.rawgit.com/julmot/mark.js/master/dist/jquery.mark.min.js" ></script>
+<!-- <script src="https://js.stripe.com/v3/"></script>
+<script>
+    var stripe = Stripe('pk_test_6pRNASCoBOKtIshFeQd4XMUh');
+var elements = stripe.elements();
+
+var elementStyles = {
+    base: {
+      fontFamily: 'sans-serif',
+      lineHeight: '36px',
+      fontSize: '14px',
+      '::placeholder': {
+        color: '#aaa',
+      },
+      ':-webkit-autofill': {
+        color: '#e39f48',
+      },
+    },
+    invalid: {
+      color: 'red'
+    },
+  };
+
+
+
+var cardNumber = elements.create('cardNumber', {
+  style: elementStyles
+});
+cardNumber.mount('#card-number');
+
+var cardExpiry = elements.create('cardExpiry', {
+  style: elementStyles
+});
+cardExpiry.mount('#card-expiry');
+
+var cardCvc = elements.create('cardCvc', {
+  style: elementStyles
+});
+cardCvc.mount('#card-cvc');
+
+
+//submitting the form
+
+var form = document.getElementById('payment-form');
+form.addEventListener('submit', function(e) {
+    e.preventDefault();
+    createToken();
+});
+
+
+//create token
+
+function createToken() {
+
+    // Gather additional customer data we may have collected in our form.
+    var name =      $('#card-name');
+    var address1 =  $('#card-address');
+    var city =      $('#card-city');
+    var state =     $('#card-city');
+    var zip =       $('#card-zip');
+  
+    var additionalData = {
+      name: name ? name.value : undefined,
+      address_line1: address1 ? address1.value : undefined,
+      address_city: city ? city.value : undefined,
+      address_state: state ? state.value : undefined,
+      address_zip: zip ? zip.value : undefined,
+    };
+
+    // Important: Although we're submitting several fields, use cardNumber here instead of 'elements'.
+    stripe.createToken(cardNumber, additionalData).then(function(result) {
+
+      // Stop loading!
+      $('body').removeClass('submitting');
+
+      if (result.error) {
+          // Inform the user if there was an error
+      } else {
+          // Send the token to your server
+          // yourTokenHandler(result.token);
+      }
+      
+    });
+  
+ 
+};
+
+</script> -->
+{% endblock %}

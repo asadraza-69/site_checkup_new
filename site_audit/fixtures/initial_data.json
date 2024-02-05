@@ -1,0 +1,114 @@
+[
+{
+    "model": "site_audit.objectivetype",
+    "pk": 1,
+    "fields": {
+        "name": "Pro Growth"
+    }
+},
+{
+    "model": "site_audit.objectivetype",
+    "pk": 2,
+    "fields": {
+        "name": "Social Media"
+    }
+},
+{
+    "model": "site_audit.objectivetype",
+    "pk": 3,
+    "fields": {
+        "name": "Traffic"
+    }
+},
+{
+    "model": "site_audit.objective",
+    "pk": 1,
+    "fields": {
+        "i_objective_type": 1,
+        "objective_name": "organic_traffic",
+        "objective_desc": "Get more organic traffic by focusing on your search terms that rank 4-15 and getting them to a top 3 search position.",
+        "objective_sub_desc": "You currently have several terms that are ranking organically on search engines but are not in a top 3 position. As you can see below, the amount of traffic you get from an organic ranking drops considerably as you move down below position number",
+        "level": "Intermediate",
+        "duration": "1week",
+        "created_on": "2022-08-01T14:09:32.459Z"
+    }
+},
+{
+    "model": "site_audit.objective",
+    "pk": 2,
+    "fields": {
+        "i_objective_type": 1,
+        "objective_name": "moz_domain_authority",
+        "objective_desc": "Understand and increase your Moz Domain Authority. It is currently  {{ domainAuthority }} out of 100.",
+        "objective_sub_desc": "What is Moz Domain Authority? Your Moz Domain Authority (DA) is a measure of your website’s power. Domain Authority is calculated by evaluating linking root domains, number of total links, MozRank, MozTrust, etc. — into a single DA score.",
+        "level": "Intermediate",
+        "duration": "2days",
+        "created_on": "2022-08-01T14:10:06.455Z"
+    }
+},
+{
+    "model": "site_audit.objective",
+    "pk": 3,
+    "fields": {
+        "i_objective_type": 1,
+        "objective_name": "backlinks",
+        "objective_desc": "Make sure your backlinks are linking to the correct pages.",
+        "objective_sub_desc": " It’s great that you have websites linking back to your site! That said, we’ve detected 10 links from other websites that are not linking to existing pages on your website anymore. Website pages come and go, so when you are deleting a page make",
+        "level": "Intermediate",
+        "duration": "2days",
+        "created_on": "2022-08-01T14:10:21.728Z"
+    }
+},
+{
+    "model": "site_audit.objective",
+    "pk": 4,
+    "fields": {
+        "i_objective_type": 1,
+        "objective_name": "google_business",
+        "objective_desc": "Increase your local traffic by optimizing your Google Business Profile account or setting one up if you don’t have one.",
+        "objective_sub_desc": "If you already have a Google Business Profile account simply sync it to your StatCounter analytics and we'll start providing you with additional insights into how to grow your local traffic, improve map listings, and even get better reviews",
+        "level": "Intermediate",
+        "duration": "ongoing",
+        "created_on": "2022-08-01T14:10:57.702Z"
+    }
+},
+{
+    "model": "site_audit.objective",
+    "pk": 5,
+    "fields": {
+        "i_objective_type": 2,
+        "objective_name": "facebook_analytics",
+        "objective_desc": "Sync your Facebook analytics with your Answer Engine account. It only takes a minute. Here’s why to do it.",
+        "objective_sub_desc": "We know your business is more than just your website. We can very soon we will be able to help you eliminate blind spots in your Facebook marketing and grow your social footprint.Once you’ve activated Facebook in Answer Engine and we’ve",
+        "level": "Intermediate",
+        "duration": "ongoing",
+        "created_on": "2022-08-01T14:11:20.783Z"
+    }
+},
+{
+    "model": "site_audit.objective",
+    "pk": 6,
+    "fields": {
+        "i_objective_type": 3,
+        "objective_name": "competitors",
+        "objective_desc": "Start monitoring up to 6 of your competitors’ rankings and traffic. We’ll also track and show you any changes they made that increased their Google rankings.",
+        "objective_sub_desc": "Our brand-new Rank Guard™ is included free with your account. You can use it right now to check your competitors’ rankings and to get new keyword ideas. However, it takes a full 30 days of tracking and monitoring for all functionality to appear",
+        "level": "Intermediate",
+        "duration": "2days",
+        "created_on": "2022-08-01T14:11:36.556Z"
+    }
+},
+{
+    "model": "site_audit.objective",
+    "pk": 8,
+    "fields": {
+        "i_objective_type": 1,
+        "objective_name": "website",
+        "objective_desc": "Your website could be much faster. Let's speed it up.",
+        "objective_sub_desc": "Your website load speed affects your user experience which also affects your search engine rankings. The better speed and user experience you have, the better ranking you can achieve. We relate speed to professionalism, reliability,",
+        "level": "Intermediate",
+        "duration": "2wks",
+        "created_on": "2022-08-01T14:12:20.239Z"
+    }
+}
+]

@@ -1,0 +1,702 @@
+{% extends "base2.html" %}
+{% load static %}
+
+{% block extrahead %}
+<link rel="stylesheet" href="https://cdn.lineicons.com/3.0/lineicons.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
+<style>
+  strong.search_headings {
+    display: block;
+    font-size: smaller;
+    margin: 4px 15px -9px;
+  }
+
+  .link_container {
+    padding-top: 5px;
+  }
+
+  #list-group-onee {
+    max-height: 270px;
+    overflow-y: auto;
+    overflow-x: hidden;
+  }
+
+  #list-group-onee a,
+  #list-group-twoo a,
+  #list-group-depreciated a {
+    font-size: 12px;
+  }
+
+  #list-group-twoo {
+    max-height: 270px;
+    overflow-y: auto;
+    overflow-x: hidden;
+
+  }
+
+  #list-group-depreciated {
+    max-height: 250px;
+    overflow-y: auto;
+    overflow-x: hidden;
+  }
+
+  #list-group-onee {
+    flex: 1;
+    /* box-shadow: 0px 0px 21px 0px rgb(0 0 0 / 19%); */
+  }
+
+  #list-group-twoo {
+    flex: 1;
+    /* box-shadow: 0px 0px 21px 0px rgb(0 0 0 / 19%); */
+  }
+
+  .checkSingle {
+    margin-left: 20px;
+  }
+
+  #checkedAll {
+    margin-left: 20px;
+  }
+
+  .sweap_left {
+    margin-right: -70px;
+    cursor: pointer;
+    display: inline-block;
+    border-radius: 50%;
+    transition: background-color 0.3s ease;
+
+  }
+  .sweap_left2 {
+    margin-right: -70px;
+    cursor: pointer;
+    display: inline-block;
+    border-radius: 50%;
+    transition: background-color 0.3s ease;
+    background-color: #f3f5f7;
+
+  }
+
+  .sweap_right {
+    margin-bottom: 3px;
+    margin-left: -41px;
+    cursor: pointer;
+    display: inline-block;
+    border-radius: 50%;
+    transition: background-color 0.3s ease;
+  }
+  .sweap_right2 {
+    margin-bottom: 3px;
+    margin-left: -41px;
+    cursor: pointer;
+    display: inline-block;
+    background-color: #f3f5f7;
+    border-radius: 50%;
+    transition: background-color 0.3s ease;
+  }
+
+  .sweap_right:hover,
+  .sweap_left:hover {
+    background-color: #707070 !important;
+    color: #fff;
+    padding: 1px;
+  }
+
+
+
+  .middle_arrows {
+    justify-content: center;
+    align-items: center;
+    height: 60vh;
+
+  }
+  .middle_arrows_disable {
+    justify-content: center;
+    align-items: center;
+    height: 60vh;
+
+  }
+
+  .grey-box .list-group-item {
+    background-color: transparent !important;
+  }
+
+  .list-group-item {
+    border: none !important;
+  }
+
+  .link_loaderr {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* height: 100vh; */
+  }
+
+  #list-group-depreciated .list-group-item {
+    background-color: transparent;
+  }
+
+  .grey-box {
+    height: 430px !important;
+    box-shadow: none !important;
+  }
+
+  .submit_btn {
+    margin-right: 37px;
+    margin-bottom: 10px;
+  }
+  .middle_arrows{
+    display: flex;
+  }
+  .middle_arrows_disable{
+    display: flex;
+  }
+</style>
+{% endblock %}
+
+{% block content %}
+
+<div class="container">
+  <div class="row ">
+    <div class="col-xl-9">
+      <div class="center-section">
+        <h4 class="title mb-4 fw-400 pb-2"> Selected Links:</h4>
+      </div>
+    </div>
+  </div>
+  <div class="row justify-content-center">
+    <div class="col-md-5">
+      <div class="grey-box  mb-3 px-3 pt-3">
+        <div class="d-flex justify-content-between counters align-items-center">
+          <h5>Total Links</h5>
+        
+          <div>
+            <h6>
+              Total links : <span class="total_Pages badge badge-secondary e">0</span>
+            </h6>
+            <h6>
+              Allowed links : <span class="allowed_Pagess badge badge-secondary ">0</span>
+            </h6>
+          </div>
+        </div>
+        <div>
+          <input placeholder='Search..' class='form-control me-2 mb-3' type="text" name="searchLeftt"
+            id="searchLeftt" />
+        </div>
+         <p class="font-10 text-red m-0 upgrade_plan_notice"  style="display: none;" >
+              You've reached your limits for the free plan. You can see more by
+              upgrading to the higher plan.
+            </p>
+        <input type="checkbox" name="checkedAll_leftt" id="checkedAll_leftt" /> <span id="SelectAll_left">Select
+          All</span>
+        <div class="link_loaderr" style='height: 40vh;'>
+          <div class="spinner-border text-dark" role="status">
+            <span class="visually-hidden">Loading...</span>
+          </div>
+        </div>
+        <div class="list-group mt-2 " id="list-group-onee">
+        </div>
+      </div>
+    </div>
+    <div class="col-md-1  middle_arrows" style="display:none">
+      <div>
+        <i class="lni lni-chevron-right-circle sweap_right" data-bs-toggle="tooltip" data-bs-placement="top"
+          title="Swap Right"> </i>
+        <br>
+        <i class="lni lni-chevron-left-circle sweap_left" data-bs-toggle="tooltip" data-bs-placement="top"
+          title="Swap Left"></i>
+      </div>
+      
+    </div>
+
+    <div class="col-md-1  middle_arrows_disable " >
+      <div>
+        <i class="lni lni-chevron-right-circle sweap_right2 " data-bs-toggle="tooltip" data-bs-placement="top"
+          title="You've reached your limits for the free plan. You can see more by upgrading to the higher plan."> </i>
+        <br>
+        <i class="lni lni-chevron-left-circle  sweap_left2 " data-bs-toggle="tooltip" data-bs-placement="top"
+        title="You've reached your limits for the free plan. You can see more by upgrading to the higher plan."></i>
+      </div>
+      
+    </div>
+    <div class="col-md-5">
+      <div class="grey-box  mb-3 px-3 pt-3">
+        <div class="d-flex justify-content-between counters align-items-center">
+          <h5>Selected Links To Crawl</h5>
+          <div>
+            <h6>
+              Selected links : <span class="selected_Pagess badge badge-secondary ">0</span>
+            </h6>
+          </div>
+        </div>
+        <div>
+          <input placeholder='Search..' class='form-control me-2 mb-3' type="text" name="searchRightt"
+            id="searchRightt" />
+        </div>
+        <input type="checkbox" name="checkedAll_rightt" id="checkedAll_rightt" /> <span id="SelectAll_right">Select
+          All</span>
+        <div class="link_loaderr" style='height: 40vh;'>
+          <div class="spinner-border text-dark" role="status">
+            <span class="visually-hidden">Loading...</span>
+          </div>
+        </div>
+        <div class="list-group mt-2 " id="list-group-twoo">
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="container">
+    <div class="d-flex justify-content-end submit_btn">
+      <button class="btn btn-primary mt-2" id="submit_linkss"> <span class="spinner-border spinner-border-sm d-none"
+          role="status" id="submit_loader" aria-hidden="true"></span> Submit</button>
+    </div>
+  </div>
+  <div class="row justify-content-center" id="depreciated_links" style="display: none;">
+    <div class="col-md-11">
+      <div class="gray-bg   mb-3 pb-3 px-3 pt-3">
+        <div class="d-flex justify-content-between counters align-items-center">
+          <h5>Depreciated Links </h5>
+          <div>
+            <h6>
+              Depreciated pages : <span class="depreciated_Pages badge badge-secondary e">0</span>
+            </h6>
+          </div>
+        </div>
+        <div>
+          <input placeholder='Search..' class='form-control me-2 mb-3' type="text" name="searchDepreciated"
+            id="searchDepreciated" />
+        </div>
+        <!-- <input type="checkbox" name="checkedAll_leftt" id="checkedAll_leftt" /> <span id="SelectAll_Depreciated">Select All</span> -->
+        <div class="link_loaderr">
+          <div class="spinner-border text-dark" role="status">
+            <span class="visually-hidden">Loading...</span>
+          </div>
+        </div>
+        <div class="list-group mt-2 " id="list-group-depreciated">
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+
+</div>
+
+{% endblock %}
+{% block extrascript %}
+<script>
+  $(document).ready(function () {
+    var allowed_links 
+    var id = window.location.search;
+    id = id.split('?project_id=')
+    $.ajax({
+      method: 'GET',
+      url: '/site_audit/edit_webpages/?project_id=' + id[1],
+      success: function (res) {
+        console.log("jhellll", res)
+        if (res.status) {
+        
+          allowed_links = res.allowed_pages
+         
+          $(".link_loaderr").hide()
+          let total_pages = res.total_pages;
+          let selected_pages = res.selected_links;
+          const firstArrayUrls = selected_pages.map(url => url.toLowerCase());
+          const totalLinksArray = total_pages.filter(obj => {
+            const objUrl = obj.url.toLowerCase();
+            return !firstArrayUrls.includes(objUrl);
+          });
+          let selectedLinksArray = total_pages.filter(obj => {
+            const objUrl = obj.url.toLowerCase();
+            return firstArrayUrls.includes(objUrl);
+          });
+
+          const remainingSelectedLinksArray = selected_pages.filter(url => !selectedLinksArray.some(obj => obj.url === url));
+
+          // console.log("total links", totalLinksArray, selectedLinksArray)
+          // console.log("kkk", resultArray)
+          // initially appended in boxes code 
+          $.each(totalLinksArray, function (i, val) {
+            // console.log(val,'val')
+            //  $('#list-group-onee').append(`<li class="list-group-item"><strong>${val.label}</strong>${val.url}</li>`)
+            $('#list-group-onee').append(`<div><div class='list-group-item2 d-flex border-bottom'>
+                                    <input type="checkbox"   name="checkAll" heading="${val.label}" url="${val.url}" 
+                                          class="checkSingle_left ml-5"   />
+                                    <div class="link_container">
+                                      <strong class="search_headings"> ${val.label}</strong>
+                                      <a href="#" class="list-group-item">${val.url}</a>
+                                    </div>
+                                  </div></div>`);
+          });
+          $(".total_Pages").html($("#list-group-onee input[type='checkbox']").length)
+
+          $('#list-group-twoo').empty()
+          $.each(selectedLinksArray, function (i, val) {
+            $('#list-group-twoo').append(`<div > <div class='list-group-item3 d-flex border-bottom'> 
+            <input type="checkbox"  name="checkAll" heading="${val.label}" url="${val.url}" class="checkSingle_right ml-5"   />
+            <div class="link_container">
+              <strong class="search_headings"> ${val.label}</strong>
+              <a href="#" class="list-group-item">${val.url}</a></div></div></div>`)
+          })
+          $(".selected_Pagess").html($("#list-group-twoo input[type='checkbox']").length)
+
+
+          $('#list-group-depreciated').empty()
+          if (remainingSelectedLinksArray.length > 0) {
+            $.each(remainingSelectedLinksArray, function (i, val) {
+              $('#list-group-depreciated').append(`<div > <div class='list-group-item4 d-flex border-bottom'> 
+            <div class="link_container">
+              <a href="#" class="list-group-item">${val}</a></div></div></div>`)
+            })
+            $(".depreciated_Pages").html($("#list-group-depreciated .list-group-item ").length)
+            $("#depreciated_links").show()
+          }
+
+          $(".allowed_Pagess").html(allowed_links)
+          // res.allowed_pages = 9
+          // selectedLinksArray.length = 9
+          if( allowed_links <= selectedLinksArray.length ){
+            // console.log("ell")
+            $("#checkedAll_leftt").prop("disabled", true);
+            $(`#list-group-onee input[type='checkbox']`).each(function () {
+              $(this).prop("disabled", true);
+            })
+          }
+          // console.log("ressss", res.consumed_links , allowed_links)
+          if((res.consumed_links >= allowed_links) ){
+            // console.log("helloooo")
+            $(".middle_arrows").hide()
+            $(".middle_arrows_disable").show()
+            $(`#list-group-twoo input[type='checkbox']`).each(function () {
+              $(this).prop("disabled", true);
+            })
+            $("#checkedAll_rightt").prop("disabled", true);
+          }
+          else{
+            $(".middle_arrows").show()
+            $(".middle_arrows_disable").hide()
+            // console.log("helloooo 2")
+            $(`#list-group-twoo input[type='checkbox']`).each(function () {
+              $(this).prop("disabled", false);
+            })
+            $("#checkedAll_rightt").prop("disabled", false);
+          }
+        }
+      }
+    })
+
+//  $(document).on("change", ".list-group-item2 input[type='checkbox']", function() {
+//   var count = $("#list-group-onee input[type='checkbox']:checked").length;
+//   $("#list-group-onee input[type='checkbox']").each(function() {
+//     if (this.checked) {
+//       if (++count >= allowed_links) {
+//         // Disable unchecked checkboxes
+//         $("#checkedAll_leftt").prop("disabled", true);
+//         $("#list-group-onee input[type='checkbox']:not(:checked)").prop("disabled", true);
+//       }
+//     } else {
+//       // Enable all checkboxes
+//       $("#checkedAll_leftt").prop("disabled", false);
+//       $("#list-group-onee input[type='checkbox']").prop("disabled", false);
+//     }
+//   });
+// });
+
+
+var theCheckboxes = $("#list-group-onee input[type='checkbox']")
+      var theCheckboxes_right = $("#list-group-twoo input[type='checkbox']")
+      var counter = 0
+      $(document).on("change", theCheckboxes, function () {
+        var count
+        counter = $("#list-group-twoo input[type='checkbox']").length;
+        if (counter > 0) {
+          count = counter;
+        } else {
+          count = 0
+        }
+        $("#list-group-onee input[type='checkbox']:checked").each(function () {
+          count++;
+        })
+        if (count >= allowed_links) {
+          $("#list-group-onee input[type='checkbox']:not(:checked)").each(function () {
+            $(this).prop('disabled', true)
+          })
+        } else {
+          $("#list-group-onee input[type='checkbox']:not(:checked)").each(function () {
+            $(this).prop('disabled', false)
+          })
+        }
+      }
+      );
+
+
+
+
+
+ 
+    // swap right button code start 
+    $('.sweap_right').on('click', function () {
+
+      // Update the number of allowed pages when a checkbox is added or removed
+      $("#list-group-onee").on("DOMNodeInserted DOMNodeRemoved", function () {
+        setTimeout(() => {
+          $(".total_Pages").html($("#list-group-onee input[type='checkbox']").length);
+          // Update the number of selected pages when a checkbox is added or removed
+          $(".selected_Pagess").html($("#list-group-twoo input[type='checkbox']").length);
+          if($("#list-group-twoo input[type='checkbox']").length >= allowed_links)
+          {
+            $(".upgrade_plan_notice").show()
+            console.log("hh", $("#list-group-twoo input[type='checkbox']").length, allowed_links)
+          }else {
+            $(".upgrade_plan_notice").hide()
+          }
+        }, 100);
+      });
+      if ($('#checkedAll_leftt').is(':checked')) {
+
+        $('#checkedAll_leftt').prop('checked', false);
+        $('#SelectAll_left').text('Select All')
+      }
+
+      $('#list-group-onee .checkSingle_left:checked').each(function () {
+        // arr.push($(this).attr('url'))
+        $('#list-group-twoo').append(`<div > <div class='list-group-item3 d-flex border-bottom'> <input  type="checkbox" heading="${$(this).attr('heading')}"  name="checkAll" url="${$(this).attr('url')}" class="checkSingle_right ml-5" /><div class="link_container"> <strong class="search_headings"> ${$(this).attr('heading')}</strong><a href="#" class="list-group-item">${$(this).attr('url')}</a></div></div></div>`)
+        $('.checkSingle_left:checked').parent().remove();
+      });
+      var list_length_left = $('.checkSingle_left').length;
+      if (list_length_left <= 0) {
+        $('#checkedAll_leftt').prop('disabled', true)
+      } else {
+        $('#checkedAll_leftt').prop('disabled', false)
+      }
+      var list_length_right = $('.checkSingle_right').length;
+      if (list_length_right <= 0) {
+        $('#checkedAll_rightt').prop('disabled', true)
+      } else {
+        $('#checkedAll_rightt').prop('disabled', false)
+      }
+    });
+    // swap right button code end
+
+    // swap left button code start 
+    $('.sweap_left').on('click', function () {
+      // Update the number of allowed pages when a checkbox is added or removed
+      $("#list-group-twoo").on("DOMNodeInserted DOMNodeRemoved", function () {
+        setTimeout(() => {
+          $(".total_Pages").html($("#list-group-onee input[type='checkbox']").length);
+          // Update the number of selected pages when a checkbox is added or removed
+          $(".selected_Pagess").html($("#list-group-twoo input[type='checkbox']").length);
+
+          if( allowed_links <= $("#list-group-twoo input[type='checkbox']").length ){
+            // console.log("ell")
+            $("#checkedAll_leftt").prop("disabled", true);
+            $(`#list-group-onee input[type='checkbox']`).each(function () {
+              $(this).prop("disabled", true);
+            })
+          }else{
+            $("#checkedAll_leftt").prop("disabled", false);
+            $(`#list-group-onee input[type='checkbox']`).each(function () {
+              $(this).prop("disabled", false);
+            })
+          }
+        }, 100);
+      });
+      var checked_items = 0
+      var selected_counts = pages_allowed - $("#list-group-twoo input[type='checkbox']").length;
+      if ($('#checkedAll_rightt').is(':checked')) {
+
+        $('#checkedAll_rightt').prop('checked', false);
+        $('#SelectAll_right').text('Select All')
+      }
+      $('#list-group-twoo .checkSingle_right:checked').each(function () {
+        checked_items++
+        $('#list-group-onee').prepend(`<div ><div class='list-group-item2 d-flex'><input  type="checkbox" name="checkAll" heading="${$(this).attr('heading')}" url="${$(this).attr('url')}" class="checkSingle_left ml-5" /> <div class="link_container"> <strong class="search_headings"> ${$(this).attr('heading')}</strong><a href="#" class="list-group-item">${$(this).attr('url')}</a></div></div></div>`)
+        $('.checkSingle_right:checked').parent().remove();
+      });
+      // $(".selected_Pages").html(pages_allowed - (selected_counts + checked_items))
+      $("#list-group-onee input[type='checkbox']:not(:checked)").each(function () {
+        // $(this).prop('disabled', false)
+      })
+      var list_length = $('.checkSingle_left').length;
+      if (list_length <= 0) {
+        $('#checkedAll_leftt').prop('disabled', true)
+      } else {
+        $('#checkedAll_leftt').prop('disabled', false)
+      }
+      var list_length_right = $('.checkSingle_right').length;
+      if (list_length_right <= 0) {
+        $('#checkedAll_rightt').prop('disabled', true)
+      } else {
+        $('#checkedAll_rightt').prop('disabled', false)
+      }
+    })
+    // swap left button code end
+
+    // submit button js start 
+    $('#submit_linkss').on('click', function () {
+      // console.log("HHHh")
+      // $("#submit_links").prop("disabled", true)
+      $('#submit_loader').removeClass('d-none')
+      var links_array = [];
+      $('#list-group-twoo .list-group-item').each(function () {
+
+        links_array.push($(this).text())
+      });
+      
+    
+    
+      
+      $.ajax({
+        method: 'POST',
+        url: '/site_audit/add_multiple_website/',
+        data: { website_url: JSON.stringify(links_array),project_id:id[1] },
+        success: function (res) {
+
+          window.location.href = "/site_audit/dashboard/"
+        }
+      })
+      // add projects from links end
+    })
+    // submit button js end
+
+    // Left box searching functionality start 
+    $('#searchLeftt').keyup(function () {
+      var searchVal = $(this).val().toLowerCase();
+      var keywords = searchVal.split(" ");
+      $('.list-group-item2').each(function () {
+        var text = $(this).find('.list-group-item').text().toLowerCase();
+        var matchFound = true;
+        for (var i = 0; i < keywords.length; i++) {
+          if (text.indexOf(keywords[i]) == -1) {
+            matchFound = false;
+            break;
+          }
+        }
+        if (matchFound) {
+          $(this).parent().show();
+        } else {
+          $(this).parent().hide();
+        }
+      });
+    });
+    // Left box searching functionality end
+
+    // right box searching functionality start 
+    $('#searchRightt').keyup(function () {
+      var searchVal2 = $(this).val().toLowerCase();
+      var keywordss = searchVal2.split(" ");
+      $('.list-group-item3').each(function () {
+        var textt = $(this).find('.list-group-item').text().toLowerCase();
+        var matchFoundd = true;
+        for (var i = 0; i < keywordss.length; i++) {
+          if (textt.indexOf(keywordss[i]) == -1) {
+            matchFoundd = false;
+            break;
+          }
+        }
+        if (matchFoundd) {
+          $(this).parent().show();
+        } else {
+          $(this).parent().hide();
+        }
+      });
+    });
+    // right box searching functionality end
+
+    // Depreciated box searching functionality start 
+    $('#searchDepreciated').keyup(function () {
+      var searchVal3 = $(this).val().toLowerCase();
+      var keywordsss = searchVal3.split(" ");
+      $('.list-group-item4').each(function () {
+        var textt = $(this).find('.list-group-item').text().toLowerCase();
+        var matchFounddd = true;
+        for (var i = 0; i < keywordsss.length; i++) {
+          if (textt.indexOf(keywordsss[i]) == -1) {
+            matchFounddd = false;
+            break;
+          }
+        }
+        if (matchFounddd) {
+          $(this).parent().show();
+        } else {
+          $(this).parent().hide();
+        }
+      });
+    });
+    // Depreciated box searching functionality end   
+
+
+  // select All functionality start 
+  // links modal js
+    $(document).on("change", "#checkedAll_leftt", function () {
+      if (this.checked) {
+        var selectAllLeft = allowed_links - $("#list-group-twoo input[type='checkbox']").length - $("#list-group-onee input[type='checkbox']:checked").length
+       if(selectAllLeft > 0 ) {
+        $(".checkSingle_left:not(:checked)").each(function (i,v) {
+          if (i< selectAllLeft){
+            $(this).prop("checked", true);
+          $('#SelectAll_left').text('Deselect All')
+          }else{
+            $(".checkSingle_left:not(:checked)").each(function () {
+              $(this).prop("disabled", true);
+              $(this).prop("checked", false);
+          $('#SelectAll_left').text('Select All')
+        })
+          }
+        })
+       }
+      } else {
+        $(".checkSingle_left").each(function () {
+          this.checked = false;
+          $(this).prop("disabled", false);
+          $('#SelectAll_left').text('Select All')
+        })
+      }
+    });
+
+    $(".checkSingle_left").click(function () {
+      if ($(this).is(":checked")) {
+        var isAllChecked = 0;
+        $(".checkSingle_left").each(function () {
+          if (!this.checked)
+            isAllChecked = 1;
+        })
+        if (isAllChecked == 0) { $("#checkedAll_leftt").prop("checked", true); }
+      } else {
+        $("#checkedAll_leftt").prop("checked", false);
+      }
+    });
+    //   right
+    $("#checkedAll_rightt").change(function () {
+      if (this.checked) {
+        $(".checkSingle_right").each(function () {
+          this.checked = true;
+          $('#SelectAll_right').text('Deselect All')
+        })
+      } else {
+        $(".checkSingle_right").each(function () {
+          this.checked = false;
+          $('#SelectAll_right').text('Select All')
+
+        })
+      }
+    });
+
+    $(".checkSingle_right").click(function () {
+      if ($(this).is(":checked")) {
+        var isAllChecked = 0;
+        $(".checkSingle_right").each(function () {
+          if (!this.checked)
+            isAllChecked = 1;
+        })
+        if (isAllChecked == 0) { $("#checkedAll_rightt").prop("checked", true); }
+      } else {
+        $("#checkedAll_rightt").prop("checked", false);
+      }
+    });
+  });
+
+</script>
+
+{% endblock %}

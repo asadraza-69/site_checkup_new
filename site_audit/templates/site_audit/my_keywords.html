@@ -1,0 +1,1204 @@
+{% extends "base2.html" %}
+{% load static %}
+{% block extrahead %}
+
+
+<style>
+ 
+.input-group-append button {
+    border-bottom-left-radius: 0;
+    border-top-left-radius: 0;
+}
+
+.dataTables_length, button.btn.modelFormTrigger,.dataTables_info {
+    display: none;
+}
+.dataTables_wrapper .dataTables_paginate{
+    text-align: center;
+    float: none;
+}
+
+.limit-alert-bar {
+  display: flex;
+  align-items: center;
+  background-color: #f3f5f7;
+  border-radius: 10px;
+  padding: 15px 20px;
+ 
+}
+.limit-alert-bar {
+  flex-wrap: wrap;
+  text-align: center;
+  gap: 10px;
+}
+
+
+.upgrade-btn {
+margin-left: auto;
+background-color: #167ee6;
+color: #fff;
+border-radius: 10px;
+text-transform: uppercase;
+padding: 10px;
+font-weight: 500;
+font-size: 15px;
+transition: all 0.3s ease-in-out;
+border: 1px solid transparent;
+}
+
+.upgrade-btn:hover {
+background-color: transparent;
+color: #167ee6;
+border-color: #167ee6;
+}
+
+.upgrade-btn>img {
+margin-right: 5px;
+}
+
+.upgrade-btn>img {
+max-width: 18%;
+}
+
+a.paginate_button.disabled {
+    cursor: not-allowed;
+}
+
+#keywordsTable td,
+#keywordsTable th {
+    border: 0;
+    position: relative;
+  }
+
+  #keywordsTable th:last-child {
+    border-top-right-radius: 20px;
+  }
+  
+  #keywordsTable th:first-child {
+    border-top-left-radius: 20px;
+  }
+  
+  .table-buttons {
+  justify-content: flex-end
+}
+  @media only screen and (max-width: 991px) {
+    .col-lg-6 h2 {
+      text-align:center
+    } 
+
+    .table-buttons {
+      justify-content: center;
+      padding-bottom: 5px
+    }
+  }
+
+  @media (max-width: 991.5px){
+
+    main {
+        padding-left: 0;
+    }
+
+    .app-banners-container {
+      display: grid;
+      grid-gap: 8px;
+      grid-template-columns: repeat(1,1fr);
+    }
+    }
+
+    @media (max-width: 1200px) {
+      .illustration {
+        left:10px
+      }
+    }
+
+    
+</style>
+{% endblock %}
+{% block content %}
+
+
+
+  
+  <!-- Modal -->
+
+
+  <div class="modal fade" id="startTrackingModal" tabindex="-1" aria-labelledby="chooseDataLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+       
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body text-center" style="padding:20px 40px 40px 40px;">
+            <img decoding="async" alt="Banner illustration" class="ModalBanner" src="../../static/site_audit/assets/keyword-tracking-statistics-min.svg">
+            <h4 class="modal-title" id="chooseDataLabel">Ready to start tracking the keyword <span class="trackKeywordText"></span> for 
+              <!-- <span class="selectedWebsite"> </span> -->
+          </h4>
+            <p>Once you start tracking a keyword we will show you how your rankings change over time in Google. We will also start sending you emails with updates related to this keyword and add new alerts/objectives for this specific keyword. Free members can track 5 keywords while Pro members can track 50 unique keywords.</p>
+
+
+
+              <div class="modal-footer" style="margin: 10px auto;display: grid;grid-gap: 9px;margin-top: 20px;width: 100%;max-width: 430px;grid-template-columns: 1fr 1fr;padding: 0;">
+              
+                <a href="/site_audit/keyword_introduction/"  class="btn btn-outline-primary" type="button">How do i use this?</a>
+               
+                  <button  class="startTrackingBtn btn btn-primary" type="button">Start Tracking </button>
+                 
+                  
+               
+              </div>
+        </div>
+       
+      </div>
+    </div>
+  </div>
+
+  <div class="modal fade" id="startTrackingConfirmedModal" tabindex="-1" aria-labelledby="chooseDataLabel" aria-hidden="true">
+    <div class="modal-dialog modal-md modal-dialog-centered" style="max-width:622px">
+      <div class="modal-content">
+        <div class="modal-header">
+       
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body text-center" style="padding:20px 40px 40px 40px;">
+            <img decoding="async" alt="Banner illustration" class="ModalBanner" src="../../static/site_audit/assets/solid_II.svg">
+            <h4 class="modal-title" id="chooseDataLabel">Nice! We've successfully started tracking the keyword <span class="trackKeywordText"></span></h4>
+           
+
+              <div class="modal-footer" style="margin: 10px auto;margin-top: 20px;width: 100%;max-width: 430px;padding: 0;">
+              
+             
+               
+                  <button class="backToKeywords btn btn-primary" type="button">Back to Keywords </button>
+                 
+                  
+               
+              </div>
+        </div>
+       
+      </div>
+    </div>
+  </div>
+
+
+
+
+  <div class="modal fade" id="stopTrackingConfirmedModal" tabindex="-1" aria-labelledby="chooseDataLabel" aria-hidden="true">
+    <div class="modal-dialog modal-md modal-dialog-centered" style="max-width:622px">
+      <div class="modal-content">
+        <div class="modal-header">
+       
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body text-center" style="padding:20px 40px 40px 40px;">
+            <img decoding="async" alt="Banner illustration" class="ModalBanner" src="../../static/site_audit/assets/under_construction_solid.svg">
+            <h4 class="modal-title" id="chooseDataLabel">Are you sure you want to remove the keyword <span class="trackKeywordText"></span> from Keyword Tracking? </h4>
+           
+
+              <div class="modal-footer" style="margin: 10px auto;display: grid;grid-gap: 9px;margin-top: 20px;width: 100%;max-width: 430px;grid-template-columns: 1fr 1fr;padding: 0;">
+              
+             
+               
+                  <button data-bs-dismiss="modal" class="btn btn-outline-primary" type="button">No </button>
+                 
+                  <button  class="stopTrackingBtn btn btn-primary" type="button">Yes </button>
+               
+              </div>
+        </div>
+       
+      </div>
+    </div>
+  </div>
+
+
+
+
+  <div class="modal fade" id="limitTrackingModal" tabindex="-1" aria-labelledby="chooseDataLabel" aria-hidden="true">
+    <div class="modal-dialog modal-md modal-dialog-centered" style="max-width:622px">
+      <div class="modal-content">
+        <div class="modal-header">
+       
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body text-center" style="padding:20px 40px 40px 40px;">
+            <img decoding="async" alt="Banner illustration" class="ModalBanner" src="../../static/site_audit/assets/notifications_solid_III.svg">
+            <h2 class="title my-3" id="limitTrackingLabel"></h2>
+           <p id="LimitDetails"></p>
+
+              <div class="modal-footer">
+              
+             
+               
+                  <a href="#" class="btn btn-primary" type="button" style="min-width: 180px;">View Plans </a>
+                 
+                  
+               
+              </div>
+        </div>
+       
+      </div>
+    </div>
+  </div>
+
+
+  <div class="modal fade" id="chooseData" tabindex="-1" aria-labelledby="chooseDataLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+       
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body" style="">
+            <h4 class="modal-title" id="chooseDataLabel">Choose Data</h4>
+
+
+
+            <div class="accordion accordion-flush" id="chooseColumns">
+              <div class="KeywordsColumns">
+                <div class="accordion-item">                
+                
+                      <div class="accordion-header" id="flush-headingNine">
+                        <div class="form-check">
+                            <input data-column="Google Ranking" class="form-check-input" type="checkbox" value="" checked>
+                          
+                          </div>
+                           <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseNine" aria-expanded="false" aria-controls="flush-collapseOne">
+                            Google Ranking
+                    </button>
+                  </div>
+                  <div id="flush-collapseNine" class="accordion-collapse collapse" aria-labelledby="flush-headingNine" data-bs-parent="#chooseColumnsTabs">
+                    <div class="accordion-body">The organic position in Google search for this keyword. A 5 means a website ranks in the fifth spot in Google searches.</div>
+                  </div>
+                </div>
+                <div class="border-bottom"> </div>
+                <div class="accordion-item">
+                 
+                 
+                    <div class="accordion-header" id="flush-headingTen">
+                      <div class="form-check">
+                          <input data-column="Recent Change" class="form-check-input" type="checkbox" value="" checked>
+                        
+                        </div>
+                         <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseTen" aria-expanded="false" aria-controls="flush-collapseTwo">
+                          Recent Change
+                        </button>
+                </div>
+                <div id="flush-collapseTen" class="accordion-collapse collapse" aria-labelledby="flush-headingTen" data-bs-parent="#chooseColumnsTabs">
+                  <div class="accordion-body">The change in ranking since we last checked. An up arrow followed by a number means a website increased a certain number of spots in the rankings. A down arrow means the opposite.</div>
+                </div>
+              </div>
+          
+              <div class="border-bottom"> </div>
+              <div class="accordion-item">
+                 
+                 
+                <div class="accordion-header" id="flush-headingEleven">
+                  <div class="form-check">
+                      <input data-column="Traffic" class="form-check-input" type="checkbox" value="" checked>
+                    
+                    </div>
+                     <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseEleven" aria-expanded="false" aria-controls="flush-collapseTwo">
+                      Traffic
+                    </button>
+            </div>
+            <div id="flush-collapseEleven" class="accordion-collapse collapse" aria-labelledby="flush-headingEleven" data-bs-parent="#chooseColumnsTabs">
+              <div class="accordion-body">Approximate traffic by keyword depending on its volume and position.</div>
+            </div>
+          </div>
+      
+          <div class="border-bottom"> </div>
+
+          <div class="accordion-item">
+                 
+                 
+            <div class="accordion-header" id="flush-headingTwelve">
+              <div class="form-check">
+                  <input data-column="Monthly Volume" class="form-check-input" type="checkbox" value=""  checked>
+                
+                </div>
+                 <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseTwelve" aria-expanded="false" aria-controls="flush-collapseTwo">
+                  Monthly Volume
+                </button>
+        </div>
+        <div id="flush-collapseTwelve" class="accordion-collapse collapse" aria-labelledby="flush-headingTwelve" data-bs-parent="#chooseColumnsTabs">
+          <div class="accordion-body">Our estimate of the number of times people searched for a keyword in Google over the last 30 days.</div>
+        </div>
+      </div>
+
+      <div class="border-bottom"> </div>
+      <div class="accordion-item">
+                 
+                 
+        <div class="accordion-header" id="flush-headingThirteen">
+          <div class="form-check">
+              <input data-column="Ranking Difficulty" class="form-check-input" type="checkbox" value=""  checked>
+            
+            </div>
+             <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseThirteen" aria-expanded="false" aria-controls="flush-collapseTwo">
+              Ranking Difficulty
+            </button>
+    </div>
+    <div id="flush-collapseThirteen" class="accordion-collapse collapse" aria-labelledby="flush-headingThirteen" data-bs-parent="#chooseColumnsTabs">
+      <div class="accordion-body">How hard we think it is to rank in the top 10 for a specific keyword. When selecting keywords to write about (i.e. in articles/blogs) look for high-volume + low-difficulty keywords first!</div>
+    </div>
+  </div>
+
+  <div class="border-bottom"> </div>
+
+  <div class="accordion-item">
+                 
+                 
+    <div class="accordion-header" id="flush-headingFourteen">
+      <div class="form-check">
+          <input data-column="Link" class="form-check-input" type="checkbox" value="">
+        
+        </div>
+         <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseFourteen" aria-expanded="false" aria-controls="flush-collapseTwo">
+          Link
+        </button>
+</div>
+<div id="flush-collapseFourteen" class="accordion-collapse collapse" aria-labelledby="flush-headingFourteen" data-bs-parent="#chooseColumnsTabs">
+  <div class="accordion-body">    
+    A link to the website page that ranks for a keyword. Note: this opens a new window.</div>
+</div>
+</div>
+
+
+<div class="border-bottom"> </div>
+<div class="accordion-item">
+                 
+                 
+  <div class="accordion-header" id="flush-headingFifteen">
+    <div class="form-check">
+        <input data-column="CPC($)" class="form-check-input" type="checkbox" value=""  checked>
+      
+      </div>
+       <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseFifteen" aria-expanded="false" aria-controls="flush-collapseTwo">
+        CPC($)
+      </button>
+</div>
+<div id="flush-collapseFifteen" class="accordion-collapse collapse" aria-labelledby="flush-headingFifteen" data-bs-parent="#chooseColumnsTabs">
+<div class="accordion-body">    
+  Cost-Per-Click is the price an advertiser pays “on average” to bid on Google Search results and get a click. You can work hard to rank organically, or you can pay Google to put you at the top of any keyword search.</div>
+</div>
+</div>
+
+
+<div class="border-bottom"> </div>
+
+<div class="accordion-item">
+                 
+                 
+  <div class="accordion-header" id="flush-headingFifteen">
+    <div class="form-check">
+        <input data-column="Results" class="form-check-input" type="checkbox" value="" checked>
+      
+      </div>
+       <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseFifteen" aria-expanded="false" aria-controls="flush-collapseTwo">
+        Results
+      </button>
+</div>
+<div id="flush-collapseFifteen" class="accordion-collapse collapse" aria-labelledby="flush-headingFifteen" data-bs-parent="#chooseColumnsTabs">
+<div class="accordion-body">    
+  The number of associated webpages that Google found in its index when an individual searches for a keyword.</div>
+</div>
+</div>
+
+
+<div class="border-bottom"> </div>
+<div class="accordion-item">
+                 
+                 
+  <div class="accordion-header" id="flush-headingSixteen">
+    <div class="form-check">
+        <input data-column="Tracking" class="form-check-input" type="checkbox" value="" checked>
+      
+      </div>
+       <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseSixteen" aria-expanded="false" aria-controls="flush-collapseTwo">
+        Tracking Status
+      </button>
+</div>
+<div id="flush-collapseSixteen" class="accordion-collapse collapse" aria-labelledby="flush-headingSixteen" data-bs-parent="#chooseColumnsTabs">
+<div class="accordion-body">    
+  Keyword Tracker lets you see changes in your Google ranking over time for specific keywords. It also prioritizes reporting for this keyword and will add it to snapshots and alerts.</div>
+</div>
+</div>
+
+
+
+
+
+            </div>
+              </div>
+
+
+
+              <div class="modal-footer">
+        
+                <button type="button" class="btn btn-primary" id="columnFunction">Choose</button>
+              </div>
+        </div>
+       
+      </div>
+    </div>
+  </div>
+
+
+
+
+    <!-- Modal -->
+    <div class="modal fade" id="dictionary" tabindex="-1" aria-labelledby="dictionaryLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-lg">
+          <div class="modal-content">
+           
+            <div class="modal-body p-0" style="background-color: #e8e8e8;">
+           
+
+
+               
+<div class="tab">
+
+
+
+<button class="tablinks websiteAuthorityTab" onclick="openTab(event, 'WebsiteAuthority')" id="defaultOpen">Website Authority</button>
+<button class="tablinks organicSearchTrafficTab" onclick="openTab(event, 'OrganicSearchTraffic')">Organic Search Traffic</button>
+<button class="tablinks totalNumberofKeywordsTab" onclick="openTab(event, 'TotalNumberofKeywords')">Total Number of Keywords</button>
+<button class="tablinks totalNumberofBacklinksTab" onclick="openTab(event, 'TotalNumberofBacklinks')">Total Number of Backlinks</button>
+<button class="tablinks googleRankingTab" onclick="openTab(event, 'GoogleRanking')">Google Ranking</button>
+<button class="tablinks recentChangeTab" onclick="openTab(event, 'RecentChange')">Recent Change</button>
+<button class="tablinks trafficTab" onclick="openTab(event, 'Traffic')">Traffic</button>
+<button class="tablinks monthlyVolumeTab" onclick="openTab(event, 'MonthlyVolume')">Monthly Volume</button>
+<button class="tablinks rankingDifficultyTab" onclick="openTab(event, 'RankingDifficulty')">Ranking Difficulty</button>
+<button class="tablinks linkTab" onclick="openTab(event, 'Link')">Link</button>
+<button class="tablinks CPCTab" onclick="openTab(event, 'CPC')">CPC($)</button>
+<button class="tablinks resultsTab" onclick="openTab(event, 'Results')">Results</button>
+<button class="tablinks referringDomainsTab" onclick="openTab(event, 'ReferringDomains')">Referring domains</button>
+<button class="tablinks sourcePageTitleAndURLTab" onclick="openTab(event, 'SourcePageTitleAndURL')">Source page Title and URL</button>
+<button class="tablinks linkTypeTab" onclick="openTab(event, 'LinkType')">Link type</button>
+<button class="tablinks anchorTextTab" onclick="openTab(event, 'AnchorText')">Anchor text</button>
+<button class="tablinks targetURLTab" onclick="openTab(event, 'TargetURL')">Target URL</button>
+<button class="tablinks firstSeenTab" onclick="openTab(event, 'FirstSeen')">First Seen</button>
+<button class="tablinks lastSeenTab" onclick="openTab(event, 'LastSeen')">Last Seen</button>
+
+</div>
+
+ 
+  <div id="LastSeen" class="tabcontent px-5 py-3">
+    <button type="button" class="btn-close float-end" data-bs-dismiss="modal" aria-label="Close" style="margin-right: -30px;"></button>
+    <br><br>
+    <h4>Last Seen</h4>
+    <p>Indicates the date that we last confirmed/crawled this backlink.</p>
+  </div>
+  
+
+
+  <div id="FirstSeen" class="tabcontent px-5 py-3">
+    <button type="button" class="btn-close float-end" data-bs-dismiss="modal" aria-label="Close" style="margin-right: -30px;"></button>
+    <br><br>
+    <h4>First Seen</h4>
+    <p>Indicates the date that we first spotted this backlink.</p>
+  </div>
+  
+
+
+
+  <div id="TargetURL" class="tabcontent px-5 py-3">
+    <button type="button" class="btn-close float-end" data-bs-dismiss="modal" aria-label="Close" style="margin-right: -30px;"></button>
+    <br><br>
+    <h4>Target URL</h4>
+    <p>This is the URL of the page that is receiving the backlink.</p>
+  </div>
+  
+
+
+
+  <div id="AnchorText" class="tabcontent px-5 py-3">
+    <button type="button" class="btn-close float-end" data-bs-dismiss="modal" aria-label="Close" style="margin-right: -30px;"></button>
+    <br><br>
+    <h4>Anchor text</h4>
+    <p>Anchor text is the visible, clickable text of a link. It usually appears in a different color than the surrounding text and is sometimes underlined. In most cases, link text tells the visitor what to expect if they click on the link. Anchor text is a component of every backlink. Aa backlink is a link from a page on one website to another. When a website owner links to your site, you get a backlink from them. In turn, if you link to another website, then they have a backlink from you.</p>
+
+    <p>Anchor text is an important part of SEO. Look at your anchor text and in most cases, you will see words containing your business name and/or terms relevant to your industry. Google sees backlinks as a vote for your website “authority” and the actual anchor text in the backlink provides Google with a bit more information on what the vote is regarding. For instance, if you primarily sell “dog beds” but all your anchor text is for the word “cat furniture” because you wrote a popular blog post on cat furniture, Google is less likely to rank you as high for the keyword “dog beds” than if you had a lot of backlinks with the anchor text “dog beds”. It is important to keep in mind that when people link to your website you don’t get to choose the anchor text. They may put click here or here is the link instead of using the anchor text dog beds. In fact, if almost all your anchor text is one or two keywords it might start to look a little fake to Google. It is better to have a mix of anchor text that is relevant to your products/services. Take a look at your competitors’ main anchor text. How do you compare? If you are manually link building, you might even get some ideas for additional anchor text!</p>
+  </div>
+  
+
+
+
+
+  <div id="LinkType" class="tabcontent px-5 py-3">
+    <button type="button" class="btn-close float-end" data-bs-dismiss="modal" aria-label="Close" style="margin-right: -30px;"></button>
+    <br><br>
+    <h4>Link type</h4>
+    <p>This shows the type of link. Options include:
+
+        <b>Text:</b> This is the most common type of link and as a rule, contains an anchor.<br>
+        <b>Image:</b> Refers to an image that links to the analyzed website.<br>
+        <b>Redirect:</b> Occurs when a page redirects to a page on the analyzed site.</p>
+  </div>
+  
+
+
+  
+  <div id="SourcePageTitleAndURL" class="tabcontent px-5 py-3">
+    <button type="button" class="btn-close float-end" data-bs-dismiss="modal" aria-label="Close" style="margin-right: -30px;"></button>
+    <br><br>
+    <h4>Source page Title and URL</h4>
+    <p>This is the title and URL of the page that is giving the backlink.</p>
+  </div>
+  
+
+  <div id="ReferringDomains" class="tabcontent px-5 py-3">
+    <button type="button" class="btn-close float-end" data-bs-dismiss="modal" aria-label="Close" style="margin-right: -30px;"></button>
+    <br><br>
+    <h4>Referring Domains</h4>
+    <p>Referring domains is the total number of websites that link to the website you are researching. Backlinks are an important component of a website’s authority and the ratio of the total number of backlinks to referring domains can impact how much “authority” Google ascribes to a website. For instance, a website with 100 backlinks coming from 50 websites would have a ratio of 2 backlinks per referring domain. This can be seen as more trustworthy in the eyes of Google than a website with 1000 backlinks from 2 websites. There is no perfect ratio but when comparing your website’s backlink profile and authority to your competitors keep in mind that the number of referring domains is usually a more accurate measure of how many “unique” backlinks a website has earned.</p>
+  </div>
+  
+  
+  <div id="Results" class="tabcontent px-5 py-3">
+    <button type="button" class="btn-close float-end" data-bs-dismiss="modal" aria-label="Close" style="margin-right: -30px;"></button>
+    <br><br>
+    <h4>Results</h4>
+    <p>The number of associated webpages that Google found in its index when an individual searches for a keyword. This number is usually giant because almost every page from every website on the Internet is cached by Google. For example, imagine if you walked into a library and said “dog” andthe librarian instantly said we have 56,000 pages in our books related to, or containing, that keyword. The results would be 56,000. The number of results can be a bit of a “too general” flag but really isn’t super useful. We include it because everyone else does. One way we have used it in the past is to look at the results volume of the keywords you rank well for. For instance, “London Plumber” has 9 million results, while “plumber” has 6 billion results. If all your ranking keywords are under a billion results maybe stick with that and don’t go after keywords with 1+ billion results (if you have any better suggestions how to use “results” let us know).</p>
+  </div>
+  
+  <div id="Traffic" class="tabcontent px-5 py-3">
+    <button type="button" class="btn-close float-end" data-bs-dismiss="modal" aria-label="Close" style="margin-right: -30px;"></button>
+    <br><br>
+    <h4>Traffic</h4>
+    <p>Approximate traffic by keyword depending on its volume and position.</p>
+  </div>
+  
+
+
+  <div id="RecentChange" class="tabcontent px-5 py-3">
+    <button type="button" class="btn-close float-end" data-bs-dismiss="modal" aria-label="Close" style="margin-right: -30px;"></button>
+    <br><br>
+    <h4>Recent Change</h4>
+    <p>The change in ranking since we last checked. An up arrow followed by a number means a website increased a certain number of spots in the rankings. A down arrow means the opposite.</p>
+  </div>
+  
+
+
+
+  <div id="GoogleRanking" class="tabcontent px-5 py-3">
+    <button type="button" class="btn-close float-end" data-bs-dismiss="modal" aria-label="Close" style="margin-right: -30px;"></button>
+    <br><br>
+    <h4>Google Ranking</h4>
+    <p>The organic position in Google search for this keyword. A 5 means a website ranks in the fifth spot in Google searches. Rank position does not include ads that may appear at the top of search results. Rankings may vary depending on location and/or very recent changes to results.</p>
+  </div>
+  
+
+
+
+  <div id="TotalNumberofBacklinks" class="tabcontent px-5 py-3">
+    <button type="button" class="btn-close float-end" data-bs-dismiss="modal" aria-label="Close" style="margin-right: -30px;"></button>
+    <br><br>
+    <h4>Total Number of Backlinks</h4>
+    <p>Backlinks are an important component of SEO. In simple terms, older websites with more backlinks will usually have a higher website authorityand rank higher in Google than new websites with fewer backlinks. Thinkof a backlink as a vote for a website! That said, Total Number of Backlinks does not always accurately reflect how Google sees a website’s authority. For instance, this number when reported in We, includes every backlink we have found pointing to a website. If a websitehas 1000 backlinks all from one website, we will report 1000 backlinks. This is not nearly as powerful in Google’s eyes as 1000 backlinks from 1000 different websites (1 backlink per website). Other factors that impact how important this number is include relevancy and strength. Backlinks from relevant websites matter much more than backlinks from other websites that have nothing to do with the target website’s industry. Last, the authority and strength of the website that is providing the backlink matters. A backlink from the homepage of Amazon.com is goingto provide a lot more power than a backlink from a brand-new website. As you can see there are many factors to consider when analyzing the total number of backlinks your website or your competitor’s website has pointing to it.</p>
+  </div>
+  
+
+
+
+  <div id="TotalNumberofKeywords" class="tabcontent px-5 py-3">
+    <button type="button" class="btn-close float-end" data-bs-dismiss="modal" aria-label="Close" style="margin-right: -30px;"></button>
+    <br><br>
+    <h4>Total Number of Keywords</h4>
+    <p>This is the total number of keywords that a website ranks in the top 100 for in Google search results. For example, if a website ranks #14 for the term “Russian Sturgeon Caviar” that would count as 1 keyword.</p>
+  </div>
+  
+
+  <div id="OrganicSearchTraffic" class="tabcontent px-5 py-3">
+    <button type="button" class="btn-close float-end" data-bs-dismiss="modal" aria-label="Close" style="margin-right: -30px;"></button>
+    <br><br>
+    <h4>Organic Search Traffic</h4>
+    <p>Approximate traffic by keyword depending on its volume and position.</p>
+  </div>
+  
+
+
+
+  <div id="WebsiteAuthority" class="tabcontent px-5 py-3">
+    <button type="button" class="btn-close float-end" data-bs-dismiss="modal" aria-label="Close" style="margin-right: -30px;"></button>
+    <br><br>
+    <h4>Website Authority</h4>
+    <p>Website authority predicts how likely a website is to rank for keywords in search engines. Website authority scores range from 0 to 100, with higher scores correlating to more powerful websites. Website authority is logarithmic, meaning for example, it is easier to go from 20 to 30 than it is from 50 to 60. When using website authority as part of your SEO strategy, remember to focus on websites in your industry/location that rank for similar keywords. For example, a dentist in London should compare their website authority to other London dentists’ websites.</p>
+  </div>
+  
+
+
+  <div id="Link" class="tabcontent px-5 py-3">
+    <button type="button" class="btn-close float-end" data-bs-dismiss="modal" aria-label="Close" style="margin-right: -30px;"></button>
+    <br><br>
+    <h4>Link</h4>
+    <p>A link to the website page that ranks for a keyword. Note: this opens a new window.</p>
+  </div>
+  
+  <div id="MonthlyVolume" class="tabcontent px-5 py-3">
+    <button type="button" class="btn-close float-end" data-bs-dismiss="modal" aria-label="Close" style="margin-right: -30px;"></button>
+    <br><br>
+    <h4>Monthly Volume</h4>
+    <p>Our estimate of the number of times people searched for a keyword in Google over the last 30 days.</p>
+  </div>
+  
+  <div id="RankingDifficulty" class="tabcontent px-5 py-3">
+    <button type="button" class="btn-close float-end" data-bs-dismiss="modal" aria-label="Close" style="margin-right: -30px;"></button>
+    <br><br>  <h4>Ranking Difficulty</h4>
+    <p>How hard we think it is to rank in the top 10 for a specific keyword. When selecting keywords to write about (i.e. in articles/blogs) look for high-volume + low-difficulty keywords first!</p> 
+  </div>
+  
+  <div id="CPC" class="tabcontent px-5 py-3">
+    <button type="button" class="btn-close float-end" data-bs-dismiss="modal" aria-label="Close" style="margin-right: -30px;"></button>
+    <br><br> <h4>CPC($)</h4>
+    <p>Cost-Per-Click is the price an advertiser pays “on average” to bid on Google Search results and get a click. You can work hard to rank organically, or you can pay Google to put you at the top of any keyword search. After thousands of “actual” CPC campaigns of we’ve found that average CPCs as reported by Google (and us), are rarely very accurate. That said, they are directionally correct and thus very useful! The higher the CPC, the more likely that ranking for that term has monetary value. For instance, if someone searches for “types of houses” in London they may be in the market to buy, but if you were a real estate agent in London, you’d pay a lot more for a click from someone searching for “1 bedroom London flats to buy”. Look at the CPCs for terms in your industry and it will help you find keywords that are worth a lot to your competitors! The trick to writing content for your business, and getting more traffic as a result, is picking high-value terms that you can realistically rank for.</p>
+  </div>
+  
+
+     
+
+                
+            </div>
+          
+          </div>
+        </div>
+      </div>
+    
+
+<div class="container">
+
+<div class="pt-4 pb-2">
+  <div class="container mt-0 margin-left" >
+    <h4 class="title mb-5 fw-400 pb-2">My Keywords</h4>
+  </div>
+ <!-- <app-breadcrumbs class="c197 ng-star-inserted"><a 
+   class="home ng-star-inserted"><img  src="../../static/site_audit/assets/home.svg" alt="">
+   <app-url-shortener class="c197">
+    <div  class="segment ng-star-inserted">www.</div>
+    <div class="selectedWebsite segment longest ng-star-inserted" ></div>
+
+   </app-url-shortener>
+  </a>
+  <div  class="delimiter ng-star-inserted">/</div><a 
+   class="item ng-star-inserted">My Keywords</a>
+ 
+ </app-breadcrumbs> -->
+</div>
+
+<div class="col-md-12">
+
+
+  <div class="card">
+    <div class="card-body overview-title" style="padding: 40px 32px 36px;">
+        <div class="row mt-3 justify-content-center">
+            <div class="col-md-8">
+    
+                <h1><span>Organic research for&nbsp;</span>
+                  <span  class="text-primary selectedWebsite_new">
+                      <div class="spinner-border text-primary spinner-border-sm mr-1 " role="status" style="font-size:12px">
+                        <span class="visually-hidden">Loading...</span>
+                        </div>
+                
+                </span></h1>
+    </div>
+    <div class="col-md-4 mb-2 ">
+             
+        <div class="float-end">
+        <button id="country-info-block-btn" class="country-wrapper"><span class="country">
+        <i aria-hidden="true" class="country__flag flag-icon flag-icon-squared "></i>
+        <span class="country__name"></span></span><i  data-bs-toggle="tooltip" data-bs-placement="left"
+                                        class="fa fa-pencil"
+                                         id="country-info-block-btn-modal"
+                                        title="This tool uses data based on the country
+                                         that is selected under your primary account settings.
+                                          You can switch countries and we highly recommend it 
+                                          if it is set wrong, but it does use some of the data 
+                                          we have allotted to your account. As such, we recommend
+                                           making sure it is set correctly and then keeping it set to the country where you do the most business." id="country-info-block-btn-modal" aria-hidden="true">
+        </i><!----></button>
+        
+        </div>  
+    </div>
+    
+    <input type="hidden" value="{{country}}" id="selectedLoaction">
+     </div>
+    
+    </div>
+     <div class="card-group">
+
+      <div class="card">  <div class="card-body">
+        <div class="summary-metric__label"><h3>Website Authority</h3>
+
+          <div class='loaderBacklinks'>
+          <div class="spinner-border text-primary spinner-border-sm  p_spinner mt-1 mr-1" role="status">
+            <span class="visually-hidden">Loading...</span>
+            </div>
+          </div>
+        <span data-bs-toggle="popover" data-bs-placement="top"
+            data-bs-custom-class="custom-popover"
+            data-bs-title="Website Authority"
+            data-bs-content="Website authority predicts how likely a website is to rank for keywords in search engines. Website authority scores range from 0 to 100, with higher scores correlating to more powerful websites. 
+            <a href='javascript:void(0);' class='link-Website-Authority'>more &#62;
+            </a>" role="img" svgicon="hint"  class="mat-icon notranslate mat-icon-no-color" aria-hidden="true" data-mat-icon-type="svg" data-mat-icon-name="hint"><i class="far fa-question-circle" aria-hidden="true"></i></span>
+          <div><div class="summary-metric__value"><span id="website-authority">   
+            {% comment %} <div class="loaderBacklinks">
+            <div class="lds-ellipsis">
+                <div></div>
+                <div></div>
+                <div></div>
+            </div>
+
+        </div> {% endcomment %}
+      </span>
+       
+          
+            </div>
+        </div>
+        </div>
+    </div>
+  </div>
+
+ 
+        <div class="card">  <div class="card-body">
+          <div class="summary-metric__label">
+           
+            <h3>Organic Search Traffic</h3>
+
+            <div class="loaderBacklinks">
+            <div class="spinner-border text-primary spinner-border-sm  p_spinner mt-1 mr-1" role="status">
+              <span class="visually-hidden">Loading...</span>
+              </div>
+            </div>
+          <span data-bs-toggle="popover" data-bs-placement="top"
+              data-bs-custom-class="custom-popover"
+              data-bs-title="Organic Search Traffic"
+              data-bs-content="Approximate traffic by keyword depending on its volume and position. 
+              <a href='javascript:void(0);' class='link-Organic-Search-Traffic'>more &#62;
+              </a>" role="img" svgicon="hint"  class="mat-icon notranslate mat-icon-no-color" aria-hidden="true" data-mat-icon-type="svg" data-mat-icon-name="hint"><i class="far fa-question-circle" aria-hidden="true"></i></span>
+            <div class="overviewStats organicSearchTraffic"><div class="summary-metric__value">
+              <span id="organicSearchTraffic">
+              {% comment %} <div class="loaderBacklinks">
+                            <div class="lds-ellipsis">
+                                <div></div>
+                                <div></div>
+                                <div></div>
+                            </div>
+    
+                        </div> {% endcomment %}
+                      </span></div>
+                        <span class="changeIcon">
+                       
+                        </span>
+                      </div>
+                      <span class="organicSearchTraffic changeDesc"></span>
+          </div>
+      </div></div>
+      <div class="card">  <div class="card-body">
+        <div class="summary-metric__label"><h3>Total Number of Keywords</h3>
+          <div class='loaderBacklinks'>
+            <div class="spinner-border text-primary spinner-border-sm  p_spinner mt-1 mr-1" role="status">
+              <span class="visually-hidden">Loading...</span>
+              </div>
+            </div>
+
+        <span data-bs-toggle="popover" data-bs-placement="top"
+            data-bs-custom-class="custom-popover"
+            data-bs-title="Total Number of Keywords"
+            data-bs-content="This is the total number of keywords that a website ranks in the top 100 for in Google search results. For example, if a website ranks #14 for the term “Russian Sturgeon Caviar” that would count as 1 keyword.
+            <a href='javascript:void(0);' class='link-Total-Number-of-Keywords'>more &#62;
+            </a>" role="img" svgicon="hint"  class="mat-icon notranslate mat-icon-no-color" aria-hidden="true" data-mat-icon-type="svg" data-mat-icon-name="hint"><i class="far fa-question-circle" aria-hidden="true"></i></span><!----><!---->
+          <div class="overviewStats totalKeywords">
+            <div class="summary-metric__value"><span id="totalKeywords">
+            {% comment %} <div class="loaderBacklinks">
+                          <div class="lds-ellipsis">
+                              <div></div>
+                              <div></div>
+                              <div></div>
+                          </div>
+  
+                      </div> {% endcomment %}
+                    </span></div>
+                      <span class="changeIcon">
+                       </span>
+                        </div>
+                        <span class="totalKeywords changeDesc"></span>
+        </div>
+    </div></div>
+
+
+    <div class="card">  <div class="card-body">
+      <div class="summary-metric__label"><h3>Tracked Keywords</h3>
+
+        <div class="loaderBacklinks">
+        <div class="spinner-border text-primary spinner-border-sm  p_spinner mt-1 mr-1" role="status">
+          <span class="visually-hidden">Loading...</span>
+          </div>
+        </div>
+      <span data-bs-toggle="popover" data-bs-placement="top"
+          data-bs-custom-class="custom-popover"
+          data-bs-title="Tracked Keywords"
+          data-bs-content="Keyword Tracker lets you see changes in your Google ranking over time for specific keywords. It also prioritizes reporting for this keyword and will add it to snapshots and alerts. 
+          <a href='/site_audit/keyword_introduction/' target='_blank' class='link-Referring-domains'>How to use this tool? 
+          </a>" role="img" svgicon="hint"  class="mat-icon notranslate mat-icon-no-color" aria-hidden="true" data-mat-icon-type="svg" data-mat-icon-name="hint"><i class="far fa-question-circle" aria-hidden="true"></i></span><!----><!---->
+        <div><div class="summary-metric__value">
+          <div class="overview-metric__value"><span id="tracked-keywords" > 
+            {% comment %} <div class="loaderBacklinks">
+            <div class="lds-ellipsis">
+                <div></div>
+                <div></div>
+                <div></div>
+            </div>
+
+        </div> {% endcomment %}
+      </span> </div>
+          <a href="/site_audit/keyword_introduction/" type="button" class="btn btn-sm btn-primary" >How do I use this?</a>
+   </div>
+                  
+      </div>
+      
+  </div></div>
+
+
+          </div>
+    
+    
+    
+    
+    </div>
+    
+    
+</div>
+
+
+
+
+
+
+<section class="my-5">
+  <div class="container">
+  <div class="row justify-content-center">
+      <div class="col-lg-12 overflow-auto">
+
+
+        <div>
+  <!-- Button trigger modal -->
+  
+  <div class="row"> 
+    <div class="col-lg-6">  <h2>List of Keywords</h2></div>
+    <div class="col-lg-6"> 
+      <div class="table-buttons d-flex " >
+      <button type="button" class="btn btn-outline-primary btn-sm" data-bs-toggle="modal" data-bs-target="#chooseData">
+          <!-- <svg  style="margin-right: 8px" height="100%" viewBox="0 0 18 18" xmlns="http://www.w3.org/2000/svg" fit="" preserveAspectRatio="xMidYMid meet" focusable="false">
+              <path d="M15.3281 2.53125H14.3438C14.2664 2.53125 14.2031 2.59453 14.2031 2.67188V15.3281C14.2031 15.4055 14.2664 15.4688 14.3438 15.4688H15.3281C15.4055 15.4688 15.4688 15.4055 15.4688 15.3281V2.67188C15.4688 2.59453 15.4055 2.53125 15.3281 2.53125ZM12.4102 2.53125H11.4258C11.3484 2.53125 11.2852 2.59453 11.2852 2.67188V3.65625C11.2852 3.73359 11.3484 3.79688 11.4258 3.79688H12.4102C12.4875 3.79688 12.5508 3.73359 12.5508 3.65625V2.67188C12.5508 2.59453 12.4875 2.53125 12.4102 2.53125ZM3.65625 2.53125H2.67188C2.59453 2.53125 2.53125 2.59453 2.53125 2.67188V3.65625C2.53125 3.73359 2.59453 3.79688 2.67188 3.79688H3.65625C3.73359 3.79688 3.79688 3.73359 3.79688 3.65625V2.67188C3.79688 2.59453 3.73359 2.53125 3.65625 2.53125ZM9.49219 2.53125H8.50781C8.43047 2.53125 8.36719 2.59453 8.36719 2.67188V3.65625C8.36719 3.73359 8.43047 3.79688 8.50781 3.79688H9.49219C9.56953 3.79688 9.63281 3.73359 9.63281 3.65625V2.67188C9.63281 2.59453 9.56953 2.53125 9.49219 2.53125ZM6.57422 2.53125H5.58984C5.5125 2.53125 5.44922 2.59453 5.44922 2.67188V3.65625C5.44922 3.73359 5.5125 3.79688 5.58984 3.79688H6.57422C6.65156 3.79688 6.71484 3.73359 6.71484 3.65625V2.67188C6.71484 2.59453 6.65156 2.53125 6.57422 2.53125ZM9.49219 5.44922H8.50781C8.43047 5.44922 8.36719 5.5125 8.36719 5.58984V6.57422C8.36719 6.65156 8.43047 6.71484 8.50781 6.71484H9.49219C9.56953 6.71484 9.63281 6.65156 9.63281 6.57422V5.58984C9.63281 5.5125 9.56953 5.44922 9.49219 5.44922ZM3.65625 5.44922H2.67188C2.59453 5.44922 2.53125 5.5125 2.53125 5.58984V6.57422C2.53125 6.65156 2.59453 6.71484 2.67188 6.71484H3.65625C3.73359 6.71484 3.79688 6.65156 3.79688 6.57422V5.58984C3.79688 5.5125 3.73359 5.44922 3.65625 5.44922ZM3.65625 11.2852H2.67188C2.59453 11.2852 2.53125 11.3484 2.53125 11.4258V12.4102C2.53125 12.4875 2.59453 12.5508 2.67188 12.5508H3.65625C3.73359 12.5508 3.79688 12.4875 3.79688 12.4102V11.4258C3.79688 11.3484 3.73359 11.2852 3.65625 11.2852ZM9.49219 11.2852H8.50781C8.43047 11.2852 8.36719 11.3484 8.36719 11.4258V12.4102C8.36719 12.4875 8.43047 12.5508 8.50781 12.5508H9.49219C9.56953 12.5508 9.63281 12.4875 9.63281 12.4102V11.4258C9.63281 11.3484 9.56953 11.2852 9.49219 11.2852ZM9.49219 14.2031H8.50781C8.43047 14.2031 8.36719 14.2664 8.36719 14.3438V15.3281C8.36719 15.4055 8.43047 15.4688 8.50781 15.4688H9.49219C9.56953 15.4688 9.63281 15.4055 9.63281 15.3281V14.3438C9.63281 14.2664 9.56953 14.2031 9.49219 14.2031ZM9.49219 8.36719H8.50781C8.43047 8.36719 8.36719 8.43047 8.36719 8.50781V9.49219C8.36719 9.56953 8.43047 9.63281 8.50781 9.63281H9.49219C9.56953 9.63281 9.63281 9.56953 9.63281 9.49219V8.50781C9.63281 8.43047 9.56953 8.36719 9.49219 8.36719ZM3.65625 14.2031H2.67188C2.59453 14.2031 2.53125 14.2664 2.53125 14.3438V15.3281C2.53125 15.4055 2.59453 15.4688 2.67188 15.4688H3.65625C3.73359 15.4688 3.79688 15.4055 3.79688 15.3281V14.3438C3.79688 14.2664 3.73359 14.2031 3.65625 14.2031ZM3.65625 8.36719H2.67188C2.59453 8.36719 2.53125 8.43047 2.53125 8.50781V9.49219C2.53125 9.56953 2.59453 9.63281 2.67188 9.63281H3.65625C3.73359 9.63281 3.79688 9.56953 3.79688 9.49219V8.50781C3.79688 8.43047 3.73359 8.36719 3.65625 8.36719ZM12.4102 14.2031H11.4258C11.3484 14.2031 11.2852 14.2664 11.2852 14.3438V15.3281C11.2852 15.4055 11.3484 15.4688 11.4258 15.4688H12.4102C12.4875 15.4688 12.5508 15.4055 12.5508 15.3281V14.3438C12.5508 14.2664 12.4875 14.2031 12.4102 14.2031ZM12.4102 8.36719H11.4258C11.3484 8.36719 11.2852 8.43047 11.2852 8.50781V9.49219C11.2852 9.56953 11.3484 9.63281 11.4258 9.63281H12.4102C12.4875 9.63281 12.5508 9.56953 12.5508 9.49219V8.50781C12.5508 8.43047 12.4875 8.36719 12.4102 8.36719ZM6.57422 14.2031H5.58984C5.5125 14.2031 5.44922 14.2664 5.44922 14.3438V15.3281C5.44922 15.4055 5.5125 15.4688 5.58984 15.4688H6.57422C6.65156 15.4688 6.71484 15.4055 6.71484 15.3281V14.3438C6.71484 14.2664 6.65156 14.2031 6.57422 14.2031ZM6.57422 8.36719H5.58984C5.5125 8.36719 5.44922 8.43047 5.44922 8.50781V9.49219C5.44922 9.56953 5.5125 9.63281 5.58984 9.63281H6.57422C6.65156 9.63281 6.71484 9.56953 6.71484 9.49219V8.50781C6.71484 8.43047 6.65156 8.36719 6.57422 8.36719Z"></path>
+              <path d="M15.3281 2.53125H14.3438C14.2664 2.53125 14.2031 2.59453 14.2031 2.67188V15.3281C14.2031 15.4055 14.2664 15.4688 14.3438 15.4688H15.3281C15.4055 15.4688 15.4688 15.4055 15.4688 15.3281V2.67188C15.4688 2.59453 15.4055 2.53125 15.3281 2.53125ZM12.4102 2.53125H11.4258C11.3484 2.53125 11.2852 2.59453 11.2852 2.67188V3.65625C11.2852 3.73359 11.3484 3.79688 11.4258 3.79688H12.4102C12.4875 3.79688 12.5508 3.73359 12.5508 3.65625V2.67188C12.5508 2.59453 12.4875 2.53125 12.4102 2.53125ZM3.65625 2.53125H2.67188C2.59453 2.53125 2.53125 2.59453 2.53125 2.67188V3.65625C2.53125 3.73359 2.59453 3.79688 2.67188 3.79688H3.65625C3.73359 3.79688 3.79688 3.73359 3.79688 3.65625V2.67188C3.79688 2.59453 3.73359 2.53125 3.65625 2.53125ZM9.49219 2.53125H8.50781C8.43047 2.53125 8.36719 2.59453 8.36719 2.67188V3.65625C8.36719 3.73359 8.43047 3.79688 8.50781 3.79688H9.49219C9.56953 3.79688 9.63281 3.73359 9.63281 3.65625V2.67188C9.63281 2.59453 9.56953 2.53125 9.49219 2.53125ZM6.57422 2.53125H5.58984C5.5125 2.53125 5.44922 2.59453 5.44922 2.67188V3.65625C5.44922 3.73359 5.5125 3.79688 5.58984 3.79688H6.57422C6.65156 3.79688 6.71484 3.73359 6.71484 3.65625V2.67188C6.71484 2.59453 6.65156 2.53125 6.57422 2.53125ZM9.49219 5.44922H8.50781C8.43047 5.44922 8.36719 5.5125 8.36719 5.58984V6.57422C8.36719 6.65156 8.43047 6.71484 8.50781 6.71484H9.49219C9.56953 6.71484 9.63281 6.65156 9.63281 6.57422V5.58984C9.63281 5.5125 9.56953 5.44922 9.49219 5.44922ZM3.65625 5.44922H2.67188C2.59453 5.44922 2.53125 5.5125 2.53125 5.58984V6.57422C2.53125 6.65156 2.59453 6.71484 2.67188 6.71484H3.65625C3.73359 6.71484 3.79688 6.65156 3.79688 6.57422V5.58984C3.79688 5.5125 3.73359 5.44922 3.65625 5.44922ZM3.65625 11.2852H2.67188C2.59453 11.2852 2.53125 11.3484 2.53125 11.4258V12.4102C2.53125 12.4875 2.59453 12.5508 2.67188 12.5508H3.65625C3.73359 12.5508 3.79688 12.4875 3.79688 12.4102V11.4258C3.79688 11.3484 3.73359 11.2852 3.65625 11.2852ZM9.49219 11.2852H8.50781C8.43047 11.2852 8.36719 11.3484 8.36719 11.4258V12.4102C8.36719 12.4875 8.43047 12.5508 8.50781 12.5508H9.49219C9.56953 12.5508 9.63281 12.4875 9.63281 12.4102V11.4258C9.63281 11.3484 9.56953 11.2852 9.49219 11.2852ZM9.49219 14.2031H8.50781C8.43047 14.2031 8.36719 14.2664 8.36719 14.3438V15.3281C8.36719 15.4055 8.43047 15.4688 8.50781 15.4688H9.49219C9.56953 15.4688 9.63281 15.4055 9.63281 15.3281V14.3438C9.63281 14.2664 9.56953 14.2031 9.49219 14.2031ZM9.49219 8.36719H8.50781C8.43047 8.36719 8.36719 8.43047 8.36719 8.50781V9.49219C8.36719 9.56953 8.43047 9.63281 8.50781 9.63281H9.49219C9.56953 9.63281 9.63281 9.56953 9.63281 9.49219V8.50781C9.63281 8.43047 9.56953 8.36719 9.49219 8.36719ZM3.65625 14.2031H2.67188C2.59453 14.2031 2.53125 14.2664 2.53125 14.3438V15.3281C2.53125 15.4055 2.59453 15.4688 2.67188 15.4688H3.65625C3.73359 15.4688 3.79688 15.4055 3.79688 15.3281V14.3438C3.79688 14.2664 3.73359 14.2031 3.65625 14.2031ZM3.65625 8.36719H2.67188C2.59453 8.36719 2.53125 8.43047 2.53125 8.50781V9.49219C2.53125 9.56953 2.59453 9.63281 2.67188 9.63281H3.65625C3.73359 9.63281 3.79688 9.56953 3.79688 9.49219V8.50781C3.79688 8.43047 3.73359 8.36719 3.65625 8.36719ZM12.4102 14.2031H11.4258C11.3484 14.2031 11.2852 14.2664 11.2852 14.3438V15.3281C11.2852 15.4055 11.3484 15.4688 11.4258 15.4688H12.4102C12.4875 15.4688 12.5508 15.4055 12.5508 15.3281V14.3438C12.5508 14.2664 12.4875 14.2031 12.4102 14.2031ZM12.4102 8.36719H11.4258C11.3484 8.36719 11.2852 8.43047 11.2852 8.50781V9.49219C11.2852 9.56953 11.3484 9.63281 11.4258 9.63281H12.4102C12.4875 9.63281 12.5508 9.56953 12.5508 9.49219V8.50781C12.5508 8.43047 12.4875 8.36719 12.4102 8.36719ZM6.57422 14.2031H5.58984C5.5125 14.2031 5.44922 14.2664 5.44922 14.3438V15.3281C5.44922 15.4055 5.5125 15.4688 5.58984 15.4688H6.57422C6.65156 15.4688 6.71484 15.4055 6.71484 15.3281V14.3438C6.71484 14.2664 6.65156 14.2031 6.57422 14.2031ZM6.57422 8.36719H5.58984C5.5125 8.36719 5.44922 8.43047 5.44922 8.50781V9.49219C5.44922 9.56953 5.5125 9.63281 5.58984 9.63281H6.57422C6.65156 9.63281 6.71484 9.56953 6.71484 9.49219V8.50781C6.71484 8.43047 6.65156 8.36719 6.57422 8.36719Z"></path>
+              </svg>  -->
+              Choose Data
+        </button>
+        <button type="button" class="btn btn-outline-primary btn-sm mx-1 customExportBtn">
+          <i class="fa fa-upload" aria-hidden="true" style="margin-right: 8px"></i> <span>Export</span>
+        </button>
+        <button type="button" class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#dictionary">
+          Dictionary
+        </button>
+  </div> 
+</div>
+  </div>
+ 
+  
+
+  <div id="MyKeywords">
+
+    <table id="keywordsTable" class="table audit table-striped table-bordered table-sm" cellspacing="0" width="100%">
+      
+      <thead class="table-head audit">
+          <tr>     
+                             
+              <th style= "width: 100%"><div class="theader"><span class="th-title">Keyword</span></div></th>
+              <th><div class="theader"><span class="th-title" data-bs-toggle="popover" data-bs-placement="top"
+                data-bs-custom-class="custom-popover"
+                data-bs-title="Google Ranking"
+                data-bs-content="The organic position in Google search for this keyword. A 5 means a website ranks in the fifth spot in Google searches. 
+                <a href='javascript:void(0);' class='link-Google-Ranking'>more &#62;
+                </a>"></span>Google Ranking</span></div></th>
+              <th><div class="theader"><span class="th-title" data-bs-toggle="popover" data-bs-placement="top"
+                data-bs-custom-class="custom-popover"
+                data-bs-title="Recent Change"
+                data-bs-content="The change in ranking since we last checked. An up arrow followed by a number means a website increased a certain number of spots in the rankings. A down arrow means the opposite."></span>
+                Recent Change</span></div></th>
+              <th><div class="theader"><span class="th-title" data-bs-toggle="popover" data-bs-placement="top"
+                data-bs-custom-class="custom-popover"
+                data-bs-title="Traffic"
+                data-bs-content="Approximate traffic by keyword depending on its volume and position.">
+              </span>Traffic</span></div></th>
+              <th><div class="theader"><span class="th-title" data-bs-toggle="popover" data-bs-placement="top"
+                data-bs-custom-class="custom-popover"
+                data-bs-title="Monthly Volume"
+                data-bs-content="Our estimate of the number of times people searched for a keyword in Google over the last 30 days.">
+              </span>Monthly Volume</span></div></th>
+              <th><div class="theader"><span class="th-title" data-bs-toggle="popover" data-bs-placement="top"
+                data-bs-custom-class="custom-popover"
+                data-bs-title="Ranking Difficulty"
+                data-bs-content="How hard we think it is to rank in the top 10 for a specific keyword. When selecting keywords to write about (i.e. in articles/blogs) look for high-volume + low-difficulty keywords first!">
+              </span>Ranking Difficulty</span></div></th>
+              <th><div class="theader"><span class="th-title" data-bs-toggle="popover" data-bs-placement="top"
+                data-bs-custom-class="custom-popover"
+                data-bs-title="Tracking"
+                data-bs-content="Keyword Tracker lets you see changes in your Google ranking over time for specific keywords. It also prioritizes reporting for this keyword and will add it to snapshots and alerts.">
+              </span>Tracking</span></div></th>
+              <th><div class="theader"><span class="th-title" data-bs-toggle="popover" data-bs-placement="top"
+                data-bs-custom-class="custom-popover"
+                data-bs-title="Link"
+                data-bs-content="A link to the website page that ranks for a keyword. Note: this opens a new window."></span>Link</span></div></th>
+                <th><div class="theader"><span class="th-title" data-bs-toggle="popover" data-bs-placement="top"
+                  data-bs-custom-class="custom-popover"
+                  data-bs-title="CPC($)"
+                  data-bs-content="Cost-Per-Click is the price an advertiser pays “on average” to bid on Google Search results and get a click. You can work hard to rank organically, or you can pay Google to put you at the top of any keyword search.">
+                </span>CPC($)</span></div></th>
+                <th><div class="theader"><span class="th-title" data-bs-toggle="popover" data-bs-placement="top"
+                  data-bs-custom-class="custom-popover"
+                  data-bs-title="Results"
+                  data-bs-content="The number of associated webpages that Google found in its index when an individual searches for a keyword.">
+                </span>Results</span></div></th>
+  
+          </tr>
+      </thead>
+      
+
+
+      <tbody class="audit-scroll-bar">
+        
+      </tbody>
+      
+  </table>
+
+  
+      </div>
+
+  </div>
+  
+
+</div>
+<div class="loader">
+  <div class="spinner-border text-primary mt-5 mr-1" role="status">
+    <span class="visually-hidden">Loading...</span>
+    </div>
+    <div>
+</section>
+
+
+<div class="app-banners-container my-5">
+    <app-keyword-banner titletext="View your competitors rankings and backlinks! " buttontext="Competitor Analysis"
+        imagesrc="../../static/site_audit/assets/graphs_and_statistics_solid_III.svg" >
+        <div class="banner-content">
+            <h3>Looking for new keywords ideas? </h3>
+            <a href="/site_audit/keyword_explorer" class="btn btn-primary">
+              <!---->
+              <span> Keyword Explorer </span>
+          </a>
+        </div>
+        <div class="illustration">
+            <img decoding="async" alt="Banner illustration" class="ModalBanner img-fluid" src="../../static/site_audit/assets/graphs_and_statistics_solid_III.svg">
+        </div>
+        <!---->
+        <!---->
+    </app-keyword-banner>
+    <app-keyword-banner titletext="Research your existing keywords and backlinks!" buttontext="Organic Research"
+        imagesrc="../../static/site_audit/assets/cat-error-primary-alt.svg" >
+        <div class="banner-content">
+            <h3>Research your existing keywords and backlinks!</h3>
+            <a href="/site_audit/my_keywords" class="btn btn-primary">
+              <!---->
+              <!----><span> Organic Research </span>
+          </a>
+
+        </div>
+        <div class="illustration">
+            <img decoding="async" alt="Banner illustration" class="ModalBanner img-fluid"
+                src="../../static/site_audit/assets/cat-error-primary-alt.svg">
+        </div>
+        <!---->
+        <!---->
+</div>
+
+<form id="SearchKeyWord" method="POST" style="visibility:hidden;">
+  <!-- {% csrf_token %} -->
+  <div class="row">
+      <div class="col-12 mb-2">
+        
+          <input type="text" autocomplete="off" class="form-control Keyword" required
+              placeholder="Enter a keyword" aria-label="keyword" name="keyword">
+       
+      </div>
+      <div class="col-12 mb-2">
+         
+          <select class="form-select CountrySelect" required name="country"></select>
+      </div>
+    
+      <div class="col-12 text-center">
+      
+          <button type="submit" class="btn btn-primary SearchKeyword" style="width: 275px;">SEARCH</button>
+      </div>
+  </div>
+
+
+</form>
+
+</div>
+
+<div class="modal fade " id="upgradeSub" tabindex="{-1}" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered modal-lg">
+      <div class="modal-content">
+          <div class="modal-body">
+            <div class="limit-alert-bar mt-md-4 mt-4 mb-md-4 mx-4 mb-4 justify-content-center">
+              <div class="limit-alert">
+                <img src="../../static/site_audit/assets/limit-alert.png" alt="limit-alert" />
+              </div>
+              <p class="font-14 text-black m-0">
+                You've reached your limits for the free plan. You can see more by
+                upgrading to the higher plan.
+              </p>
+              <a href="/subscription/upgrade_subscription/" class="upgrade-btn mx-0">
+                <img src="../../static/site_audit/assets/king.png" alt="king" />
+                Upgrade plan
+              </a>
+            </div>
+          </div>
+      </div>
+  </div>
+</div>
+
+
+{% endblock %}
+{% block extrascript %}
+
+
+<script>
+    function openTab(evt, tabName) {
+      var i, tabcontent, tablinks;
+      tabcontent = document.getElementsByClassName("tabcontent");
+      for (i = 0; i < tabcontent.length; i++) {
+        tabcontent[i].style.display = "none";
+      }
+      tablinks = document.getElementsByClassName("tablinks");
+      for (i = 0; i < tablinks.length; i++) {
+        tablinks[i].className = tablinks[i].className.replace(" active", "");
+      }
+      document.getElementById(tabName).style.display = "block";
+      evt.currentTarget.className += " active";
+    }
+    
+    // Get the element with id="defaultOpen" and click on it
+    document.getElementById("defaultOpen").click();
+    </script>
+
+<script src="https://code.highcharts.com/highcharts.js"></script>
+
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.3.0/Chart.js"></script> -->
+<script src="{% static 'site_audit/libs/select2/js/select2.full.min.js'%}"></script>
+<script type="text/javascript" src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
+<script type="text/javascript" src="https://cdn.datatables.net/buttons/2.2.3/js/dataTables.buttons.min.js"></script>
+<script type="text/javascript" src="https://cdn.datatables.net/buttons/2.2.3/js/buttons.html5.min.js"></script>
+<script type="text/javascript" src="https://cdn.datatables.net/fixedcolumns/4.1.0/js/dataTables.fixedColumns.min.js"></script>
+
+
+<script>
+
+  var CompihttpVal = 'https://';
+
+  //showing modal if units ended
+  $(document).ready(function(){
+    if('{{error}}') {
+      $("#upgradeSub").modal('show')
+      $("#sidebarMenu").css("z-index",'10000')
+      $('#main-navbar').css("z-index",'99999')
+      $('main').css('opacity', '0.07')
+  }
+
+  })
+  
+  $(document).on('change','.httpClass',function(){
+              
+              httpVal = $("#httpUrl").children("option").filter(":selected").text()
+              console.log('hh',httpVal)
+              $('#inptvalue').val(httpVal+''+URLValue)
+         });
+          // http compi dropdown
+          $(document).on('change','.compihttpClass',function(){
+              CompihttpVal = $("#compihttpUrl").children("option").filter(":selected").text()
+              // CompihttpVal = $(".compihttpClass").val();
+             
+  
+          });
+          // for edit
+          $(document).on('change','.httpClassEdit',function(){
+  
+              httpValEdit = $("#compihttpUrlEdit").children("option").filter(":selected").text()
+           
+              // $('.remHtml').val(httpValEdit+''+URLValue)
+          });
+  $(document).on('input change paste','#myTagscreat_p',function() {
+              var re = new  RegExp("^([0-9A-Za-z-\\.@:%_\+~#=]+)+((\\.[a-zA-Z]{2,3})+)(/(.)*)?(\\?(.)*)?");
+            var creat_p_tags = $('#myTagscreat_p').val();
+            creat_p_tags = creat_p_tags.trim(" ")
+            creat_p_tags = creat_p_tags.replace('https://','');
+            creat_p_tags = creat_p_tags.replace('http://','');
+            
+              $('.remHtml').val(CompihttpVal+''+creat_p_tags)
+              $('#myTagscreat_p').val(creat_p_tags)
+              
+              $("#responseError").hide();
+            
+              if (creat_p_tags == "") {
+                  
+                  $("#myurl_tags_c").hide();
+                  $('#myTagscreat_p').css('border-bottom-color', '#6c6b6b')
+              } else if (re.test(creat_p_tags)) {
+                  $("#myurl_tags_c").hide();
+                  $('#myTagscreat_p').css('border-bottom-color', '#6c6b6b')
+                  $("#competitorsURL").val(creat_p_tags);
+              } else {
+                  $("#myurl_tags_c").show();
+                  $('#myTagscreat_p').css('border-bottom-color', 'red')
+              }
+          });
+  
+  
+  
+      function inputURL(el) {
+   if(event.key === 'Enter') {    //  alert(ele.value);   
+      
+           $("#competitorsURL").val(CompihttpVal+''+el.value);
+              
+   }
+  }
+  
+  </script>
+<script>
+    $("#searchedKeyword").val('{{keyword}}');
+    $("#searchedLocation").val('{{country}}');
+
+    $(document).ready(function(){
+    $('[data-bs-toggle="popover"]').popover({trigger: "manual",html:true}).on("mouseenter", function() {
+    var _this = this;
+    $(this).popover("show");
+    $(".popover").on("mouseleave", function() {
+      $(_this).popover('hide');
+    });
+  }).on("mouseleave", function() {
+    var _this = this;
+    setTimeout(function() {
+      if (!$(".popover:hover").length) {
+        $(_this).popover("hide");
+      }
+    }, 300);
+  });  
+});
+
+
+    </script>
+
+
+
+<script src="{% static 'site_audit/js/my_keywords.js' %}"></script>
+
+{% endblock %}

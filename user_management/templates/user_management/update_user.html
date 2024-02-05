@@ -1,0 +1,141 @@
+{% extends 'base.html' %}
+{% load widget_tweaks %}
+{% load user_perm %}
+{% block extra_style %}
+<style>
+    @media only screen and (max-width: 767px){
+        form.validateForm{
+            margin: auto 14px;
+        }
+    }
+</style>
+{% endblock %}
+{% block body %}
+
+    {% get_user_perm "can_edit_user" as can_edit_users %}
+    {% if  can_edit_users %}
+    <form action="" class="validateForm" method="post">
+    {% csrf_token %}
+        <input type="hidden" id="selected_ips" name="ip_groups" value="">
+        <div class="ui top header attached" style="margin-top: 100px;">
+            <h3>Update User Profile</h3>
+        </div>
+        <div class="ui middle segment attached">
+            <div class="ui form" id="userCreateForm">
+                <div class="four fields" id="first_row">
+                    <div class="field required">
+                        <label for="id_username">Username:</label>
+                        {{ user_form.username}}
+                        {{ user_form.username.errors}}
+                    </div>
+                    <div class="field required">
+                        <label for="id_first_name">First name:</label>
+                        {{ user_form.first_name}}
+                        {{ user_form.first_name.errors}}
+                    </div>
+                    <div class="field required">
+                        <label for="id_last_name">Last name:</label>
+                        {{ user_form.last_name}}
+                        {{ user_form.last_name.errors}}
+                    </div>
+                    <div class="field required">
+                        <label for="id_email">Email:</label>
+                        {{ user_form.email}}
+                        {{ user_form.email.errors}}
+                        <ul style="list-style: none;padding: 0;margin: 0;color: #0C4DA2 !important;font-size: 12px !important;"><li>Enter a valid email ID to receive verification code</li></ul>
+
+                    </div>
+                </div>
+                <div class="four fields">
+                    <div class="field">
+                        <label for="id_permission_group">Groups:</label>
+                        {{ profile_form.permission_groups}}
+                        {{ profile_form.permission_groups.errors}}
+                    </div>
+                    <div class="field">
+                        <label for="id_permission_tags">Permissions:</label>
+                        {{ profile_form.permission_tags}}
+                        {{ profile_form.permission_tags.errors}}
+                    </div>
+                    <div class="field" style="margin-top:25px;">
+                        <div class="fancy_checkbox">
+                            <label class="checkbox_label checkbox">
+                                {{ user_form.is_active}}
+                                <span class="checkbox_style" ></span> Active
+                            </label>
+                        </div>
+                        {{ user_form.is_active.errors}}
+                    </div>
+                    <div class="field" style="margin-top:25px;" id="qr_container">
+                        <div class="fancy_checkbox">
+                            <label class="checkbox_label checkbox">
+                                {{ profile_form.qr_verified}}
+                                <span class="checkbox_style" ></span> QR verified
+                            </label>
+                        </div>
+                        {{ profile_form.qr_verified.errors}}
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        <div class="ui bottom segment attached center aligned">
+            <div class="ui form">
+                <div class="field">
+                    <button class="ui button small green labeled icon"  id="submit"><i class="icon arrow right"></i> Submit</button>
+                    <span class="ui button small red labeled icon" onclick="goBack();"><i class="icon remove"></i> Cancel</span>
+                </div>
+            </div>
+        </div>
+    </form>
+    {% else %}
+    <div class="right_segment" style="margin-top: 100px;">
+   <P>You don't have required permission</P>
+    </div>
+{% endif %}
+{% endblock %}
+
+{% block extra_script %}
+<script>
+    $(function() {
+        $('#id_permission_tags').multipleSelect({
+            placeholder: "Select User Permissions",
+            single: false,
+            filter: true,
+        })
+        $('#id_permission_groups').multipleSelect({
+            placeholder: "Select Groups",
+            single: false,
+            filter: true
+        })
+        $('#id_names').multipleSelect({
+            placeholder: "Select Brands",
+            single: false,
+            filter: true
+        })
+        $('#id_i_brand_groups').find('option')[0].remove();
+        $('#id_i_brand_groups').multipleSelect({
+            placeholder: "Select Brands",
+            single: false,
+            filter: true
+        })
+        var $userPermissions = $('#id_user_permissions'),
+            optionsHtml = '';
+        $userPermissions.find('option').each(function() {
+            var $this = $(this),
+                value = $this.val(),
+                text = $this.text(),
+                textArray = text.split('| '),
+                selected = $this.attr('selected');
+            if ( selected ) {
+                optionsHtml += '<option value="'+value+'" selected="selected">'+textArray[2]+'</option>';
+            }
+            else {
+                optionsHtml += '<option value="'+value+'">'+textArray[2]+'</option>';
+            }
+        });
+
+      
+    });
+</script>
+{% endblock %}

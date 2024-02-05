@@ -1,0 +1,311 @@
+{% extends "base2.html" %}
+{% load static %}
+{% block extrahead %}
+<style>
+    @media (min-width: 1150px) {
+        .c348 {
+            background: rgba(250, 250, 250, .9);
+            border: 1px solid #ffffff;
+            border-radius: 5px;
+            margin: 16px 0 16px 16px;
+            grid-gap: 48px;
+            padding: 28px 44px;
+        }
+    }
+
+    .c348 {
+        grid-template-columns: repeat(2, 1fr);
+        grid-gap: 32px;
+
+    }
+
+    .c348 {
+
+        padding: 24px 20px;
+        font-family: Poppins, sans-serif;
+    }
+
+
+
+    .c348 .label {
+        grid-gap: 20px;
+    }
+
+    .c348 .label {
+        font-family: Poppins, sans-serif;
+        font-style: normal;
+        font-weight: 600;
+        font-size: 16px;
+        line-height: 20px;
+        color: #000;
+        display: grid;
+        grid-gap: 12px;
+        grid-template-columns: auto 1fr;
+        align-items: center;
+        margin-bottom: 8px;
+        position: relative;
+    }
+
+    .mat-icon {
+        -webkit-user-select: none;
+        user-select: none;
+        background-repeat: no-repeat;
+        display: inline-block;
+        fill: currentColor;
+        height: 24px;
+        width: 24px;
+    }
+
+    .c202.description {
+        margin-left: 40px;
+    }
+
+
+    .c202.description {
+        font-family: Poppins, sans-serif;
+        font-style: normal;
+        font-weight: 400;
+        font-size: 13px;
+        line-height: 20px;
+        color: #262626;
+    }
+
+    .c203.label {
+        font-family: Poppins, sans-serif;
+        font-style: normal;
+        font-weight: 600;
+        font-size: 13px;
+        line-height: 18px;
+        display: flex;
+        align-items: center;
+        margin-top: 16px;
+        color: #000;
+    }
+
+    .c203.label mat-icon {
+        width: 42px;
+        height: 35px;
+        margin-right: 10px;
+    }
+
+    .c203.label p {
+        margin: 0;
+        line-height: 22px;
+    }
+
+    .c203.label p a {
+        white-space: nowrap;
+        color: #2f54eb;
+    }
+
+    .c203.label p {
+        margin: 0;
+        line-height: 22px;
+    }
+
+    .c203.label p a {
+        white-space: nowrap;
+        color: #2f54eb;
+    }
+
+    section.content {
+    background-color: #fff;
+}
+
+</style>
+{% endblock %}
+{% block content %}
+                <section id="contact-us">
+                    <div class="pt-70 pb-70">
+                        <div class="container">
+                            <div class="row justify-content-between">
+                                <div class="col-12 col-sm-12 col-md-12 col-lg-6 col-xl-6 col-xxl-6">
+                                    <h2 class="f-28 f-600 f-height-1-1 f-black mb-3">Contact Us</h2>
+                                    <p class="f-17 f-400 f-black-light mb-5">WebsiteRankingExpert is located in Salt Lake City, Utah, at the base of the Wasatch Mountains. We are having a wonderful time here, and there are an amazing number of analytics businesses within 50 miles of our headquarters.</p>
+                                    <div class="d-flex align-items-start justify-content-start gap-3 mb-3">
+                                        <div>
+                                            <img src="/static/site_audit/assets/building-icon.png" alt="websiterankingexpert" width="" height="">
+                                        </div>
+                                        <div>
+                                            <h6 class="f-18 f-500 f-black mb-0"><strong>Address:</strong></h6>
+                                            <p class="f-15 f-400 f-black mb-0">123 ABC Lane, ABCview, FL 12345</p>
+                                        </div>
+                                    </div>
+                                    <div class="d-flex align-items-start justify-content-start gap-3 mb-3">
+                                        <div>
+                                            <img src="/static/site_audit/assets/envelope-icon.png" alt="websiterankingexpert" width="" height="">
+                                        </div>
+                                        <div>
+                                            <h6 class="f-18 f-500 f-black mb-0"><strong>Email:</strong></h6>
+                                            <p class="f-15 f-400 f-black mb-2">hello@WebsiteRankingExpert.com</p>
+                                            <p class="f-15 f-400 f-black mb-0">Customers frequently are responded within 1-2 business days</p>
+                                        </div>
+                                    </div>
+                                    <div class="d-flex align-items-start justify-content-start gap-3">
+                                        <div>
+                                            <img src="/static/site_audit/assets/fax-icon.png" alt="websiterankingexpert" width="" height="">
+                                        </div>
+                                        <div>
+                                            <h6 class="f-18 f-500 f-black mb-0"><strong>Phone number:</strong></h6>
+                                            <p class="f-15 f-400 f-black mb-2">Xxx xxx- xxxx</p>
+                                            <p class="f-15 f-400 f-black mb-0">Please contact us only if you have billing questions</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-sm-12 col-md-12 col-lg-5 col-xl-5 col-xxl-5">
+                                    <div class="contact-box">
+                                        <form id="Contact_us">
+                                            <div class="row mb-lg-3">
+                                                <div class=" col-12 col-sm-12 col-md-12 col-lg-6 col-xl-6 col-xxl-6">
+                                                    <input type="text" class="cls" name="name"  placeholder="Name" required="">
+                                                </div>
+                                                <div class="col-12 col-sm-12 col-md-12 col-lg-6 col-xl-6 col-xxl-6">
+                                                    <input type="email" class="cls" name="email "  placeholder="Email Address" required="">
+                                                </div>
+                                            </div>
+                                            <div class="row mb-lg-3">
+                                                <div class=" col-12 col-sm-12 col-md-12 col-lg-6 col-xl-6 col-xxl-6">
+                                                   <div class="mb-3 input-group"> 
+                                                    <span class="input-group-text">+1</span>
+                                                    <input type="hidden" name="phone_number"  id="phone_number" maxlength="254" class="form-control" placeholder="phone number">
+                                                
+                                                    
+                                                    <input type="text"  name=""  id="phoneNumber"  maxlength="254" class="cls form-control mb-0 onlyNumber" placeholder="Phone Number" required="">
+                                                    
+                                                    </div>
+                                                </div>
+                                                <div class="cls col-12 col-sm-12 col-md-12 col-lg-6 col-xl-6 col-xxl-6">
+                                                    <input type="text" class="cls" name="subject " placeholder="Subject" required="">
+                                                </div>
+                                            </div>
+                                            <div class="row mb-lg-3">
+                                                <div class="cls col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 col-xxl-12">
+                                                    <input type="text" class="cls" name="address " placeholder="Address" required="">
+                                                </div>
+                                            </div>
+                                            <div class="row mb-lg-3">
+                                                <div class="cls col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 col-xxl-12">
+                                                    <textarea class="cls" required name="message " placeholder="Message...."></textarea>
+                                                </div>
+                                            </div>
+                                            <div class="d-block text-center mb-3">
+                                                <input type="hidden" id="captchaResponse" name="captcha_response">
+                                            <script src='https://www.google.com/recaptcha/api.js'></script>
+                                            <div class="g-recaptcha d-inline-block" data-sitekey="{{recaptcha_site_key}}" data-callback="correctCaptcha"></div>
+                                            </div>
+                                            <button type="submit"  id="submit">GET IN TOUCH</button>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+<!-- Modal -->
+<!-- <div class="modal fade" id="captchaModal" tabindex="-1" aria-labelledby="captchaModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+    
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+     
+      </div>
+    
+    </div>
+  </div>
+</div> -->
+    
+{% endblock %}
+{% block extrascript %}
+<!-- <script src="https://www.google.com/recaptcha/api.js?onload=onloadCallback&render=explicit"></script> -->
+
+<script>
+$('#submit').attr('disabled',true)
+  function correctCaptcha(res) {
+    $('#captchaResponse').val(res)
+$('#submit').attr('disabled',false)
+
+
+  }
+$('#Contact_us').on('submit',function(e){
+  e.preventDefault();
+       // Get form
+ var form = $('#Contact_us')[0];
+
+// Create an FormData object 
+ var data = new FormData(form);
+
+ $.ajax({
+     type: "POST",  
+     url: "/api/save_contact_details/",
+     data: data,
+     processData: false,
+    contentType: false,
+    cache: false,
+     success: function (data) {
+  
+   if(data.status){
+ $('#captchaModal').modal('hide');
+       
+      ShowNoty(data.message,'success');
+      $('.cls').val('');
+      grecaptcha.reset();
+   
+   }else{
+ 
+
+      ShowNoty(data.error,'error');
+      grecaptcha.reset();
+
+
+   
+   }
+        
+  
+     },
+   
+ });
+
+
+})
+
+
+      // $("#bitsWiseNavigation").remove();
+      $(document).ready(function(){
+
+        $('input.onlyNumber').keyup(function (event) {
+          
+        if (event.which != 8 && event.which != 0 && event.which < 48 || event.which > 57) {
+          $(this).val(function (index, value) {
+            let val;
+            
+             val = value.replace(/\D/g, "");
+           
+             return  val
+          });
+        }
+     
+             $("#phone_number").val("+1"+$('input.onlyNumber').val());
+      });
+
+      $('input.onlyNumber').change(function (event) {
+     
+          $(this).val(function (index, value) {
+            let val;
+            
+             val = value.replace(/\D/g, "");
+           
+             return  val
+          });
+        
+     
+             $("#phone_number").val("+1"+$('input.onlyNumber').val());
+      });
+
+      })
+    </script>
+
+{% endblock %}s

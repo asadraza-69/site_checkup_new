@@ -1,0 +1,76 @@
+{% extends "base2.html" %}
+{% load static %}
+{% block extrahead %}
+<style>
+.form-control {
+    width:75%
+}
+</style>
+
+{% endblock %}
+{% block content %}
+<div class="container">
+
+    <div class="row ">
+        <div class="col-xl-9">
+            <div class="center-section">
+                <h4 class="title mb-5 fw-400 pb-2"> Add Plans</h4>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="row d-flex justify-content-start">
+    <div class="col-md-4 ">
+        <select id="invoices" class="form-select mb-5" aria-label="Default select example">
+            <option value="select_plan" selected disabled>Select your Plan</option>
+            <option id= "all_invoices" value="all_invoices">Free</option>
+            <option id= "paid_invoices" value="paid_invoices">Pro</option>
+            <option id= "unpaid_invoices" value="unpaid_invoices">Corporate</option>
+        </select>
+    </div>
+</div>
+
+
+<form>
+<div class="row">
+    <div class="col-md-4 ">
+        <ul class="list-group" id="getModules">
+
+        </ul>
+    </div>
+
+    <div id="add_modules"  class="col-md-4">
+        <input type="text" class="form-control mb-3" placeholder="inputs">
+        <input type="text" class="form-control mb-3" placeholder="inputs">
+        <input type="text" class="form-control mb-3" placeholder="inputs">
+        <input type="text" class="form-control mb-3" placeholder="inputs">
+        <input type="text" class="form-control mb-3" placeholder="inputs">  
+    </div>
+
+    
+    <div id="add_modules"  class="col-md-4">
+        <input type="text" class="form-control mb-3" placeholder="remarks">
+        <input type="text" class="form-control mb-3" placeholder="remarks">
+        <input type="text" class="form-control mb-3" placeholder="remarks">
+        <input type="text" class="form-control mb-3" placeholder="remarks">
+        <input type="text" class="form-control mb-3" placeholder="remarks">  
+    </div>
+
+</div>
+    <div class="row d-flex justify-content-center">
+        <div class="col-md-4">
+            <button class="btn btn-primary" id="sbmt_btn"> Submit </button>
+        </div>
+    </div>
+
+</form>
+
+
+{% endblock %}
+
+{% block extrascript %}
+<script src="{% static 'subscription_module/js/add_plans.js' %}"></script>
+
+{% endblock %}

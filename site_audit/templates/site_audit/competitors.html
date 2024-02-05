@@ -1,0 +1,595 @@
+{% extends "base2.html" %}
+{% load static %}
+{% block extrahead %}
+<link type="text/css" rel="stylesheet" href="{% static 'site_audit/css/technical_site_audit.css' %}" />
+
+
+<style>
+.limit-alert-bar {
+    display: flex;
+    align-items: center;
+    background-color: #f3f5f7;
+    border-radius: 10px;
+    padding: 15px 20px;
+   
+  }
+  .limit-alert-bar {
+    flex-wrap: wrap;
+    text-align: center;
+    gap: 10px;
+  }
+  
+  .upgrade-btn {
+  margin-left: auto;
+  background-color: #167ee6;
+  color: #fff;
+  border-radius: 10px;
+  text-transform: uppercase;
+  padding: 10px;
+  font-weight: 500;
+  font-size: 15px;
+  transition: all 0.3s ease-in-out;
+  border: 1px solid transparent;
+  }
+  
+  .upgrade-btn:hover {
+  background-color: transparent;
+  color: #167ee6;
+  border-color: #167ee6;
+  }
+  
+  .upgrade-btn>img {
+  margin-right: 5px;
+  }
+  
+  .upgrade-btn>img {
+  max-width: 18%;
+  }
+    .addCompPos {
+        position: relative
+      }
+      .addCompInput{
+        border: 1px solid #ced4da;
+        border-start-end-radius: 20px;
+        border-end-end-radius: 20px;
+      }
+     
+      #myTagscreat_p{
+        border: 0;
+        height: 50px;
+        padding: 10px 20px;
+        background-color: transparent;
+        outline: none;
+      }
+    
+    
+    .analyzeCompetitor {
+        vertical-align: bottom;
+        border: 0;
+        font-weight: 500;
+        line-height: 1.5;
+        background-color: var(--primary-color);
+        color: #fff;
+        height: 42px;
+        margin: auto 0;
+        border-radius: 20px ;
+        min-width: 180px;
+        box-shadow: none ;
+        position: absolute;
+        right: 4px;
+        top: 0;
+        bottom: 0;
+        font-size: 14px ;
+    }
+
+    .selectBorderRadius {
+        border-top-left-radius: 20px;
+        border-bottom-left-radius: 20px;
+      }
+      #compihttpUrl:focus {
+        box-shadow: none;
+        border-color: #ced4da
+     }
+
+     @media (max-width: 991.5px){
+
+        main {
+            padding-left: 0;
+        }
+        }
+#responseError{
+    display:none
+}
+</style>
+{% endblock %}
+{% block content %}
+
+
+<div class="container Step1">
+
+
+    <div class="pt-4 pb-2">
+        <div class="container mt-0 margin-left" >
+            <h4 class="title mb-5 fw-400 pb-2">My Competitors</h4>
+        </div>
+        <!-- <app-breadcrumbs class="c197 ng-star-inserted"><a class="home ng-star-inserted"><img
+                    src="../../static/site_audit/assets/home.svg" alt="">
+                <app-url-shortener class="c197">
+                    <div class="segment ng-star-inserted">www.</div>
+                    <div class="selectedWebsite segment longest ng-star-inserted" ></div>
+                </app-url-shortener>
+            </a>
+            <div class="delimiter ng-star-inserted">/</div><a class="item ng-star-inserted">Competitors</a>
+      
+        </app-breadcrumbs> -->
+    </div>
+
+    <div class="col-md-12">
+
+
+        <div class="card">
+            <div class="card-body">
+                <h2 class="text-center main-title">Add Competitors for <span
+                        class="text-primary selectedWebsite"></span></h2>
+                <div class="row my-3 justify-content-center">
+                    <div class="col-md-12">
+
+                        <p class="text-center"> Research your competitors’ <strong>backlinks</strong> and
+                            <strong>keywords!</strong>
+                        </p>
+
+                        <form id="competitorAnalysis" method="POST">
+                            <!-- {% csrf_token %} -->
+                            <div class="row">
+                                <div class="col-12 mb-2">
+                                    <div class="input-group mb-3 d-flex justify-content-center">
+                                        <div class="input-group-prepend">
+
+                                            <select class="compihttpClass form-select selectBorderRadius" id="compihttpUrl">
+                                                <option selected>https://</option>
+                                                <option>http://</option>
+                                            </select>
+
+                                        </div>
+
+                                        <div class="addCompPos">
+                                            <div class="addCompInput d-flex justify-content-between">
+                                              <input type="text" class="input-group" id="myTagscreat_p" onkeypress="inputURL(this)" required/>
+                                              <input type="hidden" class="form-control" id="competitorsURL" name="website_url" /> 
+
+                                             <button type="submit" class="btn btn-primary analyzeCompetitor"> Add Competitor </button>
+                                            </div> 
+                                          </div>
+                                        {% comment %} <input type="text" class="form-control" id="myTagscreat_p"
+                                            onkeypress="inputURL(this)" required />
+
+                                        <input type="hidden" class="form-control" id="competitorsURL"
+                                            name="website_url" /> {% endcomment %}
+                                    </div>
+                                    <input type="hidden" class="form-control" id="project_id" name="project_id" />
+                                    <div id="responseError" style="color: red;display:none; text-align: center"><small></small></div>
+                                    <div id="myurl_tags_c" class="text-center" style="color: red;display:none; "><small>Please enter valid
+                                            website url (e.g www.example.com)</small></div>
+                                </div>
+
+
+                                {% comment %} <div class="col-12 text-center">
+
+                                    <button type="submit" class="btn btn-primary analyzeCompetitor"
+                                        style="width: 275px;">Analyze Competitor</button>
+                                </div>  {% endcomment %}
+                            </div>
+
+
+                        </form>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="main-description mt-1">
+            <div class="main-description__keywords main-description__wrapper">
+                <div class="description-title">
+                    <h3>Keywords</h3>
+                    <!-- <mat-icon role="img" svgicon="hint" nz-tooltip class="mat-icon notranslate mat-icon-no-color"
+                        aria-hidden="true" data-mat-icon-type="svg" data-mat-icon-name="hint"><i class="far fa-question-circle" aria-hidden="true"></i></mat-icon> -->
+                </div>
+                <p class="description-text"> Discover where your competitors are getting their traffic from! Also, find
+                    new keywords that you can use in articles and blogs on your website. </p>
+            </div>
+            <div class="main-description__backlinks main-description__wrapper">
+                <div class="description-title">
+                    <h3>Backlinks</h3>
+                    <!-- <mat-icon role="img" svgicon="hint" nz-tooltip class="mat-icon notranslate mat-icon-no-color"
+                        aria-hidden="true" data-mat-icon-type="svg" data-mat-icon-name="hint"><i class="far fa-question-circle" aria-hidden="true"></i></mat-icon> -->
+                </div>
+                <p class="description-text"> Find new backlink opportunities for your website. Backlinks from other
+                    websites can generate more traffic to your website and also increase your website authority. </p>
+            </div>
+        </div>
+        <div class="tool-information mt-1">
+            <section class="tool-information__main-wrapper">
+                <h2 class="tool-information__title">How to use this tool</h2>
+                <div class="tool-information__vertical-line"></div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="tool-information__image-inner"><img
+                                src="../../static/site_audit/assets/designer_solid_III.svg" alt="designer"
+                                decoding="async" class="tool-information__image"></div>
+
+                    </div>
+                    <div class="col-md-6">
+
+                        <div class="tool-information__list-wrapper">
+                            <ul class="tool-information__list">
+                                <li data-number="01" class="tool-information__item">
+                                    <h3 class="information-tool__subtitle">Enter a competitor’s website
+                                        into We</h3>
+                                    <p class="information-tool__description"> Try to stick with
+                                        competitors that look the most like your business. Even though Amazon or
+                                        Wikipedia might
+                                        rank above you they are probably not very useful competitors to analyze for
+                                        keyword
+                                        ideas. </p>
+                                </li>
+                                <li data-number="02" class="tool-information__item">
+                                    <h3 class="information-tool__subtitle">Build a list of potential
+                                        keywords</h3>
+                                    <p class="information-tool__description"> Look at the related
+                                        keywords and volume. Could you also use any of these in the title and content of
+                                        an
+                                        article or blog post? </p>
+                                </li>
+                                <li data-number="03" class="tool-information__item">
+                                    <h3 class="information-tool__subtitle">Start writing!</h3>
+                                    <p class="information-tool__description"> We suggest making your
+                                        articles at least 1000 words long. Write naturally (only using the keyword
+                                        occasionally)
+                                        and when you have a great article post it on your website. </p>
+                                </li>
+                                <li data-number="04" class="tool-information__item">
+                                    <h3 class="information-tool__subtitle">Scroll through their
+                                        backlinks.</h3>
+                                    <p class="information-tool__description"> The higher the authority
+                                        the more important they are to your competitors and likely to you! Focus on the
+                                        backlinks that are in your industry and have something to do with your services
+                                        and/or
+                                        products. </p>
+                                </li>
+                                <li data-number="05" class="tool-information__item">
+                                    <h3 class="information-tool__subtitle">Visit the websites that look
+                                        interesting.</h3>
+                                    <p class="information-tool__description"> Find where they link to
+                                        your competitor. Is there a reason they might add your website link on the same
+                                        page or
+                                        a new page? Email them with the best reasons for why they should also link to
+                                        your
+                                        website. We’ve found this takes time but even if only 1 out of 10 adds your
+                                        website you
+                                        will see your traffic and website authority benefiting! </p>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+
+                </div>
+
+
+            </section>
+            <section class="tool-information__sub-wrapper">
+                <div class="row">
+
+                    <div class="col-md-6">
+                        <div class="tool-information__section">
+                            <h2 class="information-tool__section"> After you've found some new keywords,
+                                search for them in Google and see what types of articles already rank well. </h2>
+                            <p> This should give you an idea of what to write about. For instance, if you
+                                Google “raw honey” you will see a lot of articles in the top 10 positions talking about
+                                the
+                                “benefits” of “raw honey”. It is a good idea to follow their example! Also localize your
+                                article
+                                if you are focused on a specific city or area. For instance, it is easier to rank for
+                                “How to
+                                find a dog walker in New York City” than the national term “Dog walker”. </p>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="tool-information__thumbnail"><img
+                                src="../../static/site_audit/assets/content.svg" alt="content" decoding="async"
+                                class="tool-information__thumbnail-image"></div>
+                    </div>
+
+                </div>
+
+
+            </section>
+            <section class="tool-information__sub-wrapper-second">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="tool-information__thumbnail-second"><img
+                                src="../../static/site_audit/assets/competitors-spreadsheet.svg" alt="spreadsheet"
+                                decoding="async"></div>
+
+                    </div>
+                    <div class="col-md-6">
+                        <div class="tool-information__section">
+                            <h2 class="information-tool__section"> Keep a spreadsheet of all the backlink
+                                opportunities you have found and include any notes (i.e., when you email them). </h2>
+                            <p> Backlinking is one of the most important things you can do but it also
+                                takes significant time. Plan on devoting at least a few hours a month to this or have an
+                                employee/family member do it for you. </p>
+                        </div>
+                    </div>
+
+                </div>
+
+            </section>
+        </div>
+        <!-- compi keywrds -->
+        <div class="container">
+            <div class="competitors-keywords">
+            <h2 class="competitors-keywords__title">Outrank Your Competitors with We’s Keyword
+                Explorer</h2>
+            <section class="competitors-research">
+           
+            <div class="row justify-content-center">
+            <div class="col-md-6">
+            <div class="competitors-research__image"><img
+                        src="../../static/site_audit/assets/iPhone-x-11.svg" alt="iPhone-x-11" decoding="async"
+                        class="competitors-image"></div>
+            </div>
+            <div class="col-md-6">
+                <h2 class="competitors-research__title competitors-title"> Research your
+                    competitors for 1000s of new keyword ideas </h2>
+                <div class="competitors-research__list-wrapper">
+                    <ul class="competitors-keywords__list">
+                        <li class="competitors-keywords__item">Find the keywords that your
+                            competitors are ranking for</li>
+                        <li class="competitors-keywords__item">Understand the search volume and
+                            importance of each keyword</li>
+                        <li class="competitors-keywords__item"> Write articles and blog posts
+                            about things people are really searching for </li>
+                    </ul>
+                </div>
+            </div>
+
+            </div>
+               
+              
+            </section>
+            <section class="competitors-data">
+                <h2 class="competitors-data__title competitors-title">Build a custom keyword list
+                    based on competitor data</h2>
+                    <div class="row justify-content-center">
+                    <div class="col-md-6">
+                      <div class="competitors-data__list-wrapper">
+                    <ul class="competitors-keywords__list">
+                        <li class="competitors-keywords__item">Compare volume with how difficult
+                            it will be to rank for a keyword</li>
+                        <li class="competitors-keywords__item"> See how much people pay to rank
+                            for certain keywords on Google advertising (keywords that people pay a lot to rank for tend
+                            to convert better). </li>
+                    </ul>
+                </div>
+                    </div>
+                    <div class="col-md-6">
+                      <div class="competitors-data__image"><img
+                        src="../../static/site_audit/assets/competitors-data-table.svg" alt="data-table" decoding="async"
+                        class="competitors-image"></div>
+                    </div>
+
+                    </div>
+              
+              
+            </section>
+            <section class="competitors-seo">
+                <h2 class="competitors-seo__title competitors-title">Beat your competitors at SEO
+                </h2>
+                <div class="row justify-content-center">
+                   <div class="col-md-6">
+                  <div class="competitors-seo__image"><img
+                        src="../../static/site_audit/assets/competitors-seo.svg" alt="seo" decoding="async" class="competitors-image">
+                </div>
+                </div>
+                <div class="col-md-6">
+                   <div class="competitors-seo__list-wrapper">
+                    <ul class="competitors-keywords__list">
+                        <li class="competitors-keywords__item"> Make sure you have the best
+                            articles for all the important keywords your competitors rank for </li>
+                        <li class="competitors-keywords__item">Get new ideas based on your
+                            competitors’ keyword rankings</li>
+                    </ul>
+                </div>
+                </div>
+             
+
+                </div>
+             
+              
+            </section>
+            <section class="competitors-monitor">
+                <h2 class="competitors-monitor__title competitors-title"> Monitor the growth and
+                    decline of competitors’ backlinks </h2>
+                    <div class="row justify-content-center">
+                    <div class="col-md-6">
+                     <div class="competitors-monitor__list-wrapper">
+                    <ul class="competitors-keywords__list">
+                        <li class="competitors-keywords__item"> Spot new competitors that are
+                            investing heavily in building backlinks. Track the overall health of all your competitors’
+                            backlink profiles. </li>
+                    </ul>
+                </div>
+                    </div>
+                    <div class="col-md-6 ">
+                       
+                <div class="competitors-monitor__image"><img
+                        src="../../static/site_audit/assets/competitors-analysis-table.svg" alt="articles" decoding="async"
+                        class="competitors-image"></div>
+                    </div>
+                    </div>
+            
+            </section>
+            <section class="competitors-links">
+                <h2 class="competitors-links__title competitors-title">See all the websites that
+                    link to your competitors</h2>
+                    <div class="row justify-content-center">
+                    <div class="col-md-6">
+                    <div class="competitors-links__image"><img
+                        src="../../static/site_audit/assets/competitors-links.svg" alt="links" decoding="async"
+                        class="competitors-image"></div>
+                    </div>
+                    <div class="col-md-6">
+                       <div class="competitors-links__list-wrapper">
+                    <ul class="competitors-keywords__list">
+                        <li class="competitors-keywords__item"> Find new opportunities to get
+                            backlinks that can increase your traffic and authority. </li>
+                    </ul>
+                </div>
+                    </div>
+                    
+                    </div>
+             
+                
+            </section>
+            <section class="competitors-backlinks">
+                <h2 class="competitors-backlinks__title competitors-title">Identify the top
+                    backlinks in your industry</h2>
+                    <div class="row justify-content-center">
+                    <div class="col-md-6">
+                     <div class="competitors-backlinks__list-wrapper">
+                    <ul class="competitors-keywords__list">
+                        <li class="competitors-keywords__item"> Short on time? Try targeting only
+                            the strongest backlinks that your competitors have linking to their websites. </li>
+                    </ul>
+                </div>
+                    </div>
+                    <div class="col-md-6">
+                     <div class="competitors-backlinks__image"><img
+                        src="../../static/site_audit/assets/competitors-backlinks.svg" alt="backlinks" decoding="async"
+                        class="competitors-image"></div>
+                    </div>
+                    </div>
+               
+               
+            </section>
+            {% comment %} <div class="competitors-keywords__btn"><button onclick="topFunction()" class="c-50 primary ng-star-inserted"
+                >
+                    <!----><span _ngcontent-pbn-c50="">Add Competitors</span>
+                </button>
+                <!---->
+                <!---->
+            </div> {% endcomment %}
+        </div>
+        </div>
+       
+    </div>
+
+    <div class="limit-alert-bar mt-md-5 mb-md-4 mx-4 mt-5 mb-4">
+        <div class="limit-alert">
+          <img src="../../static/site_audit/assets/limit-alert.png" alt="limit-alert" />
+        </div>
+        <p class="font-14 text-black m-0">
+          You've reached your limits for the free plan. You can see more by
+          upgrading to the higher plan.
+        </p>
+        <a  href="/subscription/upgrade_subscription/" class="upgrade-btn">
+          <img src="../../static/site_audit/assets/king.png" alt="king" />
+          Upgrade plan
+        </a>
+      </div>
+    <div class="modal fade " id="upgradeSub" tabindex="{-1}" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered modal-lg">
+      <div class="modal-content">
+          <div class="modal-body">
+            <div class="limit-alert-bar mt-md-4 mt-4 mb-md-4 mx-4 mb-4 justify-content-center">
+              <div class="limit-alert">
+                <img src="../../static/site_audit/assets/limit-alert.png" alt="limit-alert" />
+              </div>
+              <p class="font-14 text-black m-0">
+                You've reached your limits for the free plan. You can see more by
+                upgrading to the higher plan.
+              </p>
+              <a href="/subscription/upgrade_subscription/" class="upgrade-btn mx-0">
+                <img src="../../static/site_audit/assets/king.png" alt="king" />
+                Upgrade plan
+              </a>
+            </div>
+          </div>
+      </div>
+  </div>
+</div>
+</div>
+
+{% endblock %}
+{% block extrascript %}
+<script src="{% static 'site_audit/libs/select2/js/select2.full.min.js'%}"></script>
+<script>
+
+    var CompihttpVal = 'https://';
+
+    $(document).on('change', '.httpClass', function () {
+
+        httpVal = $("#httpUrl").children("option").filter(":selected").text()
+        console.log('hh', httpVal)
+        $('#inptvalue').val(httpVal + '' + URLValue)
+    });
+    // http compi dropdown
+    $(document).on('change', '.compihttpClass', function () {
+        CompihttpVal = $("#compihttpUrl").children("option").filter(":selected").text()
+        // CompihttpVal = $(".compihttpClass").val();
+
+
+    });
+    // for edit
+    $(document).on('change', '.httpClassEdit', function () {
+
+        httpValEdit = $("#compihttpUrlEdit").children("option").filter(":selected").text()
+
+        // $('.remHtml').val(httpValEdit+''+URLValue)
+    });
+    $(document).on('input change paste', '#myTagscreat_p', function () {
+        var re = new RegExp("^([0-9A-Za-z-\\.@:%_\+~#=]+)+((\\.[a-zA-Z]{2,3})+)(/(.)*)?(\\?(.)*)?");
+        var creat_p_tags = $('#myTagscreat_p').val();
+        creat_p_tags = creat_p_tags.trim(" ")
+        creat_p_tags = creat_p_tags.replace('https://', '');
+        creat_p_tags = creat_p_tags.replace('http://', '');
+
+        $('.remHtml').val(CompihttpVal + '' + creat_p_tags)
+        $('#myTagscreat_p').val(creat_p_tags)
+
+        $("#responseError").hide();
+
+        if (creat_p_tags == "") {
+
+            $("#myurl_tags_c").hide();
+            $('#myTagscreat_p').css('border-bottom-color', '#6c6b6b')
+        } else if (re.test(creat_p_tags)) {
+            $("#myurl_tags_c").hide();
+            $('#myTagscreat_p').css('border-bottom-color', '#6c6b6b')
+            $("#competitorsURL").val(CompihttpVal+''+creat_p_tags);
+        } else {
+            $("#myurl_tags_c").show();
+            $('#myTagscreat_p').css('border-bottom-color', 'red')
+        }
+
+    });
+
+
+
+    function inputURL(el) {
+        if (event.key === 'Enter') {    //  alert(ele.value);   
+
+            $("#competitorsURL").val(CompihttpVal + '' + el.value);
+
+
+
+        }
+    }
+// 
+function topFunction() {
+  document.body.scrollTop = 0;
+  document.documentElement.scrollTop = 0;
+}
+</script>
+<script src="{% static 'site_audit/js/competitors.js' %}"></script>
+{% endblock %}

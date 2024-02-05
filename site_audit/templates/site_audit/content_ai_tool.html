@@ -1,0 +1,1257 @@
+{% extends "base2.html" %}
+{% load static %}
+{% block extrahead %}
+<style>
+  .top_spinner {
+    display: none;
+  }
+
+  .copyJson {
+    border-radius: 50%;
+    padding: 4px;
+    cursor: pointer;
+    color: #fff;
+    border: 2px solid #1a237e;
+    background: #1a237e;
+    margin-bottom: 10px;
+  }
+
+  .cardSpinner2 {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+  }
+
+  #richText {
+    display: none;
+  }
+
+  #page_navigation {
+    clear: both;
+    margin: 20px 0;
+  }
+
+  #page_navigation a {
+    padding: 3px 6px;
+    border: 1px solid #2e6da4;
+    margin: 2px;
+    color: black;
+    text-decoration: none
+  }
+
+  .active_page {
+    background: #337ab7;
+    color: white !important;
+  }
+
+  .ai_cards {
+    max-height: 285px;
+    overflow-y: scroll;
+    background-color: #f3f5f7;
+    box-shadow: 0 3px 8px 0 rgb(65 69 88 / 41%), 0 3px 6px 0 rgb(0 0 0 / 7%);
+    border-radius: 0px !important;
+  }
+
+  .bold {
+    color: #000000 !important;
+    font-size: 20px;
+    font-weight: 600
+  }
+
+  .bold1 {
+    font-size: 14px;
+    font-weight: 400;
+    color: #b5a5c1 !important;
+  }
+
+  .status_spinner {
+    position: absolute;
+    left: 2%;
+  }
+
+  .card_btn {
+    background: none;
+    border: none;
+  }
+
+  .holder {}
+
+  .holder a {
+    font-size: 12px;
+    cursor: pointer;
+    color: #333;
+  }
+
+  .holder a:hover {
+    background-color: #707070 !important;
+    color: #fff;
+  }
+
+  .holder a.jp-previous {
+    border: 2px solid #707070;
+    padding: 7px 12px;
+    font-size: 12px;
+    border-top-left-radius: 13%;
+    border-bottom-left-radius: 13%;
+    border-right: none;
+    background: #edebf1
+  }
+
+  .holder a.jp-next {
+    border-left: 2px solid #707070 !important;
+    border: 2px solid #707070;
+    padding: 7px 12px;
+    font-size: 12px;
+    border-left: none;
+    border-top-right-radius: 13%;
+    border-bottom-right-radius: 13%;
+    background: #edebf1
+  }
+
+  .holder a.jp-current,
+  a.jp-current:hover {
+    color: #FF4242;
+    font-weight: bold;
+  }
+
+  .holder a.jp-disabled,
+  a.jp-disabled:hover {
+    color: #bbb;
+  }
+
+  .holder a.jp-current,
+  a.jp-current:hover,
+  .holder a.jp-disabled,
+  a.jp-disabled:hover {
+    cursor:not-allowed;
+    background: none;
+  }
+
+  .holder span {
+    margin: 0 5px;
+  }
+
+
+  .list {
+    display: flex;
+    flex-wrap: wrap;
+  }
+
+  .list .list_item {
+    list-style: none;
+    width: 60px;
+    height: 55px;
+    font-size: 40px;
+    text-align: center;
+    color: #fff;
+    background-color: pink;
+    border: 3px double lightcoral;
+  }
+
+  /* .card {
+    max-height: 192px;
+  } */
+  .card {
+    height: 95%;
+}
+  .description1 {
+    display: -webkit-box !important;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    white-space: normal;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    font-size: 14px;
+    font-weight: 400;
+  }
+
+  .no-line-clamp .description {
+    -webkit-line-clamp: none;
+  }
+  .second-nav-container {
+    position: sticky;
+    top: -10px;
+    z-index: 3;
+    background-color: #f3f5f7;
+}
+
+  .flex-boxes {
+    width: 23%;
+    cursor: pointer;
+    /* height: 150px; */
+  }
+
+  #typewriter-text {
+    font-size: 17px;
+    line-height: 1.5;
+    padding: 10px;
+    border: none;
+    margin-bottom: 10px;
+    resize: none;
+    float: left;
+    width: 100%;
+    min-height: 300px;
+    background-color: #f3f5f7;
+    overflow-y: auto;
+    cursor: pointer;
+    box-shadow: 0 7px 14px 0 rgb(65 69 88 / 41%), 0 3px 6px 0 rgb(0 0 0 / 7%) !important;
+  }
+
+  .flex__wrap{
+    flex-wrap: wrap;
+  }
+
+  #markdown {
+    font-size: 17px;
+    line-height: 1.5;
+    padding: 10px;
+    border: none;
+    margin-bottom: 10px;
+    resize: none;
+    float: left;
+    width: 100%;
+    min-height: 300px;
+    max-height: 400px;
+    background-color: #f3f5f7;
+    overflow-y: auto;
+    /* cursor: pointer; */
+    box-shadow: 0 7px 14px 0 rgb(65 69 88 / 41%), 0 3px 6px 0 rgb(0 0 0 / 7%) !important;
+  }
+
+
+  #keywords_list {
+    max-height: 180px;
+    overflow: auto;
+    display: flex;
+    flex-wrap: wrap;
+    padding: 4px;
+    border-radius: 5px;
+    border: 1px solid #a6a6a6;
+  }
+
+  .pointer {
+    cursor: pointer;
+  }
+
+  #card_label {
+    font-size: 24px;
+    font-weight: 600;
+  }
+
+  textarea:focus-visible {
+    outline-offset: 0px !important;
+  }
+
+  #typewriter-text::-webkit-scrollbar {
+    width: 5px;
+    cursor: pointer
+  }
+
+  #markdown::-webkit-scrollbar {
+    width: 5px;
+    /* cursor: pointer */
+  }
+
+  @media only screen and (max-width: 1305px) {
+    .flex-boxes {
+      width: 48%;
+    }
+  }
+  @media (max-width: 1300px) {
+        
+    main {
+      padding-left: 18%;
+    }
+}
+
+@media (max-width: 1199px) {
+    main {
+      padding-left: 20%;
+    }
+}    
+/* @media only screen and (min-width: 992px)
+  {
+main {
+    padding-top: 0px;
+}
+  } */
+</style>
+{% endblock %}
+{% block content %}
+<div class="container pb-2 mb-2">
+  <div class="row ">
+    <div class="col-xl-9">
+      <div class="center-section">
+        <h4 class="title mb-3 fw-400 pb-2">Content AI Tool</h4>
+      </div>
+    </div>
+  </div>
+  <section class='ai_cards p-3 ' style="padding-top: 10px !important;">
+ <div class="second-nav-container">
+  <div class='row d-flex justify-content-between'>
+    <div class="col-md-4 d-flex align-items-start gap-2">
+          <label for="categories" style="padding-top: 7px;">Categories</label>
+          <select id="categories" class="form-select form-select-sm" aria-label="Default select example" style="cursor: pointer;">
+            <option value="All">Show All</option>
+          </select>
+    </div>
+
+    <div class="col-md-4 mb-4 ">
+      <input type="search" id="searchInput" style="width:250px; float:right" class="form-control form-control-sm"
+        placeholder="Search" aria-controls="example">
+    </div>
+  </div>
+
+  <div class=' d-flex justify-content-between' style="margin-top: -15px; margin-bottom: 15px;">
+    <div>
+      <form class="d-flex align-items-start gap-2">
+        <label style="padding-top: 7px; min-width: 133px;">Prompts Per Page</label>
+        <select id="per_pages_select" class="form-select form-select-sm" aria-label="Default select example" style="cursor: pointer;">
+          <option selected>10</option>
+          <option>50</option>
+          <option>100</option>
+        </select>
+      </form>
+    </div>
+    <div class="d-flex justify-content-end align-items-center">
+      <div class="holder"></div>
+    </div>
+  </div>
+
+ </div>
+    <input type='hidden' id='current_page' />
+    <input type='hidden' id='show_per_page' />
+    <!-- <div id="page_navigation"></div> -->
+
+    <div class="d-flex flex__wrap gap-3" id="cards">
+      <div class="cardSpinner d-none">
+        <div class="spinner-border spinner-border-lg" role="status">
+          <span class="visually-hidden">Loading...</span>
+        </div>
+      </div>
+    </div>
+
+  </section>
+</div>
+
+<div class="container pb-2 mb-5">
+  <section id='input_keyword' class='ai_cards p-3 d-none'>
+    <div class="row">
+      <div class="col-xl-8">
+        <div class="form-group">
+          <label id="card_label" for="exampleInputEmail1"></label>
+          <textarea class="form-control " id="send_description" rows="2"></textarea>
+        </div>
+        <div class='d-flex justify-content-end'>
+          <button class="btn btn-success mt-2 d-flex align-items-center justify-content-center" id="submit_description">
+            <div class="searchSpinner d-none">
+              <div class="spinner-border spinner-border-sm" role="status">
+                <span class="visually-hidden">Loading...</span>
+              </div>
+            </div> Submit
+          </button>
+          &nbsp;
+          <button class="btn btn-danger mt-2 " id="clear_txt">Clear</button>
+        </div>
+      </div>
+
+    </div>
+  </section>
+</div>
+</div>
+
+<div class="container" id='richText'>
+  <div class="row justify-content-center">
+    <div class="col-md-12">
+      <div class="mb-5 mt-3 description_container">
+        <span class='d-flex justify-content-end' id="copy_text" style="display: none;"> <i class="fa fa-copy copyJson"
+            title="Copy Text"></i> </span>
+        <!-- <textarea id="typewriter-text" readonly>
+        </textarea> -->
+        <div id="markdown"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- <div class="container">
+  <div id="markdown"></div>
+</div> -->
+
+
+{% endblock %}
+
+{% block extrascript %}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/marked/2.1.3/marked.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/typed.js/2.0.12/typed.min.js"></script>
+<script>
+
+  $(document).ready(function () {
+    var openCardId = null;
+    function initSearch() {
+      const searchInput = document.getElementById('searchInput');
+      const cards = document.getElementById('cards').querySelectorAll('.flex-boxes');
+      const select = document.querySelector('#per_pages_select');
+
+      $(document).on("input", "#searchInput", function () {
+        const query = searchInput.value.toLowerCase().trim();
+        cards.forEach(function (card) {
+          const text = card.textContent.toLowerCase();
+          if (text.includes(query)) {
+            card.style.display = 'block';
+          } else {
+            card.style.display = 'none';
+          }
+        });
+        // Check if search input is empty
+        if (!query) {
+          // Call the change event function
+          var newPerPage = parseInt(select.value);
+          $("div.holder").jPages("destroy").jPages({
+            containerID: "cards",
+            perPage: newPerPage
+          });
+        }
+      })
+    }
+    var cardData
+    $.ajax({
+      method: 'GET',
+      url: `/site_audit/get_text_dict_api/`,
+      beforeSend: function () {
+        $('.cardSpinner').removeClass('d-none')
+        $('.cardSpinner').css({
+          'display': 'flex',
+          'justify-content': 'center',
+          'align-items': 'center',
+          'width': '100%'
+        });
+        // $('.cardSpinner').show()
+      },
+      success: function (res) {
+        // console.log("hello", res)
+        if (res.status) {
+          // $('.cardSpinner').hide()
+          $('.cardSpinner').addClass('d-none')
+          $('.searchSpinner').addClass('d-none')
+          $(".searchSpinner").hide()
+          $('#markdown').removeClass('d-none');
+          var $selectElement = $("#categories");
+          var categories = [];
+          cardData = res.data
+          $.each(cardData, function (index, value) {
+            $("#cards").append(`<div class="flex-boxes" >
+              <div class="card card_${index + 1} mb-3" id='card_id' data-id="${value.id}">
+                <div class="card-body">
+                  <div class="text-start">
+                    <p class="text-gery card_title bold font-14" style="overflow: hidden; text-overflow: ellipsis; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; margin-bottom: 7px !important;" title="${value.title}">${value.title}</p>
+                    <p class="text-gery bold1 font-14" style="margin-bottom: 7px !important;">${value.category}</p>
+                    <p class="text-gery description1 font-14" style="overflow: hidden; text-overflow: ellipsis; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; margin-bottom: 7px !important;" title="${value.description}">${value.description}</p>
+                  </div>
+                </div>
+              </div>
+            </div>`)
+
+            var categories = [];
+            var category = value.category;
+            if (!categories.includes(category)) {
+              categories.push(category);
+              var $optionElement = $("<option>");
+              $optionElement.text(category);
+              $selectElement.append($optionElement);
+            }
+          })
+          initSearch();
+          var seen = {};
+          $('#categories option').each(function () {
+            var val = $(this).val();
+            if (seen[val]) {
+              $(this).remove();
+            } else {
+              seen[val] = true;
+            }
+          });
+          $("div.holder").jPages({
+          containerID: "cards",
+          perPage: 10
+    });
+        }
+        else {
+          $("#cards").append(`<div class="flex-boxes" > No Data Found</div>`)
+        }
+        $selectElement.on("change", function () {
+          var selectedCategory = $(this).val();
+          $("#input_keyword").addClass('d-none');
+          // console.log("hwlllo", selectedCategory, cardData)
+          var filteredData = cardData.filter(function (obj) {
+            return obj.category === selectedCategory;
+          });
+          // console.log(filteredData);
+          $("#cards").empty()
+          $.each(filteredData, function (index, value) {
+            $("#cards").append(`<div class="flex-boxes" >
+              <div class="card card_${index + 1} mb-3" id='card_id' data-id="${value.id}">
+                <div class="card-body">
+                  <div class="text-start">
+                    <p class="text-gery card_title bold font-14" style="overflow: hidden; text-overflow: ellipsis; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical;">${value.title}</p>
+                    <p class="text-gery bold1 font-14">${value.category}</p>
+                    <p class="text-gery description1 font-14" style="overflow: hidden; text-overflow: ellipsis; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical;">${value.description}</p>
+                  </div>
+                </div>
+              </div>
+            </div>`)
+          })
+          if (selectedCategory === "All") {
+            $("#cards").empty()
+            $.each(cardData, function (index, value) {
+              $("#cards").append(`<div class="flex-boxes" >
+              <div class="card card_${index + 1} mb-3" id='card_id' data-id="${value.id}">
+                <div class="card-body">
+                  <div class="text-start">
+                    <p class="text-gery card_title bold font-14" style="overflow: hidden; text-overflow: ellipsis; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical;">${value.title}</p>
+                    <p class="text-gery bold1 font-14">${value.category}</p>
+                    <p class="text-gery description1 font-14" style="overflow: hidden; text-overflow: ellipsis; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical;">${value.description}</p>
+                  </div>
+                </div>
+              </div>
+            </div>`)
+            })
+          }
+
+          // $(".card").each(function() {
+          //   var cardCategory = $(this).find(".bold1").text();
+          //   if (cardCategory === selectedCategory || selectedCategory === "All") {
+          //     $(this).parent().css("display", "block");
+          //     $(this).show();
+          //   } else {
+          //     $(this).parent().css("display", "none");
+          //   }
+          // });
+          initSearch();
+        });
+
+        var card_id = '';
+        $(document).on("click", '#card_id', function () {
+          $("#send_description").val("")
+          $('.card.mb-3.data-id').removeClass("data-id")
+
+          $(this).addClass("data-id")
+          var card_label = $(this).find(".card_title").text()
+          $("#card_label").html(card_label)
+          // var description = $(this).find(".description1").text();
+          // $("#send_description").val($("#send_description").val() + description);
+
+          // $('#send_description').val('')
+          //  $('#submit_description').prop('disabled', true)
+          $('#markdown').addClass('d-none');
+          $("#copy_text").addClass("d-none")
+          $("#copy_text").removeClass("d-flex")
+        });
+      },
+      error: function(msg) {
+        $('.cardSpinner').css({
+          'display': '',
+          'justify-content': '',
+          'align-items': '',
+          'width': ''
+        })
+        $('.cardSpinner').addClass('d-none')
+        $(".cardSpinner").hide()
+        $("#cards").append('<p style="width:100%;font-size: 20px" class="d-flex justify-content-center align-items-center">No Data Found</p>')
+      }
+    })
+    $(document).ready(function () {
+      // Disable submit button if text area is empty
+      $('#submit_description').prop('disabled', true);
+
+      $("#send_description").on('input', function (e) {
+        var text = $(this).val();
+        if (text.trim() === '') {
+          $('#submit_description').prop('disabled', true);
+        } else {
+          $('#submit_description').prop('disabled', false);
+        }
+      });
+      var typed;
+      // Submit button click handler
+      $("#submit_description").on('click', function (e) {
+
+        $('#markdown').addClass('d-none');
+        $("#copy_text").addClass("d-none")
+        $("#copy_text").removeClass("d-flex")
+
+        if (typeof typed !== 'undefined') {
+          typed.stop();
+          typed.destroy();
+        }
+        var text = $("#send_description").val().trim();
+        if (text === '') {
+          return;
+        }
+
+        $('#submit_description').prop('disabled', true);
+        text = JSON.stringify(text);
+        card_id = $('.data-id').attr('data-id');
+
+        $.ajax({
+          method: 'GET',
+          url: `/site_audit/seo_ai_data/?card_id=${card_id}&keywords=${text}`,
+          beforeSend: function () {
+            $('.searchSpinner').removeClass('d-none')
+            $('.searchSpinner').addClass('d-block')
+            $(".searchSpinner").show()
+          },
+          success: function (res) {
+            $('#submit_description').prop('disabled', false)
+            $("#copy_text").addClass("d-flex")
+            $("#copy_text").removeClass("d-none")
+            $(".typed-cursor").hide()
+            if (res.status) {
+              $('.searchSpinner').addClass('d-none')
+              $(".searchSpinner").hide()
+              $('#markdown').removeClass('d-none');
+              var richText = res.data;
+              var formattedText = richText.replace(/\n/g, '<br>').trim();
+              $('#markdown').empty();
+              $(".typed-cursor").hide()
+              var text = formattedText.replace(/<br>/g, '\n');
+              var i = 0;
+              $("#richText").css("display", "block")
+              $('html, body').animate({
+                scrollTop: $("#richText").offset().top
+              }, 1);
+              var textarea = $('#markdown');
+              // Convert the text to markdown
+              var markdown = marked(text, { breaks: true });
+              // Destroy the previous instance of Typed.js, if any
+              if (typeof typed !== 'undefined') {
+                typed.destroy();
+              }
+              // Initialize typed.js with the markdown as the typed text
+              var markdownTextarea = document.getElementById('markdown');
+
+              typed = new Typed('#markdown', {
+                strings: [markdown],
+                typeSpeed: 10, // Adjust the typing speed as needed
+                onComplete: function() {
+                  const container = $('#markdown')[0];
+                  const lastChild = container.lastChild;
+                  lastChild.scrollIntoView({behavior: 'smooth', block: 'start'});
+                }
+              });
+              $(".typed-cursor").hide()
+            }
+          },
+   
+        })
+      });
+    });
+
+    $('#send_description').on('input keypress keyup change', function () {
+      let sen_length = $(this).val().length;
+      if (sen_length > 0) {
+        $('#submit_sentences').prop('disabled', false)
+      } else {
+        $('#markdown').addClass('d-none');
+        $('#submit_sentences').prop('disabled', true)
+      }
+    })
+    $('#clear_txt').on('click', function () {
+      $('#submit_description').prop('disabled', true);
+      $('#send_description').val('')
+      //  $('#submit_description').prop('disabled', true)
+      $('#markdown').addClass('d-none');
+      $("#copy_text").addClass("d-none")
+      $("#copy_text").removeClass("d-flex")
+
+    })
+
+    $(document).on('click', '.copyJson', function () {
+      let typeText = $('#markdown').text();
+      if (navigator.clipboard) {
+        navigator.clipboard.writeText(typeText)
+          .then(function () {
+            ShowNoty('Text copied to clipboard', 'success');
+          })
+          .catch(function (error) {
+            console.error('Failed to copy text: ', "error");
+          });
+      } else {
+        ShowNoty('Your browser does not support the Clipboard API. Please select the text and use the keyboard shortcut to copy (e.g. Ctrl+C or Command+C).', 'error')
+      }
+    })
+
+    $(document).on('click', '.card', function (e) {
+      const cardId = $(this).data('id'); // get the ID of the clicked card
+      // check if the clicked card is the same as the currently open card
+      if (cardId === openCardId) {
+        $("#input_keyword").addClass('d-none'); // close the section
+        openCardId = null; // reset the variable
+      } else {
+        $("#input_keyword").removeClass('d-none'); // open the section
+        openCardId = cardId; // update the variable
+      }
+    });
+  })
+  $(function () {
+   
+    $("#per_pages_select").change(function () {
+      var newPerPage = parseInt($(this).val());
+      $("div.holder").jPages("destroy").jPages({
+        containerID: "cards",
+        perPage: newPerPage
+      });
+    });
+  });
+
+  ; (function ($, window, document, undefined) {
+
+    var name = "jPages",
+      instance = null,
+      defaults = {
+        containerID: "",
+        first: false,
+        previous: "Prev",
+        next: "Next",
+        last: false,
+        links: false,
+        startPage: 1,
+        startPage: 1,
+        perPage: 10,
+        midRange: 5,
+        startRange: 1,
+        endRange: 1,
+        keyBrowse: false,
+        scrollBrowse: false,
+        pause: 0,
+        clickStop: false,
+        delay: 50,
+        direction: "forward",
+        animation: "",
+        fallback: 400,
+        minHeight: true,
+        callback: undefined
+      };
+
+    function Plugin(element, options) {
+      this.options = $.extend({}, defaults, options);
+
+      this._container = $("#" + this.options.containerID);
+      if (!this._container.length) return;
+
+      this.jQwindow = $(window);
+      this.jQdocument = $(document);
+
+      this._holder = $(element);
+      this._nav = {};
+
+      this._first = $(this.options.first);
+      this._previous = $(this.options.previous);
+      this._next = $(this.options.next);
+      this._last = $(this.options.last);
+
+      /* only visible items! */
+      this._items = this._container.children(":visible");
+      this._itemsShowing = $([]);
+      this._itemsHiding = $([]);
+
+      this._numPages = Math.ceil(this._items.length / this.options.perPage);
+      this._currentPageNum = this.options.startPage;
+
+      this._clicked = false;
+      this._cssAnimSupport = this.getCSSAnimationSupport();
+
+      this.init();
+    }
+
+    Plugin.prototype = {
+      constructor: Plugin,
+      getCSSAnimationSupport: function () {
+        var animation = false,
+          animationstring = 'animation',
+          keyframeprefix = '',
+          domPrefixes = 'Webkit Moz O ms Khtml'.split(' '),
+          pfx = '',
+          elm = this._container.get(0);
+
+        if (elm.style.animationName) animation = true;
+
+        if (animation === false) {
+          for (var i = 0; i < domPrefixes.length; i++) {
+            if (elm.style[domPrefixes[i] + 'AnimationName'] !== undefined) {
+              pfx = domPrefixes[i];
+              animationstring = pfx + 'Animation';
+              keyframeprefix = '-' + pfx.toLowerCase() + '-';
+              animation = true;
+              break;
+            }
+          }
+        }
+        return animation;
+      },
+
+      init: function () {
+        this.setStyles();
+        this.setNav();
+        this.paginate(this._currentPageNum);
+        this.setMinHeight();
+      },
+      setStyles: function () {
+        var requiredStyles = "<style>" +
+          ".jp-invisible { visibility: hidden !important; } " +
+          ".jp-hidden { display: none !important; }" +
+          "</style>";
+        $(requiredStyles).appendTo("head");
+
+        if (this._cssAnimSupport && this.options.animation.length)
+          this._items.addClass("animated jp-hidden");
+        else this._items.hide();
+
+      },
+
+      setNav: function () {
+        var navhtml = this.writeNav();
+
+        this._holder.each(this.bind(function (index, element) {
+          var holder = $(element);
+          holder.html(navhtml);
+          this.cacheNavElements(holder, index);
+          this.bindNavHandlers(index);
+          this.disableNavSelection(element);
+        }, this));
+
+        if (this.options.keyBrowse) this.bindNavKeyBrowse();
+        if (this.options.scrollBrowse) this.bindNavScrollBrowse();
+      },
+
+      writeNav: function () {
+        var i = 1, navhtml;
+        navhtml = this.writeBtn("first") + this.writeBtn("previous");
+
+        for (; i <= this._numPages; i++) {
+          if (i === 1 && this.options.startRange === 0) navhtml += "<span>...</span>";
+          if (i > this.options.startRange && i <= this._numPages - this.options.endRange)
+            navhtml += "<a href='#' class='jp-hidden'>";
+          else
+            navhtml += "<a>";
+
+          switch (this.options.links) {
+            case "numeric":
+              navhtml += i;
+              break;
+            case "blank":
+              break;
+            case "title":
+              var title = this._items.eq(i - 1).attr("data-title");
+              navhtml += title !== undefined ? title : "";
+              break;
+          }
+
+          navhtml += "</a>";
+          if (i === this.options.startRange || i === this._numPages - this.options.endRange)
+            navhtml += "<span>...</span>";
+        }
+        navhtml += this.writeBtn("next") + this.writeBtn("last") + "</div>";
+        return navhtml;
+      },
+
+      writeBtn: function (which) {
+
+        return this.options[which] !== false && !$(this["_" + which]).length ?
+          "<a class='jp-" + which + "'>" + this.options[which] + "</a>" : "";
+
+      },
+
+      cacheNavElements: function (holder, index) {
+        this._nav[index] = {};
+        this._nav[index].holder = holder;
+        this._nav[index].first = this._first.length ? this._first : this._nav[index].holder.find("a.jp-first");
+        this._nav[index].previous = this._previous.length ? this._previous : this._nav[index].holder.find("a.jp-previous");
+        this._nav[index].next = this._next.length ? this._next : this._nav[index].holder.find("a.jp-next");
+        this._nav[index].last = this._last.length ? this._last : this._nav[index].holder.find("a.jp-last");
+        this._nav[index].fstBreak = this._nav[index].holder.find("span:first");
+        this._nav[index].lstBreak = this._nav[index].holder.find("span:last");
+        this._nav[index].pages = this._nav[index].holder.find("a").not(".jp-first, .jp-previous, .jp-next, .jp-last");
+        this._nav[index].permPages =
+          this._nav[index].pages.slice(0, this.options.startRange)
+            .add(this._nav[index].pages.slice(this._numPages - this.options.endRange, this._numPages));
+        this._nav[index].pagesShowing = $([]);
+        this._nav[index].currentPage = $([]);
+      },
+
+      bindNavHandlers: function (index) {
+        var nav = this._nav[index];
+
+        // default nav
+        nav.holder.bind("click.jPages", this.bind(function (evt) {
+          var newPage = this.getNewPage(nav, $(evt.target));
+          if (this.validNewPage(newPage)) {
+            this._clicked = true;
+            this.paginate(newPage);
+          }
+          evt.preventDefault();
+        }, this));
+
+        // custom first
+        if (this._first.length) {
+          this._first.bind("click.jPages", this.bind(function () {
+            if (this.validNewPage(1)) {
+              this._clicked = true;
+              this.paginate(1);
+            }
+          }, this));
+        }
+
+        // custom previous
+        if (this._previous.length) {
+          this._previous.bind("click.jPages", this.bind(function () {
+            var newPage = this._currentPageNum - 1;
+            if (this.validNewPage(newPage)) {
+              this._clicked = true;
+              this.paginate(newPage);
+            }
+          }, this));
+        }
+
+        // custom next
+        if (this._next.length) {
+          this._next.bind("click.jPages", this.bind(function () {
+            var newPage = this._currentPageNum + 1;
+            if (this.validNewPage(newPage)) {
+              this._clicked = true;
+              this.paginate(newPage);
+            }
+          }, this));
+        }
+
+        // custom last
+        if (this._last.length) {
+          this._last.bind("click.jPages", this.bind(function () {
+            if (this.validNewPage(this._numPages)) {
+              this._clicked = true;
+              this.paginate(this._numPages);
+            }
+          }, this));
+        }
+
+      },
+
+      disableNavSelection: function (element) {
+        if (typeof element.onselectstart != "undefined")
+          element.onselectstart = function () {
+            return false;
+          };
+        else if (typeof element.style.MozUserSelect != "undefined")
+          element.style.MozUserSelect = "none";
+        else
+          element.onmousedown = function () {
+            return false;
+          };
+      },
+
+      bindNavKeyBrowse: function () {
+        this.jQdocument.bind("keydown.jPages", this.bind(function (evt) {
+          var target = evt.target.nodeName.toLowerCase();
+          if (this.elemScrolledIntoView() && target !== "input" && target != "textarea") {
+            var newPage = this._currentPageNum;
+
+            if (evt.which == 37) newPage = this._currentPageNum - 1;
+            if (evt.which == 39) newPage = this._currentPageNum + 1;
+
+            if (this.validNewPage(newPage)) {
+              this._clicked = true;
+              this.paginate(newPage);
+            }
+          }
+        }, this));
+      },
+
+      elemScrolledIntoView: function () {
+        var docViewTop, docViewBottom, elemTop, elemBottom;
+        docViewTop = this.jQwindow.scrollTop();
+        docViewBottom = docViewTop + this.jQwindow.height();
+        elemTop = this._container.offset().top;
+        elemBottom = elemTop + this._container.height();
+        return ((elemBottom >= docViewTop) && (elemTop <= docViewBottom));
+      },
+
+      bindNavScrollBrowse: function () {
+        this._container.bind("mousewheel.jPages DOMMouseScroll.jPages", this.bind(function (evt) {
+          var newPage = (evt.originalEvent.wheelDelta || -evt.originalEvent.detail) > 0 ?
+            (this._currentPageNum - 1) : (this._currentPageNum + 1);
+          if (this.validNewPage(newPage)) {
+            this._clicked = true;
+            this.paginate(newPage);
+          }
+          evt.preventDefault();
+          return false;
+        }, this));
+      },
+
+      getNewPage: function (nav, target) {
+        if (target.is(nav.currentPage)) return this._currentPageNum;
+        if (target.is(nav.pages)) return nav.pages.index(target) + 1;
+        if (target.is(nav.first)) return 1;
+        if (target.is(nav.last)) return this._numPages;
+        if (target.is(nav.previous)) return nav.pages.index(nav.currentPage);
+        if (target.is(nav.next)) return nav.pages.index(nav.currentPage) + 2;
+      },
+
+      validNewPage: function (newPage) {
+        return newPage !== this._currentPageNum && newPage > 0 && newPage <= this._numPages;
+      },
+
+      paginate: function (page) {
+        var itemRange, pageInterval;
+        itemRange = this.updateItems(page);
+        pageInterval = this.updatePages(page);
+        this._currentPageNum = page;
+        if ($.isFunction(this.options.callback))
+          this.callback(page, itemRange, pageInterval);
+
+        this.updatePause();
+      },
+
+      updateItems: function (page) {
+        var range = this.getItemRange(page);
+        this._itemsHiding = this._itemsShowing;
+        this._itemsShowing = this._items.slice(range.start, range.end);
+        if (this._cssAnimSupport && this.options.animation.length) this.cssAnimations(page);
+        else this.jQAnimations(page);
+        return range;
+      },
+
+      getItemRange: function (page) {
+        var range = {};
+        range.start = (page - 1) * this.options.perPage;
+        range.end = range.start + this.options.perPage;
+        if (range.end > this._items.length) range.end = this._items.length;
+        return range;
+      },
+
+      cssAnimations: function (page) {
+        clearInterval(this._delay);
+
+        this._itemsHiding
+          .removeClass(this.options.animation + " jp-invisible")
+          .addClass("jp-hidden");
+
+        this._itemsShowing
+          .removeClass("jp-hidden")
+          .addClass("jp-invisible");
+
+        this._itemsOriented = this.getDirectedItems(page);
+        this._index = 0;
+
+        this._delay = setInterval(this.bind(function () {
+          if (this._index === this._itemsOriented.length) clearInterval(this._delay);
+          else {
+            this._itemsOriented
+              .eq(this._index)
+              .removeClass("jp-invisible")
+              .addClass(this.options.animation);
+          }
+          this._index = this._index + 1;
+        }, this), this.options.delay);
+      },
+
+      jQAnimations: function (page) {
+        clearInterval(this._delay);
+        this._itemsHiding.addClass("jp-hidden");
+        this._itemsShowing.fadeTo(0, 0).removeClass("jp-hidden");
+        this._itemsOriented = this.getDirectedItems(page);
+        this._index = 0;
+        this._delay = setInterval(this.bind(function () {
+          if (this._index === this._itemsOriented.length) clearInterval(this._delay);
+          else {
+            this._itemsOriented
+              .eq(this._index)
+              .fadeTo(this.options.fallback, 1);
+          }
+          this._index = this._index + 1;
+        }, this), this.options.delay);
+      },
+
+      getDirectedItems: function (page) {
+        var itemsToShow;
+
+        switch (this.options.direction) {
+          case "backwards":
+            itemsToShow = $(this._itemsShowing.get().reverse());
+            break;
+          case "random":
+            itemsToShow = $(this._itemsShowing.get().sort(function () {
+              return (Math.round(Math.random()) - 0.5);
+            }));
+            break;
+          case "auto":
+            itemsToShow = page >= this._currentPageNum ?
+              this._itemsShowing : $(this._itemsShowing.get().reverse());
+            break;
+          default:
+            itemsToShow = this._itemsShowing;
+        }
+
+        return itemsToShow;
+      },
+
+      updatePages: function (page) {
+        var interval, index, nav;
+        interval = this.getInterval(page);
+        for (index in this._nav) {
+          if (this._nav.hasOwnProperty(index)) {
+            nav = this._nav[index];
+            this.updateBtns(nav, page);
+            this.updateCurrentPage(nav, page);
+            this.updatePagesShowing(nav, interval);
+            this.updateBreaks(nav, interval);
+          }
+        }
+        return interval;
+      },
+
+      getInterval: function (page) {
+        var neHalf, upperLimit, start, end;
+        neHalf = Math.ceil(this.options.midRange / 2);
+        upperLimit = this._numPages - this.options.midRange;
+        start = page > neHalf ? Math.max(Math.min(page - neHalf, upperLimit), 0) : 0;
+        end = page > neHalf ?
+          Math.min(page + neHalf - (this.options.midRange % 2 > 0 ? 1 : 0), this._numPages) :
+          Math.min(this.options.midRange, this._numPages);
+        return { start: start, end: end };
+      },
+
+      updateBtns: function (nav, page) {
+        if (page === 1) {
+          nav.first.addClass("jp-disabled");
+          nav.previous.addClass("jp-disabled");
+        }
+        if (page === this._numPages) {
+          nav.next.addClass("jp-disabled");
+          nav.last.addClass("jp-disabled");
+        }
+        if (this._currentPageNum === 1 && page > 1) {
+          nav.first.removeClass("jp-disabled");
+          nav.previous.removeClass("jp-disabled");
+        }
+        if (this._currentPageNum === this._numPages && page < this._numPages) {
+          nav.next.removeClass("jp-disabled");
+          nav.last.removeClass("jp-disabled");
+        }
+      },
+
+      updateCurrentPage: function (nav, page) {
+        nav.currentPage.removeClass("jp-current");
+        nav.currentPage = nav.pages.eq(page - 1).addClass("jp-current");
+      },
+
+      updatePagesShowing: function (nav, interval) {
+        var newRange = nav.pages.slice(interval.start, interval.end).not(nav.permPages);
+        nav.pagesShowing.not(newRange).addClass("jp-hidden");
+        newRange.not(nav.pagesShowing).removeClass("jp-hidden");
+        nav.pagesShowing = newRange;
+      },
+
+      updateBreaks: function (nav, interval) {
+        if (
+          interval.start > this.options.startRange ||
+          (this.options.startRange === 0 && interval.start > 0)
+        ) nav.fstBreak.removeClass("jp-hidden");
+        else nav.fstBreak.addClass("jp-hidden");
+
+        if (interval.end < this._numPages - this.options.endRange) nav.lstBreak.removeClass("jp-hidden");
+        else nav.lstBreak.addClass("jp-hidden");
+      },
+
+      callback: function (page, itemRange, pageInterval) {
+        var pages = {
+          current: page,
+          interval: pageInterval,
+          count: this._numPages
+        },
+          items = {
+            showing: this._itemsShowing,
+            oncoming: this._items.slice(itemRange.start + this.options.perPage, itemRange.end + this.options.perPage),
+            range: itemRange,
+            count: this._items.length
+          };
+
+        pages.interval.start = pages.interval.start + 1;
+        items.range.start = items.range.start + 1;
+        this.options.callback(pages, items);
+      },
+
+      updatePause: function () {
+        if (this.options.pause && this._numPages > 1) {
+          clearTimeout(this._pause);
+          if (this.options.clickStop && this._clicked) return;
+          else {
+            this._pause = setTimeout(this.bind(function () {
+              this.paginate(this._currentPageNum !== this._numPages ? this._currentPageNum + 1 : 1);
+            }, this), this.options.pause);
+          }
+        }
+      },
+
+      setMinHeight: function () {
+        if (this.options.minHeight && !this._container.is("table, tbody")) {
+          setTimeout(this.bind(function () {
+            this._container.css({ "min-height": this._container.css("height") });
+          }, this), 1000);
+        }
+      },
+
+      bind: function (fn, me) {
+        return function () {
+          return fn.apply(me, arguments);
+        };
+      },
+
+      destroy: function () {
+        this.jQdocument.unbind("keydown.jPages");
+        this._container.unbind("mousewheel.jPages DOMMouseScroll.jPages");
+
+        if (this.options.minHeight) this._container.css("min-height", "");
+        if (this._cssAnimSupport && this.options.animation.length)
+          this._items.removeClass("animated jp-hidden jp-invisible " + this.options.animation);
+        else this._items.removeClass("jp-hidden").fadeTo(0, 1);
+        this._holder.unbind("click.jPages").empty();
+      }
+
+    };
+
+    $.fn[name] = function (arg) {
+      var type = $.type(arg);
+
+      if (type === "object") {
+        if (this.length && !$.data(this, name)) {
+          instance = new Plugin(this, arg);
+          this.each(function () {
+            $.data(this, name, instance);
+          });
+        }
+        return this;
+      }
+
+      if (type === "string" && arg === "destroy") {
+        instance.destroy();
+        this.each(function () {
+          $.removeData(this, name);
+        });
+        return this;
+      }
+
+      if (type === 'number' && arg % 1 === 0) {
+        if (instance.validNewPage(arg)) instance.paginate(arg);
+        return this;
+      }
+
+      return this;
+    };
+
+  })(jQuery, window, document);
+
+
+</script>
+{% endblock %}

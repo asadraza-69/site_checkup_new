@@ -1,0 +1,133 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load user_perm %}
+{% block extra_style %}
+<style>
+    .right_segment .ui.header {
+        margin-bottom: 10px !important;
+    }
+
+    #dynamicTableModal .content {
+        max-height: 300px !important;
+        overflow-y: auto !important;
+    }
+
+    #editable_modal_form label {
+        font-weight: bold !important;
+    }
+
+    #dynamicTableModal_ListTag [data-tooltip]:after {
+        font-size: 12px !important;
+    }
+
+    .page_header #pageListTitle {
+        display: none !important;
+    }
+
+    .audio_segment {
+        margin-top: 50px;
+        height: 500px;
+        padding-top: 30px;
+        margin-bottom: 50px;
+    }
+
+    #waveform {
+        background: rgba(0, 0, 0, 0.8);
+        margin-bottom: 10px;
+    }
+
+    .left_btn {
+        margin-left: 20px !important;
+    }
+
+    .show_time {
+        font-size: 20px;
+        font-weight: bold;
+    }
+
+    #volume {
+        margin-top: 9px;
+        cursor: pointer;
+        margin-left: 35px;
+
+    }
+
+    #toggle_mute {
+        position: absolute;
+        top: 24px;
+        font-size: 22px !important;
+        cursor: pointer;
+    }
+
+    .tooltip .tooltiptext {
+        visibility: hidden;
+        width: 120px;
+        background-color: #555;
+        color: #fff;
+        text-align: center;
+        border-radius: 6px;
+        padding: 5px 0;
+        position: absolute;
+        z-index: 1;
+        bottom: 125%;
+        left: 50%;
+        margin-left: -60px;
+        opacity: 0;
+        transition: opacity 0.3s;
+    }
+
+    .tooltip .tooltiptext::after {
+        content: "";
+        position: absolute;
+        top: 100%;
+        left: 50%;
+        margin-left: -5px;
+        border-width: 5px;
+        border-style: solid;
+        border-color: #555 transparent transparent transparent;
+    }
+
+    .tooltip:hover .tooltiptext {
+        visibility: visible;
+        opacity: 1;
+    }
+
+    @media only screen and (max-width: 768px) {
+        .dataTables_wrapper .dataTables_filter {
+            margin-bottom: 0px !important;
+        }
+    }
+</style>
+{% endblock %}
+
+{% block body %}
+{% get_user_perm "can_view_user" as can_view_users %}
+{%if can_view_users%}
+<div class="right_segment">
+    <div id="tableApp"></div>
+</div>
+{% else %}
+<div class="right_segment" style="margin-top: 100px;">
+    <P>You don't have required permission</P>
+</div>
+{%endif%}
+{% endblock %}
+
+
+{% block extra_script %}
+{% get_user_perm "can_view_user" as can_view_users %}
+{% get_user_perm "can_add_user" as can_add_users %}
+<script>
+    var parama = window.location.search;
+    {%if can_view_users%}
+    getAndRenderDynamicTable('/user_management/users_listview/' + parama + '', 'dynamicTable');
+    {%endif%}
+    $(document).ajaxComplete(function (event, xhr, settings) {
+        if (settings.url == '/user_management/users_listview/') {
+
+            $('.modelFormTrigger').remove();
+        }
+    });
+
+</script>
+{% endblock %}

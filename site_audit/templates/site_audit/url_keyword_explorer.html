@@ -1,0 +1,567 @@
+{% extends "base2.html" %}
+{% load static %}
+
+{% block extrahead %}
+
+<style>
+    .zoom {
+        border: transparent;
+        
+    }
+
+    .card-text{
+    font-size: 15px;
+    font-weight: 700;
+    color: #707070
+    }
+
+    .tooltp{
+        font-size:13px!important
+    }
+.card {
+   border-bottom: 1px solid rgba(0,0,0,.125)!important;
+}
+.card-body {
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    height: 100px;
+    border-radius: 20px;
+    padding: 20px 25px;
+    background: #f3f5f7;
+}
+</style>
+{% endblock %}
+
+{% block content %}
+
+<div class="container" data-select2-id="993">
+    <div class="mt-5 mb-3">
+        <h4 class="title mb-4 fw-400 pb-2"> Website's keywords</h4>    
+    </div>
+    <div class="height">
+        <div class="card" style="padding: 28px 16px 28px 16px; border-radius: 2px;">
+            <form id="SearchKeyWord" data-select2-id="SearchKeyWord">
+                <div class="row g-3" data-select2-id="992">
+                    <div class="col-md-7">
+                        <label class="form-label">
+                            Get Website's detailed keywords overview
+                        </label>
+                        <input type="hidden" name="full_website" id="inptvalue" value="">
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <select class="custom-select httpClass form-control" id="httpUrl">
+                                    <option selected="">https://</option>
+                                    <option>http://</option>
+                                </select>
+                            </div>
+                            <input type="text" class="form-control SearchDomain" id="domainurl" required="" placeholder="Enter a domain (i.e. “www.example.com”)" aria-label="website" name="website">
+                        </div>
+                        <div id="status" style="color: red; font-size: 12px; display: none;"></div>
+                    </div>
+                    <div class="col-md-3" data-select2-id="991">
+                        <label class="form-label">
+                            Location
+                        </label>
+                        <select  class="form-control form-control-sm CountrySelect select2-hidden-accessible" required="" name="country" data-select2-id="1" tabindex="-1" aria-hidden="true"></select>
+                    </div>
+                    <div class="col-md-2">
+                        <label class="form-label opacity-0">
+                            Search
+                        </label>
+                        <button type="submit" class="btn btn-primary w-100 SearchKeyword d-flex align-items-center justify-content-center gap-2 disabled">
+                            <div class="searchSpinner d-none ">
+                                <div class="spinner-border spinner-border-sm" role="status">
+                                    <span class="visually-hidden">Loading...</span>
+                                    </div>
+                            </div> SEARCH</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+    <h4 class="title mb-4 fw-400 pb-2 mt-3"> Traffic Overview: <span style='color:#000000' id="SearchText"></span></h4>
+    <div class="row row-cols-1 row-cols-md-4 g-4 TrafficOverviewCards">
+        <div class="col">
+            <div class="card zoom" style='border-bottom: transparent!important'>
+                <div class="card-body">
+                    <span class="card-title text-bold mb-2">SEARCH VOLUME
+                        <a href="#" class="tooltp mb-3 font-18 " data-bs-placement="right" data-bs-toggle="tooltip"
+                        title=""
+                        data-bs-original-title="Search volume is a metric that shows how many people are searching for a particular query."
+                        aria-label="Search volume is a metric that shows how many people are searching for a particular query."><i
+                            class="far fa-question-circle"></i></a>
+                         <!-- <span class="d-inline-block" tabindex="0" data-toggle="popover" title="" data-content="Search volume is a metric that shows how many people are searching for a particular query." data-bs-original-title="Search Volume">
+                            <img src="http://23.106.56.71:8081/static/user_management/img/question-default.474ef714.svg" class="QuestionMark">
+                        </span> -->
+                    </span>
+                    <p class="card-text" id="searchVolume">-
+                        <div class="count_spinner d-none">
+                            <div class="spinner-border text-primary spinner-border-sm" role="status">
+                                <span class="visually-hidden">Loading...</span>
+                            </div>
+                        </div>
+                    </p>
+                </div>
+            </div>
+        </div>
+        <div class="col">
+            <div class="card zoom" style='border-bottom: transparent!important'>
+                <div class="card-body">
+                    <span class="card-title text-bold mb-2">Competition level
+                        <a href="#" class="tooltp mb-3 font-18 " data-bs-placement="right" data-bs-toggle="tooltip"
+                        title=""
+                        data-bs-original-title="Keyword competition is the level of difficulty involved in ranking for a certain keyword. In essence, it gives you a sense of how many web pages you need to beat to claim a top spot in search engine rankings."
+                        aria-label="Keyword competition is the level of difficulty involved in ranking for a certain keyword. In essence, it gives you a sense of how many web pages you need to beat to claim a top spot in search engine rankings."><i
+                            class="far fa-question-circle"></i></a>
+                        <!-- <span class="d-inline-block" tabindex="0" data-toggle="popover" title="" data-content="Keyword competition is the level of difficulty involved in ranking for a certain keyword. In essence, it gives you a sense of how many web pages you need to beat to claim a top spot in search engine rankings." data-bs-original-title="Competition Level">
+                            <img src="http://23.106.56.71:8081/static/user_management/img/question-default.474ef714.svg" class="QuestionMark">
+                        </span> -->
+                    </span>
+                    <p class="card-text" id="competitionLevel">-
+                        <div class="count_spinner d-none">
+                            <div class="spinner-border text-primary spinner-border-sm" role="status">
+                                <span class="visually-hidden">Loading...</span>
+                            </div>
+                        </div>
+                    </p>
+                </div>
+            </div>
+        </div>
+        <div class="col">
+            <div class="card zoom" style='border-bottom: transparent!important'>
+                <div class="card-body">
+                    <span class="card-title text-bold mb-2">Low Bid
+                        <a href="#" class="tooltp mb-3 font-18 " data-bs-placement="right" data-bs-toggle="tooltip" 
+                        title=""
+                        data-bs-original-title="Low bid refers to the minimum amount you are able to pay for each click to have your ad displayed against a query."
+                        aria-label="Low bid refers to the minimum amount you are able to pay for each click to have your ad displayed against a query."><i
+                            class="far fa-question-circle"></i></a>
+                       <!--  <span class="d-inline-block" tabindex="0" data-toggle="popover" title="" data-content="Low bid refers to the minimum amount you are able to pay for each click to have your ad displayed against a query." data-bs-original-title="Low Bid">
+                            <img src="http://23.106.56.71:8081/static/user_management/img/question-default.474ef714.svg" class="QuestionMark">
+                        </span> -->
+                    </span>
+                    <p class="card-text" id="lowBid">-
+                        <div class="count_spinner d-none">
+                            <div class="spinner-border text-primary spinner-border-sm" role="status">
+                                <span class="visually-hidden">Loading...</span>
+                            </div>
+                        </div>
+                    </p>
+                </div>
+            </div>
+        </div>
+        <div class="col">
+            <div class="card zoom" style='border-bottom: transparent!important'>
+                <div class="card-body">
+                    <span class="card-title text-bold mb-2">High Bid
+                        <a href="#" class="tooltp mb-3 font-18 " data-bs-placement="right" data-bs-toggle="tooltip"
+                        title=""
+                        data-bs-original-title="High bid is the absolute most you are willing to pay for each click on your ad when it appears in response to a keyword or group of keywords."
+                        aria-label="High bid is the absolute most you are willing to pay for each click on your ad when it appears in response to a keyword or group of keywords."><i
+                            class="far fa-question-circle"></i></a>
+                      <!--  <span class="d-inline-block" tabindex="0" data-toggle="popover" title="" data-content="High bid is the absolute most you are willing to pay for each click on your ad when it appears in response to a keyword or group of keywords." data-bs-original-title="High Bid">
+                            <img src="http://23.106.56.71:8081/static/user_management/img/question-default.474ef714.svg" class="QuestionMark">
+                        </span> -->
+                    </span>
+                    <p class="card-text" id="highBid">-
+                        <div class="count_spinner d-none">
+                            <div class="spinner-border text-primary spinner-border-sm" role="status">
+                                <span class="visually-hidden">Loading...</span>
+                            </div>
+                        </div>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <section class="pt-2">
+        <div class="row justify-content-center hidetable">
+            <div class="col-lg-12 overflow-auto">
+                <div class="hideTable">
+                    <div id="tableApp"></div>
+                </div>
+            </div>
+        </div>
+        <div class="text-center">
+            <div id="ActionBtn"></div>
+        </div>
+    </section>
+</div>
+{% endblock %}
+{% block extrascript %}
+<script type="text/javascript" src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
+<script type="text/javascript" src="https://cdn.datatables.net/buttons/2.2.3/js/dataTables.buttons.min.js"></script>
+<script type="text/javascript" src="https://cdn.datatables.net/buttons/2.2.3/js/buttons.html5.min.js"></script>
+<script type="text/javascript" src="https://cdn.datatables.net/plug-ins/1.12.1/dataRender/ellipsis.js"></script>
+<script>
+
+    $(document).ready(function(){
+        const domainInput = document.getElementById("domainurl");
+        const searchButton = document.querySelector(".SearchKeyword");
+        
+        domainInput.addEventListener('input', function() {
+            const inputVal = this.value.trim().toLowerCase();
+            const validExtensions = ['.com', '.pk', '.net','.aero','.asia','.biz','.cat','.coop','.edu','.gov','.info','.int','.jobs','.mil','.mobi','.museum','.name','.org','.pro','.tel','.travel','.ac','.ad','.ae','.af','.ag','.ai','.al','.am','.an','.ao','.aq','.ar','.as','.at','.au','.aw','.ax','.az','.ba','.bb','.bd','.be','.bf','.bg','.bh','.bi','.bj','.bm','.bn','.bo','.br','.bs','.bt','.bv','.bw','.by','.bz','.ca','.cc','.cd','.cf','.cg','.ch','.ci','.ck','.cl','.cm','.cn','.co','.cr','.cu','.cv','.cx','.cy','.cz','.cz','.de','.dj','.dk','.dm','.do', '.dz', '.ec', '.ee', '.eg', '.er', '.es', '.et', '.eu', '.fi', '.fj', '.fk', '.fm', '.fo', '.fr', '.ga', '.gb', '.gd', '.ge', '.gf', '.gg', '.gh', '.gi', '.gl', '.gm', '.gn', '.gp', '.gq', '.gr', '.gs', '.gt', '.gu', '.gw', '.gy', '.hk', '.hm', '.hn','.hr', '.ht', '.hu', '.id', '.ie', '.il', '.im', '.in', '.io', '.iq', '.ir', '.is', '.it', '.je', '.jm', '.jo', '.jp', '.ke', '.kg', '.kh', '.ki', '.km', '.kn', '.kp', '.kr', '.kw', '.ky', '.kz', '.la', '.lb', '.lc', '.li', '.lk', '.lr', '.ls', '.lt', '.lu', '.lv', '.ly', '.ma', '.mc', '.md', '.me', '.mg', '.mh', '.mk', '.ml', '.mn', '.mo', '.mp', '.mr', '.ms', '.mt', '.mu', '.mv', '.mw', '.mx', '.my', '.mz', '.na', '.nc', '.ne', '.nf', '.ng', '.ni', '.nl', '.no', '.np', '.nr', '.nu', '.nz', '.nom', '.pa', '.pe', '.pf', '.pg', '.ph', '.pk', '.pl', '.pm', '.pn', '.pr', '.ps', '.pt', '.pw', '.py', '.qa', '.re', '.ra', '.rs', '.ru', '.rw', '.sa', '.sb', '.sc', '.sd', '.se', '.sg', '.sh', '.si', '.sj', '.sj', '.sk', '.sl', '.sm', '.sn', '.so', '.sr', '.st', '.su', '.sv', '.sy', '.sz', '.tc', '.td', '.tf', '.tg', '.th', '.tj', '.tk', '.tl', '.tm', '.tn', '.to', '.tp', '.tr', '.tt', '.tv', '.tw', '.tz', '.ua', '.ug', '.uk', '.us', '.uy', '.uz', '.va', '.vc', '.ve', '.vg', '.vi', '.vn', '.vu', '.wf', '.ws', '.ye', '.yt', '.yu', '.za', '.zm', '.zw', '.arpa', '.solutions'];
+            const lastExtension = validExtensions.find(ext => inputVal.endsWith(ext));
+          
+            if (lastExtension) {
+                searchButton.disabled = false;
+              } else {
+                searchButton.disabled = true;
+              }
+        });
+        
+    
+    })
+var httpVal = 'https://';
+var URLValue = "";
+ // http dropdown
+            
+ $(document).on('change','.httpClass',function(){
+            
+    httpVal = $("#httpUrl").children("option").filter(":selected").text()
+    $('#inptvalue').val(httpVal+''+URLValue)
+})
+$('#SearchKeyWord').submit(function(event) {
+    $(".searchSpinner").removeClass('d-none')
+    $(".count_spinner").removeClass('d-none')
+    $('.hideTable').css('display','none');
+    $("#searchVolume").html('');
+    $("#competitionLevel").html('');
+    $("#lowBid").html('');
+    $("#highBid").html('');
+    // var keyCode = $('#domainurl').val();
+    // // keyCode = keyCode.replace('#',' ');
+    // keyCode = keyCode.replace('$',' ');
+    // keyCode = keyCode.replace(',',' ');
+    
+    // $("#keyErrors").html("");
+    // var regex = /^[/\s[(.?)\]/{}".A-Za-z0-9]*$/;
+    // var isValid = regex.test(keyCode);
+    // if (!isValid) {
+    //      $("#keyErrors").html("Keyword contain non-standard characters like: \!@%*+;#");
+    //      return false;
+    // }
+        event.preventDefault();
+        var dataString = $("#SearchKeyWord").serialize();
+        // let Keyword = $(".Keyword").val();
+        // let Country = $(".CountrySelect").val();
+        // let SearchedWord = { 'Keyword': Keyword, 'country': Country }; //store a key/value
+        // localStorage.setItem('SearchedWord', JSON.stringify(SearchedWord)); //stringify object and store
+    
+        $.ajax({
+            url: '/site_audit/get_url_keyword_explorer_data/',
+            method: 'GET',
+            data: dataString,
+            success: function(response) {
+                $(".searchSpinner").addClass('d-none')
+                $(".count_spinner").addClass('d-none')
+                if (response.status == true) {
+                    $("#ActionBtn").empty();
+                    var arr = response.keyword_data.listview_data;
+                    var searchVolume = response.keyword_data.search_volume;
+                    var competitionLevel = response.keyword_data.competition_level;
+                    var lowBid = response.keyword_data.low_bid;
+                    var highBid = response.keyword_data.high_bid;
+                    $("#searchVolume").html(searchVolume);
+                    $("#competitionLevel").html(competitionLevel);
+                    $("#lowBid").html(lowBid);
+                    $("#highBid").html(highBid);
+                    
+                    $("#SearchText").html(response.top_keyword);
+                    $('.hideTable').css('display','block');
+                    // getAndRenderDynamicTable('../../research_keyword/keyword_data_listview/', 'dynamicTable');
+    
+                    renderDynamicTable(response, 'dynamicTable', extras = true, tableDiv = $('#tableApp'));
+                    // $("#keywordIdeas").empty();
+    
+                    // $("#keywordIdeas").append(
+                    //   "<table class='table table-striped'><thead><tr class='table-dark'></tr></thead><tbody></tbody></table>"
+                    // );
+                    // var thead = arr[0];
+                    // jQuery.each(thead, function (i, val) {
+                    //   $("#keywordIdeas table thead tr").append(
+                    //     '<th class="' + i + '_th">' + i + "</th>"
+                    //   );
+                    // });
+    
+                    // for (var key of Object.keys(arr)) {
+                    //   var arr2 = arr[key];
+    
+                    //   $("#keywordIdeas table tbody").append(
+                    //     "<tr><td>" +
+                    //       arr2.keyword +
+                    //       '</td><td class="sparkbar chart_' +
+                    //       [key] +
+                    //       '"></td><td>' +
+                    //       arr2.volume +
+                    //       "</td><td>" +
+                    //       arr2.cpc +
+                    //       "</td></tr>"
+                    //   );
+                    //   var objc = arr2.trend;
+    
+                    //   var sparkValues = Object.values(objc);
+    
+                    //   $(".chart_" + [key]).sparkline(sparkValues, {
+                    //     type: "bar",
+                    //     barWidth: 5,
+                    //     barSpacing: 2,
+                    //     fillColor: "",
+                    //     lineColor: "ccc",
+                    //     tooltipSuffix: "",
+                    //     width: 100,
+                    //     height: "30",
+                    //     barColor: "#e5e5e5",
+                    //     negBarColor: "333",
+                    //     stackedBarColor: ["ff0", "9f0", "999", "f60"],
+                    //     sliceColors: ["ff0", "9f0", "000", "f60"],
+                    //     offset: "30",
+                    //     borderWidth: 1,
+                    //     borderColor: "ccc",
+                    //   });
+                    // }
+    
+                    // ShowNoty("success!", "error");
+    
+                    // GetServiceCharges();
+                } else {
+                    $("#searchVolume").html('-');
+                    $("#competitionLevel").html('-');
+                    $("#lowBid").html('-');
+                    $("#highBid").html('-');
+                    $('#tableApp').html(
+                        "<h5> <strong> Sorry </strong> <span> No Data Found ! </span> </h5>"
+                    );
+                    ShowNoty("Something went wrong!", "error");
+                }
+            },
+            error: function(response) {
+                ShowNoty("Response failure!", "error");
+            },
+        });
+    })
+    
+    // $(".SearchKeyword").click(function(e) {
+    
+    
+    //     var dataString = $("#SearchKeyWord").serialize();
+    
+    //     console.log(dataString);
+    //     $.ajax({
+    //       type: "POST",
+    //        url: "/research_keyword/keyword_data_listview/",
+    //       // url: "/research_keyword/get_keyword_data/",
+    
+    //       data: dataString,
+    //       success: function (response) {
+    //         if (response.status == true) {
+    
+    
+    //           // getAndRenderDynamicTable('../../research_keyword/keyword_data_listview/', 'dynamicTable');
+    //           renderDynamicTable(response, 'dynamicTable', extras = true, tableDiv = $('#tableApp'));
+    //           $("#ActionBtn").append('<button type="button" class="btn btn-theme ViewAllIdeas">View all keyword ideas</button>'); 
+    //           // $("#keywordIdeas").empty();
+    //           var arr = response.keyword_data.listview_data;
+    //           var searchVolume = response.keyword_data.search_volume;
+    //           var competitionLevel = response.keyword_data.competition_level;
+    //           var lowBid = response.keyword_data.low_bid;
+    //           var highBid = response.keyword_data.high_bid;
+    //           $("#searchVolume").html(searchVolume);
+    //           $("#competitionLevel").html(competitionLevel);
+    //           $("#lowBid").html(lowBid);
+    //           $("#highBid").html(highBid);
+    //           // $("#keywordIdeas").append(
+    //           //   "<table class='table table-striped'><thead><tr class='table-dark'></tr></thead><tbody></tbody></table>"
+    //           // );
+    //           // var thead = arr[0];
+    //           // jQuery.each(thead, function (i, val) {
+    //           //   $("#keywordIdeas table thead tr").append(
+    //           //     '<th class="' + i + '_th">' + i + "</th>"
+    //           //   );
+    //           // });
+    
+    //           // for (var key of Object.keys(arr)) {
+    //           //   var arr2 = arr[key];
+    
+    //           //   $("#keywordIdeas table tbody").append(
+    //           //     "<tr><td>" +
+    //           //       arr2.keyword +
+    //           //       '</td><td class="sparkbar chart_' +
+    //           //       [key] +
+    //           //       '"></td><td>' +
+    //           //       arr2.volume +
+    //           //       "</td><td>" +
+    //           //       arr2.cpc +
+    //           //       "</td></tr>"
+    //           //   );
+    //           //   var objc = arr2.trend;
+    
+    //           //   var sparkValues = Object.values(objc);
+    
+    //           //   $(".chart_" + [key]).sparkline(sparkValues, {
+    //           //     type: "bar",
+    //           //     barWidth: 5,
+    //           //     barSpacing: 2,
+    //           //     fillColor: "",
+    //           //     lineColor: "ccc",
+    //           //     tooltipSuffix: "",
+    //           //     width: 100,
+    //           //     height: "30",
+    //           //     barColor: "#e5e5e5",
+    //           //     negBarColor: "333",
+    //           //     stackedBarColor: ["ff0", "9f0", "999", "f60"],
+    //           //     sliceColors: ["ff0", "9f0", "000", "f60"],
+    //           //     offset: "30",
+    //           //     borderWidth: 1,
+    //           //     borderColor: "ccc",
+    //           //   });
+    //           // }
+    
+    //           // ShowNoty("success!", "error");
+    
+    //           // GetServiceCharges();
+    //         } else {
+    //           ShowNoty("Something went wrong!", "error");
+    //         }
+    //       },
+    //       error: function (response) {
+    //         ShowNoty("Response failure!", "error");
+    //       },
+    //     });
+    //     e.preventDefault();
+    //     });
+    
+     
+    
+    function Get_country_languages() {
+        $.ajax({
+            type: "GET",
+            url: "/user_management/get_country_languages/",
+    
+            success: function(response) {
+                console.log(response,'response')
+                if (response.status == true) {
+    
+                    $('.CountrySelect').empty();
+                    $('.CountrySelect').html('<option></option')
+                    var json = response.country_languages;
+                    //  glob =JSON.stringify(json);
+                    var options = [];
+                    //  console.log('g',glob)
+                    for (var i = 0; i < json.length; i++) {
+    
+                        var obj = json[i];
+                        // console.log('obj',obj)
+                        let country = obj.Country;
+    
+                        let lang = obj.Language;
+                        let code = obj.code;
+                        options.push({ id: code + '_' + country + '_' + lang, abbreviation: code, text: country + ' / ' + lang });
+                    }
+    
+                    $('.CountrySelect').select2({
+                        placeholder: 'Select Location / Language',
+                        templateResult: formatCountry,
+                        data: options
+                    });
+    
+                    function formatCountry(country) {
+                        if (!country.id) {
+                            return country.text;
+                        }
+                        var $country = $(
+                            '<span class="flag-icon flag-icon-' + country.abbreviation.toLowerCase() + ' flag-icon-squared"></span>' + '<span style="margin-left:10px;">' + country.text + '</span>'
+                        );
+                        return $country;
+                    };
+    
+    
+    
+                } else {
+    
+                }
+             
+                $('.CountrySelect').val('us_United States_English').trigger('change');
+            },
+            error: function(response) {
+                alert('error');
+    
+            }
+        });
+    
+    }
+    
+    Get_country_languages();
+    
+    $('.CountrySelect').on('change', function() {
+        $(this).attr('value', this.text);
+    
+    
+    });
+    // $('#domainurl').on('keyup change paste', function() {
+    
+        
+    //     if($(this).val() != ""){
+    //         $(".SearchKeyword").removeClass('disabled')  
+    //     }
+    //     else{
+    //         $(".SearchKeyword").addClass('disabled')  
+    //     }
+       
+    
+    // });
+    function validateURL(URL) {
+        var re = new RegExp("^([0-9A-Za-z-\\.@:%_\+~#=]+)+((\\.[a-zA-Z]{2,3})+)(/(.)*)?(\\?(.)*)?");
+        return re.test(URL);
+    }
+    
+   
+    $('#domainurl').on('input change paste', function() {
+        var re = new RegExp("^([0-9A-Za-z-\\.@:%_\+~#=]+)+((\\.[a-zA-Z]{2,3})+)(/(.)*)?(\\?(.)*)?");
+
+        URLValue = $('#domainurl').val();
+        URLValue = URLValue.replace('https://','');
+        URLValue = URLValue.replace('http://','');
+    //  console.log('URLValue',URLValue);
+     $('#domainurl').val(URLValue);
+     $('#inptvalue').val(httpVal+''+URLValue)
+        $("#status").hide();
+        $('#domainurl').css('border-bottom-color', '#d4a640');
+        if($(this).val() != ""){
+            $(".SearchKeyword").removeClass('disabled')  
+        }
+        else{
+            $(".SearchKeyword").addClass('disabled')  
+        }
+        if (URLValue == "") {
+            $("#status").hide();
+            $('#domainurl').css('border-bottom-color', '#d4a640');
+            $(".SearchDomain").removeClass("disabled");
+        } else if (validateURL(URLValue)) {
+            $("#status").hide();
+            $('#domainurl').css('border-bottom-color', '#d4a640')
+            $(".SearchDomain").removeClass("disabled");
+        } else {
+            $("#status").html("Please enter valid website url (e.g www.example.com)");
+            $("#status").show();
+            $('.hidetable').css('display','none')
+            $('#domainurl').css('border-bottom-color', 'red');
+            $(".SearchDomain").addClass("disabled");
+        }
+
+
+       
+    });
+    $(document).on('click','.SearchKeyword',function(){
+        $('.hidetable').css('display','block')
+    })
+
+    
+
+</script>
+
+{% endblock %}

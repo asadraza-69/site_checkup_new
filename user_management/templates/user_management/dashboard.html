@@ -1,0 +1,2009 @@
+{% extends "bw_base.html" %} {% load bootstrap5 %} {% load static %} {% load humanize %} {% block extrahead %}
+<link href="https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/0.8.2/css/flag-icon.min.css" rel="stylesheet" />
+
+<style>
+    span.KWord_.px-2.m-1 {
+    display: inline-block;
+}
+  span.KWord_{
+      color: #fff;
+  }
+    .compihttpClass   {
+        margin-top: 30px;
+}
+    .httpClassEdit option{
+        color: #000;
+    }
+    .remVal{
+        cursor: pointer;
+        color: #6c6b6b;
+        margin-left: 5px;
+    }
+    .remVal_create{
+        cursor: pointer;
+        color: #6c6b6b;
+        margin-left: 5px;
+    }
+    .description {
+        overflow: hidden;
+    }
+    
+    .info-title {
+        color: #3c4858;
+        margin: 30px 0 15px;
+    }
+    
+    .info {
+        max-width: 360px;
+        margin: 0 auto;
+        padding: 0;
+    }
+    
+    .icon.icon-rose {
+        color: #e91e63;
+    }
+    
+    .icon {
+        float: left;
+        margin-top: 24px;
+        margin-right: 10px;
+    }
+    
+    .icon.icon-primary {
+        color: #9c27b0;
+    }
+    
+    .icon {
+        float: left;
+        margin-top: 24px;
+        margin-right: 10px;
+    }
+    
+    .icon.icon-info {
+        color: #00bcd4;
+    }
+    
+    .icon {
+        float: left;
+        margin-top: 24px;
+        margin-right: 10px;
+    }
+    
+    .info .icon>i {
+        font-size: 3.85rem;
+    }
+    
+    .col-md-6.text-left {
+        margin-top: -18px;
+    }
+    
+    input[type="button"]:disabled {
+       pointer-events: none;
+    }
+    
+    div#status {
+        position: absolute;
+        top: 0;
+        right: 0;
+        color: red;
+    }
+    .select2-container--default .select2-selection--multiple {
+        border: none !important;
+        min-height: calc(2.25rem + 2px);
+    }
+    
+    .modal-header {
+        /* border-bottom: none !important; */
+        padding: 9px 15px 0px 19px!important;
+    }
+    select#compihttpUrlEdit {
+    background: transparent;
+    border: transparent;
+    border-bottom: 2px solid #6c6b6b;
+    margin-right: 16px;
+    
+}
+select#compihttpUrl {
+    background: transparent;
+    border: transparent;
+    border-bottom: 2px solid #6c6b6b;
+    margin-right: 16px;
+
+}
+</style>
+{% endblock %}
+<!-- <body style="background-color: #666666;"> -->
+{% block content %}
+<!-- popup -->
+<!-- Button trigger modal -->
+
+<input type="hidden" id="authenticUser" value="{{ request.user.is_authenticated }}">
+<div class="modal" id="projectModal">
+    <div class="modal-dialog modal-lg modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header text-center">
+                <!-- progressbar -->
+                <ul id="progressbar">
+                    <li class="active" id="project"><strong></strong></li>
+                    <li id="location"><strong></strong></li>
+                    <li id="trackW"><strong></strong></li>
+                    <li id="trackCompi"><strong></strong></li>
+                    {% if not request.user.is_authenticated %}
+                    <li id="register"><strong></strong></li>
+                    {% endif %}
+                    <li id="confirm"><strong></strong></li>
+                </ul>
+                <button type="button" class="btn-close btn-close-white reset"  aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-md-12 mx-0">
+                      
+                        <form id="msform">
+                            <input type="hidden" name="keywords" id="tagsArray">
+                            <input type="hidden" name="competitors" id="compi">
+                            <!-- fieldsets -->
+                            <fieldset>
+                                <div class="Heading_c">Create Your Project</div>
+                                <div class="sc-VpDxH lcZYjC" style="margin-top: -20px;"></div>
+                             
+                                <div class="">
+                                    {% csrf_token %}
+                                   
+                                    <input type="hidden" name="location" id="selectedDPvalues">
+                                    <div class="input-group mx-auto col-md-6 col-sm-6 col-xs-12">
+                                    <div class="input-group-prepend">
+                                        <select class="custom-select httpClass form-control-sm" id="httpUrl">
+                                           
+                                            <option selected>https://</option>
+                                            <option>http://</option>
+                                            <!-- <option value="3">Three</option> -->
+                                          </select>
+                                      </div>
+                                    <input type="hidden" name="website_url" id="inptvalue" />
+                                    <input type="text" autocomplete="off" id="myurl" name="web" class="form-control" placeholder="www.example.com"  />
+                                </div>
+                                    <div id="myurl_msg" class="text-danger text-center" style="display:none;"><small>Please enter valid website url (e.g www.example.com)</small></div>
+                                    <div id="status"></div>
+                                   
+                                    <br>
+                                    <input type="text" id="webNam" autocomplete="off" name="website_name" class="mx-auto form-control col-md-6 col-sm-6 col-xs-12" placeholder="Website name" required />
+                                    <div id="webNam_msg" class="text-danger text-center" style="display:none;"><small>Enter Website Name</small></div>
+                                </div>
+                                <br>
+                                <button type="button" class="btn btn-sm btn-theme action-button reset">Close</button>
+                                <input type="button" name="next" id="first_next" class="next action-button btn btn-sm btn-theme" disabled value="Next" />
+                            </fieldset>
+                            <fieldset>
+                                <div class="">
+                                    <div class="Heading_c">Choose your Location</div>
+                                     <div class="Heading"></div>
+                                    <div class="sc-VpDxH lcZYjC"></div>
+                                    <div class="row justify-content-center mt-1">
+                                        <div class="col-lg-6">
+                                            <select class="list-dt CountrySelect"  name="country">
+                      </select>
+                                            <div id="status"></div>
+                                            <ul id="selectCountry">
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                                <input type="button" name="previous" class="previous action-button-previous btn btn-sm btn-theme" id="emptList" value="Previous" />
+                                <input type="button" name="next" id="submit" class="next focus  action-button getSelected selectLocation btn btn-sm btn-theme" value="Next" />
+                            </fieldset>
+                            <fieldset>
+                                <div class="">
+                                    <div class="Heading_c">Add Keywords to Rank Tracking</div>
+                                    <div class="sc-VpDxH lcZYjC"></div>
+                                    <div class="layout">
+                                        <input name="nav" type="radio" class="nav home-radio" id="home" checked="" />
+                                        <div class="page home-page">
+                                            <div class="page-contents">
+                                                <div class="row" id="keyWordbtn">
+                                                    <div class="col-lg-6 removeDive">
+                                                        <h6>Add keywords you currently rank for</h6>
+                                                        <div class="keyCard KeyWords">
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-6 addWidth">
+                                                        <h6>Keywords to track</h6>
+                                                        <div class="keyCard">
+                                                            <!-- <small class="text-secondary">Select keywords from the list on the left or enter any keyword in the field below</small> -->
+                                                            <select autocomplete="off" placeholder="" maxlength="100" id="Add_Keywords_select" autofocus multiple="multiple" class="tags sc-jhKfdk ieUjrl border-0" value="">
+                          </select>
+                          <div class=" float-end mt-3">
+
+                         
+                          <button type="button" class="btn btn-sm btn-theme" id="KeywordsTags" disabled>Add Keyword</button>
+                        </div>                       
+                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <label class="nav" for="" id="clearCopyKey">
+                                        <span>
+                                            <svg viewBox="0 0 24 24" width="24" height="24" stroke="currentColor" stroke-width="2"
+                                            fill="none" stroke-linecap="round" stroke-linejoin="round" class="css-i6dzq1">
+                                            <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
+                                            <polyline points="9 22 9 12 15 12 15 22"></polyline>
+                                            </svg>
+                                            keyword you rank for
+                                        </span>
+                                        </label>
+                                        <input name="nav" type="radio" class="about-radio" id="about" />
+                                        <div class="page about-page">
+                                            <div class="page-contents" style="margin:0 auto">
+                                                <div class="sc-bXmIKc sc-iYPUho iCRFOP_ doRLa-d">
+                                                    <div width="" class="sc-dGIJcJ kNeSEW">
+                                                        <h6 class="sc-Pwdd iDtFSi">Keywords to track</h6>
+                                                        <div height="330px" class="sc-kuRVae efcITL">
+                                                            <div class="sc-jwjQNl doKUnh ">
+                                                                <div class="border-1" style="border:1px solid #ccc;min-height: 285px;padding: 10px;">
+                                                                    <select autocomplete="off" placeholder="copy and paste your keyword here or type them by entring each one on a new line" maxlength="100" multiple="multiple" class="tags  sc-jhKfdk ieUjrl border-0" value="">
+                                </select>
+                          <button type="button" class="btn btn-sm btn-theme float-end mt-3" id="KeywordsTags2">Add Keyword</button>
+
+                                                                </div>
+                                                            </div>
+                                                            <div class="mt-2  float-start"></div>
+                                                        </div>
+                                                        <div class="sc-QbyCT bywPWZ">You can track 25 more Keywords<span><span
+                                  style="color: inherit;">0</span>/25</span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <label class="nav" for="" id="clearKey">
+                                                <span>
+                                                    <svg viewBox="0 0 24 24" width="24" height="24" stroke="currentColor" stroke-width="2"
+                                                    fill="none" stroke-linecap="round" stroke-linejoin="round" class="css-i6dzq1">
+                                                    <circle cx="12" cy="12" r="10"></circle>
+                                                    <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"></path>
+                                                    <line x1="12" y1="17" x2="12" y2="17"></line>
+                                                    </svg>
+                                                    Copy / Paste
+                                                </span>
+                                            </label>
+                                        <input name="nav" type="radio" class="contact-radio" id="contact" />
+                                        <div class="page contact-page">
+                                            <div class="page-contents">
+                                            </div>
+                                        </div>
+                                        <label class="nav" for="">
+                                            <span>
+                                                <svg viewBox="0 0 24 24" width="24" height="24" stroke="currentColor" stroke-width="2"
+                                                fill="none" stroke-linecap="round" stroke-linejoin="round" class="css-i6dzq1">
+                                                <path
+                                                    d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z">
+                                                </path>
+                                                </svg>
+                                                <!-- Import from CSV -->
+                                            </span>
+                                        </label>
+                                    </div>
+                                </div> <input type="button" name="previous" class="previous action-button-previous btn btn-sm btn-theme" value="Previous" />
+                                <input type="button" name="make_payment" disabled class="next focus action-button test third_next btn btn-sm btn-theme" id="getTags" value="Next" />
+                            </fieldset>
+                            <fieldset>
+                                <div class="">
+                                    <div class="Heading_c">Track Competitors</div>
+                                    <div class="sc-VpDxH lcZYjC"></div>
+                                    <div class="layout">
+                                        <input name="SecNav" type="radio" class="nav home-radio" id="SecTab1" checked="checked" />
+                                        <div class="page about-page">
+                                            <div class="page-contents" style="margin:0 auto">
+                                                <div class="sc-bXmIKc sc-iYPUho iCRFOP_ doRLa-d">
+                                                    <div width="" class="sc-dGIJcJ kNeSEW tags_Comp">
+                                                        <h6 class="sc-Pwdd iDtFSi"><b>Competitors to track</b></h6>
+                                                        <div class="border-1" style="border:1px solid #ccc;min-height: 285px;padding: 10px;">
+                                                         
+                                                         
+                                                            <div class="row">
+                                                                <div class="col-md-12">
+                                                                    <div class="input-group mb-3">
+                                                                        <div class="input-group-prepend">
+                                                                          
+                                                                            <select class="compihttpClass  form-control-sm" id="compihttpUrl">
+                                                                                <option selected>https://</option>
+                                                                                <option>http://</option>
+                                                                                </select>
+                                                                        
+                                                                        </div>
+                                                                         <textarea  class="form-control form-control-sm remHtml_create" id="myTagscreat_p" onkeypress="tags_create_p(this)"> </textarea>
+                                                                        </div>
+                                                                                    
+                                                                                    <!-- <select autocomplete="some-random-string" autofocus placeholder=""  multiple="multiple" class="Competitors_tagsEdit" value="">
+                                                                                </select> -->
+                                                                            <div class="text-center">
+                                                                                <small id="myurl_tags_inc_c" class="text-center" style="color:red;display: none;">Already exist !</small>
+                                                                                <div id="myurl_tags_c" style="color: red;display:none;"><small>Please enter valid website url (e.g www.example.com)</small></div>
+                                                                                <button type="button" class="btn btn-sm btn-theme mt-5" id="CompitetorsTags">Add Competitor</button>
+
+                                                    
+                                                                            </div>
+                                                                                </div>
+                                                                                <input type="hidden" name="competitors" class="tagsInput_create">
+                                                                                <span class="d-inline-flex m-1 tagsInput_create" >
+                                                    
+                                                                                </span>
+                                                        </div>
+                                                         
+                                                         
+                                                            <!-- <div class="row">
+                                                              <div class="col-md-12">
+                                                                <select  class="custom-select col-md-2  compihttpClass form-control-sm" id="compihttpUrl">
+                                           
+                                                                  
+                                                                    <option selected>https://</option>
+                                                                    <option>http://</option>
+                                                                  
+                                                                  </select>
+                                                            <select autocomplete="off" autofocus multiple="multiple" class="Competitors_tags"></select> 
+
+                                                              </div>
+                                                          </div> -->
+                                                          
+                              
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div> <input type="button" name="previous" class="previous action-button-previous btn btn-sm btn-theme" value="Previous" />
+                                <input type="button" name="make_payment" class="next action-button fourth_next btn btn-sm btn-theme" id="getCompiTags" value="Next" />
+                            </fieldset>
+                            {% if not request.user.is_authenticated %}
+                            <fieldset>
+                                <input type="hidden" name="register" id="RegisterMember" value="true">
+                                <div class="Heading_c">Create Project</div>
+                                <div style="padding: 5px 20px 20px 20px;">
+                                    <div class="row justify-content-center" style="min-height: 350px;">
+                                        <div class="col-md-6 WizardSignIn" style="display:none;">
+                                            <div class="form-group has-default bmd-form-group">
+                                                <input type="email" name="email" disabled id="email2" maxlength="254" class="form-control" placeholder="Enter Email" required id="id_email">
+                                                <div id="email2_msg" class="text-danger text-center" style="display:none;"><small>Please enter valid email address</small></div>
+                                            </div>
+                                            <div class="form-group has-default bmd-form-group">
+
+                                                <input type="password" name="password" disabled id="password2" maxlength="150" class="form-control" placeholder="Enter Password" required id="">
+                                                <div id="password2_msg" class="text-danger text-center" style="display:none;"><small>Please enter password</small></div>
+                                            </div>
+                                            <small class="text-center text-dimmed">Not a member?<a href="javascript:RegisteredMember()"> Sign up</a></small>
+
+                                        </div>
+
+                                        <div class="col-md-6 WizardSignUp">
+                                            <input type="hidden" name="project_id" id="projectID">
+                                            <div class="form-group has-default bmd-form-group">
+                                                <input type="text" name="first_name" autofocus="" id="first_name" maxlength="30" class="form-control" placeholder="Enter First Name" required>
+                                                <div id="first_name_msg" class="text-danger text-center" style="display:none;"><small>Please enter first name</small></div>
+                                            </div>
+                                            <div class="form-group has-default bmd-form-group">
+                                                <input type="text" name="last_name" id="last_name" maxlength="30" class="form-control" placeholder="Enter Last Name" required>
+                                                <div id="last_name_msg" class="text-danger text-center" style="display:none;"><small>Please enter last name</small></div>
+                                            </div>
+                                            <div class="form-group has-default bmd-form-group">
+                                                <input type="email" name="email" id="email" maxlength="254" class="form-control" placeholder="Enter Email" required>
+                                                <div id="email_msg" class="text-danger text-center" style="display:none;"><small>Please enter valid email address</small></div>
+                                            </div>
+                                            <div class="form-group has-default bmd-form-group">
+                                                <input type="hidden" name="token" id="token" value="UgsYYXGiNoreBfKqU13FNiRjigA69P6v4geqtllIK0QTl2ddUYJJCvmRL7WbFbQ1">
+                                                <input type="password" name="password" id="password" maxlength="150" class="form-control" placeholder="Enter Password" required>
+                                                <div id="password_msg" class="text-danger text-center" style="display:none;"><small>Please enter password</small></div>
+                                            </div>
+                                            <div class="form-group has-default bmd-form-group">
+                                                <input name="phone_number" id="phone" type="tel" autocomplete="" class="col-lg-12 form-control" placeholder="Enter Phone" required>
+                                                <div id="phone_msg" class="text-danger text-center" style="display:none;"><small>Please enter valid phone number</small></div>
+
+                                            </div>
+                                            <div class="form-group has-default bmd-form-group">
+                                                <input type="text" name="company" id="company" autocomplete="" class="form-control" placeholder="Enter Company Name" required>
+                                                <div id="company_msg" class="text-danger text-center" style="display:none;"><small>Please enter company name</small></div>
+
+                                            </div>
+                                            <small class="text-center text-dimmed">Already a member?<a href="javascript:RegisteredMember()"> Sign in</a></small>
+                                        </div>
+                                    </div>
+                                </div>
+                                <input type="button" name="previous" class="previous action-button-previous btn btn-sm btn-theme" value="Edit Project" />
+                                <input type="submit" name="next" class="action-button btn btn-sm btn-theme " value="Submit" />
+                            </fieldset>
+                            {% endif %}
+                            <fieldset>
+                                <div class="">
+                                    <br>
+                                    <h2 class="fs-title text-center">Success !</h2>
+
+                                    <img src="https://img.icons8.com/color/96/000000/ok--v2.png">
+                                    <br>
+                                    <div class="row justify-content-center">
+                                        <div class="col-7 text-center">
+                                            <!-- {% if not request.user.is_authenticated %}
+                                            <h5>Register to save your project and to start growing your traffic. its free!</h5>
+                                        
+                                            {% endif %} -->
+
+                                            <h5>Project has been successfully created!</h5>
+                                            {% if request.user.is_authenticated %}
+                                            <!-- <a href="/" class="btn btn-info mt-2 submit_" >Ok</a> -->
+                                            <input type="submit" name="submit" class="action-button btn btn-sm btn-theme submit_" value="Ok" /> {% endif %} {% if not request.user.is_authenticated %}
+                                            <a href="/" class="btn btn-info mt-2" onClick="window.location.reload();">Ok</a> {% endif %}
+                                            <br>
+                                        </div>
+                                    </div>
+                                </div>
+                            </fieldset>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- popup end -->
+<!-- project list start -->
+<section class="pt-2 mb-5">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-12">
+
+                <div class="row">
+                    <div class="col-md-6">
+                        <img src="https://jana-sa.com/image/about-us/e762bf4b8cbc5ee9e70e7e087f99e5c3.gif" width="100%" style="max-width: 350px;display: block;margin-top: -20px;" height="auto">
+                    </div>
+                    <div class="col-md-6">
+                        <h2 class="mb-4 mt-4"><span>Create a project</span> so you can track and improve your SEO traffic.</h2>
+                        <ul>
+                            <li class="mb-2">Track and improve your rankings</li>
+                            <li class="mb-2">Get daily status updates on how you are doing</li>
+                            <li class="mb-2">Get alerts about critical issues on your website</li>
+                            <li class="mb-2">Monitor your SEO health</li>
+                        </ul>
+                        <button class="btn btn-sm btn-theme" class="btn btn-primary" style="text-transform: uppercase;" data-bs-toggle="modal" data-bs-target="#projectModal">Create your project</button>
+                    </div>
+                </div>
+
+                <div id="tableApp">
+                </div>
+
+            </div>
+        </div>
+    </div>
+</section>
+<!-- EDIT PROJECT MODAL START -->
+<!-- Modal -->
+
+<div class="modal fade " id="editproject" aria-labelledby="" aria-hidden="true" >
+    <div class="modal-dialog modal-xl" >
+        <div class="modal-content" >
+            <div class="modal-header">
+                <h5 class="modal-title" id="">Edit Project</h5>
+                <button type="button" class="btn-close btn-close-white btn btn-sm reset" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <form id="editForm">
+               <input type="hidden" name="keywords" id="tagsEditArray">
+            <input type="hidden" name="competitors" id="Editcompitag">
+            <input type="hidden" name="project_id" id="projectID">
+            <input type="hidden" name="location" id="location">
+
+
+            <div class="modal-body">
+              
+                    {% csrf_token %}
+                    <div style="max-height: 400px;overflow-y: scroll;overflow-x: hidden;">
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label>Website Url</label>
+                                <input type="text" name="website_url" class="form-control form-control-sm" readonly placeholder="First name" required>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label>Website Name</label>
+                                <input type="text" name="website_name" class="form-control form-control-sm" placeholder="Last name" required>
+                            </div>
+                        </div>
+                   
+                        <div class="col-md-4">
+                          <div class="form-group">
+                            <label>Location</label>
+                            <select class="list-dt CountrySelect form-control-sm" id="" name="country" required>
+                            </select>
+                            <div id="status"></div>
+                           
+                        </div>
+                      </div>
+                    </div>
+                    <div class="text-center">
+                        <i class="load"></i>
+                        <input type="button" class="getSelectedOnEdit btn btn-theme btn-sm" style="opacity: 0;" value="Get Keywords" required>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <h6>Add keywords you currently rank for</h6>
+                            <div class="card" style="max-height:215px;overflow: auto;min-height: 215px;">
+                                <div class="card-body">
+                                    <div class="edit_KeyWords_"></div>
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="col">
+                            <h6>Keywords to track</h6>
+                            <div class="card" style="max-height:215px;overflow: auto;min-height: 215px;">
+                                <div class="card-body">
+                                    <!-- <div class="KeyWords_"></div> -->
+                                    <select autocomplete="off" placeholder="" maxlength="100" id="editInput" autofocus multiple="multiple" class="KeyWords_ sc-jhKfdk ieUjrl border-0" value="">
+                                    </select>
+                                    <button type="button" class="btn btn-sm btn-theme float-end mt-2" id="EditKeywordsTags">Add Keyword</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <h4>Competitors to track</h4>
+                            <div class="EditCompetitorsContainer " style="min-height: 285px;padding: 10px;">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="input-group mb-3">
+                                            <div class="input-group-prepend">
+                                              
+                                                <select class="httpClassEdit  form-control-sm" id="compihttpUrlEdit">
+                                                    <option selected >https://</option>
+                                                    <option>http://</option>
+                                                    </select>
+                                            
+                                            </div>
+                                             <input class="form-control form-control-sm remHtml" id="myTagsurl" onkeypress="tags(this)"> 
+                                            </div>
+                                  
+                                <!-- <select autocomplete="some-random-string" autofocus placeholder=""  multiple="multiple" class="Competitors_tagsEdit" value="">
+                            </select> -->
+                           <div class="text-center">
+                            <small id="myurl_tags_inc" class="text-center" style="color:red;display: none;">Already exist !</small>
+                            <div id="myurl_tags" style="color: red; display:none"><small>Please enter valid website url (e.g www.example.com)</small></div>
+                            <button type="button" class="btn btn-sm btn-theme mt-5" id="EditCompetitors">Add Competitor</button>
+
+                           </div>
+                            </div>
+                            <div class="row mt-2">
+                                <div class="col-md-12" style="width: 100vw;">
+                                    <span class="m-2 tagsInput" >
+
+                                    </span>
+                                </div>
+                            </div>
+                         
+                            </div>
+                          </div>
+                        </div>
+                    </div>
+                    </div>
+                
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-sm btn-theme UpdateProject">Save changes</button>
+                <button type="button" class="btn btn-dark btn-sm reset" data-bs-dismiss="modal">Close</button>
+              
+            </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<!-- EDIT PROJECT MODAL END -->
+<!-- competitors view modal start-->
+<!-- Modal -->
+<div class="modal fade" id="competitorList" tabindex="-1" aria-labelledby="" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="">Competitor List</h5>
+                <button type="button" class="btn-close btn-close-white btn btn-sm" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body" >
+                <ol class="list-group list-group-numbered" id="competitorsList">
+
+
+                </ol>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-theme btn-sm" data-bs-dismiss="modal">Close</button>
+                <!-- <button type="button" class="btn btn-primary">Save changes</button> -->
+            </div>
+        </div>
+    </div>
+</div>
+<!-- competitors view modal end -->
+<!-- keyword view modal start-->
+<!-- Modal -->
+<div class="modal fade" id="keywordList" tabindex="-1" aria-labelledby="" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="">Keywords List</h5>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <ol class="list-group list-group-numbered" id="keywordsList">
+
+
+                </ol>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-theme btn-sm" data-bs-dismiss="modal">Close</button>
+                <!-- <button type="button" class="btn btn-primary">Save changes</button> -->
+            </div>
+        </div>
+    </div>
+</div>
+<!-- keyword view modal end -->
+{% endblock %} {% block extrascript %}
+<!-- <script src="{% static 'user_management/libs/sparkline/jquery.sparkline.js' %}"></script> -->
+<script>
+  function validateURL(str) {
+    var pattern = new RegExp('^(https?:\\/\\/)?'+ // protocol
+    '((([a-z\\d]([a-z\\d-]*[a-z\\d])*)\\.)+[a-z]{2,}|'+ // domain name
+    '((\\d{1,3}\\.){3}\\d{1,3}))'+ // OR ip (v4) address
+    '(\\:\\d+)?(\\/[-a-z\\d%_.~+]*)*'+ // port and path
+    '(\\?[;&a-z\\d%_.~+=-]*)?'+ // query string
+    '(\\#[-a-z\\d_]*)?$','i'); // fragment locator
+  return !!pattern.test(str);
+        }
+var SelectedEditKeywordArray = [];
+var competitorsKey  = [];
+var SelectedKeywordArray = [];
+var selectedCompArray = [];
+ var httpVal = 'https://';
+ var CompihttpVal = 'https://';
+ var httpValEdit = 'https://';
+ var tagsVal = "https://";
+ var value_='';
+ var URLValue = "";
+       var id = '';
+    $(document).on('click', 'a[data-action="edit_project"]', function() {
+        
+        id = $(this).attr('data-id');
+        $('#projectID').val(id);
+        // alert(id);
+        $('#editproject').modal('show')
+       $('.tagsInput').html('');
+        $('.KeyWords_').html('')
+        $.ajax({
+            method: 'GET',
+            url: "/research_keyword/edit_project/?project_id=" + id,
+            success: function(data) {
+        
+
+                console.log('POST', data.data.competitors)
+                var weburl = data.data.website_url;
+                var webName = data.data.website_name;
+                var location = data.data.location;
+                var keys = data.data.keywords;
+                // if(keys!=''){
+                //     $(this).closest('.keyword_box').addClass("disabled");
+                // }
+                var compiKeys = data.data.competitors;
+                $('.test').append(`${compiKeys}`)
+                $('#editForm input[name="website_url"]').val(weburl);
+                $('#editForm input[name="website_name"]').val(webName);
+                $('#editForm select[name="country"]').val(location);
+                var location =   $('#editForm .select2-selection span').prop('title');
+               $('#editForm #location').val(location)
+                SelectedEditKeywordArray = keys;              
+                competitorsKey = compiKeys;
+                $.each(competitorsKey,function(index,value){
+                    $('.tagsInput').append(`<span class="KWord_ px-2 m-1" style="border: 1px solid #dee2e6;
+                            border-radius: 0.25rem;
+                            padding: 0px 2px;background:#007bff;color:#fff">${value} <span class="remVal">x</span></span>`); 
+                })
+               
+                $('#editInput').select2({
+                    placeholder: "Enter any keyword",                   
+                     tags: true,
+                     data: SelectedEditKeywordArray,
+                    dropdownCss: {
+                        display: 'none'
+                    },
+                    tokenSeparators: [","],
+                    multiple: true,
+                     matcher: matchCustom,
+                     selectOnClose: true, 
+                                closeOnSelect: true,
+                }).on('select2:select', function(e) {
+                    var data = e.params.data;
+                    SelectedEditKeywordArray.push(data.text);
+                });
+                $('#editInput').val(SelectedEditKeywordArray).trigger('change');
+                $('#editInput').on('select2:unselecting', function(e) {
+                    var data = e.params.args.data.text;
+                    SelectedEditKeywordArray = SelectedEditKeywordArray.filter(item => item !== data);
+                    $('#tagsEditArray').val(SelectedEditKeywordArray);
+                });
+
+                
+                $('.Competitors_tagsEdit').select2({
+                                placeholder: "Enter your competitor's websites",
+                                tags: true,
+                                data:competitorsKey,
+                                dropdownCss: {
+                                    display: 'none'
+                                },
+                                tokenSeparators: [","],
+                                multiple: true,
+                                 matcher: matchCustom,
+                                 selectOnClose: true, 
+                                closeOnSelect: true,
+                               
+                                
+                                createTag: function(term, data) {
+                                    var value_ = term.term;
+                                    value_ = value_.replace('https://','');
+                                    value_ = value_.replace('http://','');
+                                    value_ = CompihttpValEdit + value_;
+                                    // console.log('teet',value);
+                                    $(".EditCompetitorsContainer").find("#wrongURl").remove();
+                                    $(".EditCompetitorsContainer").find(".select2-selection__rendered").css("border-color", "#ccc");
+                                    if (validateURL(value_)) {
+                                        return {
+                                            id: value_,
+                                            text:value_
+                                        };
+                                    } else if (!validateURL(value_) && (value_ != "")) {
+                                        $(".EditCompetitorsContainer").find(".select2-selection__rendered").css("border-color", "red");
+                                        $(".EditCompetitorsContainer .select2-selection__rendered").after('<div id="wrongURl" class="text-danger text-center"><small>Please enter valid website url (e.g http(s)://www.example.com)</small></div>');
+                                    }
+                                    return null;
+                                }}).on('select2:select', function(e) {
+                                var data = e.params.data;
+
+                                competitorsKey.push(data.text);
+                                $(".EditCompetitorsContainer").find("#wrongURl").remove();
+                                $(".EditCompetitorsContainer").find(".select2-selection__rendered").css("border-color", "#ccc");
+                            });
+                            $('.Competitors_tagsEdit').val(competitorsKey).trigger('change');
+
+                            $('.Competitors_tagsEdit').on('select2:unselecting', function(e) {
+                    var data = e.params.args.data.text;
+                    competitorsKey = competitorsKey.filter(item => item !== data);
+                    $('#Editcompitag').val(competitorsKey);
+                });
+                $(".getSelectedOnEdit").trigger( "click" );
+            }
+            
+        });
+     
+    });
+  
+    $('.getSelectedOnEdit').click(function(e) {
+       $('.load').addClass('fa fa-spinner fa-spin');
+
+        var EditformData_ = $('#editForm').serialize()
+        console.log(EditformData_);
+        $.ajax({
+            method: 'POST',
+            url: '/research_keyword/get_website_info/?project_id=' + id,
+            data: EditformData_,
+            success: function(data) {
+                console.log('dsa', data);
+                if(data.status){
+
+              
+                var RankTrack_ = data.data.rank_tracking;
+              
+                // alert('ok')
+                $(".edit_KeyWords_").empty();
+                for (var i = 0; i < RankTrack_.length; i++) {
+
+                            if(SelectedEditKeywordArray.includes(RankTrack_[i].keyword)){
+                                $(".edit_KeyWords_").append(`<div class="keyword_box disabled"> <div class="sc-uFGzD koiyiL"> <div class="sc-hTRkEk fQFysH edit-keywordbox-keyword" >${RankTrack_[i].keyword}</div><div class="text-sm text-secondary text-left keywordbox-keyword-info" font-size="12px" color="#636363"> Competition: <b>${RankTrack_[i].competition_value}</b> | Volume: <b>${RankTrack_[i].avg_monthly_searches}</b></div></div><div class="sc-hKftWd gHFiPU fa fa-plus text-purple editKeyBnt"></div></div>`)
+                                        
+                            }
+                            else{
+                                $(".edit_KeyWords_").append(`<div class="keyword_box"> <div class="sc-uFGzD koiyiL"> <div class="sc-hTRkEk fQFysH edit-keywordbox-keyword" >${RankTrack_[i].keyword}</div><div class="text-sm text-secondary text-left keywordbox-keyword-info" font-size="12px" color="#636363"> Competition: <b>${RankTrack_[i].competition_value}</b> | Volume: <b>${RankTrack_[i].avg_monthly_searches}</b></div></div><div class="sc-hKftWd gHFiPU fa fa-plus text-purple editKeyBnt"></div></div>`)
+                                        
+                            }
+                   
+                }
+                $(document).on('click', '.editKeyBnt:not(.disabled)', function() {
+                    $(this).closest('.keyword_box').addClass("disabled");
+                    var keyword = $(this).parent().find('.edit-keywordbox-keyword').text();
+                    
+                    if (SelectedEditKeywordArray.includes(keyword) == false) {
+                        SelectedEditKeywordArray.push(keyword);
+                   
+                    }
+                    console.log("SelectedEditKeywordArray >>" + SelectedEditKeywordArray);
+                    $('#editInput').select2({
+                                placeholder: "Enter any keyword",
+                               data: SelectedEditKeywordArray,
+                                tags: true,
+                                dropdownCss: {
+                                    display: 'none'
+                                },
+                                tokenSeparators: [","],
+                                multiple: true,
+                              matcher: matchCustom
+                            });
+                             $('#editInput').val(SelectedEditKeywordArray).trigger('change');
+                             
+                });
+                $('#editInput').on('select2:unselecting', function(e) {
+                    var data = e.params.args.data.text;
+                    $('.keyword_box:contains('+data+')').closest('.keyword_box').removeClass("disabled");
+    
+                    SelectedEditKeywordArray = SelectedEditKeywordArray.filter(item => item !== data);
+                    $('#tagsEditArray').val(SelectedEditKeywordArray);
+                });
+              
+                e.preventDefault();
+       $('.load').removeClass('fa fa-spinner fa-spin');
+    }
+                else{
+                    $('.load').removeClass('fa fa-spinner fa-spin');
+                    ShowNoty(data.msg, "error");
+                }
+            },
+
+            error: function(e, x, y) {
+                console.log(e);
+                console.log(x);
+                console.log(y);
+            },
+            cache: false,
+            async: false
+        });
+    });
+$('.UpdateProject').click(function(){
+  $('#tagsEditArray').val(SelectedEditKeywordArray);
+  $('#Editcompitag').val(competitorsKey);
+  //  var compitatorsKey_ =  $('.EditCompetitorsContainer').text();
+  //  var trimStr = $.trim(compitatorsKey_);
+  //   $('#Editcompitag').val(trimStr);
+    var EditformData_ = $('#editForm').serialize()
+        console.log(EditformData_);
+
+        $.ajax({
+            method: 'POST',
+            url: '/research_keyword/edit_project/',
+            data: EditformData_,
+            success: function(data) {
+            // console.log('edit',data)
+            location.href='/user_management/main_dashboard/';
+            }
+        });
+});
+    // edit form end
+    var compiVal=[];
+    // $(document).on('click','.deleteIt',function(){
+    //     var index = $(this).closest('li').text();;
+    //     compiVal.splice(index)
+    //     $(this).closest('li').remove();
+       
+    // });
+    
+    $(document).on('click', 'a[data-action="url"]', function(e) {
+        var text = $(this).text();
+      
+        if (text.includes("View Competitors")) {
+            $('#competitorList').modal('show');
+            e.preventDefault();
+            var dataID = $(this).attr('data-id');
+            var id = dataID.substring(dataID.lastIndexOf('=') + 1);
+            $('#competitorsList').html('')
+            $.ajax({
+                url: "/research_keyword/get_project_competitor/?project_id=" + id,
+                method: 'GET',
+                success: function(data) {
+                    console.log('data', data.data)
+                     compiVal = data.data;
+                    console.log('length_',compiVal)
+                  if(compiVal.length == 0){
+                    $('#competitorsList').append(`
+                     <span style="color:red">No competitors found</span>`)
+                  }else{
+                  
+                    $.each(compiVal, function(index,value) {
+                      
+                            $('#competitorsList').append(`
+                         <li class="list-group-item" >${value}</li>`)
+                    });
+                  }
+                  
+                }
+            });
+        }
+        // keyword
+        else if (text.includes("View keywords")) {
+            $('#keywordList').modal('show');
+            e.preventDefault();
+            var dataID = $(this).attr('data-id');
+            var id = dataID.substring(dataID.lastIndexOf('=') + 1);
+            $('#keywordsList').html('')
+            $.ajax({
+                url: "/research_keyword/get_project_keywords/?project_id=" + id,
+                method: 'GET',
+                success: function(data) {
+                    console.log('data', data.data)
+                    var test = data.data;
+                    if (test.length!= 0) {
+                     
+                    $.each(data.data, function(index, value) {
+                        console.log('value',value)
+                       $('#keywordsList').append(`<li class="list-group-item" >${value}</li>
+                        `)
+                       
+
+                    });
+                     } else {
+                            $('#keywordsList').append(`
+                           <span style="color:red">No keywords found</span>`)
+                        }
+                }
+            });
+        }
+    });
+
+    Get_country_languages();
+
+    function Get_country_languages() {
+        $.ajax({
+            type: "GET",
+            url: "/user_management/get_country_languages/",
+            success: function(response) {
+                if (response.status == true) {
+                    $('.CountrySelect').empty();
+                    $('.CountrySelect').html('<option></option>')
+                    var json = response.country_languages;
+                    var options = [];
+                    for (var i = 0; i < json.length; i++) {
+                        var obj = json[i];
+                        let country = obj.Country;
+                        let lang = obj.Language;
+                        let code = obj.code;
+                        options.push({
+                            id: code + '_' + country + '_' + lang,
+                            abbreviation: code,
+                            text: country + ' / ' + lang
+                        });
+                    }
+                    $('.CountrySelect').select2({
+                        placeholder: "Please select an location",
+                        tokenSeparators: [',', ''],
+                        templateResult: formatCountry,
+                        data: options
+                    });
+
+                    function formatCountry(country) {
+                        if (!country.id) {
+                            return country.text;
+                        }
+                        var $country = $(
+                            '<span class="flag-icon flag-icon-' + country.abbreviation.toLowerCase() + ' flag-icon-squared"></span>' + '<span style="margin-left:10px;">' + country.text + '</span>'
+                        );
+                        return $country;
+                    };
+                }
+                // else {
+
+                // }
+                // GetSearchResults()
+                $('.CountrySelect').val('us_United States_English').trigger('change');
+            },
+            error: function(response) {
+                alert('error');
+            }
+        });
+    }
+    $('.CountrySelect').on('change', function() {
+        var country_select = $(this).val();
+
+    });
+   
+    $(document).ready(function() {
+       
+            // http dropdown
+   
+            $(document).on('change','.httpClass',function(){
+            
+                httpVal = $("#httpUrl").children("option").filter(":selected").text()
+                console.log('hh',httpVal)
+                $('#inptvalue').val(httpVal+''+URLValue)
+           });
+            // http compi dropdown
+            $(document).on('change','.compihttpClass',function(){
+                CompihttpVal = $("#compihttpUrl").children("option").filter(":selected").text()
+                // CompihttpVal = $(".compihttpClass").val();
+                alert(CompihttpVal)
+
+            });
+            // for edit
+            $(document).on('change','.httpClassEdit',function(){
+
+                httpValEdit = $("#compihttpUrlEdit").children("option").filter(":selected").text()
+                console.log('hh',httpValEdit+''+URLValue);
+                // $('.remHtml').val(httpValEdit+''+URLValue)
+            });
+// wizard login filed disabled on page load
+        $('#email2').prop('disabled',true);
+        $('#password2').prop('disabled',true);
+
+//         $(".reset").click(function() {
+//     // $(this).closest('form').find("input[type=text]").val("");
+//      $("#msform").trigger('reset');
+     
+// });
+        var current_fs, next_fs, previous_fs; //fieldsets
+        var opacity;
+        $("#msform .next").click(function() {
+        
+            current_fs = $(this).parent();
+            next_fs = $(this).parent().next();
+            //Add Class Active
+            $("#progressbar li").eq($("fieldset").index(next_fs)).addClass("active");
+            //show the next fieldset
+            next_fs.show();
+           
+            //hide the current fieldset with style
+            current_fs.animate({
+                opacity: 0
+            }, {
+                step: function(now) {
+                    // for making fielset appear animation
+                    opacity = 1 - now;
+                    current_fs.css({
+                        'display': 'none',
+                        'position': 'relative'
+                    });
+                    next_fs.css({
+                        'opacity': opacity
+                    });
+                    
+                },
+                duration: 600
+            });
+           
+        });
+        $(".previous").click(function() {
+            current_fs = $(this).parent();
+            previous_fs = $(this).parent().prev();
+            //Remove class active
+            $("#progressbar li").eq($("fieldset").index(current_fs)).removeClass("active");
+            //show the previous fieldset
+            previous_fs.show();
+            //hide the current fieldset with style
+            current_fs.animate({
+                opacity: 0
+            }, {
+                step: function(now) {
+                    // for making fielset appear animation
+                    opacity = 1 - now;
+                    current_fs.css({
+                        'display': 'none',
+                        'position': 'relative'
+                    });
+                    previous_fs.css({
+                        'opacity': opacity
+                    });
+                },
+                duration: 600
+            });
+        });
+        $('.radio-group .radio').click(function() {
+            $(this).parent().find('.radio').removeClass('selected');
+            $(this).addClass('selected');
+        });
+        $(".submit").click(function() {
+            return false;
+        })
+       
+    });
+    
+
+    (function($) {
+         $(document).ready(function() {
+          $('#emptList').click(function() {
+                $(".KeyWords").empty();
+            })
+            
+            $('.getSelected').click(function() {
+              var country = $(this).parent().find('.select2-selection__rendered').text();
+ 
+                    $('#selectedDPvalues').val(country);
+                    $('.modal-content').append('<div class="overlay1"><div class="overlay__inner"> <div class="overlay__content"><span class="spinner"></span></div> </div></div>'); // =============
+   
+                   
+
+                var formData_ = $('#msform').serialize();
+                $.ajax({
+                    method: 'post',
+                    url: '/research_keyword/get_website_info/',
+                    data: formData_,
+                    success: function(data) {
+                        if(data.status){
+                        var RankTrack = data.data.rank_tracking;
+                        $(".KeyWords").empty();
+                        for (var i = 0; i < RankTrack.length; i++) {
+                            $(".KeyWords").append(`<div class="keyword_box"> <div class="sc-uFGzD koiyiL"> <div class="sc-hTRkEk fQFysH keywordbox-keyword" >${RankTrack[i].keyword}</div><div class="text-sm text-secondary text-left keywordbox-keyword-info" font-size="12px" color="#636363"> Competition: <b>${RankTrack[i].competition_value}</b> | Volume: <b>${RankTrack[i].avg_monthly_searches}</b></div></div><div class="sc-hKftWd gHFiPU fa fa-plus text-purple keywordBtn"></div></div>`)
+                        }
+                        $('.tags').select2({
+                            placeholder: "Enter any keyword",
+                            data: SelectedKeywordArray,
+                            tags: true,
+                            dropdownCss: {
+                                display: 'none'
+                            },
+                            tokenSeparators: [","],
+                            multiple: true,
+                            matcher: matchCustom,
+                            selectOnClose: true, 
+                                closeOnSelect: true,
+            
+                        }).on('select2:select', function(e) {
+                            var data = e.params.data;
+                            SelectedKeywordArray.push(data.text)
+                        }).on('select2:unselecting', function(e) {
+                            var data = e.params.args.data.text;
+                            $('.keywordbox-keyword:contains('+data+')').closest('.keyword_box').removeClass("disabled");
+    
+                            SelectedKeywordArray = SelectedKeywordArray.filter(item => item !== data)
+                           
+                        
+                          }).val(SelectedKeywordArray).trigger('change');
+
+// if(SelectedKeywordArray.length == 0){
+ 
+//   $('.tags').select2().val(null).trigger('change');
+// }
+// else{
+//   $('.tags').select2().val(SelectedKeywordArray).trigger('change');
+// }
+
+                       
+                        $('.keywordBtn:not(.disabled)').click(function() {
+                 
+                            var keyword = $(this).parent().find('.keywordbox-keyword').text();
+                            $(this).closest('.keyword_box').addClass("disabled");
+                            if (SelectedKeywordArray.includes(keyword) == false) {
+                                SelectedKeywordArray.push(keyword);
+                                
+                            }
+                            $(".third_next").prop("disabled", false);
+                            $('.tags').select2({
+                                placeholder: "Enter any keyword",
+                                data: SelectedKeywordArray,
+                                tags: true,
+                                dropdownCss: {
+                                    display: 'none'
+                                },
+                                tokenSeparators: [","],
+                                multiple: true,
+                                matcher: matchCustom,
+                                selectOnClose: true, 
+                                closeOnSelect: true,  
+                               
+                 
+                            }).on('select2:select', function(e) {
+                            var data = e.params.data;
+                            SelectedKeywordArray.push(data.text);
+                        
+                        }).on('select2:unselecting', function(e) {
+                            var data = e.params.args.data.text;
+                            $('.keywordbox-keyword:contains('+data+')').closest('.keyword_box').removeClass("disabled");
+    
+                            SelectedKeywordArray = SelectedKeywordArray.filter(item => item !== data)
+                           
+                        
+                          }).on('select2:unselect', function(e) {
+                            var data = e.params.data.text;
+                            $('.keywordbox-keyword:contains('+data+')').closest('.keyword_box').removeClass("disabled");
+    
+                            SelectedKeywordArray = SelectedKeywordArray.filter(item => item !== data)
+                           
+                            if(SelectedKeywordArray.length == 0){
+                            $(".tags").empty();
+                              $('.tags').val(null).trigger('change');
+                                    }
+                                    else{
+                                    $('.tags').val(SelectedKeywordArray).trigger('change');
+                                    }
+                          });
+                          $('.tags').val(SelectedKeywordArray).trigger('change');
+                        })
+                      
+                        
+                        $('#getTags').click(function() {
+                         
+                            $('#tagsArray').val(SelectedKeywordArray);
+                            $('.Competitors_tags').select2({
+                                placeholder: "Enter your competitor's websites",
+                                tags: true,
+                                // dropdownCss: {
+                                //     display: 'none'
+                                // },
+                                
+                                tokenSeparators: [","],
+                                multiple: true,
+                                matcher: matchCustom,
+                                selectOnClose: true, 
+                                closeOnSelect: true,
+                                
+                                createTag: function(term, data) {
+     
+                                 if(term.term != '' && validateURL(term.term)){
+
+                                    var value = term.term.replace('https://','');
+                                     
+                                  
+                                     value = value.replace('http://','');
+                                     
+                                        value = CompihttpVal+value;
+                                      
+                                        $('.select2-search__field').val(value)
+                                    $(".tags_Comp").find("#wrongURl").remove();
+                                    $(".tags_Comp").find(".select2-selection__rendered").css("border-color", "#ccc");
+                                    if (validateURL(value)) {
+                                       
+                                        return {
+                                            id: value,
+                                            text:value
+                                        };
+                                    } 
+                                    else if (!validateURL(value) && (value != "")) {
+                                     
+                                        $(".tags_Comp").find(".select2-selection__rendered").css("border-color", "red");
+                                        $(".tags_Comp .select2-selection__rendered").after('<div id="wrongURl" class="text-danger text-center"><small>Please enter valid website url (e.g www.example.com)</small></div>');
+                                    }
+                                    return null;
+                                 }
+                                 else {
+                                    
+                                    return null;
+                                 }
+                                }
+                            }).on('select2:select', function(e) {
+                                var data = e.params.data;
+
+                                selectedCompArray.push(data.text);
+                               
+                                $(".tags_Comp").find("#wrongURl").remove();
+                                $(".tags_Comp").find(".select2-selection__rendered").css("border-color", "#ccc");
+                                $('.Competitors_tags').val(selectedCompArray).trigger('change');
+                              
+                            }).on('select2:unselecting', function(e) {
+                    var data = e.params.args.data.text;
+                    console.log(selectedCompArray + "  competitorsKey  " + data);
+                    selectedCompArray = selectedCompArray.filter(item => item !== data);
+                   
+                    $('#Editcompitag').val(selectedCompArray);
+                   
+                    $('.Competitors_tags').val(selectedCompArray).trigger('change');
+                });
+            });
+                        $('.overlay1').remove();
+                    }
+                    else{
+
+                        $('.overlay1').remove();
+                        ShowNoty(data.msg, "error");
+                    }
+             
+                    },
+                    error: function(e, x, y) {
+                        console.log(e);
+                        console.log(x);
+                        console.log(y);
+                        $('.overlay1').remove();
+                    },
+                    cache: false,
+                    async: false,
+                    
+                });
+             
+               
+            });
+        });
+        
+
+      
+
+ 
+        // reove tags
+        $(document).on('click', '.removeTag', function() {
+            // alert('working')
+            $(this).closest('.removeKey').remove();
+        });
+        // $(document).on('click','.submit_',function(){
+           
+        // })
+        // post form
+        // document.querySelector("#msform").addEventListener("submit", function (event) {
+        $('#msform').submit(function(event) {
+            event.preventDefault();
+            if ($('.WizardSignUp').length > 0 || $('.WizardSignIn').length > 0) {
+                ValidateAll();
+            }
+            var formData = $('#msform').serialize()
+            $.ajax({
+                method: 'post',
+                url: '/research_keyword/create_project/',
+                data: formData,
+                success: function(data) {
+                    if (data.status) {
+                      
+                        if ($('.WizardSignUp').length > 0 || $('.WizardSignIn').length > 0) {
+                            current_fs = $("#RegisterMember").parent();
+                            next_fs = $("#RegisterMember").parent().next();
+                            //Add Class Active
+                            $("#progressbar li").eq($("fieldset").index(next_fs)).addClass("active");
+                            //show the next fieldset
+                            next_fs.show();
+                            //hide the current fieldset with style
+                            current_fs.animate({
+                                opacity: 0
+                            }, {
+                                step: function(now) {
+                                    // for making fielset appear animation
+                                    opacity = 1 - now;
+                                    current_fs.css({
+                                        'display': 'none',
+                                        'position': 'relative'
+                                    });
+                                    next_fs.css({
+                                        'opacity': opacity
+                                    });
+                                },
+                                duration: 600
+                            });
+                        } else {
+                            window.location.reload();
+                        }
+                    } else {
+                        $(".error_msg").text(data.msg);
+                        ShowNoty(data.msg, "error");
+
+                        event.stopPropagation();
+                    }
+                },
+                error: function(e, x, y) {
+                    $(".error_msg").text(y + " " + x);
+                    ShowNoty(y + " " + x, "error");
+                    console.log(e);
+                    console.log(x);
+                    console.log(y);
+                    event.stopPropagation();
+                },
+                cache: false,
+                async: false
+            })
+        })
+
+        $('#getCompiTags').click(function() {
+
+            $('#compi').val(selectedCompArray);
+        });
+    })(jQuery);
+
+    function EmailValidate(selector) {
+        var numericExpression = /^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
+        var elem = selector.val();
+        if (elem.match(numericExpression))
+            return true;
+        else
+            return false;
+    }
+    var validate = false;
+    // $(document).on('input change',function(){
+    //     var firstName = $("#first_name").val();
+    //     var lastName = $("#last_name").val();
+    //     var email = $("#email").val().val()
+    //     var pwd = $("#password").val();
+    //     var phone = $("#phone").val()
+    //     var company = $("#company").val()
+      
+
+
+    //     if (firstName == '' || lastName || ){
+    //     $('.submit_').prop('disabled',true)
+    // }else{
+    //     $('.submit_').prop('disabled',false)
+    // }
+    // })
+  
+    function ValidateAll() {
+
+        //first Name
+        if ($("#first_name").val() == '') {
+            $("#first_name_msg").show();
+            validate = false;
+           
+
+        } else {
+            $("#first_name_msg").hide();
+            validate = true;
+           
+        }
+        //last Name
+        if ($("#last_name").val() == '') {
+            $("#last_name_msg").show();
+            validate = false;
+
+        } else {
+            $("#last_name_msg").hide();
+            validate = true;
+
+        }
+        //End
+        //Email
+        if ($("#email").val() == '' || !(EmailValidate($("#email")))) {
+            $("#email_msg").show();
+            validate = false;
+
+        } else {
+            $("#email_msg").hide();
+            validate = true;
+
+        }
+        if ($("#email2").val() == '' || !(EmailValidate($("#email2")))) {
+            $("#email2_msg").show();
+            validate = false;
+
+        } else {
+            $("#email2_msg").hide();
+            validate = true;
+        }
+        //End
+
+        if ($("#password").val() == '') {
+            $("#password_msg").show();
+            validate = false;
+
+        } else {
+            $("#password_msg").hide();
+            validate = true;
+
+        }
+
+        if ($("#password2").val() == '') {
+            $("#password2_msg").show();
+            validate = false;
+
+        } else {
+            $("#password2_msg").hide();
+            validate = true;
+        }
+        if ($("#phone").val() == '') {
+            $("#phone_msg").show();
+            validate = false;
+        } else {
+            $("#phone_msg").hide();
+            validate = true;
+
+        }
+        if ($("#company").val() == '') {
+            $("#company_msg").show();
+            validate = false;
+
+        } else {
+            $("#company_msg").hide();
+            validate = true;
+
+        }
+
+        if (validate == true) {
+            return true;
+        } else {
+            return false;
+        }
+
+    }
+
+
+
+
+    //  validation
+    $(document).ready(function() {
+        $('.CountrySelect').change(function() {
+            var options_ = $('.CountrySelect');
+
+            if (options_.val() === '') {
+                alert("Please select an item from the list and then proceed!");
+                $('.CountrySelect').focus();
+                // $('#submit').prop('disabled',true);
+                return true;
+            } else {
+                $('.second_next').prop('disabled', false);
+            }
+        });
+        $('input[type="text"], input[type="email"], input[type="password"], input[type="tel"]').keyup(function() {
+            if ($(this).val() != '') {
+                //  $(':input[type="button"]').prop('disabled', false);
+                $(this).css('border-bottom-color', '#6c6b6b');
+
+            } else {
+                $(this).css('border-bottom-color', 'red')
+            }
+        });
+        // for project create
+        $(document).on('input change paste','#myTagscreat_p',function() {
+            var re = new  RegExp("^([0-9A-Za-z-\\.@:%_\+~#=]+)+((\\.[a-zA-Z]{2,3})+)(/(.)*)?(\\?(.)*)?");
+          var creat_p_tags = $('#myTagscreat_p').val();
+          creat_p_tags = creat_p_tags.trim(" ")
+          creat_p_tags = creat_p_tags.replace('https://','');
+          creat_p_tags = creat_p_tags.replace('http://','');
+          
+            $('.remHtml').val(CompihttpVal+''+creat_p_tags)
+            $('#myTagscreat_p').val(creat_p_tags)
+             console.log('y',creat_p_tags);
+            $("#myurl_tags_inc_c").hide();
+            $("#myurl_tags_c").hide();
+            $('#myurl').css('border-bottom-color', '#6c6b6b')
+            if (creat_p_tags == "") {
+                $("#myurl_tags_c").hide();
+                $('#myTagscreat_p').css('border-bottom-color', '#6c6b6b')
+            } else if (re.test(creat_p_tags)) {
+                $("#myurl_tags_c").hide();
+                $('#myTagscreat_p').css('border-bottom-color', '#6c6b6b')
+            } else {
+                $("#myurl_tags_c").show();
+                $('#myTagscreat_p').css('border-bottom-color', 'red')
+            }
+         
+        });
+
+            // enter compitators in edit project
+   $(document).on('click','#CompitetorsTags',function(){
+  
+  var create_TagsValue =  $('#myTagscreat_p').val();
+
+  if(create_TagsValue == ''){
+      
+     $("#myurl_tags_c").show();
+             $('#myTagsurl').css('border-bottom-color', 'red')
+  }else{
+     if(competitorsKey.includes(CompihttpVal+''+create_TagsValue)){
+         $("#myurl_tags_inc_c").show();
+        
+     }else{
+         $("#myurl_tags_inc_c").hide();
+           $("#myurl_tags_c").hide();
+         // $("#myurl_tags").html('Already Exsit !');
+         console.log('competitorsKey1',competitorsKey);
+         competitorsKey.push(CompihttpVal+''+create_TagsValue);
+         console.log('competitorsKey',competitorsKey);
+        $('.tagsInput_create').val(competitorsKey);
+         
+         $('.tagsInput_create').append(`<span class="KWord_ px-2 m-1" style="border: 1px solid #dee2e6;
+         border-radius: 0.25rem;
+         padding: 0px 2px;background:#007bff">${CompihttpVal+''+create_TagsValue} <span class="remVal_create">x</span></span>`);  
+         // alert(httpValEdit)  
+         $('.remHtml_create').val('')
+     }
+
+       
+  }
+
+})
+
+$(document).on('click','.remVal_create',function(){
+ var data = $(this).closest('.KWord_').text();
+    data =  data.replace(' x','')
+ competitorsKey = competitorsKey.filter(item => item !== data);
+ $('.tagsInput_create').val(competitorsKey);
+ $(this).closest('.KWord_').remove();
+
+})
+        // for edit
+        $('#myTagsurl').on('input change paste', function() {
+            var re = new  RegExp("^([0-9A-Za-z-\\.@:%_\+~#=]+)+((\\.[a-zA-Z]{2,3})+)(/(.)*)?(\\?(.)*)?");
+            tagsVal = $('#myTagsurl').val();
+
+            tagsVal = tagsVal.replace('https://','');
+            tagsVal = tagsVal.replace('http://','');
+          
+            $('.remHtml').val(httpValEdit+''+tagsVal)
+            $('#myTagsurl').val(tagsVal)
+            // console.log(URLValue);
+            $("#myurl_tags_inc").hide();
+            $("#myurl_tags").hide();
+            $('#myTagsurl').css('border-bottom-color', '#6c6b6b')
+            if (tagsVal == "") {
+                $("#myurl_tags").hide();
+                $('#myTagsurl').css('border-bottom-color', '#6c6b6b')
+            } else if (re.test(tagsVal)) {
+                $("#myurl_tags").hide();
+                $('#myTagsurl').css('border-bottom-color', '#6c6b6b')
+            } else {
+                $("#myurl_tags").show();
+                $('#myTagsurl').css('border-bottom-color', 'red')
+            }
+         
+        });
+        var WebsiteName = "";
+        $('#myurl').on('input change paste', function() {
+            var re = new  RegExp("^([0-9A-Za-z-\\.@:%_\+~#=]+)+((\\.[a-zA-Z]{2,3})+)(/(.)*)?(\\?(.)*)?");
+        
+
+            URLValue = $('#myurl').val();
+          
+            URLValue = URLValue.replace('https://','');
+            URLValue = URLValue.replace('http://','');
+          
+            $('#inptvalue').val(httpVal+''+URLValue);
+          
+            $('#myurl').val(URLValue)
+            // console.log(URLValue);
+            WebsiteName = $('#webNam').val();
+            $("#myurl_msg").hide();
+            $('#myurl').css('border-bottom-color', '#6c6b6b')
+            if (URLValue == "") {
+                $("#myurl_msg").hide();
+                $('#myurl').css('border-bottom-color', '#6c6b6b')
+            } else if (re.test(URLValue)) {
+                $("#myurl_msg").hide();
+                $('#myurl').css('border-bottom-color', '#6c6b6b')
+            } else {
+                $("#myurl_msg").show();
+                $('#myurl').css('border-bottom-color', 'red')
+            }
+
+
+            if (re.test(URLValue) && WebsiteName != "") {
+
+                $('#first_next').prop('disabled', false);
+
+            } else {
+
+                $('#first_next').prop('disabled', true);
+
+            }
+        });
+        $('#webNam').on('input change', function() {
+            var re = new RegExp("^([0-9A-Za-z-\\.@:%_\+~#=]+)+((\\.[a-zA-Z]{2,3})+)(/(.)*)?(\\?(.)*)?");
+
+            URLValue = $('#myurl').val();
+            WebsiteName = $('#webNam').val();
+
+            if (WebsiteName != '') {
+                $("#webNam_msg").hide();
+            } else {
+                $("#webNam_msg").show();
+                $('#first_next').prop('disabled', true);
+
+                // $(':input[type="button"]').prop('disabled', true);
+                $('#webNam').css('border-bottom-color', 'red')
+            }
+            if (re.test(URLValue) && WebsiteName != "") {
+                $('#first_next').prop('disabled', false);
+
+            } else {
+                $('#first_next').prop('disabled', true);
+
+            }
+
+        });
+
+        // third next
+        $("#keyWordbtn").on("change", function() {
+            if ($(this).text() !== "") {
+                $(".third_next").prop("disabled", false);
+            }
+        });
+        $("#Add_Competitors").on("change", function() {
+            if ($(this).text() !== "") {
+                $(".fourth_next").prop("disabled", false);
+            }
+
+        });
+        // http validation
+
+
+
+
+    });
+// for create project
+    $(document).on('click', '#projectModal .reset', function(e) {
+        $('.tagsInput_create').html('');
+      if($("#myurl").val() != "" || $("#webNam").val() != ""){
+
+   
+		    swal({
+				title: "", 
+				text: "Are you sure you want to close this form?", 
+				type: "warning",
+				confirmButtonText: "Yes",
+				showCancelButton: true,
+   
+		    })
+		    	.then((result) => {
+					if (result.value) {
+
+        
+            $('.tags').val(null).trigger('change');
+     $('.Competitors_tags').val(null).trigger('change');
+     SelectedKeywordArray = [];
+     selectedCompArray=[];
+     $("#msform .select2-selection__rendered li.select2-selection__choice").remove();
+
+     
+					       $(this).closest('form').find("input[type=text]").val("");
+     $("#msform").trigger('reset');
+     $('#first_next').prop('disabled', true);
+     $("#progressbar li#project").addClass("active").siblings().removeClass("active");
+     $("#msform > fieldset:nth-child(3)").css("opacity",'1');
+     $("#msform > fieldset:nth-child(3)").css("display",'block');
+     $("#msform > fieldset:nth-child(3)").siblings().css("display",'none');
+     $("#projectModal").modal('hide');
+     $("#myurl_msg").hide();
+     $('#myurl').css('border-bottom-color', '#6c6b6b');
+     $("#webNam_msg").hide();
+     $('#webNam').css('border-bottom-color', '#6c6b6b');
+					} else if (result.dismiss === 'cancel') {
+					  
+					}
+				})
+
+      }  
+      else{
+        $("#projectModal").modal('hide');
+      }
+		});
+        
+</script>
+<!-- projectlist js -->
+{% if request.user.is_authenticated %}
+<script src="{% static 'user_management/better_admin/js/project_list.js' %}"></script>
+{% endif %}
+
+<!-- <script src="{% static 'user_management/libs/Fileuploader/jquery.dm-uploader.min.js' %}"></script>
+<script src="{% static 'user_management/libs/Fileuploader/demo-ui.js' %}"></script> -->
+<script>
+
+function matchCustom(params, data) {
+
+
+// If there are no search terms, return all of the data
+if ($.trim(params.term) === '') {
+    return data;
+}
+
+// Do not display the item if there is no 'text' property
+if (typeof data.text === 'undefined') {
+    return null;
+}
+
+// `params.term` should be the term that is used for searching
+// `data.text` is the text that is displayed for the data object
+if (data.text === (params.term)) {
+    var modifiedData = $.extend({}, data, true);
+    modifiedData.text += ' (matched)';
+
+    // You can return modified objects from here
+    // This includes matching the `children` how you want in nested data sets
+    return data;
+}
+
+// Return `null` if the term should not be displayed
+return null;
+}
+
+
+
+    $(document).ready(function() {
+        // $('.focus').click(function() {
+        //         $(".select2-search__field")[0].focus();
+        //     })
+            // $(':input[type="button"]').prop('disabled', true);
+            // console.log('submit disabled');
+        $('#status_select').on('change', function() {
+            var fileStatus = $(this).val();
+        });
+        $(document).on("click", "a[data-action=status]", function() {
+            var fielid = $(this).closest("tr").children("td:first-child").attr('data-id');
+            var stat = $(this).closest("tr").children("td:nth-child(6)").text();
+            var fileTitle = $(this).closest("tr").children("td:nth-child(2)").text();
+            $("#status_select").val(stat);
+            $("#file-id").append(`<input type="hidden" value="${fielid}" name="file_id"/>`)
+            $("#status").append(`
+                     <p class="mt-2" style="font-size:11px">[ ${fileTitle} ]</p>
+                `)
+        })
+    });
+
+    $('#clearKey').click(function() {
+        $('input[type="radio"]:checked+.page+label.nav').css('border-bottom', '1px solid #ccc');
+
+        $('.removeDive').css('display', 'none');
+        $('.addWidth').removeClass('col-lg-6').addClass('col-md-12')
+        $('#clearKey ').css('color', '#fff');
+        $('#clearKey ').css('border-bottom', '3px solid #6c6b6b');
+        $('#clearCopyKey').css('color', '#6c6b6b;');
+    });
+    $('#clearCopyKey').click(function() {
+        $('.removeDive').css('display', 'block');
+        $('.addWidth').removeClass('col-md-12').addClass('col-md-6');
+        $('#clearKey ').css('color', '');
+        $('#clearKey ').css('border-bottom', '');
+        $('#clearCopyKey').css('border-bottom', '3px solid #6c6b6b');
+    });
+
+    //   $('#submit').click(function (e) {
+    //    console.log('document load');
+    //     var options_ = $('.CountrySelect');
+    //     console.log('options',options_)
+    //     if (options_.val() === '') {
+    //         alert("Please select an item from the list and then proceed!");
+    //         $('.CountrySelect').focus();
+    //         // $('#submit').prop('disabled',true);
+        //         return false;
+        //     }else{
+    //       alert('ok')
+    //        $('.second_next').prop('disabled', false);
+
+    //     }
+
+    // });
+    // $('.select2-search__field').keypress(function(e) {
+    //   if ($(".third_next")(e.keycode == 13 || e.which == 13)) {
+    //     alert("Enter is pressed");
+    //   }
+    // });
+    // $('.modal').on('select2:open', () => {
+    //     document.querySelector('.select2-search__field').focus();
+    // });
+
+    function RegisteredMember() {
+
+        if (($("#RegisterMember").val()) == "true") {
+         
+
+            $('.WizardSignUp').find('input, textarea, button, select').attr('disabled', true);
+            $('.WizardSignIn input').attr('disabled', false);
+            $("#RegisterMember").val("false");
+            $('#email2').prop('disabled',false);
+            $('#password2').prop('disabled',false);
+        } else {
+            $('.WizardSignUp').find('input, textarea, button, select').attr('disabled', false);
+            $('.WizardSignIn input').attr('disabled', true);
+            $("#RegisterMember").val("true");
+            $('#email2').prop('disabled',true);
+            $('#password2').prop('disabled',true);
+       
+        }
+        $('.WizardSignIn').toggle();
+        $('.WizardSignUp').toggle();
+
+
+
+
+    }
+
+    var input = document.querySelector("#phone");
+
+    if (input != undefined || input != null) {
+
+
+        window.intlTelInput(input, {
+            utilsScript: "https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/14.0.1/js/utils.js"
+        });
+    }
+    $('.iti__flag-container').click(function() {
+        var countryCode = $('.iti__selected-flag').attr('title');
+        var countryCode = countryCode.replace(/[^0-9]/g, '')
+        $('#phone').val("");
+        $('#phone').val("+" + countryCode + " " + $('#phone').val());
+    });
+
+    // keyword validation
+    $(document).ready(function(){
+        $('#KeywordsTags').prop('disabled',true);
+        $(document).on('keypress input change','.select2-search__field',function(){
+            $('#KeywordsTags').prop('disabled',false);
+        })
+    })
+    $(document).on('click','#KeywordsTags',function(){
+     var searchFiled = $('.select2-search__field').val();
+    if(searchFiled === ''){
+       
+        // ShowNoty('Please enter keyword','error')
+        $('.select2-container--default').css('border-bottom','1px solid red')
+    }
+    
+    });
+    // enter compitators in edit project
+   
+   $(document).on('click','#EditCompetitors',function(){
+  
+     var inputTagsValue =  $('#myTagsurl').val();
+
+     if(inputTagsValue == ''){
+        $("#myurl_tags").show();
+                $('#myTagsurl').css('border-bottom-color', 'red');
+            $("#myurl_tags_inc").hide();
+
+     }else{
+        if(competitorsKey.includes(httpValEdit+''+inputTagsValue)){
+            $("#myurl_tags_inc").show();
+           
+        }else{
+            $("#myurl_tags_inc").hide();
+              $("#myurl_tags").hide();
+            // $("#myurl_tags").html('Already Exsit !');
+            competitorsKey.push(httpValEdit+''+inputTagsValue);
+
+            $('.tagsInput').append(`<span class="KWord_ px-2 m-1" style="border: 1px solid #dee2e6;
+            border-radius: 0.25rem;
+            padding: 0px 2px;background:#007bff">${httpValEdit+''+inputTagsValue} <span class="remVal">x</span></span>`);  
+            // alert(httpValEdit)  
+            $('.remHtml').val('')
+        }
+   
+          
+     }
+   
+   });
+   function tags_create_p(el) {
+ if(event.key === 'Enter') {
+    //  alert(ele.value);   
+     if(competitorsKey.includes(CompihttpVal+''+el.value)){
+         $("#myurl_tags_inc_c").show();
+        
+     }else{
+         $("#myurl_tags_inc_c").hide();
+         // $("#myurl_tags").html('Already Exsit !');
+         competitorsKey.push(CompihttpVal+''+el.value);
+
+         $('.tagsInput_create').append(`<span class="KWord_create px-2 m-1" style="border: 1px solid #dee2e6;
+         border-radius: 0.25rem;
+         padding: 0px 2px;background:#007bff">${CompihttpVal+''+el.value} <span class="remVal_create">x</span></span>`);  
+         // alert(httpValEdit)  
+         $('.remHtml_create').val('')
+     }
+   
+ }
+}
+
+    function tags(ele) {
+    if(event.key === 'Enter') {
+        //  alert('yy');   
+        if(competitorsKey.includes(httpValEdit+''+ele.value)){
+            $("#myurl_tags_inc").show();
+           
+        }else{
+            $("#myurl_tags_inc").hide();
+            // $("#myurl_tags").html('Already Exsit !');
+            competitorsKey.push(httpValEdit+''+ele.value);
+
+            $('.tagsInput').append(`<span class="KWord_ px-2 m-1" style="border: 1px solid #dee2e6;
+            border-radius: 0.25rem;
+            padding: 0px 2px;background:#007bff">${httpValEdit+''+ele.value} <span class="remVal">x</span></span>`);  
+            // alert(httpValEdit)  
+            $('.remHtml').val('')
+        }
+      
+    }
+}
+$(document).on('click','.remVal',function(){
+    var data = $(this).closest('.KWord_').text();
+       data =  data.replace(' x','')
+    competitorsKey = competitorsKey.filter(item => item !== data);
+    $('.tagsInput').val(competitorsKey);
+    $(this).closest('.KWord_').remove();
+
+})
+</script>
+<script>
+    {% if messages %}
+      {% for message in messages %}
+
+        ShowNoty('{{message}}','alert');
+      {% endfor %}
+      {% endif %}
+  </script>
+{% endblock %}

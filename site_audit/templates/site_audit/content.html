@@ -1,0 +1,452 @@
+{% extends "base2.html" %} {% load static %} {% block extrahead %}
+<link type="text/css" rel="stylesheet" href="{% static 'site_audit/css/technical_site_audit.css' %}" />
+<style>
+  .tb_loader {
+    position: absolute;
+    z-index: 999;
+    margin: 3% 40%;
+  }
+  .acordion_1{
+    display: none;
+  }
+  .showw{
+    display: block!important;
+  }
+  /* .table-head.errorTypes {
+    position: sticky;
+    top: 0;
+  } */
+
+  .table-head.audit {
+    position: sticky;
+    top: -1px;
+  }
+
+  /* .sort-table-scroll {
+    max-height: 200px;
+    overflow-y: scroll;
+  } */
+
+  .displayTableWrapper {
+    max-height: 450px;
+    overflow-y: scroll;
+  }
+
+  .badge.badge-info {
+    cursor: pointer;
+  }
+
+  .key_count {
+    width: .8rem;
+    height: .8rem;
+  }
+
+  .shadow_ {
+    background-color: rgba(255, 255, 255, 0.8);
+    -moz-box-shadow: 0 4px 2px -3px rgba(0, 0, 0, 0.5) inset;
+    -webkit-box-shadow: 0 4px 2px -3px rgba(0, 0, 0, 0.5) inset;
+    box-shadow: 0 4px 2px -3px rgba(0, 0, 0, 0.5) inset;
+    padding: 5px;
+  }
+
+  .td_div {
+    max-height: 300px;
+    ;
+    overflow: auto;
+  }
+
+  .keyword-td {
+    max-height: 400px;
+    overflow-y: scroll;
+  }
+
+  #displayTable td {
+    color: gray;
+  }
+
+  #displayTable th {
+    font-weight: 500 !important;
+  }
+
+  #modalTable td {
+    color: gray;
+  }
+
+  #modalTable th {
+    font-weight: 500 !important;
+  }
+
+  .tabs-table th {
+    font-weight: 500 !important;
+  }
+
+  .text-elpsis-class {
+    max-width: 370px !important;
+    display: block !important;
+  }
+
+  @media only screen and (max-width:991.5px) {
+    ul.d-flex.justify-content-start.tabs.audit.mb-4 {
+      justify-content: center !important;
+    }
+  }
+
+  .bottom_table {
+    display: none;
+  }
+
+  #content-addBtn {
+    vertical-align: bottom;
+    border: 0;
+    box-shadow: 0 2px 5px 0 rgb(0 0 0 / 20%), 0 2px 10px 0 rgb(0 0 0 / 10%);
+    font-weight: 500;
+    padding: 0.625rem 1.5rem 0.5rem;
+    font-size: .75rem;
+    line-height: 1.5;
+    height: 39px;
+  }
+
+  #content-addBtn:hover {
+    outline: 0;
+    box-shadow: 0 4px 10px 0 rgb(0 0 0 / 20%), 0 4px 20px 0 rgb(0 0 0 / 10%);
+  }
+
+  .pagevalue1,
+  .pagevalue2 {
+    padding-left: 10px
+  }
+
+  .errorTypesLabel {
+    min-width: 180px;
+  }
+
+  .sub-headline {
+    font-weight: 500;
+    font-size: 12px;
+    color: #EB4335;
+    padding: 14px;
+  }
+
+  .help-icon {
+    cursor: pointer;
+  }
+
+  #links_detail tr td:nth-child(2) {
+    text-overflow: ellipsis;
+    word-break: break-all;
+    
+  }
+
+  .bg-light-blue3 {
+    background-color: #cee7fe;
+  }
+</style>
+{% endblock %} {% block content %}
+<div class="container pt-4">
+
+  <div class="d-flex justify-content-around">
+    <div class="backlins-hdng blue mb-4">
+      <h2 class="title">Content:<a href="" id="finalUrl"></a></h2>
+      <a href="#" data-bs-toggle="modal" data-bs-target="#addToMyWebsite"
+        class="btn btn-primary d-flex justify-content-center align-items-center gap-2" id="content-addBtn"><i
+          class="fas fa-plus"></i> Add
+        to my Websites</a>
+       
+    </div>
+  </div>
+ 
+  <div class="souce-page-tabs mt-2">
+    <div class="backl-tabs audit-tabs-main">
+      <ul class="d-flex justify-content-start tabs gap-5 audit mb-4">
+        <li class="active tabs-li" data-targetit="tabs-1">
+          <span id="tabOne">Page Titles</span><span class="text-gray empty_counts pagevalue0" id="PageTitle">
+            <div class="count_loader">
+              <div class="spinner-border spinner-border-sm" role="status">
+                <span class="visually-hidden">Loading...</span>
+              </div>
+            </div>
+          </span>
+        </li>
+        <li class="tabs-li" data-targetit="tabs-2">
+          <span id="tabTwo">Page Description</span><span class="text-gray empty_counts pagevalue1" id="PageDescription">
+            <div class="count_loader">
+              <div class="spinner-border spinner-border-sm" role="status">
+                <span class="visually-hidden">Loading...</span>
+              </div>
+            </div>
+          </span>
+        </li>
+        <li class="tabs-li" data-targetit="tabs-3">
+          <span id="tabThree">Content Ratio</span><span class="text-gray empty_counts  pagevalue2" id="ContentRatio">
+            <div class="count_loader">
+              <div class="spinner-border spinner-border-sm" role="status">
+                <span class="visually-hidden">Loading...</span>
+              </div>
+            </div>
+          </span>
+        </li>
+        <li class="tabs-li" data-targetit="tabs-4">
+          <span id="tabFour">Word Count</span><span class="text-gray empty_counts pagevalue3" id="WordCount">
+            <div class="count_loader">
+              <div class="spinner-border spinner-border-sm" role="status">
+                <span class="visually-hidden">Loading...</span>
+              </div>
+            </div>
+          </span>
+        </li>
+        <li class="tabs-li" data-targetit="tabs-5">
+          <span id="tabFive">H1</span><span class="text-gray empty_counts pagevalue4" id="H-1">
+            <div class="count_loader">
+              <div class="spinner-border spinner-border-sm" role="status">
+                <span class="visually-hidden">Loading...</span>
+              </div>
+            </div>
+          </span>
+        </li>
+      </ul>
+    </div>
+    <div class="backl-tab-content">
+      <div class="tab-content">
+        <div class="tabs-1 showfirst">
+          <div class="error-types-table sort-table ">
+            <table class="table table-striped table-bordered table-sm tabs-table" cellspacing="0" width="100%">
+              <thead class="table-head errorTypes">
+                <tr>
+                  <th class="th-sm w-70 font-14 br-0">Error Type</th>
+                  <th class="th-sm text-center w-10 font-14"></th>
+                  <th class="th-sm text-center w-10 font-14">Found</th>
+                  <th class="th-sm text-center w-10 font-14">History</th>
+                </tr>
+              </thead>
+              <tbody id="page_title">
+                <div class="tb_loader">
+                  <div class="spinner-border" role="status">
+                    <span class="visually-hidden">Loading...</span>
+                  </div>
+                </div>
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <div class="tabs-2">
+          <div class="error-types-table sort-table ">
+            <table class="table table-striped table-bordered table-sm tabs-table" cellspacing="0" width="100%">
+              <thead class="table-head errorTypes">
+                <tr>
+                  <th class="th-sm w-70 font-14 br-0">Error Type</th>
+                  <th class="th-sm text-center w-10 font-14"></th>
+                  <th class="th-sm text-center w-10 font-14">Found</th>
+                  <th class="th-sm text-center w-10 font-14">History</th>
+                </tr>
+              </thead>
+              <tbody id="Page_Description">
+                <div class="tb_loader">
+                  <div class="spinner-border" role="status">
+                    <span class="visually-hidden">Loading...</span>
+                  </div>
+                </div>
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <div class="tabs-3">
+          <div class="error-types-table sort-table ">
+            <table class="table table-striped table-bordered table-sm tabs-table" cellspacing="0" width="100%">
+              <thead class="table-head errorTypes">
+                <tr>
+                  <th class="th-sm w-70 font-14 br-0">Error Type</th>
+                  <th class="th-sm text-center w-10 font-14"></th>
+                  <th class="th-sm text-center w-10 font-14">Found</th>
+                  <th class="th-sm text-center w-10 font-14">History</th>
+                </tr>
+              </thead>
+              <tbody id="Content_Ratio">
+                <div class="tb_loader">
+                  <div class="spinner-border" role="status">
+                    <span class="visually-hidden">Loading...</span>
+                  </div>
+                </div>
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <div class="tabs-4">
+          <div class="error-types-table sort-table ">
+            <table class="table table-striped table-bordered table-sm tabs-table" cellspacing="0" width="100%">
+              <thead class="table-head errorTypes">
+                <tr>
+                  <th class="th-sm w-70 font-14 br-0">Error Type</th>
+                  <th class="th-sm text-center w-10 font-14"></th>
+                  <th class="th-sm text-center w-10 font-14">Found</th>
+                  <th class="th-sm text-center w-10 font-14">History</th>
+                </tr>
+              </thead>
+              <tbody id="Word_Count">
+                <div class="tb_loader">
+                  <div class="spinner-border" role="status">
+                    <span class="visually-hidden">Loading...</span>
+                  </div>
+                </div>
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <div class="tabs-5">
+          <div class="error-types-table sort-table ">
+            <table class="table table-striped table-bordered table-sm tabs-table" cellspacing="0" width="100%">
+              <thead class="table-head errorTypes">
+                <tr>
+                  <th class="th-sm w-70 font-14 br-0">Error Type</th>
+                  <th class="th-sm text-center w-10 font-14"></th>
+                  <th class="th-sm text-center w-10 font-14">Found</th>
+                  <th class="th-sm text-center w-10 font-14">History</th>
+                </tr>
+              </thead>
+              <tbody id="H1">
+                <div class="tb_loader">
+                  <div class="spinner-border" role="status">
+                    <span class="visually-hidden">Loading...</span>
+                  </div>
+                </div>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="sort-table audit mt-4 bottom_table" id="table-heading">
+      <div class="d-flex">
+        <div class="errorTypesLabel error_type_label bg-light-blue2 font-16 text-gray px-3 pt-3 pb-4">Page has links
+          to broken page</div>
+        <div class=" sub-headline">
+        </div>
+      </div>
+      <div>
+        <table id="displayTable" class="table audit table-striped table-bordered table-sm" cellspacing="0" width="100%">
+          <thead class="table-head audit " id="tableHead">
+            <tr>
+              <th class=" sorting-icon th-sm p-relative w-37" style="text-align: left;"> Source Page Title <small
+                  class="tbl-sml-txt">Website URL</small>
+                <small class=" tbl-sml-txt chevron d-flex justify-content-end" style="padding-bottom: 20px;">
+                  <i class="fa-solid fa-chevron-up me-1"></i>
+                </small>
+              </th>
+              <th class=" sorting-icon th-sm p-relative w-15" style="text-align: left;">Title <small
+                  class=" tbl-sml-txt chevron d-flex justify-content-end" style="padding-bottom: 20px;">
+                  <i class="fa-solid fa-chevron-up me-1"></i>
+                </small></th>
+              <th class=" sorting-icon th-sm p-relative w-11" style="text-align: left;">
+                Content Type
+                <small class=" tbl-sml-txt chevron d-flex justify-content-end" style="padding-bottom: 20px;">
+                  <i class="fa-solid fa-chevron-up me-1"></i>
+                </small>
+              </th>
+              <th class=" sorting-icon th-sm w-10" style="text-align: left;">Date <small
+                  class=" tbl-sml-txt chevron d-flex justify-content-end" style="padding-bottom: 20px;">
+                  <i class="fa-solid fa-chevron-up me-1"></i>
+                </small></th>
+              <th class=" sorting-icon th-sm w-12" style="text-align: left;">Length <small
+                  class=" tbl-sml-txt chevron d-flex justify-content-end" style="padding-bottom: 20px;">
+                  <i class="fa-solid fa-chevron-up me-1"></i>
+                </small></th>
+              <th class=" sorting-icon th-sm w-15" style="text-align: left;">Recommended Length <small
+                  class=" tbl-sml-txt chevron d-flex justify-content-end" style="padding-bottom: 20px;">
+                  <i class="fa-solid fa-chevron-up me-1"></i>
+                </small></th>
+            </tr>
+          </thead>
+          <tbody class="audit-scroll-bar " id="links_detail">
+            <!-- <div class="tb_loader" id="links_detail_loader">
+            <div class="spinner-border" role="status">
+              <span class="visually-hidden">Loading...</span>
+            </div>
+          </div> -->
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+  <div class="limit-alert-bar mt-md-5 mb-md-4 mx-4 mt-5 mb-4 freeProSection" style="display: none;" >
+    <div class="limit-alert">
+      <img src="../../static/site_audit/assets/limit-alert.png" alt="limit-alert" />
+    </div>
+    <p class="font-14 text-black m-0">
+      You've reached your limits for the free plan. You can see more by
+      upgrading to the higher plan.
+    </p>
+    <a  href="/subscription/upgrade_subscription/" class="upgrade-btn">
+      <img src="../../static/site_audit/assets/king.png" alt="king" />
+      Upgrade plan
+    </a>
+  </div>
+</div>
+<!-- Add to My Website Popup Start  -->
+<!-- add website modal -->
+<!-- Add to My Website Popup End  -->
+<!-- ConTent Ratio (?) Popup Start  -->
+<div class="modal fade" id="tableContentPopup" tabindex="-1" aria-labelledby="exampleModalLabel"
+  data-gtm-vis-first-on-screen-2340190_1302="26215" data-gtm-vis-total-visible-time-2340190_1302="100"
+  data-gtm-vis-has-fired-2340190_1302="1" aria-modal="true" role="dialog">
+  <div class="modal-dialog modal-lg modal-dialog-centered">
+    <!-- <div class="modal-dialog modal-xl"> -->
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title m-0" id="modalBroken-heading"></h5>
+        <button type="button" class="btn-close px-0 m-0" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body" style="max-height:400px;overflow:auto">
+        <div class="modal-body-text"></div>
+        <!-- <div class="sort-table  text-center" id="modal-heading"> -->
+          <!-- <div class="errorTypesLabel  bg-light-blue2 font-16 text-gray px-3 pt-3 pb-4" id="modal-heading">
+          
+          </div> -->
+          <!-- <table id="modalTable" class="table audit table-striped table-bordered table-sm" cellspacing="0" width="100%">
+            <thead class="table-head audit" id="modal-table-head">
+              <tr>
+                <th class=" sorting-icon th-sm p-relative w-26">Title <small
+                    class=" tbl-sml-txt chevron d-flex justify-content-end" style="padding-bottom: 20px;">
+                    <i class="fa-solid fa-chevron-up me-1"></i>
+                  </small></th>
+                <th class="th-sm p-relative w-17 text-center">
+                  Content Type
+                  <small class=" tbl-sml-txt chevron">
+                    <i class="fa-solid fa-chevron-up me-1"></i>
+                    <i class="fa-solid fa-chevron-down"></i>
+                  </small>
+                </th>
+                <th class=" sorting-icon th-sm w-10">Date <small class=" tbl-sml-txt chevron d-flex justify-content-end"
+                    style="padding-bottom: 20px;">
+                    <i class="fa-solid fa-chevron-up me-1"></i>
+                  </small></th>
+                <th class=" sorting-icon th-sm w-12">Length <small
+                    class=" tbl-sml-txt chevron d-flex justify-content-end" style="padding-bottom: 20px;">
+                    <i class="fa-solid fa-chevron-up me-1"></i>
+                  </small></th>
+                <th class=" sorting-icon th-sm w-18">Recommended Length <small
+                    class="  tbl-sml-txt chevron d-flex justify-content-end" style="padding-bottom: 20px;">
+                    <i class="fa-solid fa-chevron-up me-1"></i>
+                  </small></th>
+              </tr>
+            </thead>
+            <tbody class="audit-scroll-bar" id="modal-audit-scroll-bar">
+            </tbody>
+          </table> -->
+        <!-- </div> -->
+      </div>
+    </div>
+  
+ 
+ 
+  </div>
+</div>
+{% endblock %} {% block extrascript %}
+<script src="https://cdn.rawgit.com/julmot/mark.js/master/dist/jquery.mark.min.js" ></script>
+<script type="text/javascript" src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
+<script type="text/javascript" src="https://cdn.datatables.net/buttons/2.2.3/js/dataTables.buttons.min.js"></script>
+<script type="text/javascript" src="https://cdn.datatables.net/buttons/2.2.3/js/buttons.html5.min.js"></script>
+<script type="text/javascript" src="https://cdn.datatables.net/plug-ins/1.12.1/dataRender/ellipsis.js"></script>
+<script src="{% static 'site_audit/js/content.js' %}"></script>
+
+{% endblock %}
+</div>
+</div>

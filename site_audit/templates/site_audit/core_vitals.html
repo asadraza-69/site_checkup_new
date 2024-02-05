@@ -1,0 +1,743 @@
+{% extends "base2.html" %}
+{% load static %}
+{% block extrahead %}
+<script src="https://cdn.jsdelivr.net/gh/google/code-prettify@master/loader/run_prettify.js"></script>
+<link type='text/css' rel="stylesheet" href="{% static 'site_audit/css/dashboard2.css' %}">
+<style>
+  .chartRelative {
+        position: relative;
+    }
+
+    .absolute-center {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+    }
+
+    #scoreDonutChart {
+        font-size: 30px;
+        font-weight: 600;
+    }
+    #coreVitalsShow {
+        display:none
+    }
+    .searchSpinner{
+        display: none;
+    }
+
+    #donutChartt {
+        height:360px!important
+    }
+</style>
+{% endblock %}
+{% block content %}
+<div class="container pb-2 mb-5">
+<div class="urlSearchBar mb-5">
+   
+        <div class="row">
+            <div class="col-xl-9">
+         
+          {% csrf_token %}
+                <div class="urlForm crawler">
+                    <div class="search-input rounded-0">
+                        <input type="text" id="Urlsearch" placeholder="Search Page Url" autocomplete="off"
+                            class="urlInput">
+                        <div class="">
+                            <button type="button" 
+                                class="srch-btn disabled rounded-0 d-flex align-items-center justify-content-center gap-3"
+                                id="searchUrlBtn"><span class="btn-text">Search</span>
+                                <div class="searchSpinner">
+                                <div class="spinner-border spinner-border-sm" role="status">
+                                    <span class="visually-hidden">Loading...</span>
+                                    </div>
+                                    </div>
+                                <span><i class="fa-solid fa-magnifying-glass"></i></span>
+                            </button>
+                        </div>
+                       
+                    </div>
+                </div>
+                 <span id="responseText"></span>
+               
+            </div>
+        </div>
+    </div>
+    <div id="coreVitalsShow">
+<div class="row" >
+<div class="col-xl-9">
+   <h2 class="title fw-400 mb-3 ps-md-0  ms-md-0 pb-2">Core Vitals </h2>
+
+            <p class="text-black font-12 fw-400 p-md-0 mb-4">Core Vitals are now a part of Google’s
+                search
+                algorithm and
+                can
+                positively or negatively impact your keyword rankings. Low Core Vitals scores can also
+                negatively impact your visitors’ overall experience on your website. Google has assigned
+                different weights (i.e. importance) to each Core Vital metric. That said, if you score
+                very
+                bad for any Core Vital it is always going to be a top priority to fix even if it isn’t
+                the
+                most important Core Vital.</p>
+
+            <!-- Core Vital Heading Paragraph End -->
+
+            <div class="coreVital_categorize">
+                <div class="row">
+                    <div class="col-xl-6">
+                        <p class="vital_title text-gray mb-3">
+                            <span class="domain-title vital_title d-flex flex-wrap " id="domain-title">
+                            </span>
+                        </p>
+                    </div>
+                    <div class="col-xl-6">
+
+                        <div class="vital_title d-flex align-items-center text-gray mt-5 mt-lg-0 mb-3"><span
+                                class="metrics__title me-1 d-inline-block">Overview :</span>
+                            <div class="metric-info mr-2">
+                                <span class=" metrics-info__value metrics-info__static-value-overview  strong"
+                                    id="strong"></span>
+
+                                <div class="spinner-border text-primary spinner-border-sm" id="overview_spinner"
+                                    role="status">
+                                    <span class="visually-hidden">Loading...</span>
+                                </div><span class="metrics-info__static-value ">/100</span>
+                            </div>
+
+                            <div class="overview mx-3" id="circle-a">
+
+                            </div>
+                            <div> |
+                                <span class="metrics-info__status ml-4" id="si_status_overview"></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-6 mt-5">
+
+                        <div class="vital_resultBar bg-light-green w-100 py-2 px-3 mb-4 fcp_bar">
+                            <div class="left-side">
+                                <span class="vital-resultSeconds text-gray font-13">
+                                    First Contentful Paint : <var class=" font-13  p_spinner_cls" id="fcp"></var>
+                                    <div class="spinner-border text-primary spinner-border-sm  p_spinner mt-1 mr-1"
+                                        role="status">
+                                        <span class="visually-hidden">Loading...</span>
+                                    </div>
+                                </span>
+                                <span class="vital_resultName font-12" id="fcp_status"></span>
+                            </div>
+                            <span class="vital-toltp">
+                                <a href="#" class="tooltp mb-3 font-18" data-bs-placement="left"
+                                    data-bs-toggle="tooltip" title=""
+                                    data-bs-original-title="More than half of all website traffic comes from mobile phones so it is very important your website loads fast. We review your website's speed daily and will alert you if we find any issues."
+                                    aria-label="More than half of all website traffic comes from mobile phones so it is very important your website loads fast. We review your website's speed daily and will alert you if we find any issues."><i
+                                        class="far fa-question-circle"></i></a>
+                            </span>
+
+                        </div>
+
+                        <div class="p_spinner_cls rangeSliderMain ">
+                            <div class="rangeSeconds">
+                                <span class="range LessThan text-gray font-12 me-4">Less than 1.8
+                                    sec</span>
+                                <span class="range greaterThan text-gray font-12">Over 3 sec</span>
+                            </div>
+                            <div class="rangeSlider" id="rangeSlider">
+                                <div id="tooltipTitle_fcp" data-bs-toggle="tooltip" data-bs-placement="top" title=""
+                                    class="indicator indicator_FCP slider-circle">
+                                </div>
+
+                                <div class="fast-main">
+                                    <div class="fast-status">
+                                        <div class="battery-inner1 bg-green"></div>
+                                        <div class="battery-inner1 bg-green"></div>
+                                        <div class="battery-inner1 bg-green"></div>
+                                        <div class="battery-inner1 bg-green"></div>
+                                        <div class="battery-inner1 bg-green"></div>
+                                        <div class="battery-inner1 bg-green"></div>
+                                    </div>
+                                    <span class="status-name font-13 text-black">Fast</span>
+                                </div>
+
+                                <div class="moderate-main">
+                                    <div class="moderate-status">
+                                        <div class="battery-inner1 bg-yellow"></div>
+                                        <div class="battery-inner1 bg-yellow"></div>
+                                        <div class="battery-inner1 bg-yellow"></div>
+                                        <div class="battery-inner1 bg-yellow"></div>
+                                        <div class="battery-inner1 bg-light-orange"></div>
+                                        <div class="battery-inner1 bg-light-orange"></div>
+                                        <div class="battery-inner1 bg-light-orange"></div>
+                                        <div class="battery-inner1 bg-light-orange"></div>
+                                    </div>
+                                    <span class="status-name font-13 text-black">Moderate</span>
+                                </div>
+
+                                <div class="slow-main">
+                                    <div class="slow-status">
+                                        <div class="battery-inner1 bg-red"></div>
+                                        <div class="battery-inner1 bg-red"></div>
+                                        <div class="battery-inner1 bg-red"></div>
+                                        <div class="battery-inner1 bg-red"></div>
+                                        <div class="battery-inner1 bg-dark-red"></div>
+                                        <div class="battery-inner1 bg-mehroon"></div>
+                                        <div class="battery-inner1 bg-mehroon"></div>
+                                    </div>
+                                    <span class="status-name font-13 text-black">Slow</span>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-6 mt-5">
+                        <div class="vital_resultBar bg-light-green w-100 py-2 px-3 mb-4 tbt_bar">
+                            <div class="left-side">
+                                <span class="vital-resultSeconds text-gray font-13">
+                                    Total Blocking Time : <var class="font-13  p_spinner_cls" id="tbt"></var>
+                                    <div class="spinner-border text-primary spinner-border-sm  p_spinner mt-1 mr-1"
+                                        role="status">
+                                        <span class="visually-hidden">Loading...</span>
+                                    </div>
+                                </span>
+                                <span class="vital_resultName font-12" id="tbt_status"></span>
+                            </div>
+                            <span class="vital-toltp">
+                                <a href="#" class="tooltp mb-3 font-18" data-bs-placement="left"
+                                    data-bs-toggle="tooltip" title=""
+                                    data-bs-original-title="More than half of all website traffic comes from mobile phones so it is very important your website loads fast. We review your website's speed daily and will alert you if we find any issues."
+                                    aria-label="More than half of all website traffic comes from mobile phones so it is very important your website loads fast. We review your website's speed daily and will alert you if we find any issues."><i
+                                        class="far fa-question-circle"></i></a>
+                            </span>
+                        </div>
+
+                        <div class="p_spinner_cls rangeSliderMain">
+                            <div class="rangeSeconds">
+                                <span class="range LessThan text-gray font-12 me-4">Less than 200
+                                    ms</span>
+                                <span class="range greaterThan text-gray font-12">Over 600 ms</span>
+                            </div>
+
+                            <div class="rangeSlider" id="rangeSlider">
+
+                                <div id="tooltipTitle_tbt" data-bs-toggle="tooltip" data-bs-placement="top" title=""
+                                    class="indicator indicator_TBT slider-circle">
+                                </div>
+
+
+                                <div class="fast-main">
+                                    <div class="fast-status">
+                                        <div class="battery-inner1 bg-green"></div>
+                                        <div class="battery-inner1 bg-green"></div>
+                                        <div class="battery-inner1 bg-green"></div>
+                                        <div class="battery-inner1 bg-green"></div>
+                                        <div class="battery-inner1 bg-green"></div>
+                                        <div class="battery-inner1 bg-green"></div>
+                                    </div>
+                                    <span class="status-name font-13 text-black">Fast</span>
+                                </div>
+
+                                <div class="moderate-main">
+                                    <div class="moderate-status">
+                                        <div class="battery-inner1 bg-yellow"></div>
+                                        <div class="battery-inner1 bg-yellow"></div>
+                                        <div class="battery-inner1 bg-yellow"></div>
+                                        <div class="battery-inner1 bg-yellow"></div>
+                                        <div class="battery-inner1 bg-light-orange"></div>
+                                        <div class="battery-inner1 bg-light-orange"></div>
+                                        <div class="battery-inner1 bg-light-orange"></div>
+                                        <div class="battery-inner1 bg-light-orange"></div>
+                                    </div>
+                                    <span class="status-name font-13 text-black">Moderate</span>
+                                </div>
+
+                                <div class="slow-main">
+                                    <div class="slow-status">
+                                        <div class="battery-inner1 bg-red"></div>
+                                        <div class="battery-inner1 bg-red"></div>
+                                        <div class="battery-inner1 bg-red"></div>
+                                        <div class="battery-inner1 bg-red"></div>
+                                        <div class="battery-inner1 bg-dark-red"></div>
+                                        <div class="battery-inner1 bg-mehroon"></div>
+                                        <div class="battery-inner1 bg-mehroon"></div>
+                                    </div>
+                                    <span class="status-name font-13 text-black">Slow</span>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-6 mt-5">
+                        <div class="vital_resultBar bg-light-green w-100 py-2 px-3 mb-4 lcp_bar">
+                            <div class="left-side">
+                                <span class="vital-resultSeconds text-gray font-13">
+                                    Largest Contentful Paint : <var class=" font-13  p_spinner_cls" id="lcp"></var>
+                                    <div class="spinner-border text-primary spinner-border-sm  p_spinner mt-1 mr-1"
+                                        role="status">
+                                        <span class="visually-hidden">Loading...</span>
+                                    </div>
+                                </span>
+                                <span class="vital_resultName  font-12" id="lcp_status"></span>
+                            </div>
+                            <span class="vital-toltp">
+                                <a href="#" class="tooltp mb-3 font-18" data-bs-placement="left"
+                                    data-bs-toggle="tooltip" title=""
+                                    data-bs-original-title="More than half of all website traffic comes from mobile phones so it is very important your website loads fast. We review your website's speed daily and will alert you if we find any issues."
+                                    aria-label="More than half of all website traffic comes from mobile phones so it is very important your website loads fast. We review your website's speed daily and will alert you if we find any issues."><i
+                                        class="far fa-question-circle"></i></a>
+                            </span>
+                        </div>
+
+                        <div class="p_spinner_cls rangeSliderMain">
+                            <div class="rangeSeconds">
+                                <span class="range LessThan text-gray font-12 me-4">Less than 2500 ms
+                                    sec</span>
+                                <span class="range greaterThan text-gray font-12">Over 4000 ms</span>
+                            </div>
+                            <div class="rangeSlider" id="rangeSlider">
+
+                                <div id="tooltipTitle_lcp" data-bs-toggle="tooltip" data-bs-placement="top" title=""
+                                    class="indicator indicator_LCP slider-circle">
+                                </div>
+                                <div class="fast-main">
+                                    <div class="fast-status">
+                                        <div class="battery-inner1 bg-green"></div>
+                                        <div class="battery-inner1 bg-green"></div>
+                                        <div class="battery-inner1 bg-green"></div>
+                                        <div class="battery-inner1 bg-green"></div>
+                                        <div class="battery-inner1 bg-green"></div>
+                                        <div class="battery-inner1 bg-green"></div>
+                                    </div>
+                                    <span class="status-name font-13 text-black">Fast</span>
+                                </div>
+
+                                <div class="moderate-main">
+                                    <div class="moderate-status">
+                                        <div class="battery-inner1 bg-yellow"></div>
+                                        <div class="battery-inner1 bg-yellow"></div>
+                                        <div class="battery-inner1 bg-yellow"></div>
+                                        <div class="battery-inner1 bg-yellow"></div>
+                                        <div class="battery-inner1 bg-light-orange"></div>
+                                        <div class="battery-inner1 bg-light-orange"></div>
+                                        <div class="battery-inner1 bg-light-orange"></div>
+                                        <div class="battery-inner1 bg-light-orange"></div>
+                                    </div>
+                                    <span class="status-name font-13 text-black">Moderate</span>
+                                </div>
+
+                                <div class="slow-main">
+                                    <div class="slow-status">
+                                        <div class="battery-inner1 bg-red"></div>
+                                        <div class="battery-inner1 bg-red"></div>
+                                        <div class="battery-inner1 bg-red"></div>
+                                        <div class="battery-inner1 bg-red"></div>
+                                        <div class="battery-inner1 bg-dark-red"></div>
+                                        <div class="battery-inner1 bg-mehroon"></div>
+                                        <div class="battery-inner1 bg-mehroon"></div>
+                                    </div>
+                                    <span class="status-name font-13 text-black">Slow</span>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-6 mt-5">
+                        <div class="vital_resultBar bg-light-green  w-100 py-2 px-3 mb-4 speed_ind_bar">
+                            <div class="left-side">
+                                <span class="vital-resultSeconds text-gray font-13">
+                                    Speed Index : <var class="font-13  p_spinner_cls" id="si"> </var>
+                                    <div class="spinner-border text-primary spinner-border-sm  p_spinner mt-1 mr-1"
+                                        role="status">
+                                        <span class="visually-hidden">Loading...</span>
+                                    </div>
+                                </span>
+                                <span class="vital_resultName  font-12" id="si_status"></span>
+                            </div>
+                            <span class="vital-toltp">
+                                <a href="#" class="tooltp mb-3 font-18" data-bs-placement="left"
+                                    data-bs-toggle="tooltip" title=""
+                                    data-bs-original-title="More than half of all website traffic comes from mobile phones so it is very important your website loads fast. We review your website's speed daily and will alert you if we find any issues."
+                                    aria-label="More than half of all website traffic comes from mobile phones so it is very important your website loads fast. We review your website's speed daily and will alert you if we find any issues."><i
+                                        class="far fa-question-circle"></i></a>
+                            </span>
+                        </div>
+
+                        <div class="p_spinner_cls rangeSliderMain">
+                            <div class="rangeSeconds">
+                                <span class="range LessThan text-gray font-12 me-4">Less than
+                                    3.4 sec</span>
+                                <span class="range greaterThan text-gray font-12">Over 5.8 sec</span>
+                            </div>
+                            <div class="rangeSlider" id="rangeSlider">
+
+                                <div id="tooltipTitle_si" data-bs-toggle="tooltip" data-bs-placement="top" title=""
+                                    class="indicator indicator_SI slider-circle">
+                                </div>
+
+                                <div class="fast-main">
+                                    <div class="fast-status">
+                                        <div class="battery-inner1 bg-green"></div>
+                                        <div class="battery-inner1 bg-green"></div>
+                                        <div class="battery-inner1 bg-green"></div>
+                                        <div class="battery-inner1 bg-green"></div>
+                                        <div class="battery-inner1 bg-green"></div>
+                                        <div class="battery-inner1 bg-green"></div>
+                                    </div>
+                                    <span class="status-name font-13 text-black">Fast</span>
+                                </div>
+
+                                <div class="moderate-main">
+                                    <div class="moderate-status">
+                                        <div class="battery-inner1 bg-yellow"></div>
+                                        <div class="battery-inner1 bg-yellow"></div>
+                                        <div class="battery-inner1 bg-yellow"></div>
+                                        <div class="battery-inner1 bg-yellow"></div>
+                                        <div class="battery-inner1 bg-light-orange"></div>
+                                        <div class="battery-inner1 bg-light-orange"></div>
+                                        <div class="battery-inner1 bg-light-orange"></div>
+                                        <div class="battery-inner1 bg-light-orange"></div>
+                                    </div>
+                                    <span class="status-name font-13 text-black">Moderate</span>
+                                </div>
+
+                                <div class="slow-main">
+                                    <div class="slow-status">
+                                        <div class="battery-inner1 bg-red"></div>
+                                        <div class="battery-inner1 bg-red"></div>
+                                        <div class="battery-inner1 bg-red"></div>
+                                        <div class="battery-inner1 bg-red"></div>
+                                        <div class="battery-inner1 bg-dark-red"></div>
+                                        <div class="battery-inner1 bg-mehroon"></div>
+                                        <div class="battery-inner1 bg-mehroon"></div>
+                                    </div>
+                                    <span class="status-name font-13 text-black">Slow</span>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-6 mt-5">
+                        <div class="vital_resultBar bg-light-green w-100 py-2 px-3 mb-4 cls_bar">
+                            <div class="left-side">
+                                <span class="vital-resultSeconds text-gray font-13">
+                                    Cumulative Layout Shift :<var class=" font-13  p_spinner_cls" id="cls"></var>
+                                    <div class="spinner-border text-primary spinner-border-sm  p_spinner mt-1 mr-1"
+                                        role="status">
+                                        <span class="visually-hidden">Loading...</span>
+                                    </div>
+                                </span>
+                                <span class="vital_resultName  font-12" id="cls_status"></span>
+                            </div>
+                            <span class="vital-toltp">
+                                <a href="#" class="tooltp mb-3 font-18" data-bs-placement="left"
+                                    data-bs-toggle="tooltip" title=""
+                                    data-bs-original-title="More than half of all website traffic comes from mobile phones so it is very important your website loads fast. We review your website's speed daily and will alert you if we find any issues."
+                                    aria-label="More than half of all website traffic comes from mobile phones so it is very important your website loads fast. We review your website's speed daily and will alert you if we find any issues."><i
+                                        class="far fa-question-circle"></i></a>
+                            </span>
+                        </div>
+
+                        <div class="p_spinner_cls rangeSliderMain">
+                            <div class="rangeSeconds">
+                                <span class="range LessThan text-gray font-12 me-4">Less than 0.1
+                                    sec</span>
+                                <span class="range greaterThan text-gray font-12">Over 0.25 sec</span>
+                            </div>
+                            <div class="rangeSlider" id="rangeSlider">
+                                <div id="tooltipTitle_cls" data-bs-toggle="tooltip" data-bs-placement="top" title=""
+                                    class="indicator indicator_CLS slider-circle">
+                                </div>
+
+                                <div class="fast-main">
+                                    <div class="fast-status">
+                                        <div class="battery-inner1 bg-green"></div>
+                                        <div class="battery-inner1 bg-green"></div>
+                                        <div class="battery-inner1 bg-green"></div>
+                                        <div class="battery-inner1 bg-green"></div>
+                                        <div class="battery-inner1 bg-green"></div>
+                                        <div class="battery-inner1 bg-green"></div>
+                                    </div>
+                                    <span class="status-name font-13 text-black">Fast</span>
+                                </div>
+
+                                <div class="moderate-main">
+                                    <div class="moderate-status">
+                                        <div class="battery-inner1 bg-yellow"></div>
+                                        <div class="battery-inner1 bg-yellow"></div>
+                                        <div class="battery-inner1 bg-yellow"></div>
+                                        <div class="battery-inner1 bg-yellow"></div>
+                                        <div class="battery-inner1 bg-light-orange"></div>
+                                        <div class="battery-inner1 bg-light-orange"></div>
+                                        <div class="battery-inner1 bg-light-orange"></div>
+                                        <div class="battery-inner1 bg-light-orange"></div>
+                                    </div>
+                                    <span class="status-name font-13 text-black">Moderate</span>
+                                </div>
+
+                                <div class="slow-main">
+                                    <div class="slow-status">
+                                        <div class="battery-inner1 bg-red"></div>
+                                        <div class="battery-inner1 bg-red"></div>
+                                        <div class="battery-inner1 bg-red"></div>
+                                        <div class="battery-inner1 bg-red"></div>
+                                        <div class="battery-inner1 bg-dark-red"></div>
+                                        <div class="battery-inner1 bg-mehroon"></div>
+                                        <div class="battery-inner1 bg-mehroon"></div>
+                                    </div>
+                                    <span class="status-name font-13 text-black">Slow</span>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-6 mt-5">
+                        <div class="vital_resultBar bg-light-green w-100 py-2 px-3 mb-4 tti_bar">
+                            <div class="left-side">
+                                <span class="vital-resultSeconds text-gray font-13">
+                                    Time to Interactive : <var class=" font-13  p_spinner_cls" id="tti"></var>
+                                    <div class="spinner-border text-primary spinner-border-sm  p_spinner mt-1 mr-1"
+                                        role="status">
+                                        <span class="visually-hidden">Loading...</span>
+                                    </div>
+                                </span>
+                                <span class="vital_resultName  font-12" id="tti_status"></span>
+                            </div>
+                            <span class="vital-toltp">
+                                <a href="#" class="tooltp mb-3 font-18" data-bs-placement="left"
+                                    data-bs-toggle="tooltip" title=""
+                                    data-bs-original-title="More than half of all website traffic comes from mobile phones so it is very important your website loads fast. We review your website's speed daily and will alert you if we find any issues."
+                                    aria-label="More than half of all website traffic comes from mobile phones so it is very important your website loads fast. We review your website's speed daily and will alert you if we find any issues."><i
+                                        class="far fa-question-circle"></i></a>
+                            </span>
+                        </div>
+
+                        <div class="p_spinner_cls rangeSliderMain">
+                            <div class="rangeSeconds">
+                                <span class="range LessThan text-gray font-12 me-4">Less than 3.8
+                                    sec</span>
+                                <span class="range greaterThan text-gray font-12">Over 7.3 sec</span>
+                            </div>
+                            <div class="rangeSlider" id="rangeSlider">
+                                <div id="tooltipTitle_tti" data-bs-toggle="tooltip" data-bs-placement="top" title=""
+                                    class="indicator indicator_TTI slider-circle">
+                                </div>
+
+                                <div class="fast-main">
+                                    <div class="fast-status">
+                                        <div class="battery-inner1 bg-green"></div>
+                                        <div class="battery-inner1 bg-green"></div>
+                                        <div class="battery-inner1 bg-green"></div>
+                                        <div class="battery-inner1 bg-green"></div>
+                                        <div class="battery-inner1 bg-green"></div>
+                                        <div class="battery-inner1 bg-green"></div>
+                                    </div>
+                                    <span class="status-name font-13 text-black">Fast</span>
+                                </div>
+
+                                <div class="moderate-main">
+                                    <div class="moderate-status">
+                                        <div class="battery-inner1 bg-yellow"></div>
+                                        <div class="battery-inner1 bg-yellow"></div>
+                                        <div class="battery-inner1 bg-yellow"></div>
+                                        <div class="battery-inner1 bg-yellow"></div>
+                                        <div class="battery-inner1 bg-light-orange"></div>
+                                        <div class="battery-inner1 bg-light-orange"></div>
+                                        <div class="battery-inner1 bg-light-orange"></div>
+                                        <div class="battery-inner1 bg-light-orange"></div>
+                                    </div>
+                                    <span class="status-name font-13 text-black">Moderate</span>
+                                </div>
+
+                                <div class="slow-main">
+                                    <div class="slow-status">
+                                        <div class="battery-inner1 bg-red"></div>
+                                        <div class="battery-inner1 bg-red"></div>
+                                        <div class="battery-inner1 bg-red"></div>
+                                        <div class="battery-inner1 bg-red"></div>
+                                        <div class="battery-inner1 bg-dark-red"></div>
+                                        <div class="battery-inner1 bg-mehroon"></div>
+                                        <div class="battery-inner1 bg-mehroon"></div>
+                                    </div>
+                                    <span class="status-name font-13 text-black">Slow</span>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+</div>
+<div class="col-xl-3">
+  <div class="progress-sideBar mt-3 ps-md-3">
+                <div class="crawled gray-bg py-4 px-3">
+                    <p class="text-center text-gray">How Google generally weighs
+                        the importance of eachcan
+                        main Core Vital</p>
+                    <div class="multiColorProgress text-center my-4 position-relative">
+                        <div id="donut_spinner" class="spinner-border text-primary spinner-border-lg  mr-1"
+                            role="status">
+                            <span class="visually-hidden">Loading...</span>
+                        </div>
+
+                        <div class="chartRelative">
+                             <canvas id="donutChartt" style=""></canvas> 
+
+
+                            <div class="absolute-center text-center" id="scoreDonutChart">
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="overview-information-container">
+                        <ul class="overview-list coreVitalStatus">
+                            <li class="mb-2  font-10 p-relative ">
+                                <span class="font-8 text-red me-1"><i class="fa-solid fa-circle"></i></span>
+                                Total Blocking Time (TBT) <span class="overview-value percentage_TBT"></span>
+                                <div class="spinner-border text-primary spinner-border-sm percent_spinner mt-1 mr-1"
+                                    role="status">
+                                    <span class="visually-hidden">Loading...</span>
+                                </div>
+                            </li>
+                            <li class="mb-2  font-10 p-relative ">
+                                <span class="font-8 text-yellow me-1"><i class="fa-solid fa-circle"></i></span>
+                                Largest Contentful Paint (LCP)
+                                <span class="overview-value percentage_LCP"></span>
+                                <div class="spinner-border text-primary spinner-border-sm  percent_spinner mt-1 mr-1"
+                                    role="status">
+                                    <span class="visually-hidden">Loading...</span>
+                                </div>
+                            </li>
+                            <li class="mb-2  font-10 p-relative ">
+                                <span class="font-8 text-orange me-1"><i class="fa-solid fa-circle"></i></span>
+                                Cumulative Layout Shift (CLS) <span class="overview-value percentage_CLS"></span>
+                                <div class="spinner-border text-primary spinner-border-sm  percent_spinner mt-1 mr-1"
+                                    role="status">
+                                    <span class="visually-hidden">Loading...</span>
+                                </div>
+                            </li>
+                            <li class="mb-2  font-10 p-relative">
+                                <span class="font-8 text-green me-1"><i class="fa-solid fa-circle"></i></span>
+                                First Contentful Paint (FCP) <span class="overview-value percentage_FCP"></span>
+                                <div class="spinner-border text-primary spinner-border-sm  percent_spinner mt-1 mr-1"
+                                    role="status">
+                                    <span class="visually-hidden">Loading...</span>
+                                </div>
+                            </li>
+                            <li class="mb-2  font-10 p-relative">
+                                <span class="font-8 text-d-blue me-1"><i class="fa-solid fa-circle"></i></span>
+                                Speed Index (SI) <span class="overview-value percentage_SI"></span>
+                                <div class="spinner-border text-primary spinner-border-sm  percent_spinner mt-1 mr-1"
+                                    role="status">
+                                    <span class="visually-hidden">Loading...</span>
+                                </div>
+                            </li>
+                            <li class="mb-2  font-10 p-relative">
+                                <span class="font-8 text-gray me-1"><i class="fa-solid fa-circle"></i></span>
+                                Time
+                                to Interact (TTI) <span class="overview-value percentage_TTI"></span>
+                                <div class="spinner-border text-primary spinner-border-sm percent_spinner mt-1 mr-1"
+                                    role="status">
+                                    <span class="visually-hidden">Loading...</span>
+                                </div>
+                            </li>
+
+                        </ul>
+                    </div>
+                </div>
+
+
+            </div>
+</div>
+</div>
+   </div>
+</div>
+
+{% endblock %}
+
+{% block extrascript %}
+<script>
+  $('#Urlsearch').on('change input type', function () {
+          website_url = $(this).val();
+          $("#responseText").html("")
+             $("#coreVitalsShow").hide()
+              $("#tb_loader").show()
+  $("#big_images_count_loader").show()
+  $("#big_images_count").hide()
+  $("#pages_circle").hide()
+  $('.rangeSliderMain').hide()
+  $("#mainChart").show()
+  $(".p_spinner_cls").hide()
+   $(".crawl-spinner").show();
+         $('#broken').html('-');
+        $('#redirects').html(' -')
+         $('#healthy').html('- ')
+         $('#blocked').html(' -')
+         $('#page_total').html('')
+         $('#total-crawler-pages').html('')
+  $('#seoHdg_spinner').show();
+  $("#seoHdg_URL").html("")
+  $(".seoHdg_spinner").show()
+  const red_lower_range = 0;
+  const red_upper_range = 49;
+  const yellow_lower_range = 50;
+  const yellow_upper_range = 89;
+  const green_lower_range = 90;
+  const green_upper_range = 100;
+
+
+
+    var url =  $(this).val();
+        $('.health-score_web').hide();
+        $('.health-score').hide();
+        $('.desktop_Health_circle').hide();
+       $('.health_spinner_web').show();  
+        $(".health_mobile_spinner").show()
+        $(".health_Desktop_spinner").show()
+        $('#overview_spinner').show();
+        $(".percent_spinner").show()
+        $("#scoreDonutChart").html("")
+       si.html('');
+         tbt.html('');;
+         lcp.html('');;
+         cls.html('');
+         fcp.html('');
+         tti.html('');
+         si_status.html('');
+         tbt_status.html('');
+         lcp_status.html('');
+         cls_status.html('');
+         fcp_status.html('');
+         tti_status.html('');
+
+         $('#si_status_overview').html('')
+         $('.p_spinner').show();
+         $('.loaderr').show();
+         $('.failed_val').html('')
+         $('.passed_val').html('')
+         $('.warning_val').html('')
+          $(".strong").hide();
+          $(".count-main").hide()
+          $("#donut_spinner").show()
+          $("#mainChart").show();
+          $(".percentage_TBT").html("")
+          $(".percentage_CLS").html("")
+          $(".percentage_FCP").html("")
+          $(".percentage_SI").html("")
+          $(".percentage_TTI").html("")
+          $(".percentage_LCP").html("")
+
+          var pattern = /(((http|ftp|https):\/{2})+(([0-9a-z_-]+\.)+(aero|asia|biz|cat|com|coop|edu|gov|info|int|jobs|mil|mobi|museum|name|net|org|pro|tel|travel|ac|ad|ae|af|ag|ai|al|am|an|ao|aq|ar|as|at|au|aw|ax|az|ba|bb|bd|be|bf|bg|bh|bi|bj|bm|bn|bo|br|bs|bt|bv|bw|by|bz|ca|cc|cd|cf|cg|ch|ci|ck|cl|cm|cn|co|cr|cu|cv|cx|cy|cz|cz|de|dj|dk|dm|do|dz|ec|ee|eg|er|es|et|eu|fi|fj|fk|fm|fo|fr|ga|gb|gd|ge|gf|gg|gh|gi|gl|gm|gn|gp|gq|gr|gs|gt|gu|gw|gy|hk|hm|hn|hr|ht|hu|id|ie|il|im|in|io|iq|ir|is|it|je|jm|jo|jp|ke|kg|kh|ki|km|kn|kp|kr|kw|ky|kz|la|lb|lc|li|lk|lr|ls|lt|lu|lv|ly|ma|mc|md|me|mg|mh|mk|ml|mn|mn|mo|mp|mr|ms|mt|mu|mv|mw|mx|my|mz|na|nc|ne|nf|ng|ni|nl|no|np|nr|nu|nz|nom|pa|pe|pf|pg|ph|pk|pl|pm|pn|pr|ps|pt|pw|py|qa|re|ra|rs|ru|rw|sa|sb|sc|sd|se|sg|sh|si|sj|sj|sk|sl|sm|sn|so|sr|st|su|sv|sy|sz|tc|td|tf|tg|th|tj|tk|tl|tm|tn|to|tp|tr|tt|tv|tw|tz|ua|ug|uk|us|uy|uz|va|vc|ve|vg|vi|vn|vu|wf|ws|ye|yt|yu|za|zm|zw|arpa)(:[0-9]+)?((\/([~0-9a-zA-Z\#\+\%@\.\/_-]+))?(\?[0-9a-zA-Z\+\%@\/&\[\];=_-]+)?)?))\b/
+          if (pattern.test(website_url)) {
+            $('#searchUrlBtn').prop('disabled', false);
+          } else {
+            $('#searchUrlBtn').prop('disabled', true)
+            $("#responseText").html('Please enter correct url i.e https://example.com').addClass('text-danger')
+          }
+        });
+      
+
+
+</script>
+ <script src="{% static 'site_audit/js/core_vitals.js' %}"></script>
+
+{% endblock %}

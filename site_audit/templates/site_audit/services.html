@@ -1,0 +1,474 @@
+{% extends "base2.html" %}
+{% load static %}
+{% block extrahead %}
+<link rel="stylesheet" href="https://phpcoder.tech/multiselect/css/jquery.multiselect.css">
+<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
+
+  <link href="{% static 'site_audit/css/acqu.css' %}" rel="stylesheet">
+
+
+<style>
+
+   
+.dropdown_custom {
+      position: relative;
+    /* display: inline-block; */
+    height: 100%;
+    line-height: 41px;
+    align-items: center;
+    justify-content: center;
+    padding: 0px 20px;
+}
+.dropdown_custom .dropdown-list {
+    padding: 12px;
+    background: #fff;
+    position: absolute;
+    top: 0px;
+    z-index: 999;
+    width: 300px;
+    left: 0px;
+    /* right: 2px; */
+    box-shadow: 0 1px 2px 1px rgb(0 0 0 / 15%);
+    transform-origin: 50% 0;
+    transform: scale(1, 0);
+    transition: transform 0.15s ease-in-out 0.15s;
+    max-height: 66vh;
+    /* overflow-y: scroll; */
+}
+.dropdown_custom .dropdown-option {
+  display: block;
+  /* padding: 8px 12px; */
+  opacity: 0;
+  transition: opacity 0.15s ease-in-out;
+}
+.dropdown_custom .dropdown-label {
+  display: block;
+  height: 30px;
+  background: #fff;
+font-weight: 500;
+  padding: 0px 1px;
+
+  cursor: pointer;
+}
+.dropdown_custom .dropdown-label:before {
+  content: "▼";
+  float: right;
+}
+.dropdown_custom.on .dropdown-list {
+  transform: scale(1, 1);
+  transition-delay: 0s;
+}
+.dropdown_custom.on .dropdown-list .dropdown-option {
+  opacity: 1;
+  transition-delay: 0.2s;
+}
+.dropdown_custom.on .dropdown-label:before {
+  content: "▲";
+}
+.dropdown_custom [type=checkbox] {
+  position: relative;
+  top: 2px;
+  margin-right: 4px;
+}
+</style>
+
+{% endblock %}
+{% block content %}
+
+
+
+<div class="container">
+<h3 style="border-bottom: 4px solid blue; display:block;width: 630px;"><a class="navbar-brand" href="/site_audit/seo_checkup/"><img
+             src="{%static '/site_audit/assets/logo.svg'%}" alt=""></a>Google Analytics Acquisition Overview</h3>
+
+    <div class="wrapper1">
+        <div class="c_dp" >
+          
+             <div class="dropdown_custom" data-control="checkbox-dropdown">
+  <label class="dropdown-label">Continent</label>
+  <div class="dropdown-list">
+    <span class="float-end d-block Sessions" title="Sessions"><b>Sessions</b></span>
+    <a href="#" data-toggle="check-all" class="dropdown-option">
+      Check  All
+    </a>
+    <input id="continent" type="text" placeholder="Search.." class="form-control form-control-sm" />
+  
+    <label class="dropdown-option continent">
+      <input type="checkbox" name="dropdown-group" defaultValue="Northern America" />
+      Northern America <span class="float-end d-block only"><a class="btn-custom">Only</a><small class="number">41.3k</small></span>
+    </label>
+    <label class="dropdown-option continent">
+      <input type="checkbox" name="dropdown-group" defaultValue="Southern Asia" />
+      Southern Asia <span class="float-end d-block only"><a class="btn-custom">Only</a><small class="number">6.2k</small></span>
+    </label>
+   
+  </div>
+</div>
+           
+        </div>
+        <div  class="c_dp">
+           <div class="dropdown_custom" data-control="checkbox-dropdown">
+  <label class="dropdown-label">Region</label>
+  <div class="dropdown-list">
+    <span class="float-end d-block Sessions" title="Sessions"><b>Sessions</b></span>
+
+    <a href="#" data-toggle="check-all" class="dropdown-option">
+      Check All  
+    </a>
+    <input id="region" type="text" placeholder="Search.." class="form-control form-control-sm"/>
+      <label class="dropdown-option region">
+      <input type="checkbox" name="dropdown-group" defaultValue="Selection 1" />
+      (Not set) <span class="float-end d-block only"><a class="btn-custom">Only</a><small class="number">3.7k</small></span>
+    </label>
+    <label class="dropdown-option region">
+      <input type="checkbox" name="dropdown-group" defaultValue="Selection 1" />
+    England <span class="float-end d-block only"><a class="btn-custom">Only</a><small class="number">3.3k</small></span>
+    </label>
+    <label class="dropdown-option region">
+      <input type="checkbox" name="dropdown-group" defaultValue="Selection 2" />
+     Tokyo <span class="float-end d-block only"><a class="btn-custom">Only</a><small class="number">823</small></span>
+    </label>
+   
+      
+  </div>
+</div>
+
+                
+        </div>
+        <div class="c_dp">
+          
+<div class="dropdown_custom" data-control="checkbox-dropdown">
+  <label class="dropdown-label">Channel</label>
+  <div class="dropdown-list">
+    <span class="float-end d-block Sessions" title="Sessions"><b>Sessions</b></span>
+
+      <a href="#" data-toggle="check-all" class="dropdown-option">
+      Check All  
+    </a>
+    <input id="channel" type="text" placeholder="Search.." class="form-control form-control-sm"/>
+
+    <label class="dropdown-option channell">
+      <input type="checkbox" name="dropdown-group" defaultValue="Direct" />
+     Direct <span class="float-end d-block only"><a class="btn-custom">Only</a><small class="number">23.9k</small></span>
+    </label>
+    <label class="dropdown-option channell">
+      <input type="checkbox" name="dropdown-group" defaultValue="Paid Search" />
+      Paid Search <span class="float-end d-block only"><a class="btn-custom">Only</a><small class="number">509</small></span>
+    </label>
+     <label class="dropdown-option channell">
+      <input type="checkbox" name="dropdown-group" defaultValue="Affiliates" />
+     Affiliates <span class="float-end d-block only"><a class="btn-custom">Only</a><small class="number">96</small></span>
+    </label>
+     <label class="dropdown-option channell">
+      <input type="checkbox" name="dropdown-group" defaultValue="Affiliates" />
+     Display <span class="float-end d-block only"><a class="btn-custom">Only</a><small class="number">15</small></span>
+    </label>
+     <label class="dropdown-option channell">
+      <input type="checkbox" name="dropdown-group" defaultValue="Affiliates" />
+     (Other) <span class="float-end d-block only"><a class="btn-custom">Only</a><small class="number">1</small></span>
+    </label>
+   
+  </div>
+</div>
+          
+        </div>
+        <div class="c_dp">
+             <div class="dropdown_custom" data-control="checkbox-dropdown">
+  <label class="dropdown-label">Device</label>
+  <div class="dropdown-list">
+    <span class="float-end d-block Sessions" title="Sessions"><b>Sessions</b></span>
+
+    <a href="#" data-toggle="check-all" class="dropdown-option">
+      Check All  
+    </a>
+    <!-- <label class="dropdown-option device">
+      <input type="checkbox" name="dropdown-group" data-toggle="check-all" />
+    Check All
+    </label> -->
+    
+    <input id="device" type="text" placeholder="Search.." class="form-control form-control-sm" />
+  
+    <label class="dropdown-option device">
+      <input type="checkbox" name="dropdown-group" defaultValue="Desktop" />
+     Desktop <span class="float-end d-block only"><a class="btn-custom">Only</a><small class="number">17.7k</small></span>
+    </label>
+    <label class="dropdown-option device">
+      <input type="checkbox" name="dropdown-group" defaultValue="Mobile" />
+   Mobile <span class="float-end d-block only"> <a class="btn-custom">Only</a><small class="number">6.7k</small></span>
+    </label>
+     <label class="dropdown-option device">
+      <input type="checkbox" name="dropdown-group" defaultValue="Tablet" />
+   Tablet <span class="float-end d-block only"><a class="btn-custom">Only</a> <small class="number">290</small></span>
+    </label>
+   
+  </div>
+</div>
+          
+        </div>
+        <div class="c_dp">
+          
+                <div class="input-group p-2">
+                    <input type="text" readonly id="daterange" name="daterange" value="01/01/2018 - 01/15/2018"
+                        class="border-0" />
+                    <span class="input-group-text" id="basic-addon1"></span>
+
+             
+
+            </div>
+        </div>
+    </div>
+    <div class="wrapper">
+
+    </div>
+    <div class="wrapper2">
+        <div class="box">
+            <canvas id="doughnutChart" width="200" height="200"></canvas>
+        </div>
+        <div class="box">
+            <!-- <span>Users (vs New Users)</span> -->
+            <canvas id="myChart" style="display: block; width: 300px; height: 300px;" width="300" height="300"
+                class="chartjs-render-monitor"></canvas>
+        </div>
+        <div class="box">
+            <!-- <span>Conversions</span> -->
+            <canvas id="conver" style="display: block; width: 300px; height: 300px;" width="300" height="300"
+                class="chartjs-render-monitor"></canvas>
+        </div>
+
+    </div>
+    <!-- wrraper 3 -->
+     <!-- style dives start -->
+       
+        <!-- styles dives end -->
+    <div class="wrapper3">
+        <!-- <div>hello 3rd wrapper</div> -->
+         <div class="acqu_col"></div>
+         <div class="conv_col"></div>
+
+        <div class="inner_wrapper">
+            <span></span>
+            <span>Acquisition</span>
+            <span>Behavior</span>
+            <span>Conversions</span>
+
+        </div>
+        <div class="inner_wrapper2">
+
+        </div>
+    
+       
+        <table class="ch_tab">
+        <thead>  
+         <tr class="rdHeader1">
+                <th>Source </th>
+                <th>Sessions</th>
+                <th>Users</th>
+                <th>New Users</th>
+                <th>Bounce Rate</th>
+                <th>Pages / Session</th>
+                <th>Avg. Session Durat...</th>
+                <th>Goal Conversion</th>
+                <th>Goal Completion</th>
+                <th>Goal Value</th>
+            </tr>
+            </thead>
+
+         <tbody id="ch_tbody">
+         
+         </tbody>
+          
+            <!-- <tr class="rdHeader">
+                <td> google / cpc</td>
+                <td class="lighter_td_bg_color">8,444</td>
+                <td class="lighter_td_bg_color">6,661</td>
+                <td class="lighter_td_bg_color">5,998</td>
+                <td class="dark_td_bg_color">60.01%</td>
+                <td class="dark_td_bg_color">3.69</td>
+                <td class="light_td_bg_color">00:01:59</td>
+                <td class="light_td_bg_color">13.18%</td>
+                <td class="lighter_td_bg_color">1,113</td>
+                <td class="lighter_light_td_bg_color">$0</td>
+            </tr>
+            <tr class="rdHeader">
+                <td>bing / cpc</td>
+                <td class="lighter_light_td_bg_color">218</td>
+                <td class="lighter_light_td_bg_color">186</td>
+                <td class="lighter_light_td_bg_color">173</td>
+                <td class="dark_td_bg_color">44.04%</td>
+                <td class="light_td_bg_color">4</td>
+                <td class="lighter_dark_td_bg_color">00:02:11</td>
+                <td  class="light_td_bg_color">17.43%</td>
+                <td class="lighter_light_td_bg_color">38</td>
+                <td class="lighter_light_td_bg_color">$0</td>
+            </tr>
+            <tr class="rdHeader">
+                <td >Partners / affiliate</td>
+                <td class="lighter_light_td_bg_color">151</td>
+                <td class="lighter_light_td_bg_color">138</td>
+                <td class="lighter_light_td_bg_color">126</td>
+                <td class="dark_td_bg_color">73.51%</td>
+                <td class="dark_light_td_bg_color">1.91</td>
+                <td class="dark_light_td_bg_color">00:01:13</td>
+                <td class="lighter_td_bg_color">4.64%</td>
+                <td class="lighter_light_td_bg_color">7</td>
+                <td class="lighter_light_td_bg_color">$0</td>
+            </tr> -->
+
+        </table>
+        <br>
+        <br>
+    </div>
+</div>
+
+
+
+{% endblock %}
+{% block extrascript %}
+
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+<script type="text/javascript" src="https://cdn2.hubspot.net/hubfs/476360/Chart.js"></script>
+
+<!-- <script src="https://code.highcharts.com/highcharts.js"></script> -->
+
+<!-- <script type="text/javascript" src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
+<script type="text/javascript" src="https://cdn.datatables.net/buttons/2.2.3/js/dataTables.buttons.min.js"></script>
+<script type="text/javascript" src="https://cdn.datatables.net/buttons/2.2.3/js/buttons.html5.min.js"></script>
+<script type="text/javascript" src="https://cdn.datatables.net/fixedcolumns/4.1.0/js/dataTables.fixedColumns.min.js"></script> -->
+<!-- <script src="https://unpkg.com/masonry-layout@4/dist/masonry.pkgd.min.js"></script> -->
+<script src="https://phpcoder.tech/multiselect/js/jquery.multiselect.js"></script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
+<script src="{% static 'site_audit/js/acqu.js' %}"></script>
+<script>
+$(document).ready(function(){
+    (function($) {
+  var CheckboxDropdown = function(el) {
+    var _this = this;
+    
+    this.isOpen = false;
+    this.areAllChecked = false;
+    this.$el = $(el);
+    this.$label = this.$el.find('.dropdown-label');
+ 
+    this.$text_label = this.$el.find('.dropdown-label').text();
+    
+    this.$checkAll = this.$el.find('[data-toggle="check-all"]').first();
+    this.$inputs = this.$el.find('[type="checkbox"]');
+    
+    this.onCheckBox();
+    
+    this.$label.on('click', function(e) {
+      e.preventDefault();
+      _this.toggleOpen();
+    });
+    
+    this.$checkAll.on('click', function(e) {
+      e.preventDefault();
+      _this.onCheckAll();
+    });
+    
+    this.$inputs.on('change', function(e) {
+      _this.onCheckBox();
+    });
+  };
+  
+  CheckboxDropdown.prototype.onCheckBox = function() {
+    this.updateStatus();
+  };
+  
+  CheckboxDropdown.prototype.updateStatus = function() {
+    var checked = this.$el.find(':checked');
+  
+    this.areAllChecked = false;
+    this.$checkAll.html('Check All');
+    
+    if(checked.length <= 0 ) {
+      this.$label.html(this.$text_label);
+    }
+    else if(checked.length === 1) {
+      this.$label.html(checked.parent('label').text());
+    }
+    else if(checked.length === this.$inputs.length) {
+      this.$label.html('All Selected');
+      this.areAllChecked = true;
+      this.$checkAll.html('Uncheck All');
+    }
+    else {
+      this.$label.html(checked.length + ' Selected');
+    }
+  };
+  
+  CheckboxDropdown.prototype.onCheckAll = function(checkAll) {
+    if(!this.areAllChecked || checkAll) {
+      this.areAllChecked = true;
+      this.$checkAll.html('Uncheck All');
+      this.$inputs.prop('checked', true);
+    }
+    else {
+      this.areAllChecked = false;
+      this.$checkAll.html('Check All');
+      this.$inputs.prop('checked', false);
+    }
+    
+    this.updateStatus();
+  };
+  
+  CheckboxDropdown.prototype.toggleOpen = function(forceOpen) {
+    var _this = this;
+    $('.dropdown_custom').removeClass('on');
+
+    if(!this.isOpen || forceOpen) {
+       this.isOpen = true;
+       this.$el.addClass('on');
+      $(document).on('click', function(e) {
+        if(!$(e.target).closest('[data-control]').length) {
+            
+         _this.toggleOpen();
+        }
+      });
+    }
+    else {
+      this.isOpen = false;
+      this.$el.removeClass('on');
+      $(document).off('click');
+    }
+  };
+  
+  var checkboxesDropdowns = document.querySelectorAll('[data-control="checkbox-dropdown"]');
+  for(var i = 0, length = checkboxesDropdowns.length; i < length; i++) {
+    new CheckboxDropdown(checkboxesDropdowns[i]);
+  }
+  
+})(jQuery);
+ $("#continent").on("keyup", function() {
+    var value = $(this).val().toLowerCase();
+    $(".continent").filter(function() {
+      $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+    });
+  });
+//   channel
+ $("#channel").on("keyup", function() {
+    var value = $(this).val().toLowerCase();
+    $(".channell").filter(function() {
+      $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+    });
+  });
+//   region
+ $("#region").on("keyup", function() {
+    var value = $(this).val().toLowerCase();
+    $(".region").filter(function() {
+      $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+    });
+  });
+//  device
+ $("#device").on("keyup", function() {
+    var value = $(this).val().toLowerCase();
+    $(".device").filter(function() {
+      $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+    });
+  }); 
+
+})
+</script>
+
+{% endblock %}

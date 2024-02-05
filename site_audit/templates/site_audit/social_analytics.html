@@ -1,0 +1,2024 @@
+{% extends "base2.html" %}
+{% load static %}
+{% block extrahead %}
+<style>
+ #alternative_img {
+    display: flex; 
+    align-items: center;
+    justify-content: center;
+     }
+
+     #alternative_img2 {
+        display: flex; 
+        align-items: center;
+        justify-content: center;
+         }
+       
+         #alternative_img3 {
+            display: flex; 
+            align-items: center;
+            justify-content: center;
+             }
+            
+     #front-text-img {
+        position: absolute;
+        text-align: center;
+    }
+
+
+    .google_spinnerr{
+        opacity: 0;
+     }
+     
+     @media (max-width: 991.5px){
+
+        main {
+            padding-left: 0;
+        }
+        }
+.websiteRankHdng {
+    flex: 0.6
+}    
+
+.text {
+    padding: 0 20px 
+}
+
+.corevitaltabs .tabs {
+    display: flex;
+    margin-bottom: 20px;
+    border-bottom: 1px solid #ddd;
+}
+.tabs {
+    width: 100%;
+    /* justify-content: center; */
+    /* background-color: #09F; */
+    background: transparent;
+    border-radius: 0;
+}
+
+.corevitaltabs .tabs>li {
+    display: flex;
+    justify-content: center;
+    {% comment %} border-radius: 6px; {% endcomment %}
+    {% comment %} border: 1px solid #707070; {% endcomment %}
+    min-width: 150px;
+    font-size: 14px;
+    padding: 5px;
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+    font-weight: 600;
+}
+
+.corevitaltabs .tabs>li.active, .corevitaltabs .tabs>li:hover {
+    {% comment %} background-color: #5c5c5c; {% endcomment %}
+    {% comment %} color: gray; {% endcomment %}
+    border: 1px solid #ddd!important;
+    border-bottom-color: transparent!important;
+    color: #555 !important;
+    cursor: pointer;
+    background-color: #fff!important;
+    margin-bottom: -1px;
+}
+
+.tabs-1, .tabs-2, .tabs-3 {
+ margin-top: -20px;
+border-left: 1px solid #ddd;
+border-right: 1px solid #ddd;
+border-bottom: 1px solid #ddd;
+}
+
+.result-tabs .tabs {
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.paddingGap {
+    padding-left: 10px;
+  }
+
+  .limit-alert-bar {
+    display: flex;
+    align-items: center;
+    border-radius: 10px;
+    padding: 1rem;
+}
+
+.daysPost, .Likes, .totalReach {
+    display:flex;
+}
+.days, .like, .reach {
+    padding-left:1.5rem
+}
+
+.limit-alert>img {
+    max-width: 80%;
+}
+</style>
+{% endblock %}
+{% block content %}
+
+<div class="container mb-5">
+ <!-- <div class="loader">
+                        <div class="lds-ellipsis">
+                            <div></div>
+                            <div></div>
+                            <div></div>
+                        </div>
+
+                    </div> -->
+<div class="pt-4 pb-2">
+    <div class="container mt-0 margin-left" >
+        <h4 class="title mb-5 fw-400 pb-2">Social Analytics</h4>
+    </div>
+ <!-- <app-breadcrumbs class="c197 ng-star-inserted"><a 
+   class="home ng-star-inserted"><img  src="../../static/site_audit/assets/home.svg" alt="">
+   <app-url-shortener class="c197">
+    <div  class="segment ng-star-inserted">www.</div>
+    <div  class="selectedWebsite segment longest ng-star-inserted"></div>
+   </app-url-shortener>
+  </a>
+  <div  class="delimiter ng-star-inserted">/</div><a 
+   class="item ng-star-inserted">Social Analytics</a>
+ </app-breadcrumbs> -->
+</div>
+<div class="tabs">
+    <div class="row justify-content-center">
+
+        <div class="col-xl-12"> 
+            <div class="corevitaltabs">
+
+                <ul class="tabs"> 
+                    <li class="active" data-targetit="tabs-1"> 
+                       <span class="paddingGap"> 7 Days</span> 
+                    </li>
+                    <li data-targetit="tabs-2"> 
+                     
+                        <span class="paddingGap"> 14 Days</span> 
+                    </li>
+
+                    <li data-targetit="tabs-3"> 
+                        
+                        <span class="paddingGap"> 30 Days</span> 
+                    </li>
+                </ul>
+
+            </div>
+         </div>
+        
+    </div>
+
+</div>
+
+<div class="tab-content">  
+    <div class="tabs-1 showfirst"> 
+        <div class="container">
+    <div class="row">
+       
+        <div class="col-md-8">
+            <!-- <div   class="app-not-synced c282 ng-star-inserted">
+                <h1 class="c82">Connect Facebook Insights</h1>
+                <div class="illustration c82"><img 
+                        src="../../static/site_audit/assets/usb_1.svg" alt="USB icon"></div>
+                <p class="c82"> Please sync your Facebook business page with We® to see insights on your
+                    Facebook posts and learn more about your social media audience.
+                </p>
+                <div  class="actions c82"><button class="c82">Sync Now</button></div>
+                <div class="description c82"> Adding your Facebook Insights to <em
+                     class="c82">WEBSITERANKINGEXPERT™</em> only takes a few seconds and allows us to suggest improvements
+                    on how to grow your business on Facebook and Instagram.
+                </div>
+                <div  class="examples c82">
+                    <div  class="title c82">Examples include:</div>
+                    <div  class="list c82">
+                        <div  class="item82 c82">When are the best days and times for you to post</div>
+                        <div class="item82 c82">Who your audience is and how are they reacting to your
+                            posts</div>
+                        <div class="item82 c82">Alerts if certain segments of your audience aren’t
+                            engaging with your post</div>
+                        <div  class="item82 c82"> Benchmarking data for similar websites (i.e. see how
+                            often the typical dentist posts if you are a dentist) </div>
+                        <div  class="item82 c82">+100s of more insights</div>
+                    </div>
+                </div>
+            </div> -->
+
+            <div class="card mt-2">
+                <div class="card-body" >
+                  <div class="text">
+                   <h1 class="text-gery" style= "font-size: 24px;">Post Performance</h1>
+                  </div>
+                  <div class="limit-alert-bar " style= "background: #fff8e9">
+                    <div class="limit-alert">
+                      <img src="../../static/site_audit/assets/limit-alert.png" alt="limit-alert" />
+                    </div>
+
+                    <p class="font-14 text-black m-0">
+                        You didn't post on Facebook on last 7 days
+                    </p>
+                   
+                  </div>
+               </div>
+            </div>
+
+            <div class="card mt-3">
+                <div class="card-body"  >
+                  <div class="text">
+                   <h1 class="text-gery" style= " font-size: 24px; ">Best Time To Post</h1>
+                  </div>
+            
+                  <div class="daysPost">
+                    <div class="days">
+                        <div class="text-green font-14">
+                            <i class="fa-solid fa-circle"> </i>
+                            <span style="color: black"> Good Day </span>
+                        </div>
+                       
+                        
+                    </div>
+
+                    <div class="days">
+                        <div class="text-yellow font-14">
+                            <i class="fa-solid fa-circle"> </i>
+                            <span style="color: black"> Average Day </span>
+                        </div>
+                        
+                    </div>
+
+                    <div class="days">
+                        <div class="text-red font-14">
+                            <i class="fa-solid fa-circle"> </i>
+                            <span style="color: black"> Bad Day </span>
+                        </div>
+                        
+                        
+                    </div>
+                  </div> 
+                  <br>
+                  <div class="text">
+                    <span class=" font-14" style= "font-weight:600 ">Fans Online By Days</span>
+                   </div>
+
+                   <br>
+                   <br>
+                   <div class="text">
+                     <span class=" font-14" style= "font-weight:600 ">Fans Online By Time</span>
+                    </div>
+                    <br>
+                    <canvas height="100" id="fansChart"></canvas>
+               </div>
+            </div>
+
+            <div class="card mt-3">
+                <div class="card-body" >
+                  <div class="text">
+                   <h1 class="text-gery" style= "font-size: 24px; ">Net Likes</h1>
+                  </div>
+            
+                  <div class="Likes">
+                    <div class="like">
+                        <div class="text-green font-14">
+                            <i class="fa-solid fa-circle"> </i>
+                            <span style="color: black"> Organic Likes</span>
+                        </div>
+                       
+                        
+                    </div>
+
+                    <div class="like">
+                        <div class="text-yellow font-14">
+                            <i class="fa-solid fa-circle"> </i>
+                            <span style="color: black"> Paid Likes </span>
+                        </div>
+                        
+                       
+                    </div>
+
+                    <div class="like">
+                        <div class="text-red font-14">
+                            <i class="fa-solid fa-circle"> </i>
+                            <span style="color: black"> Unlikes </span>
+                        </div>
+                        
+                        
+                    </div>
+                  </div> 
+
+                  <br>
+                <canvas id="likesChart" height="100"></canvas>
+               </div>
+            </div>
+
+            <div class="card mt-3">
+                <div class="card-body">
+                  <div class="text">
+                   <h1 class="text-gery " style= "font-size: 24px;">Total Reach</h1>
+                  </div>
+            
+                  <div class="totalReach">
+                    <div class="reach">
+                        <div class="text-green font-14">
+                            <i class="fa-solid fa-circle"> </i>
+                            <span style="color: black"> Organic</span>
+                        </div>
+                       
+                        
+                    </div>
+
+                    <div class="reach">
+                        <div class="text-yellow font-14">
+                            <i class="fa-solid fa-circle"> </i>
+                            <span style="color: black"> Paid </span>
+                        </div>
+                        
+                    </div>
+
+                  </div> 
+                  <br>
+                <canvas id="totalReachChart" height="100"></canvas>
+               </div>
+            </div>
+
+            <div class="card mt-3 mb-3">
+                <div class="card-body" >
+                  <div class="text">
+                   <h1 class="text-gery" style= "font-size: 24px; ">Timeline For Page Fans</h1>
+                  </div>
+                  <br>
+                <canvas id="timelinePageFans" height="100"></canvas>
+               </div>
+            </div>
+            
+
+        </div>
+        <div class="col-md-4">
+      <div class="card mt-2">
+        <div class="card-body">
+          <div class="content_ c204">
+            <h1>Annual Growth Opportunities</h1>
+            <i class="far fa-question-circle help-icon" data-bs-toggle="tooltip" data-bs-placement="left" title="This is an estimate of how much more revenue your website could contribute to your business per year. This number is based on your analytics data and the opportunities we see for your website to grow."></i>
+         
+            <!---->
+          </div>
+          <div class="dFlex">
+            <i class="fa fa-line-chart" style="font-size:24px"></i>
+          </div>
+          <div class="dFlex">
+            <!----><a routerlink="/profile/2" class="button ng-star-inserted" href="/app/profile/2">Complete Your
+              Profile</a>
+            <!---->
+            <!---->
+          </div>
+        </div>
+      </div>
+      <!-- website trank -->
+    <div class="card card-border Card_height mt-4">
+        <div class="card-body websiteRankHdng">
+          <div class="row">
+            <div class="col-md-8">
+              <h6>Website Rank</h6>
+            </div>
+
+            <div class="col-md-4">
+              <div class="float-end">
+              <i class="far fa-question-circle help-icon"  data-bs-toggle="tooltip" data-bs-placement="right"
+                  title="Your website’s rankings are based on how your website compares to other websites. Your letter grades for traffic, social media, mobile traffic and user experience are updated regularly and are based on multiple metrics and data points."></i>
+              
+              </div>
+
+            </div>
+          </div>
+          <!-- <div class="loader">
+                        <div class="lds-ellipsis">
+                            <div></div>
+                            <div></div>
+                            <div></div>
+                        </div>
+
+                    </div> -->
+        </div>
+
+        <div class="blur-class" id="alternative_img" style="display: none;">
+            <img  src="../../static/site_audit/assets/img/news_alert.png" alt="" class="background-custom img-fluid">
+            <div id="front-text-img">
+                <p style="width: 80%; margin:10px auto; ">
+                    Add Analytics to <span id="front-text-url">searchberg.com</span> to increase your SEO traffic
+                </p>
+                <button class="btn btn-primary social-analytcs-btn " type="button">
+                <span class="spinner-border spinner-border-sm google_spinnerr" role="status" aria-hidden="true"></span>
+                <i class="fa fa-cloud-upload" aria-hidden="true"></i> Add  Analytics
+                </button>
+                
+            </div>
+          </div>
+
+       <div class="main_webite_rank dFlex2">
+                        <app-rank class="ng-star-inserted">
+                            <div class="rank">
+                                <div class="chartjs-size-monitor">
+                                    <div class="chartjs-size-monitor-expand">
+                                        <div class=""></div>
+                                    </div>
+                                    <div class="chartjs-size-monitor-shrink">
+                                        <div class=""></div>
+                                    </div>
+                                </div>
+                                <div class="chartjs-size-monitor">
+                                    <div class="chartjs-size-monitor-expand">
+                                        <div class=""></div>
+                                    </div>
+                                    <div class="chartjs-size-monitor-shrink">
+                                        <div class=""></div>
+                                    </div>
+                                </div>
+                                <div style="width: 100px; height: 100px;  position: relative;">
+                                    <div id="traffic_score_"
+                                        style="width: 100%; height: 40px; position: absolute; top: 50%; left: 0; margin-top: -10px; line-height:19px; text-align: center;">
+
+                                    </div>
+                                    <canvas height="106" width="106" class="traffic rank-chart chartjs-render-monitor"
+                                        style="display: block; width: 106px; height: 106px;" data-rank="33"></canvas>
+                                </div>
+
+                                <div class="rank-label"></div>
+                            </div>
+                              <div class="dFlex">
+                                  <div class="traffic_loader">
+                       <div class="spinner-border spinner-border-sm text-primary" role="status">
+                        <span class="sr-only">Loading...</span>
+                        </div>
+                    </div>
+                                </div>
+                            <div class="title_rank">Traffic</div>
+                        </app-rank>
+                        <app-rank class="ng-star-inserted">
+                            <div class="rank">
+                                <div class="chartjs-size-monitor">
+                                    <div class="chartjs-size-monitor-expand">
+                                        <div class=""></div>
+                                    </div>
+                                    <div class="chartjs-size-monitor-shrink">
+                                        <div class=""></div>
+                                    </div>
+                                </div>
+                                <div class="chartjs-size-monitor">
+                                    <div class="chartjs-size-monitor-expand">
+                                        <div class=""></div>
+                                    </div>
+                                    <div class="chartjs-size-monitor-shrink">
+                                        <div class=""></div>
+                                    </div>
+                                </div>
+                                <div style="width: 100px; height: 100px;  position: relative;">
+                                    <div id="social_score_"
+                                        style="width: 100%; height: 40px; position: absolute; top: 50%; left: 0; margin-top: -10px; line-height:19px; text-align: center;">
+                                       -
+                                    </div>
+                                    <canvas id="" class="social rank-chart chartjs-render-monitor" height="106"
+                                        width="106"></canvas>
+                                </div>
+
+                                <div class="rank-label"></div>
+                            </div>
+                             <div class="dFlex">
+                              <div class="social_loader">
+                       <div class="spinner-border spinner-border-sm text-primary" role="status">
+                        <span class="sr-only">Loading...</span>
+                        </div>
+                    </div>
+                    </div>
+                            <div class="title_rank">Social</div>
+                        </app-rank>
+                        <app-rank class="ng-star-inserted">
+                            <div class="rank">
+                                <div class="chartjs-size-monitor">
+                                    <div class="chartjs-size-monitor-expand">
+                                        <div class=""></div>
+                                    </div>
+                                    <div class="chartjs-size-monitor-shrink">
+                                        <div class=""></div>
+                                    </div>
+                                </div>
+                                <div class="chartjs-size-monitor">
+                                    <div class="chartjs-size-monitor-expand">
+                                        <div class=""></div>
+                                    </div>
+                                    <div class="chartjs-size-monitor-shrink">
+                                        <div class=""></div>
+                                    </div>
+                                </div>
+
+                                <div style="width: 100px; height: 100px;  position: relative;">
+                                    <div id="mobile_score_"
+                                        style="width: 100%; height: 40px; position: absolute; top: 50%; left: 0; margin-top: -10px; line-height:19px; text-align: center;">
+
+                                    </div>
+                                       
+                                    <canvas id="" height="106" width="106"
+                                        class="mobile rank-chart chartjs-render-monitor"
+                                        style="display: block; width: 106px; height: 106px;" data-rank="61"></canvas>
+                                </div>
+                             
+                                
+
+                                <div class="rank-label"></div>
+                            </div>
+                                <div class="dFlex">
+                                 <div class="mobile_loader">
+                       <div class="spinner-border spinner-border-sm text-primary" role="status">
+                        <span class="sr-only">Loading...</span>
+                        </div>
+                    </div>
+                                </div>
+                            <div class="title_rank">Mobile</div>
+                        </app-rank>
+                        <app-rank class="ng-star-inserted">
+                            <div class="rank">
+                                <div class="chartjs-size-monitor">
+                                    <div class="chartjs-size-monitor-expand">
+                                        <div class=""></div>
+                                    </div>
+                                    <div class="chartjs-size-monitor-shrink">
+                                        <div class=""></div>
+                                    </div>
+                                </div>
+                                <div class="chartjs-size-monitor">
+                                    <div class="chartjs-size-monitor-expand">
+                                        <div class=""></div>
+                                    </div>
+                                    <div class="chartjs-size-monitor-shrink">
+                                        <div class=""></div>
+                                    </div>
+                                </div>
+                                <div style="width: 100px; height: 100px;  position: relative;">
+                                    <div id="visitor_score_"
+                                        style="width: 100%; height: 40px; position: absolute; top: 50%; left: 0; margin-top: -10px; line-height:19px; text-align: center;">
+
+                                    </div>
+
+                                    <canvas height="106" width="106" class="visitor rank-chart chartjs-render-monitor"
+                                        style="display: block; width: 106px; height: 106px;" data-rank="33"></canvas>
+                                </div>
+
+                                <div class="rank-label"></div>
+                            </div>
+                             <div class="dFlex">
+                                 <div class="visitor_loader">
+                       <div class="spinner-border spinner-border-sm text-primary" role="status">
+                        <span class="sr-only">Loading...</span>
+                        </div>
+                    </div>
+                                </div>
+                            <div class="title_rank">Visitor Experience</div>
+                        </app-rank>
+                        <!---->
+                    </div>
+
+      </div>
+      <!-- help card -->
+      <div class="c207 mt-4">
+        <div class="upper-part">
+          <h1 class="c207_h1">Need Help?</h1>
+          <p class="c207_p">Our experienced Growth Experts offer 15-minute website and We analytics review
+            meetings to our members <b>M-F, 9am-5pm MT.</b></p><button id="schedule-appointment-btn" app-button=""
+            class="btn btn-primary">
+            <!----><span>Schedule Free Appointment</span>
+          </button>
+          <p class="c207_p">Prefer email? Or do you live in a time zone that doesn’t work with our open hours?
+          </p>
+          <p class="email"><b>Email us: <a href="">support.com</a></b></p>
+        </div>
+        <div class="bottom-part">
+          <p>We help <span><b>250,000+</b></span>
+            businesses daily to grow their web traffic and increase their revenue.</p><img
+            src="../../static/site_audit/assets/need-help-illustration.svg" alt="illustration">
+        </div>
+      </div>
+    </div>
+</div>
+</div>
+
+</div>
+<div class="tabs-2" style="display: none">
+
+    <div class="container">
+    <div class="row">
+       
+        <div class="col-md-8">
+            <!-- <div   class="app-not-synced c282 ng-star-inserted">
+                <h1 class="c82">Connect Facebook Insights</h1>
+                <div class="illustration c82"><img 
+                        src="../../static/site_audit/assets/usb_1.svg" alt="USB icon"></div>
+                <p class="c82"> Please sync your Facebook business page with We® to see insights on your
+                    Facebook posts and learn more about your social media audience.
+                </p>
+                <div  class="actions c82"><button class="c82">Sync Now</button></div>
+                <div class="description c82"> Adding your Facebook Insights to <em
+                     class="c82">WEBSITERANKINGEXPERT™</em> only takes a few seconds and allows us to suggest improvements
+                    on how to grow your business on Facebook and Instagram.
+                </div>
+                <div  class="examples c82">
+                    <div  class="title c82">Examples include:</div>
+                    <div  class="list c82">
+                        <div  class="item82 c82">When are the best days and times for you to post</div>
+                        <div class="item82 c82">Who your audience is and how are they reacting to your
+                            posts</div>
+                        <div class="item82 c82">Alerts if certain segments of your audience aren’t
+                            engaging with your post</div>
+                        <div  class="item82 c82"> Benchmarking data for similar websites (i.e. see how
+                            often the typical dentist posts if you are a dentist) </div>
+                        <div  class="item82 c82">+100s of more insights</div>
+                    </div>
+                </div>
+            </div> -->
+
+            <div class="card mt-2">
+                <div class="card-body"  >
+                  <div class="text">
+                   <h1 class="text-gery" style= "font-size: 24px;">Post Performance</h1>
+                  </div>
+                  <div class="limit-alert-bar " style= "background: #fff8e9">
+                    <div class="limit-alert">
+                      <img src="../../static/site_audit/assets/limit-alert.png" alt="limit-alert" />
+                    </div>
+
+                    <p class="font-14 text-black m-0">
+                        You didn't post on Facebook on last 14 days
+                    </p>
+                   
+                  </div>
+               </div>
+            </div>
+
+            <div class="card mt-3">
+                <div class="card-body"  >
+                  <div class="text">
+                   <h1 class="text-gery" style= " font-size: 24px; ">Best Time To Post</h1>
+                  </div>
+            
+                  <div class="daysPost">
+                    <div class="days">
+                        <div class="text-green font-14">
+                            <i class="fa-solid fa-circle"> </i>
+                            <span style="color: black"> Good Day </span>
+                        </div>
+                       
+                        
+                    </div>
+
+                    <div class="days">
+                        <div class="text-yellow font-14">
+                            <i class="fa-solid fa-circle"> </i>
+                            <span style="color: black"> Average Day </span>
+                        </div>
+                        
+                    </div>
+
+                    <div class="days">
+                        <div class="text-red font-14">
+                            <i class="fa-solid fa-circle"> </i>
+                            <span style="color: black"> Bad Day </span>
+                        </div>
+                        
+                        
+                    </div>
+                  </div> 
+                  <br>
+                  <div class="text">
+                    <span class=" font-14" style= "font-weight:600 ">Fans Online By Days</span>
+                   </div>
+
+                   <br>
+                   <br>
+                   <div class="text">
+                     <span class=" font-14" style= "font-weight:600 ">Fans Online By Time</span>
+                    </div>
+                    <br>
+                    <canvas height="100" id="fans14Chart"></canvas>
+               </div>
+            </div>
+
+            <div class="card mt-3">
+                <div class="card-body"  >
+                  <div class="text">
+                   <h1 class="text-gery" style= "font-size: 24px; ">Net Likes</h1>
+                  </div>
+            
+                  <div class="Likes">
+                    <div class="like">
+                        <div class="text-green font-14">
+                            <i class="fa-solid fa-circle"> </i>
+                            <span style="color: black"> Organic Likes</span>
+                        </div>
+                       
+                        
+                    </div>
+
+                    <div class="like">
+                        <div class="text-yellow font-14">
+                            <i class="fa-solid fa-circle"> </i>
+                            <span style="color: black"> Paid Likes </span>
+                        </div>
+                        
+                       
+                    </div>
+
+                    <div class="like">
+                        <div class="text-red font-14">
+                            <i class="fa-solid fa-circle"> </i>
+                            <span style="color: black"> Unlikes </span>
+                        </div>
+                        
+                        
+                    </div>
+                  </div> 
+
+                  <br>
+                <canvas id="likes14Chart" height="100"></canvas>
+               </div>
+            </div>
+
+            <div class="card mt-3">
+                <div class="card-body"  >
+                  <div class="text">
+                   <h1 class="text-gery " style= "font-size: 24px;">Total Reach</h1>
+                  </div>
+            
+                  <div class="totalReach">
+                    <div class="reach">
+                        <div class="text-green font-14">
+                            <i class="fa-solid fa-circle"> </i>
+                            <span style="color: black"> Organic</span>
+                        </div>
+                       
+                        
+                    </div>
+
+                    <div class="reach">
+                        <div class="text-yellow font-14">
+                            <i class="fa-solid fa-circle"> </i>
+                            <span style="color: black"> Paid </span>
+                        </div>
+                        
+                    </div>
+
+                  </div> 
+                  <br>
+                <canvas id="totalReach14Chart" height="100"></canvas>
+               </div>
+            </div>
+
+            <div class="card mt-3 mb-3">
+                <div class="card-body"  >
+                  <div class="text">
+                   <h1 class="text-gery" style= "font-size: 24px; ">Timeline For Page Fans</h1>
+                  </div>
+                  <br>
+                <canvas id="timelinePageFans14" height="100"></canvas>
+               </div>
+            </div>
+            
+
+        </div>
+        <div class="col-md-4">
+      <div class="card mt-2">
+        <div class="card-body">
+          <div class="content_ c204">
+            <h1>Annual Growth Opportunities</h1>
+            <i class="far fa-question-circle help-icon" data-bs-toggle="tooltip" data-bs-placement="left" title="This is an estimate of how much more revenue your website could contribute to your business per year. This number is based on your analytics data and the opportunities we see for your website to grow."></i>
+         
+            <!---->
+          </div>
+          <div class="dFlex">
+            <i class="fa fa-line-chart" style="font-size:24px"></i>
+          </div>
+          <div class="dFlex">
+            <!----><a routerlink="/profile/2" class="button ng-star-inserted" href="/app/profile/2">Complete Your
+              Profile</a>
+            <!---->
+            <!---->
+          </div>
+        </div>
+      </div>
+      <!-- website trank -->
+    <div class="card card-border Card_height mt-4">
+        <div class="card-body websiteRankHdng">
+          <div class="row">
+            <div class="col-md-8">
+              <h6>Website Rank</h6>
+            </div>
+
+            <div class="col-md-4">
+              <div class="float-end">
+              <i class="far fa-question-circle help-icon"  data-bs-toggle="tooltip" data-bs-placement="right"
+                  title="Your website’s rankings are based on how your website compares to other websites. Your letter grades for traffic, social media, mobile traffic and user experience are updated regularly and are based on multiple metrics and data points."></i>
+              
+              </div>
+
+            </div>
+          </div>
+          <!-- <div class="loader">
+                        <div class="lds-ellipsis">
+                            <div></div>
+                            <div></div>
+                            <div></div>
+                        </div>
+
+                    </div> -->
+        </div>
+
+        <div class="blur-class" id="alternative_img" >
+            <img  src="../../static/site_audit/assets/img/news_alert.png" alt="" class="background-custom img-fluid">
+            <div id="front-text-img">
+                <p style="width: 80%; margin:10px auto; ">
+                    Add Analytics to <span id="front-text-url">searchberg.com</span> to increase your SEO traffic
+                </p>
+                <button class="btn btn-primary social-analytcs-btn " type="button">
+                <span class="spinner-border spinner-border-sm google_spinnerr" role="status" aria-hidden="true"></span>
+                <i class="fa fa-cloud-upload" aria-hidden="true"></i> Add  Analytics
+                </button>
+                
+            </div>
+          </div>
+
+       <div class="main_webite_rank dFlex2">
+                        <app-rank class="ng-star-inserted">
+                            <div class="rank">
+                                <div class="chartjs-size-monitor">
+                                    <div class="chartjs-size-monitor-expand">
+                                        <div class=""></div>
+                                    </div>
+                                    <div class="chartjs-size-monitor-shrink">
+                                        <div class=""></div>
+                                    </div>
+                                </div>
+                                <div class="chartjs-size-monitor">
+                                    <div class="chartjs-size-monitor-expand">
+                                        <div class=""></div>
+                                    </div>
+                                    <div class="chartjs-size-monitor-shrink">
+                                        <div class=""></div>
+                                    </div>
+                                </div>
+                                <div style="width: 100px; height: 100px;  position: relative;">
+                                    <div id="traffic_score_"
+                                        style="width: 100%; height: 40px; position: absolute; top: 50%; left: 0; margin-top: -10px; line-height:19px; text-align: center;">
+
+                                    </div>
+                                    <canvas height="106" width="106" class="traffic rank-chart chartjs-render-monitor"
+                                        style="display: block; width: 106px; height: 106px;" data-rank="33"></canvas>
+                                </div>
+
+                                <div class="rank-label"></div>
+                            </div>
+                              <div class="dFlex">
+                                  <div class="traffic_loader">
+                       <div class="spinner-border spinner-border-sm text-primary" role="status">
+                        <span class="sr-only">Loading...</span>
+                        </div>
+                    </div>
+                                </div>
+                            <div class="title_rank">Traffic</div>
+                        </app-rank>
+                        <app-rank class="ng-star-inserted">
+                            <div class="rank">
+                                <div class="chartjs-size-monitor">
+                                    <div class="chartjs-size-monitor-expand">
+                                        <div class=""></div>
+                                    </div>
+                                    <div class="chartjs-size-monitor-shrink">
+                                        <div class=""></div>
+                                    </div>
+                                </div>
+                                <div class="chartjs-size-monitor">
+                                    <div class="chartjs-size-monitor-expand">
+                                        <div class=""></div>
+                                    </div>
+                                    <div class="chartjs-size-monitor-shrink">
+                                        <div class=""></div>
+                                    </div>
+                                </div>
+                                <div style="width: 100px; height: 100px;  position: relative;">
+                                    <div id="social_score_"
+                                        style="width: 100%; height: 40px; position: absolute; top: 50%; left: 0; margin-top: -10px; line-height:19px; text-align: center;">
+                                       -
+                                    </div>
+                                    <canvas id="" class="social rank-chart chartjs-render-monitor" height="106"
+                                        width="106"></canvas>
+                                </div>
+
+                                <div class="rank-label"></div>
+                            </div>
+                             <div class="dFlex">
+                              <div class="social_loader">
+                       <div class="spinner-border spinner-border-sm text-primary" role="status">
+                        <span class="sr-only">Loading...</span>
+                        </div>
+                    </div>
+                    </div>
+                            <div class="title_rank">Social</div>
+                        </app-rank>
+                        <app-rank class="ng-star-inserted">
+                            <div class="rank">
+                                <div class="chartjs-size-monitor">
+                                    <div class="chartjs-size-monitor-expand">
+                                        <div class=""></div>
+                                    </div>
+                                    <div class="chartjs-size-monitor-shrink">
+                                        <div class=""></div>
+                                    </div>
+                                </div>
+                                <div class="chartjs-size-monitor">
+                                    <div class="chartjs-size-monitor-expand">
+                                        <div class=""></div>
+                                    </div>
+                                    <div class="chartjs-size-monitor-shrink">
+                                        <div class=""></div>
+                                    </div>
+                                </div>
+
+                                <div style="width: 100px; height: 100px;  position: relative;">
+                                    <div id="mobile_score_"
+                                        style="width: 100%; height: 40px; position: absolute; top: 50%; left: 0; margin-top: -10px; line-height:19px; text-align: center;">
+
+                                    </div>
+                                       
+                                    <canvas id="" height="106" width="106"
+                                        class="mobile rank-chart chartjs-render-monitor"
+                                        style="display: block; width: 106px; height: 106px;" data-rank="61"></canvas>
+                                </div>
+                             
+                                
+
+                                <div class="rank-label"></div>
+                            </div>
+                                <div class="dFlex">
+                                 <div class="mobile_loader">
+                       <div class="spinner-border spinner-border-sm text-primary" role="status">
+                        <span class="sr-only">Loading...</span>
+                        </div>
+                    </div>
+                                </div>
+                            <div class="title_rank">Mobile</div>
+                        </app-rank>
+                        <app-rank class="ng-star-inserted">
+                            <div class="rank">
+                                <div class="chartjs-size-monitor">
+                                    <div class="chartjs-size-monitor-expand">
+                                        <div class=""></div>
+                                    </div>
+                                    <div class="chartjs-size-monitor-shrink">
+                                        <div class=""></div>
+                                    </div>
+                                </div>
+                                <div class="chartjs-size-monitor">
+                                    <div class="chartjs-size-monitor-expand">
+                                        <div class=""></div>
+                                    </div>
+                                    <div class="chartjs-size-monitor-shrink">
+                                        <div class=""></div>
+                                    </div>
+                                </div>
+                                <div style="width: 100px; height: 100px;  position: relative;">
+                                    <div id="visitor_score_"
+                                        style="width: 100%; height: 40px; position: absolute; top: 50%; left: 0; margin-top: -10px; line-height:19px; text-align: center;">
+
+                                    </div>
+
+                                    <canvas height="106" width="106" class="visitor rank-chart chartjs-render-monitor"
+                                        style="display: block; width: 106px; height: 106px;" data-rank="33"></canvas>
+                                </div>
+
+                                <div class="rank-label"></div>
+                            </div>
+                             <div class="dFlex">
+                                 <div class="visitor_loader">
+                       <div class="spinner-border spinner-border-sm text-primary" role="status">
+                        <span class="sr-only">Loading...</span>
+                        </div>
+                    </div>
+                                </div>
+                            <div class="title_rank">Visitor Experience</div>
+                        </app-rank>
+                        <!---->
+                    </div>
+
+      </div>
+      <!-- help card -->
+      <div class="c207 mt-4">
+        <div class="upper-part">
+          <h1 class="c207_h1">Need Help?</h1>
+          <p class="c207_p">Our experienced Growth Experts offer 15-minute website and We analytics review
+            meetings to our members <b>M-F, 9am-5pm MT.</b></p><button id="schedule-appointment-btn" app-button=""
+            class="btn btn-primary">
+            <!----><span>Schedule Free Appointment</span>
+          </button>
+          <p class="c207_p">Prefer email? Or do you live in a time zone that doesn’t work with our open hours?
+          </p>
+          <p class="email"><b>Email us: <a href="">support.com</a></b></p>
+        </div>
+        <div class="bottom-part">
+          <p>We help <span><b>250,000+</b></span>
+            businesses daily to grow their web traffic and increase their revenue.</p><img
+            src="../../static/site_audit/assets/need-help-illustration.svg" alt="illustration">
+        </div>
+      </div>
+    </div>
+</div>
+</div>
+</div>
+
+<div class="tabs-3" style="display: none">
+    <div class="container">
+    <div class="row">
+       
+        <div class="col-md-8">
+            <!-- <div   class="app-not-synced c282 ng-star-inserted">
+                <h1 class="c82">Connect Facebook Insights</h1>
+                <div class="illustration c82"><img 
+                        src="../../static/site_audit/assets/usb_1.svg" alt="USB icon"></div>
+                <p class="c82"> Please sync your Facebook business page with We® to see insights on your
+                    Facebook posts and learn more about your social media audience.
+                </p>
+                <div  class="actions c82"><button class="c82">Sync Now</button></div>
+                <div class="description c82"> Adding your Facebook Insights to <em
+                     class="c82">WEBSITERANKINGEXPERT™</em> only takes a few seconds and allows us to suggest improvements
+                    on how to grow your business on Facebook and Instagram.
+                </div>
+                <div  class="examples c82">
+                    <div  class="title c82">Examples include:</div>
+                    <div  class="list c82">
+                        <div  class="item82 c82">When are the best days and times for you to post</div>
+                        <div class="item82 c82">Who your audience is and how are they reacting to your
+                            posts</div>
+                        <div class="item82 c82">Alerts if certain segments of your audience aren’t
+                            engaging with your post</div>
+                        <div  class="item82 c82"> Benchmarking data for similar websites (i.e. see how
+                            often the typical dentist posts if you are a dentist) </div>
+                        <div  class="item82 c82">+100s of more insights</div>
+                    </div>
+                </div>
+            </div> -->
+
+            <div class="card mt-2">
+                <div class="card-body"  >
+                  <div class="text">
+                   <h1 class="text-gery" style= "font-size: 24px;">Post Performance</h1>
+                  </div>
+                  <div class="limit-alert-bar " style= "background: #fff8e9">
+                    <div class="limit-alert">
+                      <img src="../../static/site_audit/assets/limit-alert.png" alt="limit-alert" />
+                    </div>
+
+                    <p class="font-14 text-black m-0">
+                        You didn't post on Facebook on last 30 days
+                    </p>
+                   
+                  </div>
+               </div>
+            </div>
+
+            <div class="card mt-3">
+                <div class="card-body"  >
+                  <div class="text">
+                   <h1 class="text-gery" style= " font-size: 24px; ">Best Time To Post</h1>
+                  </div>
+            
+                  <div class="daysPost">
+                    <div class="days">
+                        <div class="text-green font-14">
+                            <i class="fa-solid fa-circle"> </i>
+                            <span style="color: black"> Good Day </span>
+                        </div>
+                       
+                        
+                    </div>
+
+                    <div class="days">
+                        <div class="text-yellow font-14">
+                            <i class="fa-solid fa-circle"> </i>
+                            <span style="color: black"> Average Day </span>
+                        </div>
+                        
+                    </div>
+
+                    <div class="days">
+                        <div class="text-red font-14">
+                            <i class="fa-solid fa-circle"> </i>
+                            <span style="color: black"> Bad Day </span>
+                        </div>
+                        
+                        
+                    </div>
+                  </div> 
+                  <br>
+                  <div class="text">
+                    <span class=" font-14" style= "font-weight:600 ">Fans Online By Days</span>
+                   </div>
+
+                   <br>
+                   <br>
+                   <div class="text">
+                     <span class=" font-14" style= "font-weight:600 ">Fans Online By Time</span>
+                    </div>
+                    <br>
+                    <canvas height="100" id="fans21Chart"></canvas>
+               </div>
+            </div>
+
+            <div class="card mt-3">
+                <div class="card-body"  >
+                  <div class="text">
+                   <h1 class="text-gery" style= "font-size: 24px; ">Net Likes</h1>
+                  </div>
+            
+                  <div class="Likes">
+                    <div class="like">
+                        <div class="text-green font-14">
+                            <i class="fa-solid fa-circle"> </i>
+                            <span style="color: black"> Organic Likes</span>
+                        </div>
+                       
+                        
+                    </div>
+
+                    <div class="like">
+                        <div class="text-yellow font-14">
+                            <i class="fa-solid fa-circle"> </i>
+                            <span style="color: black"> Paid Likes </span>
+                        </div>
+                        
+                       
+                    </div>
+
+                    <div class="like">
+                        <div class="text-red font-14">
+                            <i class="fa-solid fa-circle"> </i>
+                            <span style="color: black"> Unlikes </span>
+                        </div>
+                        
+                        
+                    </div>
+                  </div> 
+
+                  <br>
+                <canvas id="likes21Chart" height="100"></canvas>
+               </div>
+            </div>
+
+            <div class="card mt-3">
+                <div class="card-body"  >
+                  <div class="text">
+                   <h1 class="text-gery " style= "font-size: 24px;">Total Reach</h1>
+                  </div>
+            
+                  <div class="totalReach">
+                    <div class="reach">
+                        <div class="text-green font-14">
+                            <i class="fa-solid fa-circle"> </i>
+                            <span style="color: black"> Organic</span>
+                        </div>
+                       
+                        
+                    </div>
+
+                    <div class="reach">
+                        <div class="text-yellow font-14">
+                            <i class="fa-solid fa-circle"> </i>
+                            <span style="color: black"> Paid </span>
+                        </div>
+                        
+                    </div>
+
+                  </div> 
+                  <br>
+                <canvas id="totalReach21Chart" height="100"></canvas>
+               </div>
+            </div>
+
+            <div class="card mt-3 mb-3">
+                <div class="card-body"  >
+                  <div class="text">
+                   <h1 class="text-gery" style= "font-size: 24px; ">Timeline For Page Fans</h1>
+                  </div>
+                  <br>
+                <canvas id="timelinePageFans21" height="100"></canvas>
+               </div>
+            </div>
+            
+
+        </div>
+        <div class="col-md-4">
+      <div class="card mt-2">
+        <div class="card-body">
+          <div class="content_ c204">
+            <h1>Annual Growth Opportunities</h1>
+            <i class="far fa-question-circle help-icon" data-bs-toggle="tooltip" data-bs-placement="left" title="This is an estimate of how much more revenue your website could contribute to your business per year. This number is based on your analytics data and the opportunities we see for your website to grow."></i>
+         
+            <!---->
+          </div>
+          <div class="dFlex">
+            <i class="fa fa-line-chart" style="font-size:24px"></i>
+          </div>
+          <div class="dFlex">
+            <!----><a routerlink="/profile/2" class="button ng-star-inserted" href="/app/profile/2">Complete Your
+              Profile</a>
+            <!---->
+            <!---->
+          </div>
+        </div>
+      </div>
+      <!-- website trank -->
+    <div class="card card-border Card_height mt-4">
+        <div class="card-body websiteRankHdng">
+          <div class="row">
+            <div class="col-md-8">
+              <h6>Website Rank</h6>
+            </div>
+
+            <div class="col-md-4">
+              <div class="float-end">
+              <i class="far fa-question-circle help-icon"  data-bs-toggle="tooltip" data-bs-placement="right"
+                  title="Your website’s rankings are based on how your website compares to other websites. Your letter grades for traffic, social media, mobile traffic and user experience are updated regularly and are based on multiple metrics and data points."></i>
+              
+              </div>
+
+            </div>
+          </div>
+          <!-- <div class="loader">
+                        <div class="lds-ellipsis">
+                            <div></div>
+                            <div></div>
+                            <div></div>
+                        </div>
+
+                    </div> -->
+        </div>
+
+        <div class="blur-class" id="alternative_img" >
+            <img  src="../../static/site_audit/assets/img/news_alert.png" alt="" class="background-custom img-fluid">
+            <div id="front-text-img">
+                <p style="width: 80%; margin:10px auto; ">
+                    Add Analytics to <span id="front-text-url">searchberg.com</span> to increase your SEO traffic
+                </p>
+                <button class="btn btn-primary social-analytcs-btn " type="button">
+                <span class="spinner-border spinner-border-sm google_spinnerr" role="status" aria-hidden="true"></span>
+                <i class="fa fa-cloud-upload" aria-hidden="true"></i> Add  Analytics
+                </button>
+                
+            </div>
+          </div>
+
+       <div class="main_webite_rank dFlex2">
+                        <app-rank class="ng-star-inserted">
+                            <div class="rank">
+                                <div class="chartjs-size-monitor">
+                                    <div class="chartjs-size-monitor-expand">
+                                        <div class=""></div>
+                                    </div>
+                                    <div class="chartjs-size-monitor-shrink">
+                                        <div class=""></div>
+                                    </div>
+                                </div>
+                                <div class="chartjs-size-monitor">
+                                    <div class="chartjs-size-monitor-expand">
+                                        <div class=""></div>
+                                    </div>
+                                    <div class="chartjs-size-monitor-shrink">
+                                        <div class=""></div>
+                                    </div>
+                                </div>
+                                <div style="width: 100px; height: 100px;  position: relative;">
+                                    <div id="traffic_score_"
+                                        style="width: 100%; height: 40px; position: absolute; top: 50%; left: 0; margin-top: -10px; line-height:19px; text-align: center;">
+
+                                    </div>
+                                    <canvas height="106" width="106" class="traffic rank-chart chartjs-render-monitor"
+                                        style="display: block; width: 106px; height: 106px;" data-rank="33"></canvas>
+                                </div>
+
+                                <div class="rank-label"></div>
+                            </div>
+                              <div class="dFlex">
+                                  <div class="traffic_loader">
+                       <div class="spinner-border spinner-border-sm text-primary" role="status">
+                        <span class="sr-only">Loading...</span>
+                        </div>
+                    </div>
+                                </div>
+                            <div class="title_rank">Traffic</div>
+                        </app-rank>
+                        <app-rank class="ng-star-inserted">
+                            <div class="rank">
+                                <div class="chartjs-size-monitor">
+                                    <div class="chartjs-size-monitor-expand">
+                                        <div class=""></div>
+                                    </div>
+                                    <div class="chartjs-size-monitor-shrink">
+                                        <div class=""></div>
+                                    </div>
+                                </div>
+                                <div class="chartjs-size-monitor">
+                                    <div class="chartjs-size-monitor-expand">
+                                        <div class=""></div>
+                                    </div>
+                                    <div class="chartjs-size-monitor-shrink">
+                                        <div class=""></div>
+                                    </div>
+                                </div>
+                                <div style="width: 100px; height: 100px;  position: relative;">
+                                    <div id="social_score_"
+                                        style="width: 100%; height: 40px; position: absolute; top: 50%; left: 0; margin-top: -10px; line-height:19px; text-align: center;">
+                                       -
+                                    </div>
+                                    <canvas id="" class="social rank-chart chartjs-render-monitor" height="106"
+                                        width="106"></canvas>
+                                </div>
+
+                                <div class="rank-label"></div>
+                            </div>
+                             <div class="dFlex">
+                              <div class="social_loader">
+                       <div class="spinner-border spinner-border-sm text-primary" role="status">
+                        <span class="sr-only">Loading...</span>
+                        </div>
+                    </div>
+                    </div>
+                            <div class="title_rank">Social</div>
+                        </app-rank>
+                        <app-rank class="ng-star-inserted">
+                            <div class="rank">
+                                <div class="chartjs-size-monitor">
+                                    <div class="chartjs-size-monitor-expand">
+                                        <div class=""></div>
+                                    </div>
+                                    <div class="chartjs-size-monitor-shrink">
+                                        <div class=""></div>
+                                    </div>
+                                </div>
+                                <div class="chartjs-size-monitor">
+                                    <div class="chartjs-size-monitor-expand">
+                                        <div class=""></div>
+                                    </div>
+                                    <div class="chartjs-size-monitor-shrink">
+                                        <div class=""></div>
+                                    </div>
+                                </div>
+
+                                <div style="width: 100px; height: 100px;  position: relative;">
+                                    <div id="mobile_score_"
+                                        style="width: 100%; height: 40px; position: absolute; top: 50%; left: 0; margin-top: -10px; line-height:19px; text-align: center;">
+
+                                    </div>
+                                       
+                                    <canvas id="" height="106" width="106"
+                                        class="mobile rank-chart chartjs-render-monitor"
+                                        style="display: block; width: 106px; height: 106px;" data-rank="61"></canvas>
+                                </div>
+                             
+                                
+
+                                <div class="rank-label"></div>
+                            </div>
+                                <div class="dFlex">
+                                 <div class="mobile_loader">
+                       <div class="spinner-border spinner-border-sm text-primary" role="status">
+                        <span class="sr-only">Loading...</span>
+                        </div>
+                    </div>
+                                </div>
+                            <div class="title_rank">Mobile</div>
+                        </app-rank>
+                        <app-rank class="ng-star-inserted">
+                            <div class="rank">
+                                <div class="chartjs-size-monitor">
+                                    <div class="chartjs-size-monitor-expand">
+                                        <div class=""></div>
+                                    </div>
+                                    <div class="chartjs-size-monitor-shrink">
+                                        <div class=""></div>
+                                    </div>
+                                </div>
+                                <div class="chartjs-size-monitor">
+                                    <div class="chartjs-size-monitor-expand">
+                                        <div class=""></div>
+                                    </div>
+                                    <div class="chartjs-size-monitor-shrink">
+                                        <div class=""></div>
+                                    </div>
+                                </div>
+                                <div style="width: 100px; height: 100px;  position: relative;">
+                                    <div id="visitor_score_"
+                                        style="width: 100%; height: 40px; position: absolute; top: 50%; left: 0; margin-top: -10px; line-height:19px; text-align: center;">
+
+                                    </div>
+
+                                    <canvas height="106" width="106" class="visitor rank-chart chartjs-render-monitor"
+                                        style="display: block; width: 106px; height: 106px;" data-rank="33"></canvas>
+                                </div>
+
+                                <div class="rank-label"></div>
+                            </div>
+                             <div class="dFlex">
+                                 <div class="visitor_loader">
+                       <div class="spinner-border spinner-border-sm text-primary" role="status">
+                        <span class="sr-only">Loading...</span>
+                        </div>
+                    </div>
+                                </div>
+                            <div class="title_rank">Visitor Experience</div>
+                        </app-rank>
+                        <!---->
+                    </div>
+
+      </div>
+      <!-- help card -->
+      <div class="c207 mt-4">
+        <div class="upper-part">
+          <h1 class="c207_h1">Need Help?</h1>
+          <p class="c207_p">Our experienced Growth Experts offer 15-minute website and We analytics review
+            meetings to our members <b>M-F, 9am-5pm MT.</b></p><button id="schedule-appointment-btn" app-button=""
+            class="btn btn-primary">
+            <!----><span>Schedule Free Appointment</span>
+          </button>
+          <p class="c207_p">Prefer email? Or do you live in a time zone that doesn’t work with our open hours?
+          </p>
+          <p class="email"><b>Email us: <a href="">support.com</a></b></p>
+        </div>
+        <div class="bottom-part">
+          <p>We help <span><b>250,000+</b></span>
+            businesses daily to grow their web traffic and increase their revenue.</p><img
+            src="../../static/site_audit/assets/need-help-illustration.svg" alt="illustration">
+        </div>
+      </div>
+    </div>
+</div>
+</div>
+</div>
+</div>
+
+
+
+</div>
+
+
+{% endblock %}
+{% block extrascript %}
+<script src="{% static 'site_audit/js/websiteRankCharts.js' %}"></script>
+<!-- <script src="{% static 'site_audit/js/site_audit.js' %}"></script> -->
+<script>
+    jQuery("[data-targetit]").on("click", function (e) {
+        jQuery(this).addClass("active");
+        jQuery(this).siblings().removeClass("active");
+        var target = jQuery(this).data("targetit");
+        jQuery("." + target)
+          .siblings('[class^="tabs-"]')
+          .hide();
+        jQuery("." + target).fadeIn();
+      });
+
+$(document).on('click','.social-analytcs-btn',function(){
+  $('.google_spinnerr').css('opacity','1');
+  
+  var project_id = $('.url').attr('data-id')
+ const perm_url = window.location.origin + '/site_audit/get_auth_url/?project_id='+ project_id;
+  $.ajax({
+      method:'GET',
+      url:perm_url,
+      success:function(response){
+          if(response.status){
+           $('.google_spinnerr').css('opacity','0');
+             let auth_url = response.auth_url;
+              window.location.href = auth_url
+          }
+          else{
+            ShowNoty('Somthing went wrong','error');
+             
+            $('.google_spinnerr').hide();
+          }
+      }
+  })
+})
+var ctx = document.getElementById("fansChart").getContext('2d');
+
+var myChart = new Chart(ctx, {
+    type: 'line',
+    data: {
+        labels: ["MidNight","4 Am",	"8 Am",	"Noon",	"4 Pm",	"8 Pm",	"Mid..."],
+        datasets: [{
+            label: 'Fans Online', // Name the series
+            data: [0, 0, 0,	0,	0,	0,	0 ], // Specify the data values array
+            fill: false,
+            borderColor: '#88c290', // Add custom color border (Line)
+            backgroundColor: '#88c290', // Add custom color background (Points and Fill)
+            borderWidth: 1 // Specify bar border width
+        }]},
+    options: {
+      responsive: true, // Instruct chart js to respond nicely.
+      maintainAspectRatio: true, // Add to prevent default behaviour of full-width/height 
+      legend: {
+        display: false
+    },
+      scales: {
+        xAxes: [{
+        display: true,
+    scaleLabel: {
+    display: true,
+    labelString: 'Time Of The Day'
+  },
+    
+        }],
+        yAxes: [{
+            display: true,
+           
+         scaleLabel: {
+                    display: true,
+                    labelString: 'Fans Online'
+                },
+                ticks: {
+                    min: -1,
+                    max: 1,
+                    stepSize: 1
+                }
+        }]
+    },
+   
+    }
+});
+
+
+
+var ctx1 = document.getElementById("likesChart").getContext('2d');
+var myChart = new Chart(ctx1, {
+    type: 'line',
+    data: {
+        labels: ["11/Q1","11/Q2","11/Q3","11/Q4","11/Q5","11/Q6","11/Q7","11/Q8","11/Q9" ],
+        datasets: [{
+            label: 'Fans Online', 
+            data: [0, 0, 0,	0,	0,	0,	0, 0, 0 ], 
+            fill: false,
+            borderColor: '#88c290', 
+            backgroundColor: '#88c290', 
+            borderWidth: 1 
+        }]},
+    options: {
+      responsive: true, 
+      maintainAspectRatio: true, 
+      legend: {
+        display: false
+    },
+      scales: {
+        xAxes: [{
+        display: true,
+        }],
+        yAxes: [{
+            display: true,
+           
+         scaleLabel: {
+                    display: true,
+                    labelString: 'Likes '
+                },
+                ticks: {
+                    min: -1,
+                    max: 1,
+                    stepSize: 1
+                }
+        }]
+    },
+   
+    }
+});
+
+var ctx2 = document.getElementById("totalReachChart").getContext('2d');
+var myChart = new Chart(ctx2, {
+    type: 'line',
+    data: {
+        labels: ["11/Q1","11/Q2","11/Q3","11/Q4","11/Q5","11/Q6","11/Q7","11/Q8","11/Q9" ],
+        datasets: [{
+            label: 'Fans Online', 
+            data: [0, 0, 0,	0,	0,	0,	0, 0, 0 ], 
+            fill: false,
+            borderColor: '#88c290', 
+            backgroundColor: '#88c290', 
+            borderWidth: 1 
+        }]},
+    options: {
+      responsive: true, 
+      maintainAspectRatio: true,  
+      legend: {
+        display: false
+    },
+      scales: {
+        xAxes: [{
+        display: true,
+        }],
+        yAxes: [{
+            display: true,
+           
+         scaleLabel: {
+                    display: true,
+                    labelString: 'Total Reach '
+                },
+                ticks: {
+                    min: -1,
+                    max: 1,
+                    stepSize: 1
+                }
+        }]
+    },
+   
+    }
+});
+
+
+
+var ctx3 = document.getElementById("timelinePageFans").getContext('2d');
+var myChart = new Chart(ctx3, {
+    type: 'line',
+    data: {
+        labels: ["11/Q1","11/Q2","11/Q3","11/Q4","11/Q5","11/Q6","11/Q7" ],
+        datasets: [{
+            label: 'Fans Online', 
+            data: [0, 0, 0,	0,	0,	0,	0], 
+            fill: false,
+            borderColor: '#88c290', 
+            backgroundColor: '#88c290', 
+            borderWidth: 1 
+        }]},
+    options: {
+      responsive: true, 
+      maintainAspectRatio: true,  
+      legend: {
+        display: false
+    },
+      scales: {
+        xAxes: [{
+        display: true,
+        }],
+        yAxes: [{
+            display: true,
+           
+         scaleLabel: {
+                    display: true,
+                    labelString: 'Total Page Fans '
+                },
+                ticks: {
+                    min: -1,
+                    max: 1,
+                    stepSize: 1
+                }
+        }]
+    },
+   
+    }
+});
+
+
+var ctx4 = document.getElementById("fans14Chart").getContext('2d');
+
+var myChart = new Chart(ctx4, {
+    type: 'line',
+    data: {
+        labels: ["MidNight","4 Am",	"8 Am",	"Noon",	"4 Pm",	"8 Pm",	"Mid..."],
+        datasets: [{
+            label: 'Fans Online', // Name the series
+            data: [0, 0, 0,	0,	0,	0,	0 ], // Specify the data values array
+            fill: false,
+            borderColor: '#88c290', // Add custom color border (Line)
+            backgroundColor: '#88c290', // Add custom color background (Points and Fill)
+            borderWidth: 1 // Specify bar border width
+        }]},
+    options: {
+      responsive: true, // Instruct chart js to respond nicely.
+      maintainAspectRatio: true, // Add to prevent default behaviour of full-width/height 
+      legend: {
+        display: false
+    },
+      scales: {
+        xAxes: [{
+        display: true,
+    scaleLabel: {
+    display: true,
+    labelString: 'Time Of The Day'
+  },
+    
+        }],
+        yAxes: [{
+            display: true,
+           
+         scaleLabel: {
+                    display: true,
+                    labelString: 'Fans Online'
+                },
+                ticks: {
+                    min: -1,
+                    max: 1,
+                    stepSize: 1
+                }
+        }]
+    },
+   
+    }
+});
+
+var ctx5 = document.getElementById("likes14Chart").getContext('2d');
+var myChart = new Chart(ctx5, {
+    type: 'line',
+    data: {
+        labels: ["11/Q1","11/Q2","11/Q3","11/Q4","11/Q5","11/Q6","11/Q7","11/Q8","11/Q9" ],
+        datasets: [{
+            label: 'Fans Online', 
+            data: [0, 0, 0,	0,	0,	0,	0, 0, 0 ], 
+            fill: false,
+            borderColor: '#88c290', 
+            backgroundColor: '#88c290', 
+            borderWidth: 1 
+        }]},
+    options: {
+      responsive: true, 
+      maintainAspectRatio: true, 
+      legend: {
+        display: false
+    },
+      scales: {
+        xAxes: [{
+        display: true,
+        }],
+        yAxes: [{
+            display: true,
+           
+         scaleLabel: {
+                    display: true,
+                    labelString: 'Likes '
+                },
+                ticks: {
+                    min: -1,
+                    max: 1,
+                    stepSize: 1
+                }
+        }]
+    },
+   
+    }
+});
+
+var ctx6 = document.getElementById("totalReach14Chart").getContext('2d');
+var myChart = new Chart(ctx6, {
+    type: 'line',
+    data: {
+        labels: ["11/Q1","11/Q2","11/Q3","11/Q4","11/Q5","11/Q6","11/Q7","11/Q8","11/Q9" ],
+        datasets: [{
+            label: 'Fans Online', 
+            data: [0, 0, 0,	0,	0,	0,	0, 0, 0 ], 
+            fill: false,
+            borderColor: '#88c290', 
+            backgroundColor: '#88c290', 
+            borderWidth: 1 
+        }]},
+    options: {
+      responsive: true, 
+      maintainAspectRatio: true,  
+      legend: {
+        display: false
+    },
+      scales: {
+        xAxes: [{
+        display: true,
+        }],
+        yAxes: [{
+            display: true,
+           
+         scaleLabel: {
+                    display: true,
+                    labelString: 'Total Reach '
+                },
+                ticks: {
+                    min: -1,
+                    max: 1,
+                    stepSize: 1
+                }
+        }]
+    },
+   
+    }
+});
+
+
+var ctx7 = document.getElementById("timelinePageFans14").getContext('2d');
+var myChart = new Chart(ctx7, {
+    type: 'line',
+    data: {
+        labels: ["11/Q1","11/Q2","11/Q3","11/Q4","11/Q5","11/Q6","11/Q7" ],
+        datasets: [{
+            label: 'Fans Online', 
+            data: [0, 0, 0,	0,	0,	0,	0], 
+            fill: false,
+            borderColor: '#88c290', 
+            backgroundColor: '#88c290', 
+            borderWidth: 1 
+        }]},
+    options: {
+      responsive: true, 
+      maintainAspectRatio: true,  
+      legend: {
+        display: false
+    },
+      scales: {
+        xAxes: [{
+        display: true,
+        }],
+        yAxes: [{
+            display: true,
+           
+         scaleLabel: {
+                    display: true,
+                    labelString: 'Total Page Fans '
+                },
+                ticks: {
+                    min: -1,
+                    max: 1,
+                    stepSize: 1
+                }
+        }]
+    },
+   
+    }
+});
+
+var ctx8 = document.getElementById("fans21Chart").getContext('2d');
+
+var myChart = new Chart(ctx8, {
+    type: 'line',
+    data: {
+        labels: ["MidNight","4 Am",	"8 Am",	"Noon",	"4 Pm",	"8 Pm",	"Mid..."],
+        datasets: [{
+            label: 'Fans Online', // Name the series
+            data: [0, 0, 0,	0,	0,	0,	0 ], // Specify the data values array
+            fill: false,
+            borderColor: '#88c290', // Add custom color border (Line)
+            backgroundColor: '#88c290', // Add custom color background (Points and Fill)
+            borderWidth: 1 // Specify bar border width
+        }]},
+    options: {
+      responsive: true, // Instruct chart js to respond nicely.
+      maintainAspectRatio: true, // Add to prevent default behaviour of full-width/height 
+      legend: {
+        display: false
+    },
+      scales: {
+        xAxes: [{
+        display: true,
+    scaleLabel: {
+    display: true,
+    labelString: 'Time Of The Day'
+  },
+    
+        }],
+        yAxes: [{
+            display: true,
+           
+         scaleLabel: {
+                    display: true,
+                    labelString: 'Fans Online'
+                },
+                ticks: {
+                    min: -1,
+                    max: 1,
+                    stepSize: 1
+                }
+        }]
+    },
+   
+    }
+});
+
+var ctx9 = document.getElementById("likes21Chart").getContext('2d');
+var myChart = new Chart(ctx9, {
+    type: 'line',
+    data: {
+        labels: ["11/Q1","11/Q2","11/Q3","11/Q4","11/Q5","11/Q6","11/Q7","11/Q8","11/Q9" ],
+        datasets: [{
+            label: 'Fans Online', 
+            data: [0, 0, 0,	0,	0,	0,	0, 0, 0 ], 
+            fill: false,
+            borderColor: '#88c290', 
+            backgroundColor: '#88c290', 
+            borderWidth: 1 
+        }]},
+    options: {
+      responsive: true, 
+      maintainAspectRatio: true, 
+      legend: {
+        display: false
+    },
+      scales: {
+        xAxes: [{
+        display: true,
+        }],
+        yAxes: [{
+            display: true,
+           
+         scaleLabel: {
+                    display: true,
+                    labelString: 'Likes '
+                },
+                ticks: {
+                    min: -1,
+                    max: 1,
+                    stepSize: 1
+                }
+        }]
+    },
+   
+    }
+});
+
+var ctx10 = document.getElementById("totalReach21Chart").getContext('2d');
+var myChart = new Chart(ctx10, {
+    type: 'line',
+    data: {
+        labels: ["11/Q1","11/Q2","11/Q3","11/Q4","11/Q5","11/Q6","11/Q7","11/Q8","11/Q9" ],
+        datasets: [{
+            label: 'Fans Online', 
+            data: [0, 0, 0,	0,	0,	0,	0, 0, 0 ], 
+            fill: false,
+            borderColor: '#88c290', 
+            backgroundColor: '#88c290', 
+            borderWidth: 1 
+        }]},
+    options: {
+      responsive: true, 
+      maintainAspectRatio: true,  
+      legend: {
+        display: false
+    },
+      scales: {
+        xAxes: [{
+        display: true,
+        }],
+        yAxes: [{
+            display: true,
+           
+         scaleLabel: {
+                    display: true,
+                    labelString: 'Total Reach '
+                },
+                ticks: {
+                    min: -1,
+                    max: 1,
+                    stepSize: 1
+                }
+        }]
+    },
+   
+    }
+});
+
+var ctx11 = document.getElementById("timelinePageFans21").getContext('2d');
+var myChart = new Chart(ctx11, {
+    type: 'line',
+    data: {
+        labels: ["11/Q1","11/Q2","11/Q3","11/Q4","11/Q5","11/Q6","11/Q7" ],
+        datasets: [{
+            label: 'Fans Online', 
+            data: [0, 0, 0,	0,	0,	0,	0], 
+            fill: false,
+            borderColor: '#88c290', 
+            backgroundColor: '#88c290', 
+            borderWidth: 1 
+        }]},
+    options: {
+      responsive: true, 
+      maintainAspectRatio: true,  
+      legend: {
+        display: false
+    },
+      scales: {
+        xAxes: [{
+        display: true,
+        }],
+        yAxes: [{
+            display: true,
+           
+         scaleLabel: {
+                    display: true,
+                    labelString: 'Total Page Fans '
+                },
+                ticks: {
+                    min: -1,
+                    max: 1,
+                    stepSize: 1
+                }
+        }]
+    },
+   
+    }
+});
+
+
+    
+
+
+
+</script>
+{% endblock %}

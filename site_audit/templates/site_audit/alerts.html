@@ -1,0 +1,407 @@
+{% extends "base2.html" %}
+{% load static %}
+{% block extrahead %}
+<style>
+#alternative_img{
+   display: flex; 
+   align-items: center;
+   justify-content: center;
+}
+#front-text-img{
+    position: absolute;
+    text-align: center;
+}
+.google_spinnerr{
+   opacity: 0;
+}
+
+
+@media (max-width: 991.5px){
+
+    main {
+        padding-left: 0;
+    }
+    }
+    .websiteRankHdng {
+        flex: 0.6
+    } 
+</style>
+{% endblock %}
+{% block content %}
+<div class="container">
+<div class="pt-4 pb-2">
+
+ <!-- <app-breadcrumbs class="c197 ng-star-inserted">
+    <a  class="home ng-star-inserted"><img  src="../../static/site_audit/assets/home.svg" alt="">
+   <app-url-shortener class="c197">
+    <div  class="segment ng-star-inserted">www.</div>
+        <div class="selectedWebsite segment longest ng-star-inserted" ></div>
+   </app-url-shortener>
+  </a>
+  <div  class="delimiter ng-star-inserted">/</div><a 
+   class="item ng-star-inserted">Alerts</a>
+
+ </app-breadcrumbs> -->
+ <div class="container mt-0 margin-left" >
+    <h4 class="title mb-5 fw-400 pb-2">News Alert</h4>
+ </div>
+</div>
+    <div class="row">
+        <div class="col-md-8">
+            <div class="main">
+              
+                <div  class="list_alert ng-star-inserted alert_list">
+              
+                <div id="sync_google"></div>
+               
+                     <div id="you_may">
+                   
+                     </div>
+                       <div id="keywords_rank">
+                    
+                    </div>
+                     <div id="total_back_links">
+                  
+                    </div>
+                      {% comment %} <div class="dFlex loader">
+                       <div class="lds-ellipsis">
+                            <div></div>
+                            <div></div>
+                            <div></div>
+                        </div>
+                    </div> {% endcomment %}
+
+                    <div class="dFlex loader">
+                        <div class="spinner-border text-primary spinner-border p_spinner mt-1 mr-1" role="status">
+                        <span class="visually-hidden">Loading...</span>
+                        </div>
+                    </div>
+
+                    <div id="follow_unfollow">
+                   
+                    </div>
+                    <div id="domain_authority">
+                   
+                    </div>
+                    <div id="new_links"></div>
+                    
+                    
+                  
+                </div>
+            </div>
+        </div>
+       <div class="col-md-4">
+      <div class="card card-border">
+        <div class="card-body">
+          <div class="content_ c204">
+            <h1>Annual Growth Opportunities</h1>
+            <i class="far fa-question-circle help-icon" data-bs-toggle="tooltip" data-bs-placement="left" title="This is an estimate of how much more revenue your website could contribute to your business per year. This number is based on your analytics data and the opportunities we see for your website to grow."></i>
+         
+            <!---->
+          </div>
+          <div class="dFlex">
+            <i class="fa fa-line-chart" style="font-size:24px"></i>
+          </div>
+          <div class="dFlex">
+            <!----><a class="button ng-star-inserted" href="javascript:void();">Complete Your
+              Profile</a>
+            <!---->
+            <!---->
+          </div>
+        </div>
+      </div>
+      <!-- website trank -->
+      <div class="card card-border Card_height mt-4">
+        <div class="card-body websiteRankHdng">
+          <div class="row">
+            <div class="col-md-8">
+              <h6>Website Rank</h6>
+            </div>
+
+            <div class="col-md-4">
+              <div class="float-end">
+              <i class="far fa-question-circle help-icon"  data-bs-toggle="tooltip" data-bs-placement="right"
+                  title="Your website’s rankings are based on how your website compares to other websites. Your letter grades for traffic, social media, mobile traffic and user experience are updated regularly and are based on multiple metrics and data points."></i>
+              
+              </div>
+
+            </div>
+          </div>
+          <!-- <div class="loader">
+                        <div class="lds-ellipsis">
+                            <div></div>
+                            <div></div>
+                            <div></div>
+                        </div>
+
+                    </div> -->
+        </div>
+        <div class="blur-class" id="alternative_img" style="display: none;">
+            <img  src="../../static/site_audit/assets/img/news_alert.png" alt="" class="background-custom img-fluid">
+            <div id="front-text-img">
+                <p style="width: 80%; margin:10px auto; ">
+                    Add Analytics to <span id="front-text-url">searchberg.com</span> to increase your SEO traffic
+                </p>
+                <button class="btn btn-primary gogle-btnn " type="button">
+                <span class="spinner-border spinner-border-sm google_spinnerr" role="status" aria-hidden="true"></span>
+                <i class="fa fa-cloud-upload" aria-hidden="true"></i> Add  Analytics
+                </button>
+                
+               
+            </div>
+          </div>
+       <div class="main_webite_rank dFlex2">
+                        <app-rank class="ng-star-inserted">
+                            <div class="rank">
+                                <div class="chartjs-size-monitor">
+                                    <div class="chartjs-size-monitor-expand">
+                                        <div class=""></div>
+                                    </div>
+                                    <div class="chartjs-size-monitor-shrink">
+                                        <div class=""></div>
+                                    </div>
+                                </div>
+                                <div class="chartjs-size-monitor">
+                                    <div class="chartjs-size-monitor-expand">
+                                        <div class=""></div>
+                                    </div>
+                                    <div class="chartjs-size-monitor-shrink">
+                                        <div class=""></div>
+                                    </div>
+                                </div>
+                                <div style="width: 100px; height: 100px;  position: relative;">
+                                    <div id="traffic_score_"
+                                        style="width: 100%; height: 40px; position: absolute; top: 50%; left: 0; margin-top: -10px; line-height:19px; text-align: center;">
+
+                                    </div>
+                                    <canvas height="106" width="106" class="traffic rank-chart chartjs-render-monitor"
+                                        style="display: block; width: 106px; height: 106px;" data-rank="33"></canvas>
+                                </div>
+
+                                <div class="rank-label"></div>
+                            </div>
+                              <div class="dFlex">
+                                  <div class="traffic_loader">
+                       <div class="spinner-border spinner-border-sm text-primary" role="status">
+                        <span class="sr-only">Loading...</span>
+                        </div>
+                    </div>
+                                </div>
+                            <div class="title_rank">Traffic</div>
+                        </app-rank>
+                        <app-rank class="ng-star-inserted">
+                            <div class="rank">
+                                <div class="chartjs-size-monitor">
+                                    <div class="chartjs-size-monitor-expand">
+                                        <div class=""></div>
+                                    </div>
+                                    <div class="chartjs-size-monitor-shrink">
+                                        <div class=""></div>
+                                    </div>
+                                </div>
+                                <div class="chartjs-size-monitor">
+                                    <div class="chartjs-size-monitor-expand">
+                                        <div class=""></div>
+                                    </div>
+                                    <div class="chartjs-size-monitor-shrink">
+                                        <div class=""></div>
+                                    </div>
+                                </div>
+                                <div style="width: 100px; height: 100px;  position: relative;">
+                                    <div id="social_score_"
+                                        style="width: 100%; height: 40px; position: absolute; top: 50%; left: 0; margin-top: -10px; line-height:19px; text-align: center;">
+                                       -
+                                    </div>
+                                    <canvas id="" class="social rank-chart chartjs-render-monitor" height="106"
+                                        width="106"></canvas>
+                                </div>
+
+
+
+                                <div class="rank-label"></div>
+                            </div>
+                             <div class="dFlex">
+                              <div class="social_loader">
+                       <div class="spinner-border spinner-border-sm text-primary" role="status">
+                        <span class="sr-only">Loading...</span>
+                        </div>
+                    </div>
+                    </div>
+                            <div class="title_rank">Social</div>
+                        </app-rank>
+                        <app-rank class="ng-star-inserted">
+                            <div class="rank">
+                                <div class="chartjs-size-monitor">
+                                    <div class="chartjs-size-monitor-expand">
+                                        <div class=""></div>
+                                    </div>
+                                    <div class="chartjs-size-monitor-shrink">
+                                        <div class=""></div>
+                                    </div>
+                                </div>
+                                <div class="chartjs-size-monitor">
+                                    <div class="chartjs-size-monitor-expand">
+                                        <div class=""></div>
+                                    </div>
+                                    <div class="chartjs-size-monitor-shrink">
+                                        <div class=""></div>
+                                    </div>
+                                </div>
+
+                                <div style="width: 100px; height: 100px;  position: relative;">
+                                    <div id="mobile_score_"
+                                        style="width: 100%; height: 40px; position: absolute; top: 50%; left: 0; margin-top: -10px; line-height:19px; text-align: center;">
+
+                                    </div>
+                                       
+                                    <canvas id="" height="106" width="106"
+                                        class="mobile rank-chart chartjs-render-monitor"
+                                        style="display: block; width: 106px; height: 106px;" data-rank="61"></canvas>
+                                </div>
+                             
+                                
+
+                                <div class="rank-label"></div>
+                            </div>
+                                <div class="dFlex">
+                                 <div class="mobile_loader">
+                       <div class="spinner-border spinner-border-sm text-primary" role="status">
+                        <span class="sr-only">Loading...</span>
+                        </div>
+                    </div>
+                                </div>
+                            <div class="title_rank">Mobile</div>
+                        </app-rank>
+                        <app-rank class="ng-star-inserted">
+                            <div class="rank">
+                                <div class="chartjs-size-monitor">
+                                    <div class="chartjs-size-monitor-expand">
+                                        <div class=""></div>
+                                    </div>
+                                    <div class="chartjs-size-monitor-shrink">
+                                        <div class=""></div>
+                                    </div>
+                                </div>
+                                <div class="chartjs-size-monitor">
+                                    <div class="chartjs-size-monitor-expand">
+                                        <div class=""></div>
+                                    </div>
+                                    <div class="chartjs-size-monitor-shrink">
+                                        <div class=""></div>
+                                    </div>
+                                </div>
+                                <div style="width: 100px; height: 100px;  position: relative;">
+                                    <div id="visitor_score_"
+                                        style="width: 100%; height: 40px; position: absolute; top: 50%; left: 0; margin-top: -10px; line-height:19px; text-align: center;">
+
+                                    </div>
+
+                                    <canvas height="106" width="106" class="visitor rank-chart chartjs-render-monitor"
+                                        style="display: block; width: 106px; height: 106px;" data-rank="33"></canvas>
+                                </div>
+
+                                <div class="rank-label"></div>
+                            </div>
+                             <div class="dFlex">
+                                 <div class="visitor_loader">
+                       <div class="spinner-border spinner-border-sm text-primary" role="status">
+                        <span class="sr-only">Loading...</span>
+                        </div>
+                    </div>
+                                </div>
+                            <div class="title_rank">Visitor Experience</div>
+                        </app-rank>
+                        <!---->
+                    </div>
+
+      </div>
+      <!-- help card -->
+      <div class="c207 mt-4">
+        <div class="upper-part">
+          <h1 class="c207_h1">Need Help?</h1>
+          <p class="c207_p">Our experienced Growth Experts offer 15-minute website and We analytics review
+            meetings to our members <b>M-F, 9am-5pm MT.</b></p><button id="schedule-appointment-btn" app-button=""
+            class="btn btn-primary">
+            <!----><span>Schedule Free Appointment</span>
+          </button>
+          <p class="c207_p">Prefer email? Or do you live in a time zone that doesn’t work with our open hours?
+          </p>
+          <p class="email"><b>Email us: <a href="">support.com</a></b></p>
+        </div>
+        <div class="bottom-part">
+          <p>We help <span><b>250,000+</b></span>
+            businesses daily to grow their web traffic and increase their revenue.</p><img
+            src="../../static/site_audit/assets/need-help-illustration.svg" alt="illustration">
+        </div>
+      </div>
+    </div>
+    </div>
+</div>
+
+{% endblock %}
+
+{% block extrascript %}
+<script src="{% static 'site_audit/js/alerts.js' %}"></script>
+<!-- <script src="{% static 'site_audit/js/site_audit.js' %}"></script> -->
+<script src="{% static 'site_audit/js/websiteRankCharts.js' %}"></script>
+<script>
+      $('.gogle-btnn').on('click',function(){
+    $('.google_spinnerr').css('opacity','1');
+    var project_id = $('.url').attr('data-id')
+   const perm_url = window.location.origin + '/site_audit/get_auth_url/?project_id='+project_id;
+    $.ajax({
+        method:'GET',
+        url:perm_url,
+        success:function(response){
+            if(response.status){
+             $('.google_spinner').css('opacity','0');
+
+
+               let auth_url = response.auth_url;
+                window.location.href = auth_url
+            }
+        }
+    })
+})
+
+</script>
+<!-- 
+<script>
+
+var clr_alrt = setInterval(Func,1000)
+function Func(){
+  
+  var url = $('.url').text();
+
+  if(url !== undefined && url !== ''){
+     clearInterval(clr_alrt)
+   
+       $.ajax({
+        method:'GET',
+        url: "/site_audit/get_site_live_data/?url=" + url,
+        success:function(res){
+       if(res.status){
+         if(res.response_mobile !== undefined && res.response_mobile.all_data !== undefined){
+            var mobile_score = res.response_mobile.all_data
+            if(mobile_score.lighthouseResult !== undefined){
+                var score = mobile_score.lighthouseResult.categories['performance'].score
+               alert(score)
+            }
+         };
+
+
+       }
+    $('.mobile_loader').hide();
+       $(".mobile_chart").circleProgress({
+        value: 50 / 100,
+        size: 100,
+        fill: "#ffc107",
+      });
+    }
+  })
+  }
+ 
+}
+
+</script> -->
+{% endblock %}

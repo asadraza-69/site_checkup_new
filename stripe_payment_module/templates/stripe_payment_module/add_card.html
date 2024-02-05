@@ -1,0 +1,608 @@
+{% extends "base2.html" %}
+{% load static %}
+{% block extrahead %}
+{% endblock %}
+{% block content %}
+<style>
+	/* Card General Styles */
+	.card-custom {
+		width: 100%;
+		margin: auto;
+		max-width: 430px;
+		position: relative;
+		color: #fff;
+		transition: .3s ease all;
+		transform: rotateY(0deg);
+		transform-style: preserve-3d;
+		cursor: pointer;
+		z-index: 2;
+		border-radius: 1.5rem;
+	}
+
+	.tb_loader2 {
+		height: 300px;
+	}
+
+	.membership-heading {
+		background-color: #707070;
+		line-height: 1.5;
+		color: #fff;
+		text-transform: uppercase;
+		box-shadow: 0 2px 5px 0 rgb(0 0 0 / 20%), 0 2px 10px 0 rgb(0 0 0 / 10%);
+		border-radius: 6px;
+	}
+
+	.add_btn--paymentt {
+		color: #fff;
+		background-color: #707070;
+	}
+
+	.custom-card {
+		max-height: 620px;
+	}
+
+	.card-width {
+		width: 60%;
+		margin: auto;
+	}
+
+	.custom-Form {
+		display: flex;
+		justify-content: center;
+	}
+
+	/* .card-custom.active {
+		transform: rotateY(180deg);
+	} */
+
+	.card-custom>div {
+
+		/* max-width: 470px; */
+		position: relative;
+		padding: 30px;
+		border-radius: 15px;
+		/* min-height: 315px; */
+		display: flex;
+		flex-direction: column;
+		justify-content: space-between;
+		box-shadow: 0 10px 10px 10px rgba(0, 60, 134, 0.3);
+	}
+
+	/* Front Card */
+	.card-custom .front {
+		width: 100%;
+		background: linear-gradient(to bottom right,
+				rgba(255, 255, 255, 0.2),
+				rgb(87, 79, 90));
+		box-shadow: 0 1rem 2rem rgba(0, 0, 0, 0.5),
+			-1 -1 2px rgb(27, 26, 26),
+			1 1 2px rgb(23, 21, 21);
+		backdrop-filter: blur(0.65rem);
+		-webkit-backdrop-filter: blur(0.65rem);
+	}
+
+	.front .brand-logo {
+		text-align: right;
+		min-height: 50px;
+	}
+
+	.front .brand-logo img {
+		width: 100%;
+		height: 100%;
+		object-fit: cover;
+		max-width: 80px;
+	}
+
+	.front .chip {
+		width: 100%;
+		max-width: 50px;
+		margin-bottom: 20px;
+	}
+
+	@media (max-width: 1170px) {
+		.card-width {
+			width: 80%;
+			margin: auto;
+		}
+	}
+
+	@media (max-width: 776px) {
+		.card-width {
+			width: 100%;
+			margin: auto;
+		}
+	}
+
+	@media (max-width: 1300px) {
+		main {
+			padding-left: 16%;
+		}
+	}
+
+	@media (max-width: 1199px) {
+		main {
+			padding-left: 19%;
+		}
+	}
+
+	@media (max-width: 991px) {
+		main {
+			padding-left: 0;
+			margin-top: 125px;
+		}
+	}
+
+	.front .group .label {
+		font-size: 16px;
+		color: #5d6872;
+		-webkit-text-stroke: 0.15px #000;
+		margin-bottom: 5px;
+	}
+
+	.front .group .number,
+	.front .group .name,
+	.front .group .expiration {
+		color: #000;
+		font-size: 22px;
+		text-transform: uppercase;
+	}
+
+	.front .flexbox {
+		display: flex;
+		justify-content: space-between;
+		margin-top: 20px;
+	}
+
+	/* ---------- Back Card ----------*/
+	/* .back {
+		background: linear-gradient(to bottom right,
+				rgba(255, 255, 255, 0.2),
+				rgba(255, 255, 255, 0.05));
+		box-shadow: 0 1rem 2rem rgba(0, 0, 0, 0.5),
+			-1 -1 2px #aaa,
+			1 1 2px #555;
+		backdrop-filter: blur(0.8rem);
+		-webkit-backdrop-filter: blur(0.8rem);
+
+		position: absolute;
+		top: 0;
+		transform: rotateY(180deg);
+		backface-visibility: hidden;
+	}
+
+	.back .magnetic-bar {
+		height: 40px;
+		background: #000;
+		width: 100%;
+		position: absolute;
+		top: 30px;
+		left: 0;
+	}
+
+	.back .details {
+		margin-top: 60px;
+		display: flex;
+		justify-content: space-between;
+	}
+
+	.back .details p {
+		margin-bottom: 5px;
+	}
+
+	.back .details #signature {
+		width: 70%;
+		color: #000;
+	}
+
+	.back .details #signature .signature {
+		height: 40px;
+		background: repeating-linear-gradient(skyblue 0, skyblue 5px, orange 5px, orange 10px);
+	}
+
+	.back .details #signature .signature p {
+		line-height: 40px;
+		font-family: 'Liu Jian Mao Cao', cursive;
+		color: #000;
+		font-size: 30px;
+		padding: 0 10px;
+		text-transform: capitalize;
+	}
+
+	.back .details #ccv {
+		width: 20%;
+		color: #000;
+	}
+
+	.back .details #ccv .ccv {
+		background: #fff;
+		height: 40px;
+		color: #000;
+		padding: 10px;
+		text-align: center;
+	}
+
+	.back .legend {
+		font-size: 14px;
+		line-height: 24px;
+		color: black;
+	}
+
+	.back .bank-link {
+		font-size: 14px;
+		color: #000;
+	} */
+
+	/* ---------- Contenedor Boton ----------*/
+	/* .container-btn .btn-open-form {
+		width: 100px;
+		height: 50px;
+		font-size: 18px;
+		line-height: 20px;
+		background: #707070;
+		color: #fff;
+		position: relative;
+		top: -25px;
+		left: 42%;
+		z-index: 3;
+		border-radius: 10%;
+		box-shadow: -5px 4px 8px rgba(24, 56, 182, 0.4);
+		padding: 14px;
+		transition: all .2s ease;
+		border: none;
+		cursor: pointer;
+	} */
+
+	.container-btn .btn-open-form:hover {
+		outline: 0;
+		box-shadow: 0 4px 10px 0 rgb(0 0 0 / 20%), 0 4px 20px 0 rgb(0 0 0 / 10%);
+	}
+
+	.btn-open-form {
+		background-color: #707070;
+		color: white;
+	}
+
+	/* ---------- Card Form ----------*/
+	.card-formm {
+		background: #f3f5f7;
+		width: 100%;
+		max-width: 545px;
+		padding: 150px 30px 30px 30px;
+		border-radius: 10px;
+		position: relative;
+		z-index: 1;
+		clip-path: polygon(0 0, 100% 0, 100% 0, 0 0);
+		transition: clip-path .3s ease-out;
+		/* margin: 0 !important; */
+		margin: auto;
+		border: 1px solid #707070;
+	}
+
+	.card-formm.active {
+		clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+	}
+
+	.card-formm label {
+		display: block;
+		color: #3b3e41;
+		-webkit-text-stroke: 0.1px #6e7881;
+		margin-bottom: 5px;
+		font-size: 16px;
+	}
+
+	.card-formm input,
+	.card-formm select,
+	.add_btn-submitt {
+		border: 2px solid #CED6E0;
+		font-size: 18px;
+		height: 50px;
+		width: 100%;
+		padding: 5px 12px;
+		transition: .3s ease all;
+		border-radius: 5px;
+	}
+
+	.card-formm input:hover,
+	.card-formm select:hover {
+		border: 2px solid #93BDED;
+	}
+
+	.card-formm input:focus,
+	.card-formm select:focus {
+		outline: rgb(4, 4, 4);
+		box-shadow: 1px 7px 10px -5px rgba(90, 116, 148, 0.3);
+	}
+
+	.card-formm input {
+		margin-bottom: 20px;
+		text-transform: uppercase;
+	}
+
+	.card-formm .flexbox {
+		display: flex;
+		justify-content: space-between;
+	}
+
+	.card-formm .expire {
+		width: 100%;
+	}
+
+	.card-formm .ccv {
+		min-width: 100px;
+	}
+
+	.card-formm .group-select {
+		width: 100%;
+		margin-right: 15px;
+		position: relative;
+	}
+
+	.card-formm select {
+		-webkit-appearance: none;
+	}
+
+	.card-formm .group-select i {
+		position: absolute;
+		color: #CED6E0;
+		top: 18px;
+		right: 15px;
+		transition: .3s ease all;
+	}
+
+	.card-formm .group-select:hover i {
+		color: #93bfed;
+	}
+
+	.card-formm .add_btn-submitt {
+		border: none;
+		padding: 10px;
+		font-size: 15px;
+		color: #fff;
+		background: #707070;
+		box-shadow: 2px 2px 10px 0px rgba(0, 85, 212, 0.4);
+		cursor: pointer;
+
+	}
+
+	.card-formm .add_btn-submitt:hover {
+		outline: 0;
+		box-shadow: 0 4px 10px 0 rgb(0 0 0 / 20%), 0 4px 20px 0 rgb(0 0 0 / 10%);
+	}
+
+	.add_successs,
+	.add_errorr {
+		display: none;
+		font-size: 13px;
+	}
+
+	.add_successs.visible,
+	.add_errorr.visible {
+		display: inline;
+	}
+
+	#pay_card {
+		background-color: #f3f5f7;
+		border-radius: 1rem;
+		padding: 3rem;
+		display: none;
+		max-width: 26rem;
+		margin: auto;
+	}
+
+	#detail_card {
+		display: block;
+	}
+
+	.proceed_loader {
+		display: none;
+	}
+
+	.borderless td,
+	.borderless th {
+		border: none;
+	}
+
+	.membership-card-body {
+		min-height: 300px;
+		background: #f1f1f1;
+		border-radius: 10px;
+	}
+
+	.membership-card {
+		width: 30rem;
+	}
+
+	@media only screen and (max-width: 670px) {
+		.membership-card {
+			width: 20rem;
+		}
+	}
+</style>
+<script src="https://js.stripe.com/v3/"></script>
+<div class="container">
+	<!-- Crawler Heading Section  -->
+
+	<div class="row ">
+		<div class="col-xl-9">
+			<div class="center-section">
+				<h4 class="title mb-5 fw-400 pb-2"> Upgrade Subscription</h4>
+			</div>
+		</div>
+	</div>
+
+	<div class="custom-card" id="detail_card">
+
+		<!-- <section class="card-custom" id="card">
+
+			<div class="front">
+
+				<img src="https://raw.githubusercontent.com/falconmasters/formulario-tarjeta-credito-3d/master/img/chip-tarjeta.png"
+					class="chip">
+
+				<div class="details">
+
+					<div class="group" id="number">
+						<p class="label">Card Number</p>
+						<p class="number" id="cardNum">
+						<div class="d-flex card-spinner justify-content-center align-items-center">
+							<div class="spinner-border card-spinner text-dark  spinner-border-sm" role="status">
+								<span class="visually-hidden">Loading...</span>
+							</div>
+						</div> 
+						</p>
+					</div>
+					<div class="flexbox">
+
+						<div class="group" id="name">
+							<p class="label"> Card's Holder </p>
+							<p class="name" id="cardHolder"> 
+							 <div class="d-flex  card-spinner justify-content-center align-items-center">
+								<div class="spinner-border card-spinner  text-dark spinner-border-sm"
+									role="status">
+									<span class="visually-hidden ">Loading...</span>
+								</div>
+							</div> 
+							</p>
+						</div>
+
+						<div class="group" id="expiration">
+							<p class="label">Expiration</p>
+							 <div class="d-flex  card-spinner justify-content-center align-items-center">
+								<div class="spinner-border card-spinner  text-dark spinner-border-sm"
+									role="status">
+									<span class="visually-hidden ">Loading...</span>
+								</div>
+							</div> 
+							 <p class="expiration" id="expiration2" style="display: none;"> <span class="month"
+									id="mnth">
+									MM
+								</span> / <span class="year" id="year">
+									YY
+								</span>
+							</p> 
+
+						</div>
+					</div>
+				</div>
+			</div>
+	
+		</section> -->
+
+		<div class="d-flex justify-content-center align-items-center mb-5">
+			<div class="card membership-card" style=" border: none;">
+				<div class="card-body membership-card-body">
+					<h4 class="mb-5 p-3 text-center membership-heading">Card Details</h4>
+					<div class="tb_loader text-center">
+						<div class="spinner-border" role="status">
+							<span class="visually-hidden">Loading...</span>
+						</div>
+					</div>
+					<div class="card_detail" style="display: none;">
+						<table class="table table-bordered table-hover borderless">
+							<tbody id="links_detail">
+
+							</tbody>
+
+						</table>
+						<form action="" id="payForm" class="">
+							<input type="hidden" name="plan_id" id="plan_id1" value="{{plan_id}}">
+							<div class="select_dropdown_one mb-5">
+								<select class="form-select form-control plan" name="billing_cycle" id="plan" required>
+									<option value="">Select Your Plan</option>
+									<option value="monthly">Monthly</option>
+									<option value="yearly"> Yearly</option>
+								</select>
+							</div>
+							<div class="container-btn d-flex justify-content-center align-items-center gap-2">
+								<a class="btn btn-open-form" href="/site_audit/pricing/"> Cancel </a>
+								<button class="btn btn-open-form proceed_payment" id="btn-open-form">
+									<span class="proceed_loader">
+										<div class="spinner-border spinner-border-sm" role="status">
+											<span class="visually-hidden">Loading...</span>
+										</div>
+									</span>
+									Proceed
+								</button>
+							</div>
+						</form>
+					</div>
+
+				</div>
+			</div>
+		</div>
+
+		<script src="https://kit.fontawesome.com/2c36e9b7b1.js" crossorigin="anonymous"></script>
+
+	</div>
+
+	<div class="custom-card" id="pay_card">
+		<div class="tb_loader2_container" style="display: none ">
+			<div class="tb_loader2 text-center d-flex justify-content-center align-items-center">
+				<div class="spinner-border" role="status">
+					<span class="visually-hidden">Loading...</span>
+				</div>
+			</div>
+		</div>
+		<form action="" id="card_formm" class=" card_form paymentt">
+			<input type="hidden" name="card_token" id="add_tokenn" required />
+			<input type="hidden" name="plan_id2" autofocus="" value="{{plan_id}}" id="plan_id2" class="form-control"
+				required="">
+			<span class="brand"><i class="pf pf-credit-card" id="brand-icon"></i></span>
+			<div class="">
+				<!--<label>Card Number</label> -->
+				<div id="add_cc-numberr" class="form-control mb-3">
+					<!-- a Stripe Element will be inserted. -->
+					<input type="text" name="card_number" id="card_number" required pattern="[0-9]{16}" />
+				</div>
+				<!-- <label>Expiration</label>-->
+				<div id="add_cc-expp" class="form-control mb-3">
+					<!-- a Stripe Element will be inserted. -->
+					<input type="text" name="expiration" id="expiration" required pattern="(0[1-9]|1[0-2])/[0-9]{2}" />
+				</div>
+				<!-- <label>CVC</label> -->
+				<div id="add_cc-cvcc" class="form-control mb-3">
+					<!-- a Stripe Element will be inserted. -->
+					<input type="text" name="cvc" id="cvc" required pattern="[0-9]{3}" />
+				</div>
+		
+			</div>
+			<!-- <div class="select_dropdown_two mb-3">
+				<select class="form-select form-control plan " name="plan_id" id="plan" required>
+					<option value=""  hidden>Select Your Plan</option>
+					<option value="monthly" >Monthly</option>
+					<option value="yearly"> Yearly</option>
+				</select>
+			</div> -->
+			<div class="d-flex justify-content-center">
+				<button type="submit" class="add_btn--paymentt add_btn-submitt  btn-block" style="width:50%">
+					<span class="card-spinner">
+						<div class="spinner-border spinner-border-sm" role="status">
+							<span class="visually-hidden">Loading...</span>
+						</div>
+					</span>
+					Save
+				</button>
+			</div>
+			<!-- <button type="button" class="btn--save">Save</button> -->
+			<div class="outcome">
+				<div class="add_errorr text-red"></div>
+				<div class="add_successs text-green">
+					Success! Your Stripe token is <span class="add_tokenn"></span>
+				</div>
+			</div>
+		</form>
+		
+	</div>
+
+
+
+
+</div>
+
+{% endblock %}
+
+{% block extrascript %}
+
+<script src="https://cdn.rawgit.com/julmot/mark.js/master/dist/jquery.mark.min.js"></script>
+<script src="{% static 'stripe_payment_module/js/add_card.js' %}"></script>
+{% endblock %}
